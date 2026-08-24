@@ -13,3 +13,4 @@ audit.json
 audit.md
 controlled.json
 experiments/**/inputs/
+replication_output/
