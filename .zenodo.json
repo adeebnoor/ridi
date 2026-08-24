@@ -1,6 +1,6 @@
 {
-  "title": "RIDI: Decision-identity reproducibility audit",
-  "description": "Software, protocols and reproducibility materials for measuring, certifying and controlling decision-identity turnover under representation interventions.",
+  "title": "RIDI (Reproducibility of Identity Decisions Index): decision-identity reproducibility audit",
+  "description": "Software, protocols and reproducibility materials for measuring, attributing, certifying, controlling and independently validating decision-identity turnover under representation interventions.",
   "creators": [
     {
       "name": "Noor, Adeeb",
@@ -27,4 +27,3 @@
     }
   ]
 }
-

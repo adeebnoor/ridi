@@ -2,6 +2,14 @@
 
 All notable public changes are documented here.
 
+## Unreleased — v20 scientific alignment — 2026-08-24
+
+- Expanded RIDI as the Reproducibility of Identity Decisions Index throughout public documentation.
+- Aligned the repository with the five-part framework: Measure, Attribute, Certify, Control and Validate.
+- Added the corrected GraphSAGE attribution endpoint and confidence interval from the locked v20 source data.
+- Added explicit scientific-scope, outcome-gate and Zenodo-draft boundaries.
+- Preserved software version 1.0.0 because this update changes documentation and scientific provenance, not the public API.
+
 ## 1.0.0 — 2026-08-24
 
 - Public standalone RIDI repository.

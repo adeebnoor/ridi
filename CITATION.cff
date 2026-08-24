@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use RIDI or ridi-audit, please cite this software and the accompanying manuscript."
-title: "RIDI: Decision-identity reproducibility audit"
+title: "RIDI (Reproducibility of Identity Decisions Index): decision-identity reproducibility audit"
 type: software
 authors:
   - family-names: Noor
@@ -13,9 +13,9 @@ url: "https://github.com/adeebnoor/ridi"
 license: MIT
 keywords:
   - reproducibility
+  - Reproducibility of Identity Decisions Index
   - decision identity
   - representation intervention
   - ranking stability
   - top-k selection
   - audit
-

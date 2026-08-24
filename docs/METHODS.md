@@ -1,5 +1,7 @@
 # Methods in brief
 
+The **Reproducibility of Identity Decisions Index (RIDI)** is the decision-set distance used inside a controlled audit of representation-induced turnover.
+
 ## Decision function
 
 RIDI formalizes a finite top-*k* decision as `T_k = Phi(S, R, F, C, Z)`, where:
@@ -45,3 +47,6 @@ Given a prospectively declared utility-regret tolerance `eta`, the selector retu
 
 Identity continuity is neither automatically desirable nor evidence of correctness. Independent outcome evidence may justify turnover. RIDI supplies the missing measurement and control layer so that continuity, utility and evidence can be evaluated separately.
 
+## Five-part audit
+
+The complete workflow is **Measure → Attribute → Certify → Control → Validate**. Attribution requires mechanism-matched invariance controls and, for learned systems, a same-representation retraining null. Validation uses independent outcomes and a prospectively declared gate. A failed gate is retained as an adverse boundary result; it is not used to redefine the confirmatory endpoint.

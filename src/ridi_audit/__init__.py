@@ -1,4 +1,4 @@
-"""RIDI: representation-aware decision reproducibility."""
+"""RIDI: Reproducibility of Identity Decisions Index."""
 
 from .core import (
     audit_scores,
@@ -27,4 +27,3 @@ __all__ = [
 ]
 
 __version__ = "1.0.0"
-

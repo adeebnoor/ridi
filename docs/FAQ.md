@@ -1,8 +1,12 @@
 # Frequently asked questions
 
+## What does RIDI stand for?
+
+RIDI is the **Reproducibility of Identity Decisions Index**. It asks whether the same identities receive a finite set of decision slots after a controlled computational change.
+
 ## Is RIDI just Jaccard distance?
 
-The numerical set-distance primitive is Jaccard distance. The contribution is the decision-reproducibility estimand and protocol around it: a controlled representation intervention, mechanism-matched controls, retraining calibration, a score-margin certificate, independent outcome testing and exact identity-constrained selection.
+The numerical set-distance primitive is Jaccard distance. The contribution is the decision-reproducibility estimand and protocol around it: a controlled representation intervention, mechanism-matched controls, retraining calibration, a score-margin certificate, independent outcome testing and exact identity-constrained selection. The claim is therefore not that a new set-similarity formula was invented, but that finite decision identity can be measured, attributed, certified, controlled and validated as a distinct reproducibility axis.
 
 ## Why not use Spearman or Kendall correlation?
 
@@ -19,4 +23,3 @@ Prospectively, from domain costs, review capacity, safety requirements and stake
 ## Does a non-zero RIDI prove that representation caused the change?
 
 Only when the intervention design freezes source evidence, inference, candidate universe and decision rules, and when stochasticity is removed or calibrated. Otherwise it is a diagnostic difference, not causal attribution.
-

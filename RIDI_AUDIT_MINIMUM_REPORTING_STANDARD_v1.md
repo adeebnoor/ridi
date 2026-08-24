@@ -1,5 +1,7 @@
 # RIDI Audit Minimum Reporting Standard v1
 
+RIDI denotes the **Reproducibility of Identity Decisions Index**.
+
 A study may describe an analysis as a **representation-aware decision reproducibility audit** only when it reports all required elements below.
 
 1. **Freeze source evidence (S).** Identify the exact evidence-bearing records used in both arms, with version and integrity hash where feasible.
@@ -15,4 +17,3 @@ A study may describe an analysis as a **representation-aware decision reproducib
 11. **Preserve adverse outcomes and protocol lineage.** Report failed gates, null results and implementation corrections without replacing the original confirmatory estimand post-outcome.
 
 The minimum interpretive claim is: **decision identity is or is not invariant under the stated representation intervention**. The audit alone does not establish clinical harm, causal utility, fairness, or superiority of one representation.
-

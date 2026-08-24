@@ -1,6 +1,6 @@
 # RIDI v1.0.0
 
-The first standalone public release of the RIDI decision-reproducibility toolkit.
+The first standalone public release of the Reproducibility of Identity Decisions Index (RIDI) toolkit.
 
 ## What is included
 
