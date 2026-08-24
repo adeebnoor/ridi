@@ -1,0 +1,30 @@
+{
+  "files": {
+    "epss_2023_03_05.csv.gz": {
+      "bytes": 786067,
+      "sha256": "3ad1f533d7511c544f09be5e054ceba09685653cb3cdaac47859c0dcf5f21188",
+      "url": "https://raw.githubusercontent.com/empiricalsec/epss_scores/3b3ae5b793011090800848c75ceea4cecaa9d309/2023/epss_scores-2023-03-05.csv.gz"
+    },
+    "epss_2023_03_06.csv.gz": {
+      "bytes": 785972,
+      "sha256": "d83aabcce3bb14b22143736f697798335e97ac31d8acc096a514e1c8e63ceb5d",
+      "url": "https://raw.githubusercontent.com/empiricalsec/epss_scores/3b3ae5b793011090800848c75ceea4cecaa9d309/2023/epss_scores-2023-03-06.csv.gz"
+    },
+    "epss_2023_03_07.csv.gz": {
+      "bytes": 1226422,
+      "sha256": "33aa8ddc141676fde8faedac7024524c3e66fd9524e86785ab524a20a84a875b",
+      "url": "https://raw.githubusercontent.com/empiricalsec/epss_scores/3b3ae5b793011090800848c75ceea4cecaa9d309/2023/epss_scores-2023-03-07.csv.gz"
+    },
+    "epss_2023_03_08.csv.gz": {
+      "bytes": 1260629,
+      "sha256": "8a57d7759166f4015a0160bf6bcfae7cc8b82457280cef9f1f01536e9dece6b2",
+      "url": "https://raw.githubusercontent.com/empiricalsec/epss_scores/3b3ae5b793011090800848c75ceea4cecaa9d309/2023/epss_scores-2023-03-08.csv.gz"
+    },
+    "known_exploited_vulnerabilities.csv": {
+      "bytes": 956599,
+      "sha256": "e18d3e843ce865c453bf314931ad5759c32f900ea714b6fced49bd0de63a793a",
+      "url": "https://raw.githubusercontent.com/cisagov/kev-data/fea466c2e713d1f44e74c903ad4f60b81470bb22/known_exploited_vulnerabilities.csv"
+    }
+  },
+  "protocol_id": "RIDI-CYBER-NATURAL-UPDATE-v1"
+}
