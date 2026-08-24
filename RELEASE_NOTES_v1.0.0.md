@@ -10,6 +10,8 @@ The first standalone public release of the RIDI decision-reproducibility toolkit
 - the exact `O(n log n)` identity–utility frontier;
 - minimum-turnover selection under a declared utility-regret budget;
 - command-line and Python interfaces;
+- a dependency-free 60-second experiment demonstrating near-perfect global agreement with disjoint top-k decisions;
+- a zero-install interactive browser experiment and one-click Colab notebook;
 - brute-force optimality tests and multi-version continuous integration; and
 - the RIDI Audit Minimum Reporting Standard v1.
 
@@ -24,4 +26,3 @@ The release source and wheel are accompanied by SHA-256 checksums. The repositor
 ## Citation
 
 Use the repository's `CITATION.cff`. The archival DOI `10.5281/zenodo.22072275` is reserved and becomes the citation target when its public record is activated.
-
