@@ -111,15 +111,16 @@ The exact selector finds the minimum-turnover top-*k* set within a prospectively
 
 ## Evidence at a glance
 
-The locked manuscript analyses provide five complementary tests of the framework:
+The locked manuscript analyses provide six complementary tests of the framework:
 
 - **Mathematical separation:** global Spearman agreement can approach one while top-*k* decision sets remain disjoint.
 - **Certification:** `33,958` of `168,000` synthetic cases were certified with zero false certificates.
 - **Attribution:** GraphSAGE representation AURIDI was `0.11571` versus a same-representation retraining null of `0.08052`—a `44%` relative excess; the absolute difference was `0.03519` (95% query-bootstrap interval `0.02184–0.05119`) while AUROC was `0.91772` versus `0.91747`.
 - **Exact control:** at the demonstration tolerance `eta = 0.001`, `78.8%` of GraphSAGE turnover and `28.7%` of text-retrieval turnover was avoidable under the declared utility.
 - **Independent outcome boundary:** an RxNorm update changed `25` of `1,000` selected identities despite Spearman `0.999406`; later DDInter curation increased recovered interactions from `17` to `19`, whereas exact zero-change control returned `17` and failed the pre-specified `97.5%` retention gate.
+- **Natural update outside biomedicine:** FIRST's production EPSS v2→v3 update changed `565` of `1,000` vulnerability priorities, versus `0` and `7` in adjacent same-version daily controls. Among delayed CISA KEV entries, top-1,000 recovery increased from `8` to `12` although full-universe AUROC fell from `0.665` to `0.610`. The locked `eta=0.001` controller avoided `40.9%` of turnover but retained only `10/12` outcomes and failed its `95%` gate.
 
-These results establish measurement, attribution, certification and controllability. They do **not** establish clinical harm, patient benefit or universal turnover rates. See [results and interpretation boundaries](docs/RESULTS_AT_A_GLANCE.md) and [numerical provenance](docs/NUMERICAL_PROVENANCE.md).
+The EPSS extension is a natural production-model update, not a representation-attribution experiment. These results establish measurement, attribution, certification and controllability. They do **not** establish clinical harm, patient benefit or universal turnover rates. See [results and interpretation boundaries](docs/RESULTS_AT_A_GLANCE.md), [numerical provenance](docs/NUMERICAL_PROVENANCE.md), and the [locked cybersecurity protocol](experiments/cyber_natural_update/PROTOCOL_LOCK.md).
 
 ## Install
 
@@ -198,6 +199,7 @@ RIDI measures turnover—not correctness, fairness, clinical benefit, causal har
 demo/                   Zero-install browser experiment
 notebooks/              One-click Colab experiment
 examples/               Minimal scripts and aligned score tables
+experiments/            Locked extensions and blind-run replication packages
 src/ridi_audit/         Metric, certificate, exact selector and CLI
 tests/                  Unit and brute-force optimality tests
 docs/                   Methods, interpretation and reproduction guidance
@@ -222,4 +224,4 @@ Department of Information Technology, Faculty of Computing and Information Techn
 
 ## Status
 
-Version 1.0.0 is the public software companion to the v20 manuscript **prepared for submission to Nature**. It has not been submitted, accepted or peer reviewed.
+Version 1.0.0 is the public software companion to the v21 manuscript **prepared for submission to Nature**. A separately operated replication of the locked cybersecurity extension is requested; the author-run result is not labelled independent. The manuscript has not been submitted, accepted or peer reviewed.
