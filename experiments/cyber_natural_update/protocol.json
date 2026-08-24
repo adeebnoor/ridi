@@ -1,0 +1,36 @@
+{
+  "protocol_id": "RIDI-CYBER-NATURAL-UPDATE-v1",
+  "locked_at_utc": "2026-08-24T17:28:50Z",
+  "intervention": {
+    "type": "natural_operational_model_update",
+    "system": "FIRST Exploit Prediction Scoring System",
+    "r0": "EPSS v2 scores published 2023-03-06",
+    "r1": "EPSS v3 scores published 2023-03-07",
+    "claim_boundary": "component-update transport; not representation attribution"
+  },
+  "controls": {
+    "pre_update": ["2023-03-05", "2023-03-06"],
+    "post_update": ["2023-03-07", "2023-03-08"]
+  },
+  "candidate_universe": "intersection of all four EPSS files excluding CISA KEV dateAdded <= 2023-03-06",
+  "cutoffs": [100, 500, 1000, 5000],
+  "primary_cutoff": 1000,
+  "tie_rule": "descending score then lexical CVE ID",
+  "external_outcome": {
+    "source": "CISA Known Exploited Vulnerabilities catalog",
+    "field": "dateAdded",
+    "primary_window_start": "2023-03-08",
+    "primary_window_end": "2024-03-07",
+    "sensitivity_days": [30, 90, 180]
+  },
+  "identity_control": {
+    "primary_eta": 0.001,
+    "eta_ladder": [0.0, 0.0001, 0.001, 0.005, 0.01],
+    "external_retention_gate": 0.95
+  },
+  "source_commits": {
+    "empiricalsec_epss_scores": "3b3ae5b793011090800848c75ceea4cecaa9d309",
+    "cisagov_kev_data": "fea466c2e713d1f44e74c903ad4f60b81470bb22"
+  },
+  "independence": "author execution is not independent replication; a separately identified team is required"
+}
