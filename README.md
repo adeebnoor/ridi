@@ -137,6 +137,26 @@ ridi-audit --version
 pytest -q
 ```
 
+## CODECHECK reproduction
+
+The sealed EPSS natural-update computation can be reproduced independently in
+a fresh Python 3.10+ environment. It downloads six public files pinned to their
+source commits, verifies every input, runs the locked analysis and recreates the
+three files listed in [`codecheck.yml`](codecheck.yml):
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+python -m pip install --upgrade pip
+python -m pip install numpy scipy
+python experiments/cyber_natural_update/replication/run_sealed_replication.py
+```
+
+The independently operated run, not the author's verification run, is the one
+eligible for a CODECHECK certificate. Full instructions and the independence
+declaration are in
+[`experiments/cyber_natural_update/replication/`](experiments/cyber_natural_update/replication/).
+
 ## Audit your own scores
 
 Prepare two CSV files containing the same candidate IDs and one score per candidate:
