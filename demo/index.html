@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A zero-install experiment showing why global rank agreement does not certify decision identity.">
+  <title>RIDI — The 60-second decision-identity experiment</title>
+  <style>
+    :root {
+      --ink: #18212b;
+      --muted: #5d6977;
+      --line: #d9e2ec;
+      --paper: #ffffff;
+      --blue: #1769aa;
+      --cyan: #0d8a8a;
+      --orange: #d96500;
+      --violet: #6d4694;
+      --green: #008d72;
+      --soft-blue: #eef6fc;
+      --soft-orange: #fff4ea;
+      --soft-violet: #f6f0fa;
+      --soft-green: #eaf8f4;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 12% 0%, rgba(23, 105, 170, .15), transparent 34rem),
+        radial-gradient(circle at 94% 8%, rgba(109, 70, 148, .13), transparent 30rem),
+        #f5f8fb;
+    }
+
+    a { color: var(--blue); }
+    .wrap { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+    header { padding: 54px 0 28px; }
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      border: 1px solid #b9d5eb;
+      border-radius: 999px;
+      background: rgba(255,255,255,.76);
+      padding: 7px 12px;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--orange); }
+    h1 { margin: 20px 0 12px; max-width: 950px; font-size: clamp(38px, 6vw, 76px); line-height: .98; letter-spacing: -.045em; }
+    .lead { max-width: 800px; margin: 0; color: var(--muted); font-size: clamp(18px, 2.4vw, 24px); line-height: 1.5; }
+    .lead strong { color: var(--ink); }
+
+    .experiment {
+      margin: 28px 0 34px;
+      background: rgba(255,255,255,.94);
+      border: 1px solid rgba(173,190,207,.75);
+      border-radius: 26px;
+      box-shadow: 0 24px 80px rgba(25,45,65,.12);
+      overflow: hidden;
+    }
+    .experiment-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 26px 28px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(110deg, #fff 35%, #f2f8fd);
+    }
+    .experiment-head h2 { margin: 0 0 5px; font-size: 25px; letter-spacing: -.02em; }
+    .experiment-head p { margin: 0; color: var(--muted); }
+    .reset {
+      border: 1px solid #aac6dd;
+      background: white;
+      color: var(--blue);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .reset:hover { background: var(--soft-blue); }
+
+    .grid { display: grid; grid-template-columns: minmax(260px, .8fr) minmax(0, 1.7fr); }
+    .controls { padding: 28px; border-right: 1px solid var(--line); background: #fbfdff; }
+    .control + .control { margin-top: 27px; }
+    .control-top { display: flex; align-items: baseline; justify-content: space-between; gap: 15px; margin-bottom: 10px; }
+    .control label { font-weight: 800; }
+    .control output { color: var(--blue); font-variant-numeric: tabular-nums; font-size: 19px; font-weight: 900; }
+    input[type="range"] { width: 100%; accent-color: var(--blue); }
+    .control small { display: block; margin-top: 7px; color: var(--muted); line-height: 1.4; }
+
+    .results { padding: 28px; }
+    .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .metric { min-height: 116px; padding: 16px; border-radius: 17px; border: 1px solid var(--line); background: white; }
+    .metric span { display: block; color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: .055em; text-transform: uppercase; }
+    .metric strong { display: block; margin-top: 10px; font-size: clamp(22px, 3vw, 32px); line-height: 1; font-variant-numeric: tabular-nums; }
+    .metric em { display: block; margin-top: 8px; color: var(--muted); font-size: 12px; font-style: normal; }
+    .metric.global { background: var(--soft-blue); border-color: #c5deef; }
+    .metric.identity { background: var(--soft-orange); border-color: #f2cfad; }
+    .metric.overlap { background: var(--soft-green); border-color: #bce3d8; }
+    .metric.capacity { background: var(--soft-violet); border-color: #d7c2e4; }
+
+    .verdict {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin-top: 18px;
+      border-radius: 16px;
+      padding: 15px 17px;
+      background: #192432;
+      color: white;
+    }
+    .verdict .mark { display: grid; place-items: center; width: 38px; height: 38px; flex: 0 0 38px; border-radius: 50%; background: var(--orange); font-weight: 950; }
+    .verdict strong { display: block; }
+    .verdict span { display: block; margin-top: 3px; color: #cdd9e5; font-size: 13px; }
+
+    .comparison { margin-top: 24px; }
+    .bar-row { display: grid; grid-template-columns: 160px 1fr 76px; align-items: center; gap: 12px; margin: 13px 0; }
+    .bar-row label { color: var(--muted); font-size: 13px; font-weight: 800; }
+    .track { height: 13px; border-radius: 999px; background: #e8edf2; overflow: hidden; }
+    .fill { height: 100%; width: 0; border-radius: inherit; transition: width .25s ease; }
+    .fill.blue { background: linear-gradient(90deg, #3d8cca, var(--blue)); }
+    .fill.orange { background: linear-gradient(90deg, #f3a14f, var(--orange)); }
+    .bar-row output { text-align: right; font-weight: 900; font-variant-numeric: tabular-nums; }
+
+    .sets { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
+    .set-card { padding: 16px; border: 1px solid var(--line); border-radius: 16px; background: white; }
+    .set-title { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 12px; font-weight: 850; }
+    .set-title small { color: var(--muted); font-weight: 650; }
+    .seats { display: flex; flex-wrap: wrap; gap: 6px; min-height: 58px; align-content: flex-start; }
+    .seat { display: inline-grid; place-items: center; min-width: 33px; height: 27px; padding: 0 7px; border-radius: 7px; background: #eaf1f7; color: #496071; font-size: 11px; font-weight: 850; }
+    .seat.kept { background: #dff4ed; color: #05715d; }
+    .seat.new { background: #fff0df; color: #b85200; }
+    .seat.more { background: #f0eafa; color: var(--violet); }
+
+    .explain { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 0 0 48px; }
+    .panel { padding: 24px; border: 1px solid var(--line); border-radius: 20px; background: rgba(255,255,255,.88); }
+    .panel h3 { margin: 0 0 10px; font-size: 21px; }
+    .panel p { margin: 0; color: var(--muted); line-height: 1.6; }
+    .formula { margin: 17px 0 0; padding: 14px; border-radius: 13px; background: #172231; color: #e8f3fb; font: 13px/1.7 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; overflow-x: auto; }
+    .copy { margin-top: 16px; border: 0; border-radius: 11px; background: var(--violet); color: white; padding: 11px 14px; font-weight: 850; cursor: pointer; }
+    .copy:hover { filter: brightness(1.08); }
+    .status { margin-top: 13px !important; font-size: 13px; color: var(--green) !important; min-height: 20px; }
+
+    footer { padding: 0 0 45px; color: var(--muted); font-size: 13px; }
+    footer .footer-line { display: flex; justify-content: space-between; gap: 20px; padding-top: 22px; border-top: 1px solid var(--line); }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+      .controls { border-right: 0; border-bottom: 1px solid var(--line); }
+      .metrics { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 620px) {
+      header { padding-top: 34px; }
+      .experiment-head { flex-direction: column; }
+      .metrics, .sets, .explain { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: 110px 1fr 65px; }
+      .controls, .results { padding: 20px; }
+      footer .footer-line { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <div class="eyebrow">RIDI reproducibility lab</div>
+    <h1>Can ρ ≈ 1 still replace every decision?</h1>
+    <p class="lead">Yes. Run the deterministic experiment below. A ranking can appear globally unchanged while a system allocates its <strong>finite decision capacity</strong> to different identities.</p>
+  </header>
+
+  <main class="wrap">
+    <section class="experiment" aria-labelledby="experiment-title">
+      <div class="experiment-head">
+        <div>
+          <h2 id="experiment-title">The adjacent-block experiment</h2>
+          <p>Only identities around the decision boundary move. Everything else stays in the same order.</p>
+        </div>
+        <button class="reset" id="reset" type="button">Reset iconic case</button>
+      </div>
+
+      <div class="grid">
+        <div class="controls">
+          <div class="control">
+            <div class="control-top"><label for="n">Candidate universe</label><output id="nValue">10,000</output></div>
+            <input id="n" type="range" min="500" max="50000" step="500" value="10000">
+            <small>The full ranked universe, most of which never reaches a decision seat.</small>
+          </div>
+          <div class="control">
+            <div class="control-top"><label for="k">Decision capacity</label><output id="kValue">50</output></div>
+            <input id="k" type="range" min="5" max="500" step="5" value="50">
+            <small>The finite top-k reviewed, funded, tested, flagged, or displayed.</small>
+          </div>
+          <div class="control">
+            <div class="control-top"><label for="m">Seats replaced</label><output id="mValue">50</output></div>
+            <input id="m" type="range" min="0" max="50" step="1" value="50">
+            <small>Adjacent candidates cross the cutoff; no other rank changes.</small>
+          </div>
+        </div>
+
+        <div class="results" aria-live="polite">
+          <div class="metrics">
+            <div class="metric global"><span>Global Spearman ρ</span><strong id="rho">0.999998500</strong><em>whole ranking</em></div>
+            <div class="metric identity"><span>RIDI</span><strong id="ridi">1.000</strong><em>decision-set distance</em></div>
+            <div class="metric overlap"><span>Top-k overlap</span><strong id="overlap">0 / 50</strong><em>same identities</em></div>
+            <div class="metric capacity"><span>Capacity replaced</span><strong id="turnover">100.0%</strong><em>changed slots / k</em></div>
+          </div>
+
+          <div class="verdict">
+            <div class="mark">!</div>
+            <div><strong id="verdictTitle">Near-perfect global agreement; completely different decisions.</strong><span id="verdictText">Spearman rounds to 1.00000 while all 50 finite decision seats change.</span></div>
+          </div>
+
+          <div class="comparison">
+            <div class="bar-row"><label>Global agreement</label><div class="track"><div class="fill blue" id="globalBar"></div></div><output id="globalPct">99.999850%</output></div>
+            <div class="bar-row"><label>Identity retained</label><div class="track"><div class="fill orange" id="identityBar"></div></div><output id="identityPct">0.0%</output></div>
+          </div>
+
+          <div class="sets">
+            <div class="set-card">
+              <div class="set-title"><span>R₀ decision set</span><small>baseline</small></div>
+              <div class="seats" id="baselineSeats"></div>
+            </div>
+            <div class="set-card">
+              <div class="set-title"><span>R₁ decision set</span><small><span id="newCount">50</span> entrants</small></div>
+              <div class="seats" id="updatedSeats"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="explain">
+      <article class="panel">
+        <h3>What did the experiment prove?</h3>
+        <p>A high global rank correlation is compatible with any amount of finite decision turnover. Increasing the candidate universe drives ρ toward one without restoring a single displaced top-k identity.</p>
+        <div class="formula" id="formula">ρ = 1 - 12m³ / [n(n²-1)]<br>RIDI = 2m / (k+m)</div>
+      </article>
+      <article class="panel">
+        <h3>Reproduce it in Python</h3>
+        <p>The construction is deterministic and dependency-free. Copy the exact code for the current slider values.</p>
+        <button class="copy" id="copy" type="button">Copy reproducible code</button>
+        <p class="status" id="copyStatus"></p>
+      </article>
+      <article class="panel">
+        <h3>What is RIDI?</h3>
+        <p>RIDI is Jaccard distance applied to finite decision identities: zero means the same candidates receive the slots; one means none do. Changed slots are reported beside it because they map directly to consumed decision capacity.</p>
+      </article>
+      <article class="panel">
+        <h3>What does it not prove?</h3>
+        <p>Turnover is not automatically harmful. A new representation may surface better candidates. RIDI measures the change; mechanism-matched controls attribute it, independent outcomes test it, and an exact selector constrains only the avoidable remainder.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <div class="footer-line">
+      <span>RIDI v1.0.0 · Adeeb Noor · Runs entirely in your browser</span>
+      <span><a href="https://github.com/adeebnoor/ridi">Source and audit toolkit</a></span>
+    </div>
+  </footer>
+
+  <script>
+    const nInput = document.getElementById('n');
+    const kInput = document.getElementById('k');
+    const mInput = document.getElementById('m');
+
+    const fmt = new Intl.NumberFormat('en-US');
+
+    function seat(label, kind) {
+      const node = document.createElement('span');
+      node.className = `seat ${kind || ''}`;
+      node.textContent = label;
+      return node;
+    }
+
+    function renderSeats(k, m) {
+      const baseline = document.getElementById('baselineSeats');
+      const updated = document.getElementById('updatedSeats');
+      baseline.replaceChildren();
+      updated.replaceChildren();
+      const maxShown = 18;
+      const baselineShown = Math.min(k, maxShown);
+      for (let i = 1; i <= baselineShown; i++) baseline.appendChild(seat(`A${i}`, i <= k - m ? 'kept' : ''));
+      if (k > maxShown) baseline.appendChild(seat(`+${k - maxShown}`, 'more'));
+
+      const retainedShown = Math.min(k - m, Math.ceil(maxShown / 2));
+      const entrantsShown = Math.min(m, maxShown - retainedShown);
+      for (let i = 1; i <= retainedShown; i++) updated.appendChild(seat(`A${i}`, 'kept'));
+      for (let i = 1; i <= entrantsShown; i++) updated.appendChild(seat(`B${i}`, 'new'));
+      const hidden = k - retainedShown - entrantsShown;
+      if (hidden > 0) updated.appendChild(seat(`+${hidden}`, 'more'));
+    }
+
+    function pythonCode(n, k, m) {
+      return `n, k, m = ${n}, ${k}, ${m}\nbaseline = list(range(n))\n# Swap the bottom m baseline decision identities with the next m outsiders.\nupdated = (baseline[:k-m] + baseline[k:k+m] +\n           baseline[k-m:k] + baseline[k+m:])\nA, B = set(baseline[:k]), set(updated[:k])\nrho = 1 - 12*m**3 / (n*(n**2 - 1))\nridi = 1 - len(A & B) / len(A | B)\nprint(f\"Spearman = {rho:.9f}\")\nprint(f\"overlap  = {len(A & B)}/{k}\")\nprint(f\"RIDI     = {ridi:.3f}\")`;
+    }
+
+    function update() {
+      const n = Number(nInput.value);
+      const maxK = Math.min(500, Math.floor(n / 2));
+      kInput.max = maxK;
+      if (Number(kInput.value) > maxK) kInput.value = maxK;
+      const k = Number(kInput.value);
+      mInput.max = k;
+      if (Number(mInput.value) > k) mInput.value = k;
+      const m = Number(mInput.value);
+
+      const rho = 1 - 12 * (m ** 3) / (n * (n ** 2 - 1));
+      const overlap = k - m;
+      const ridi = m === 0 ? 0 : 2 * m / (k + m);
+      const replaced = 100 * m / k;
+      const retained = 100 * overlap / k;
+
+      document.getElementById('nValue').textContent = fmt.format(n);
+      document.getElementById('kValue').textContent = fmt.format(k);
+      document.getElementById('mValue').textContent = fmt.format(m);
+      document.getElementById('rho').textContent = rho.toFixed(9);
+      document.getElementById('ridi').textContent = ridi.toFixed(3);
+      document.getElementById('overlap').textContent = `${fmt.format(overlap)} / ${fmt.format(k)}`;
+      document.getElementById('turnover').textContent = `${replaced.toFixed(1)}%`;
+      document.getElementById('globalPct').textContent = `${(100 * rho).toFixed(6)}%`;
+      document.getElementById('identityPct').textContent = `${retained.toFixed(1)}%`;
+      document.getElementById('globalBar').style.width = `${Math.max(0, Math.min(100, 100 * rho))}%`;
+      document.getElementById('identityBar').style.width = `${retained}%`;
+      document.getElementById('newCount').textContent = fmt.format(m);
+
+      const globalLabel = rho >= .99999 ? 'Near-perfect' : rho >= .99 ? 'Very high' : 'High';
+      const identityLabel = m === 0 ? 'identical decisions' : m === k ? 'completely different decisions' : `${fmt.format(m)} changed decision seats`;
+      document.getElementById('verdictTitle').textContent = `${globalLabel} global agreement; ${identityLabel}.`;
+      document.getElementById('verdictText').textContent = `Spearman is ${rho.toFixed(9)} while ${replaced.toFixed(1)}% of finite decision capacity changes.`;
+      document.getElementById('formula').innerHTML = `ρ = 1 - 12m³ / [n(n²-1)] = ${rho.toFixed(9)}<br>RIDI = 2m / (k+m) = ${ridi.toFixed(3)}`;
+      renderSeats(k, m);
+      window.currentCode = pythonCode(n, k, m);
+    }
+
+    [nInput, kInput, mInput].forEach(input => input.addEventListener('input', update));
+    document.getElementById('reset').addEventListener('click', () => {
+      nInput.value = 10000;
+      kInput.value = 50;
+      mInput.value = 50;
+      update();
+    });
+    document.getElementById('copy').addEventListener('click', async () => {
+      const status = document.getElementById('copyStatus');
+      try {
+        await navigator.clipboard.writeText(window.currentCode);
+        status.textContent = 'Copied. Paste into any Python 3 session.';
+      } catch (error) {
+        status.textContent = 'Clipboard access was blocked. Open the Colab notebook instead.';
+      }
+    });
+    update();
+  </script>
+</body>
+</html>
+
