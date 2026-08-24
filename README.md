@@ -148,7 +148,7 @@ three files listed in [`codecheck.yml`](codecheck.yml):
 python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
 python -m pip install --upgrade pip
-python -m pip install numpy scipy
+python -m pip install -r requirements-codecheck.txt
 python experiments/cyber_natural_update/replication/run_sealed_replication.py
 ```
 
