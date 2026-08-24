@@ -28,6 +28,6 @@ jobs:
         run: pytest -q
       - name: Smoke-test CLI
         run: |
+          python examples/identity_paradox.py
           ridi-audit compare --r0 examples/r0.csv --r1 examples/r1.csv --k 3 5 --out /tmp/audit.json
           ridi-audit control --r0 examples/r0.csv --r1 examples/r1.csv --k 5 --eta 0.001 --out /tmp/control.json
-
