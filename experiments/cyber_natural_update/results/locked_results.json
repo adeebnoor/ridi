@@ -1,0 +1,224 @@
+{
+  "external_outcome": {
+    "cutoffs": {
+      "100": {
+        "classification": "adverse",
+        "difference_v3_minus_v2": -2,
+        "entrants_future_kev": 2,
+        "leavers_future_kev": 4,
+        "retained_future_kev": 0,
+        "v2_future_kev": 4,
+        "v3_future_kev": 2
+      },
+      "1000": {
+        "classification": "beneficial",
+        "difference_v3_minus_v2": 4,
+        "entrants_future_kev": 4,
+        "leavers_future_kev": 0,
+        "retained_future_kev": 8,
+        "v2_future_kev": 8,
+        "v3_future_kev": 12
+      },
+      "500": {
+        "classification": "beneficial",
+        "difference_v3_minus_v2": 2,
+        "entrants_future_kev": 3,
+        "leavers_future_kev": 1,
+        "retained_future_kev": 6,
+        "v2_future_kev": 7,
+        "v3_future_kev": 9
+      },
+      "5000": {
+        "classification": "beneficial",
+        "difference_v3_minus_v2": 2,
+        "entrants_future_kev": 3,
+        "leavers_future_kev": 1,
+        "retained_future_kev": 13,
+        "v2_future_kev": 14,
+        "v3_future_kev": 16
+      }
+    },
+    "full_universe": {
+      "v2_auroc": 0.6647895355741457,
+      "v2_average_precision": 0.013532346004342678,
+      "v3_auroc": 0.6096852762417124,
+      "v3_average_precision": 0.010557663785379697
+    },
+    "primary_window_end": "2024-03-07",
+    "sensitivity": {
+      "180": {
+        "n_positive": 45,
+        "v2_future_kev": 5,
+        "v3_future_kev": 7,
+        "window_end": "2023-09-03"
+      },
+      "30": {
+        "n_positive": 11,
+        "v2_future_kev": 2,
+        "v3_future_kev": 2,
+        "window_end": "2023-04-06"
+      },
+      "90": {
+        "n_positive": 28,
+        "v2_future_kev": 3,
+        "v3_future_kev": 4,
+        "window_end": "2023-06-05"
+      }
+    }
+  },
+  "gates": {
+    "primary_outcome_classification": "beneficial",
+    "update_exceeds_both_temporal_controls": true
+  },
+  "identity_control": [
+    {
+      "avoidable_turnover_fraction": 0.0,
+      "delta_unconstrained": 565,
+      "eta": 0.0,
+      "external_retention": 1.0,
+      "future_kev": 12,
+      "j_eta": 565,
+      "passes_95pct_external_retention": false,
+      "ridi_controlled": 0.7220447284345048,
+      "ridi_unconstrained": 0.7220447284345048,
+      "utility": 997.4500344589937,
+      "utility_regret": 0.0,
+      "utility_star": 997.4500344589937
+    },
+    {
+      "avoidable_turnover_fraction": 0.14336283185840704,
+      "delta_unconstrained": 565,
+      "eta": 0.0001,
+      "external_retention": 1.0,
+      "future_kev": 12,
+      "j_eta": 484,
+      "passes_95pct_external_retention": true,
+      "ridi_controlled": 0.6522911051212938,
+      "ridi_unconstrained": 0.7220447284345048,
+      "utility": 997.3512009597467,
+      "utility_regret": 9.908616555476233e-05,
+      "utility_star": 997.4500344589937
+    },
+    {
+      "avoidable_turnover_fraction": 0.40884955752212393,
+      "delta_unconstrained": 565,
+      "eta": 0.001,
+      "external_retention": 0.8333333333333334,
+      "future_kev": 10,
+      "j_eta": 334,
+      "passes_95pct_external_retention": false,
+      "ridi_controlled": 0.5007496251874063,
+      "ridi_unconstrained": 0.7220447284345048,
+      "utility": 996.4589427470207,
+      "utility_regret": 0.0009936254225612119,
+      "utility_star": 997.4500344589937
+    },
+    {
+      "avoidable_turnover_fraction": 0.7716814159292036,
+      "delta_unconstrained": 565,
+      "eta": 0.005,
+      "external_retention": 0.8333333333333334,
+      "future_kev": 10,
+      "j_eta": 129,
+      "passes_95pct_external_retention": false,
+      "ridi_controlled": 0.22852081488042517,
+      "ridi_unconstrained": 0.7220447284345048,
+      "utility": 992.4737728769443,
+      "utility_regret": 0.0049889833175939795,
+      "utility_star": 997.4500344589937
+    },
+    {
+      "avoidable_turnover_fraction": 0.952212389380531,
+      "delta_unconstrained": 565,
+      "eta": 0.01,
+      "external_retention": 0.75,
+      "future_kev": 9,
+      "j_eta": 27,
+      "passes_95pct_external_retention": false,
+      "ridi_controlled": 0.05258033106134372,
+      "ridi_unconstrained": 0.7220447284345048,
+      "utility": 987.4777701202247,
+      "utility_regret": 0.009997758277864902,
+      "utility_star": 997.4500344589937
+    }
+  ],
+  "n_candidates": 195886,
+  "n_future_kev_primary": 58,
+  "n_prior_kev_excluded": 884,
+  "post_update_control": {
+    "cutoffs": {
+      "100": {
+        "changed_slots": 0,
+        "overlap": 100,
+        "ridi": 0.0
+      },
+      "1000": {
+        "changed_slots": 7,
+        "overlap": 993,
+        "ridi": 0.013902681231380387
+      },
+      "500": {
+        "changed_slots": 4,
+        "overlap": 496,
+        "ridi": 0.015873015873015928
+      },
+      "5000": {
+        "changed_slots": 6,
+        "overlap": 4994,
+        "ridi": 0.002397123451857719
+      }
+    },
+    "global_spearman": 0.9998274829782118
+  },
+  "pre_update_control": {
+    "cutoffs": {
+      "100": {
+        "changed_slots": 0,
+        "overlap": 100,
+        "ridi": 0.0
+      },
+      "1000": {
+        "changed_slots": 0,
+        "overlap": 1000,
+        "ridi": 0.0
+      },
+      "500": {
+        "changed_slots": 1,
+        "overlap": 499,
+        "ridi": 0.003992015968063867
+      },
+      "5000": {
+        "changed_slots": 0,
+        "overlap": 5000,
+        "ridi": 0.0
+      }
+    },
+    "global_spearman": 0.9999960800674765
+  },
+  "protocol_id": "RIDI-CYBER-NATURAL-UPDATE-v1",
+  "treatment": {
+    "cutoffs": {
+      "100": {
+        "changed_slots": 73,
+        "overlap": 27,
+        "ridi": 0.8439306358381503
+      },
+      "1000": {
+        "changed_slots": 565,
+        "overlap": 435,
+        "ridi": 0.7220447284345048
+      },
+      "500": {
+        "changed_slots": 321,
+        "overlap": 179,
+        "ridi": 0.781973203410475
+      },
+      "5000": {
+        "changed_slots": 2390,
+        "overlap": 2610,
+        "ridi": 0.6468200270635995
+      }
+    },
+    "global_spearman": 0.6691660096397197
+  }
+}
