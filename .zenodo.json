@@ -1,0 +1,30 @@
+{
+  "title": "RIDI: Decision-identity reproducibility audit",
+  "description": "Software, protocols and reproducibility materials for measuring, certifying and controlling decision-identity turnover under representation interventions.",
+  "creators": [
+    {
+      "name": "Noor, Adeeb",
+      "orcid": "0000-0002-8251-1853",
+      "affiliation": "King Abdulaziz University"
+    }
+  ],
+  "license": "MIT",
+  "upload_type": "software",
+  "access_right": "open",
+  "keywords": [
+    "decision identity",
+    "reproducibility",
+    "representation intervention",
+    "ranking stability",
+    "top-k selection",
+    "audit"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/adeebnoor/ridi",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}
+

@@ -1,0 +1,36 @@
+name: Reproducible bug report
+description: Report an unexpected software result with enough information to reproduce it.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thank you for helping improve RIDI. Do not include confidential or patient-level data.
+  - type: input
+    id: version
+    attributes:
+      label: ridi-audit version
+      placeholder: 1.0.0
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Observed and expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Include commands and a synthetic or de-identified example if possible.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system, Python version and dependency versions.
+    validations:
+      required: true
+
