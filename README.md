@@ -2,18 +2,18 @@
 
 <div align="center">
 
-## Reproducibility of Identity Decisions Index
+## Decision identity for capacity-limited AI
 
-## Reproducible performance does not guarantee reproducible decisions
+### Performance and group-fairness audits can be exactly unchanged while the identities receiving finite capacity change
 
-**A small metric, a falsifiable experiment, and an exact control algorithm for systems that select a finite top-*k*.**
+**RIDI is the measurement and control toolkit for a broader result: aggregate audits identify cells, not allocations.**
 
 [![Tests](https://github.com/adeebnoor/ridi/actions/workflows/tests.yml/badge.svg)](https://github.com/adeebnoor/ridi/actions/workflows/tests.yml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-3776AB.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/code-MIT-2ea44f.svg)](LICENSE)
 [![ORCID](https://img.shields.io/badge/ORCID-0000--0002--8251--1853-A6CE39.svg)](https://orcid.org/0000-0002-8251-1853)
 
-[**Try the interactive experiment**](https://htmlpreview.github.io/?https://github.com/adeebnoor/ridi/blob/main/demo/index.html) · [**Run in Colab**](https://colab.research.google.com/github/adeebnoor/ridi/blob/main/notebooks/RIDI_60_Second_Experiment.ipynb) · [**Install the toolkit**](#install)
+[**Try the interactive experiment**](https://htmlpreview.github.io/?https://github.com/adeebnoor/ridi/blob/main/demo/index.html) · [**Run in Colab**](https://colab.research.google.com/github/adeebnoor/ridi/blob/main/notebooks/RIDI_60_Second_Experiment.ipynb) · [**Install**](#install)
 
 </div>
 
@@ -21,49 +21,89 @@
 
 ![RIDI framework: measure, attribute, certify, control and validate decision identity](assets/ridi-framework.svg)
 
-## What is RIDI?
+## The discovery
 
-The **Reproducibility of Identity Decisions Index (RIDI)** measures whether two versions of a computational system allocate the same finite decision capacity to the same identities.
+Capacity-limited AI systems do not act on an entire score distribution. They allocate a finite number of action slots: vulnerabilities enter remediation queues, people enter supervision or review, hospitals enter oversight cohorts, documents enter inspection queues, and candidates enter follow-up lists.
 
-Suppose two versions of a system each select 100 candidates for human review.
+The manuscript associated with this repository identifies an **allocation-identification failure** at that score-to-action boundary.
 
-- If both versions select exactly the same 100 identities, **RIDI = 0**.
-- If they share 75 identities, 25 seats were replaced and **RIDI = 0.40**.
-- If they share no identities, **RIDI = 1**.
+If an audit observes only finitely many outcome, protected-group or rank-position cells, then fixing the selected count inside each audited cell does **not** identify which members occupy those cells. Identities can be substituted within a cell while every reported quantity derived from those cell counts remains exactly unchanged.
 
-RIDI is simply the Jaccard distance between two finite decision sets:
+For cells `c` containing `N_c` candidates from which `m_c` are selected, the compatible allocation class contains at least
+
+```text
+product_c binomial(N_c, m_c)
+```
+
+allocations.
+
+This is not a claim that performance or fairness are unimportant. It is a statement about **what those summaries can and cannot identify**. Performance and group-fairness audits can be necessary and still be insufficient to tell us who received scarce capacity.
+
+> **Aggregate audits identify cells, not allocations.**
+
+The practical implication is simple: wherever scores become finite action, **allocation identity should be reported as a scientific estimand alongside performance and group fairness**.
+
+## RIDI is an instrument, not the theorem
+
+The **Reproducibility of Identity Decisions Index (RIDI)** measures change between two equal-capacity decision sets:
 
 ```text
 RIDI(A, B) = 1 - |A ∩ B| / |A ∪ B|
 ```
 
-It answers one operational question:
+- identical allocations: `RIDI = 0`
+- partial replacement: `0 < RIDI < 1`
+- disjoint allocations: `RIDI = 1`
 
-> **Did the same candidates receive the scarce decision slots?**
+RIDI does not replace AUROC, precision, recall, nDCG, Spearman correlation, calibration or fairness metrics. It reports the allocation axis that those summaries do not, in general, identify.
 
-RIDI does not replace AUROC, nDCG, MRR, Spearman correlation, fairness evaluation, or domain validation. It reports a different axis that those measures do not certify: **decision identity**.
+For equal-size top-`k` sets, if `Delta_k = k - |A ∩ B|` is the number of changed slots, then
 
-## The scientific contribution
+```text
+RIDI = 2*Delta_k / (k + Delta_k)
+```
 
-The scalar is intentionally simple: its set-distance primitive is Jaccard distance. The contribution is the surrounding reproducibility framework that turns finite decision identity into a falsifiable and controllable scientific object:
+## Why the result is general
 
-1. isolate a representation intervention while freezing or calibrating other causes of change;
-2. measure the identities that cross a declared decision boundary;
-3. certify zero turnover when a score-margin condition holds;
-4. compute the exact minimum-turnover solution within a declared utility tolerance; and
-5. test changed identities against independent outcomes rather than assuming that stability is always desirable.
+The identification result is induced by the **information retained by the audit**, not by a specific architecture, dataset or application. The empirical programme is therefore used as adversarial triangulation of the theorem rather than as a claim that every domain has the same turnover rate or consequence.
 
-This separates three questions that aggregate performance alone cannot answer: **what changed, what caused it, and how much of it was necessary?**
+The main evidence includes:
 
-## The 60-second experiment
+- **COMPAS:** in the public two-year cohort (`n=6,172`), a top-1,000 cohort has precision `0.745`, recall `0.265` and African-American share `74.7%`. Even when racial composition is matched exactly inside outcome cells, the audit-equivalent class remains about `10^1048` cohorts; age and sex composition remain free until those dimensions are audited explicitly.
+- **EPSS:** for the v2→v3 production update, `565/1,000` top priorities changed while adjacent same-version controls changed `0` and `7`. The v3 top-1,000 contained 12 vulnerabilities that later entered CISA KEV; even holding all 12 fixed, precision/recall leave `988/1,000` acted-on identities unresolved.
+- **CMS HVBP:** successive annual Total Performance Score updates changed `195/500` and `202/500` hospitals in declared audit cohorts, while matched same-year controls changed none. This is transport to a second independently governed production scoring system, not a claim about clinical or payment effects.
+- **Controlled mechanism tests:** graph and text experiments show how representation changes can alter surfaced identities even when conventional performance moves little, while matched controls delimit attribution.
+- **Registered failures:** RxNorm and Open Targets analyses are retained as first-class negative evidence. They show that the magnitude, mechanism and external value of identity change are system- and cutoff-dependent. The theorem is general; consequential turnover is not claimed to be universal.
 
-Can two rankings be almost identical globally while selecting completely different candidates?
+## From observability to control
+
+The toolkit operationalizes five distinct questions:
+
+| Step | Question | Output |
+|---|---|---|
+| **Measure** | Which finite decision identities changed? | RIDI, changed slots, overlap |
+| **Attribute** | What mechanism produced the change? | matched controls and invariance tests |
+| **Certify** | Can zero turnover be guaranteed? | score-margin certificate |
+| **Control** | How much change is actually required to retain updated utility? | exact identity–utility frontier |
+| **Validate** | Was the changed allocation externally justified? | pre-specified outcome gate |
+
+A sufficient zero-turnover certificate is available from stored paired scores. If the baseline top-`k` score margin `gamma_k` exceeds twice the maximum paired perturbation `epsilon`, then top-`k` identity is certified unchanged:
+
+```text
+gamma_k > 2*epsilon
+```
+
+The exact selector then finds the minimum-turnover top-`k` set within a prospectively declared updated-score utility-regret tolerance. Stability is therefore not enforced blindly: identity change can be accepted when independent outcomes justify it, and only unnecessary change should be constrained.
+
+## 60-second paradox
+
+Run:
 
 ```bash
 python examples/identity_paradox.py
 ```
 
-Expected result:
+A deterministic construction can produce near-perfect global rank agreement while completely replacing the top-`k` decision set:
 
 ```text
 Candidates (n):               10,000
@@ -71,56 +111,9 @@ Decision capacity (k):            50
 Global Spearman agreement:  0.999998500
 Top-k overlap:                     0 / 50
 RIDI:                          1.000
-
-Verdict: near-perfect global agreement, completely different decisions.
 ```
 
-The experiment is deterministic. It swaps only two adjacent blocks of 50 ranks in a universe of 10,000. The global disturbance is tiny, but every finite decision seat changes.
-
-For this construction:
-
-```text
-Spearman rho = 1 - 12*k^3 / (n*(n^2 - 1))
-RIDI         = 1
-```
-
-As `n` grows, Spearman approaches 1 while the selected sets remain disjoint. Therefore, **no threshold on global rank agreement alone can guarantee top-*k* identity**.
-
-<div align="center">
-
-[![Open interactive experiment](https://img.shields.io/badge/Open-interactive_experiment-6f42c1?style=for-the-badge)](https://htmlpreview.github.io/?https://github.com/adeebnoor/ridi/blob/main/demo/index.html)
-[![Open in Colab](https://img.shields.io/badge/Open_in-Colab-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white)](https://colab.research.google.com/github/adeebnoor/ridi/blob/main/notebooks/RIDI_60_Second_Experiment.ipynb)
-
-</div>
-
-The browser experiment runs locally in the page, uploads no data, and lets you change the candidate universe, decision capacity, and number of replaced seats.
-
-## From observation to action
-
-RIDI is not only a distance. The research framework defines a five-part audit; the public toolkit directly implements measurement, certification and exact control, and supplies the reporting structure for attribution and outcome validation.
-
-| Step | Question | Output |
-|---|---|---|
-| **Measure** | Which finite decision identities changed? | RIDI, changed slots, overlap |
-| **Attribute** | Was the change caused by representation rather than relabelling or retraining noise? | Invariance controls and retraining null |
-| **Certify** | Can zero turnover be guaranteed from stored scores? | `gamma_k > 2*epsilon` certificate |
-| **Control** | How much turnover is actually needed to preserve updated utility? | Exact identity–utility frontier |
-| **Validate** | Did changed identities improve an independently assessed outcome? | Pre-specified outcome gate, including adverse results |
-
-The exact selector finds the minimum-turnover top-*k* set within a prospectively declared utility-regret tolerance. Sorting dominates the calculation, giving `O(n log n)` complexity.
-
-## Evidence at a glance
-
-The locked manuscript analyses provide six complementary tests of the framework:
-
-- **Mathematical separation:** global Spearman agreement can approach one while top-*k* decision sets remain disjoint.
-- **Certification:** `33,958` of `168,000` synthetic cases were certified with zero false certificates.
-- **Attribution:** GraphSAGE representation AURIDI was `0.11571` versus a same-representation retraining null of `0.08052`—a `44%` relative excess; the absolute difference was `0.03519` (95% query-bootstrap interval `0.02184–0.05119`) while AUROC was `0.91772` versus `0.91747`.
-- **Exact control:** at the demonstration tolerance `eta = 0.001`, `78.8%` of GraphSAGE turnover and `28.7%` of text-retrieval turnover was avoidable under the declared utility.
-- **Independent outcome boundary:** an RxNorm update changed `25` of `1,000` selected identities despite Spearman `0.999406`; later DDInter curation increased recovered interactions from `17` to `19`, whereas exact zero-change control returned `17` and failed the pre-specified `97.5%` retention gate.
-- **Natural update outside biomedicine:** FIRST's production EPSS v2→v3 update changed `565` of `1,000` vulnerability priorities, versus `0` and `7` in adjacent same-version daily controls. Among delayed CISA KEV entries, top-1,000 recovery increased from `8` to `12` although full-universe AUROC fell from `0.665` to `0.610`. The locked `eta=0.001` controller avoided `40.9%` of turnover but retained only `10/12` outcomes and failed its `95%` gate.
-
-The EPSS extension is a natural production-model update, not a representation-attribution experiment. These results establish measurement, attribution, certification and controllability. They do **not** establish clinical harm, patient benefit or universal turnover rates. See [results and interpretation boundaries](docs/RESULTS_AT_A_GLANCE.md), [numerical provenance](docs/NUMERICAL_PROVENANCE.md), and the [locked cybersecurity protocol](experiments/cyber_natural_update/PROTOCOL_LOCK.md).
+As `n` grows, Spearman correlation approaches one while the selected sets remain disjoint. No threshold on global rank agreement alone can therefore certify top-`k` identity.
 
 ## Install
 
@@ -128,38 +121,10 @@ The EPSS extension is a natural production-model update, not a representation-at
 git clone https://github.com/adeebnoor/ridi.git
 cd ridi
 python -m pip install .
-```
-
-Verify the installation:
-
-```bash
-ridi-audit --version
 pytest -q
 ```
 
-## CODECHECK reproduction
-
-The sealed EPSS natural-update computation can be reproduced independently in
-a fresh Python 3.10+ environment. It downloads six public files pinned to their
-source commits, verifies every input, runs the locked analysis and recreates the
-three files listed in [`codecheck.yml`](codecheck.yml):
-
-```bash
-python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
-python -m pip install --upgrade pip
-python -m pip install -r requirements-codecheck.txt
-python experiments/cyber_natural_update/replication/run_sealed_replication.py
-```
-
-The independently operated run, not the author's verification run, is the one
-eligible for a CODECHECK certificate. Full instructions and the independence
-declaration are in
-[`experiments/cyber_natural_update/replication/`](experiments/cyber_natural_update/replication/).
-
 ## Audit your own scores
-
-Prepare two CSV files containing the same candidate IDs and one score per candidate:
 
 ```bash
 ridi-audit compare \
@@ -172,15 +137,7 @@ ridi-audit compare \
   --report audit.md
 ```
 
-The report contains:
-
-- global Spearman agreement;
-- RIDI, changed slots and overlap at each cutoff;
-- the baseline boundary margin `gamma_k`;
-- maximum paired score perturbation `epsilon`; and
-- whether `gamma_k > 2*epsilon` certifies identical top-*k* identity.
-
-The certificate is sufficient and one-sided. A failed certificate does not imply turnover. Once paired scores are stored, certification needs no retraining or additional inference.
+The report includes global Spearman agreement, RIDI, changed slots, overlap, the cutoff margin `gamma_k`, maximum paired perturbation `epsilon`, and the zero-turnover certificate status.
 
 ## Control avoidable turnover
 
@@ -195,23 +152,31 @@ ridi-audit control \
   --out controlled.json
 ```
 
-`eta = 0.001` allows at most 0.1% normalized updated-score utility regret. This is a demonstration choice, not a universal standard. Real deployments should declare the tolerance prospectively from domain costs, review capacity, safety requirements, and governance policy.
+`eta` is a domain-governance choice, not a universal threshold. It should be declared prospectively from utility, capacity, safety and policy constraints.
 
-## Why this matters
+## Independent reproducibility and CODECHECK
 
-A system rarely acts on an entire ranking. It allocates finite attention: molecules sent to a laboratory, records assigned to reviewers, patients flagged for follow-up, or documents shown on the first page. Global performance can be stable even when those identities change.
+The locked EPSS natural-update workflow is designed for execution outside the author environment. Executor-facing instructions, manifests and machine-readable output records are included in the repository and referenced from [`codecheck.yml`](codecheck.yml).
 
-The accompanying locked analyses span drug-interaction knowledge, graph learning and text retrieval. They show three distinct possibilities:
+A **community CODECHECK is publicly registered and pending independent assignment**:
 
-1. turnover can be **hidden** by global agreement;
-2. turnover can be **beneficial**, so stability must not be enforced blindly; and
-3. when outcomes do not justify alternatives, part of the turnover can be **avoided exactly** within a declared utility budget.
+- CODECHECK register: [codecheckers/register#208](https://github.com/codecheckers/register/issues/208)
+- current registered state: `community` / `needs codechecker`
+- requested workflow: `RIDI-CYBER-NATURAL-UPDATE-v1`
 
-The full empirical record belongs in the manuscript and immutable archive. This repository is deliberately organized around understanding, testing and reusing the method.
+Separate external environments have reproduced the canonical numerical result key. Those runs are treated as cross-environment numerical reproduction only. **No CODECHECK certificate is claimed unless and until the community workflow is completed and a certificate is formally issued.**
+
+Public tracking: [RIDI issue #2](https://github.com/adeebnoor/ridi/issues/2).
+
+## Prospective falsification
+
+The next EPSS production-version test is publicly locked in [`PROSPECTIVE_EPSS_NEXT_VERSION_PROTOCOL_LOCK_2026-08-31.md`](PROSPECTIVE_EPSS_NEXT_VERSION_PROTOCOL_LOCK_2026-08-31.md). The point is not to accumulate supportive examples; it is to make the allocation-identification programme prospectively falsifiable.
 
 ## Scientific boundaries
 
-RIDI measures turnover—not correctness, fairness, clinical benefit, causal harm, or model superiority. Representation attribution requires source evidence, inference, candidate universe, decision rules and randomness to be frozen or explicitly controlled. Drug examples in the research archive are operational selection illustrations, not prescribing guidance.
+RIDI measures allocation turnover, not correctness, fairness, causal harm, clinical benefit or model superiority. The theorem applies to audits that factor through finite outcome/group/position summaries; explicitly identity-aware, individual-fairness or causal-fairness analyses can escape that information loss. Empirical effect sizes, mechanisms and consequences remain system- and cutoff-dependent.
+
+The public COMPAS analysis is a retrospective secondary analysis of the published two-year research cohort. Constructive extremal cohorts show what the audited summaries cannot exclude; they are not predictions that a particular alternative scorer will produce those cohorts.
 
 ## Repository map
 
@@ -219,29 +184,34 @@ RIDI measures turnover—not correctness, fairness, clinical benefit, causal har
 demo/                   Zero-install browser experiment
 notebooks/              One-click Colab experiment
 examples/               Minimal scripts and aligned score tables
-experiments/            Locked extensions and blind-run replication packages
+experiments/            Locked analyses and replication packages
 src/ridi_audit/         Metric, certificate, exact selector and CLI
 tests/                  Unit and brute-force optimality tests
 docs/                   Methods, interpretation and reproduction guidance
 .github/workflows/      Continuous integration
 ```
 
-Start with the [interactive experiment](https://htmlpreview.github.io/?https://github.com/adeebnoor/ridi/blob/main/demo/index.html), then read the [methods note](docs/METHODS.md) and [minimum reporting standard](RIDI_AUDIT_MINIMUM_REPORTING_STANDARD_v1.md).
+## Manuscript
 
-## Citation and archive
+**Performance and group-fairness audits leave AI allocations unidentified**  
+Article prepared for submission to *Nature*.
+
+The manuscript's central claim is the allocation-identification theorem. RIDI is the accompanying measurement/control framework rather than the discovery itself.
+
+## Citation
 
 Use [`CITATION.cff`](CITATION.cff) to cite the software:
 
-> Noor, A. (2026). *RIDI (Reproducibility of Identity Decisions Index): decision-identity reproducibility audit* (v1.0.0). GitHub. https://github.com/adeebnoor/ridi
+> Noor, A. (2026). *RIDI: decision-identity audit and control toolkit* (v1.0.0). GitHub. https://github.com/adeebnoor/ridi
 
-The archival DOI `10.5281/zenodo.22072275` is reserved and will become the citation target when its public record is activated.
+No archival DOI is claimed here unless its public activation has been independently verified.
 
 ## Author
 
 **Adeeb Noor**  
 Department of Information Technology, Faculty of Computing and Information Technology, King Abdulaziz University, Jeddah, Saudi Arabia  
-[ORCID](https://orcid.org/0000-0002-8251-1853)
+[ORCID 0000-0002-8251-1853](https://orcid.org/0000-0002-8251-1853)
 
 ## Status
 
-Version 1.0.0 is the public software companion to the v21 manuscript **prepared for submission to Nature**. A separately operated replication of the locked cybersecurity extension is requested; the author-run result is not labelled independent. The manuscript has not been submitted, accepted or peer reviewed.
+The repository is public and actively supports the current Nature submission package. The community CODECHECK request is registered as `codecheckers/register#208` and awaits assignment. The manuscript has not been accepted or peer reviewed. No CODECHECK certificate, institutional ethics determination or archival DOI is claimed unless and until it is formally issued or independently verified.
