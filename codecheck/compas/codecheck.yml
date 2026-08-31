@@ -1,0 +1,36 @@
+---
+version: https://codecheck.org.uk/spec/config/1.0/
+
+manifest:
+  - file: layered_results.json
+    comment: primary result - class sizes and free ranges for all four audit layers
+  - file: fig_compas_audit_equivalence.png
+    comment: Main Fig. 2 of the manuscript
+  - file: VALUE_KEY.json
+    comment: canonical value key; a successful check reproduces these values exactly
+
+paper:
+  title: "Performance and group-fairness audits leave AI allocations unidentified"
+  authors:
+    - name: Adeeb Noor
+      ORCID: 0000-0002-8251-1853
+  reference: manuscript prepared for submission to Nature
+
+source:
+  - name: ProPublica COMPAS analysis
+    url: https://github.com/propublica/compas-analysis/tree/bafff5da3f2e45eca6c2d5055faad269defd135a
+
+repository: https://github.com/adeebnoor/ridi/tree/main/codecheck/compas
+
+check_time: "under 1 minute after dependencies; network used only to fetch the pinned upstream CSV"
+
+codechecker:
+  - name: ~
+    ORCID: ~
+
+summary: >
+  Computes, on the public ProPublica COMPAS two-year cohort (n=6,172), the size of the
+  audit-equivalent class of top-1,000 allocations under four cumulative audit definitions
+  (outcome; +race; +risk decile; +sex), and the free range of cohort composition inside each
+  class. verify_layers.py explicitly constructs all 32 extremal allocations and asserts that
+  every audited statistic is identical to the deployed allocation (expected: 0 mismatches).
