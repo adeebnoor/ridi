@@ -1,0 +1,49 @@
+{
+ "cohort": {
+  "n": 6172,
+  "positives": 2809
+ },
+ "deployed": {
+  "k": 1000,
+  "precision_at_k": 0.745,
+  "recall": 0.2652
+ },
+ "layers": [
+  {
+   "african_american_share": [0.0, 1.0],
+   "female_share": [0.0, 0.668],
+   "layer": "outcome",
+   "log10_class": 1094.4,
+   "mean_age": [21.751, 50.887],
+   "mean_prior_convictions": [0.148, 12.163]
+  },
+  {
+   "african_american_share": [0.747, 0.747],
+   "female_share": [0.0, 0.637],
+   "layer": "outcome x race",
+   "log10_class": 1048.2,
+   "mean_age": [21.877, 48.634],
+   "mean_prior_convictions": [0.326, 12.155]
+  },
+  {
+   "african_american_share": [0.747, 0.747],
+   "female_share": [0.095, 0.151],
+   "layer": "outcome x race x decile",
+   "log10_class": 112.7,
+   "mean_age": [27.81, 30.465],
+   "mean_prior_convictions": [6.127, 7.823]
+  },
+  {
+   "african_american_share": [0.747, 0.747],
+   "female_share": [0.131, 0.131],
+   "layer": "outcome x race x decile x sex",
+   "log10_class": 109.2,
+   "mean_age": [27.859, 30.451],
+   "mean_prior_convictions": [6.145, 7.815]
+  }
+ ],
+ "verification": {
+  "audited_statistic_mismatches": 0,
+  "extremal_allocations_built": 32
+ }
+}
