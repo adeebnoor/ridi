@@ -1,0 +1,1 @@
+This repository is ready to be entered into the CODECHECK community workflow. The author requests an unaffiliated codechecker. See `CODECHECK_REGISTER_ISSUE_BODY.md`, `COMMUNITY_CODECHECK_SCOPE_2026-08-31.md`, and the root `codecheck.yml`.
