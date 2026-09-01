@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="820" viewBox="0 0 1600 820" role="img" aria-labelledby="title desc">
+  <title id="title">Allocation identity: same audit, different entities</title>
+  <desc id="desc">A visual explanation that two capacity-limited AI systems can report the same performance, fairness, calibration and capacity while selecting different entities, motivating allocation identity as a distinct evaluation estimand.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#071426"/>
+      <stop offset="1" stop-color="#0f2747"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" x2="1">
+      <stop offset="0" stop-color="#2d7df6"/>
+      <stop offset="1" stop-color="#7b5cff"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#001126" flood-opacity="0.18"/>
+    </filter>
+    <style>
+      .title{font:700 54px Arial,Helvetica,sans-serif;fill:#fff}
+      .sub{font:400 26px Arial,Helvetica,sans-serif;fill:#c8d5e6}
+      .label{font:700 22px Arial,Helvetica,sans-serif;fill:#183252}
+      .small{font:400 18px Arial,Helvetica,sans-serif;fill:#48617f}
+      .metric{font:600 20px Arial,Helvetica,sans-serif;fill:#173251}
+      .white{fill:#fff}
+      .dark{fill:#0b1f38}
+      .blue{fill:#2d7df6}
+      .purple{fill:#7957f5}
+      .green{fill:#26a269}
+      .muted{fill:#d8e0ea}
+    </style>
+  </defs>
+
+  <rect width="1600" height="820" rx="28" fill="url(#bg)"/>
+
+  <text x="72" y="90" class="title">Allocation identity</text>
+  <text x="72" y="132" class="sub">A missing estimand at the score-to-action boundary</text>
+  <rect x="72" y="166" width="1456" height="72" rx="16" fill="#102b4b" stroke="#284a70"/>
+  <text x="800" y="211" text-anchor="middle" style="font:700 28px Arial,Helvetica,sans-serif;fill:#fff">A system can pass the same reported audit while acting on different entities.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="72" y="285" width="430" height="330" rx="22" fill="#fff"/>
+    <rect x="585" y="285" width="430" height="330" rx="22" fill="#fff"/>
+    <rect x="1098" y="285" width="430" height="330" rx="22" fill="#fff"/>
+  </g>
+
+  <rect x="72" y="285" width="430" height="58" rx="22" fill="#eaf2ff"/>
+  <text x="287" y="322" text-anchor="middle" class="label">Version t — Allocation A</text>
+  <text x="287" y="377" text-anchor="middle" class="small">Top-k capacity = 10</text>
+
+  <g transform="translate(120 408)">
+    <circle cx="0" cy="0" r="18" class="blue"/><circle cx="54" cy="0" r="18" class="blue"/><circle cx="108" cy="0" r="18" class="green"/><circle cx="162" cy="0" r="18" class="purple"/><circle cx="216" cy="0" r="18" class="blue"/>
+    <circle cx="0" cy="58" r="18" class="green"/><circle cx="54" cy="58" r="18" class="purple"/><circle cx="108" cy="58" r="18" class="blue"/><circle cx="162" cy="58" r="18" class="green"/><circle cx="216" cy="58" r="18" class="purple"/>
+    <circle cx="0" cy="118" r="18" class="muted"/><circle cx="54" cy="118" r="18" class="muted"/><circle cx="108" cy="118" r="18" class="muted"/><circle cx="162" cy="118" r="18" class="muted"/><circle cx="216" cy="118" r="18" class="muted"/>
+  </g>
+  <text x="287" y="590" text-anchor="middle" class="small">10 selected identities</text>
+
+  <rect x="585" y="285" width="430" height="58" rx="22" fill="#eef2f7"/>
+  <text x="800" y="322" text-anchor="middle" class="label">Reported audits</text>
+  <g transform="translate(640 382)">
+    <text x="0" y="0" class="metric">✓ Performance</text>
+    <text x="0" y="52" class="metric">✓ Precision / Recall @ k</text>
+    <text x="0" y="104" class="metric">✓ Group fairness</text>
+    <text x="0" y="156" class="metric">✓ Calibration / robustness</text>
+    <text x="0" y="208" class="metric">✓ Capacity (k)</text>
+  </g>
+  <rect x="625" y="560" width="350" height="38" rx="10" fill="#edf8f2"/>
+  <text x="800" y="585" text-anchor="middle" style="font:700 18px Arial,Helvetica,sans-serif;fill:#23855a">ALL REPORTED VALUES: SAME</text>
+
+  <rect x="1098" y="285" width="430" height="58" rx="22" fill="#f2edff"/>
+  <text x="1313" y="322" text-anchor="middle" class="label">Version t+1 — Allocation B</text>
+  <text x="1313" y="377" text-anchor="middle" class="small">Top-k capacity = 10</text>
+
+  <g transform="translate(1146 408)">
+    <circle cx="0" cy="0" r="18" class="purple"/><circle cx="54" cy="0" r="18" class="green"/><circle cx="108" cy="0" r="18" class="purple"/><circle cx="162" cy="0" r="18" class="blue"/><circle cx="216" cy="0" r="18" class="purple"/>
+    <circle cx="0" cy="58" r="18" class="purple"/><circle cx="54" cy="58" r="18" class="blue"/><circle cx="108" cy="58" r="18" class="green"/><circle cx="162" cy="58" r="18" class="purple"/><circle cx="216" cy="58" r="18" class="green"/>
+    <circle cx="0" cy="118" r="18" class="muted"/><circle cx="54" cy="118" r="18" class="muted"/><circle cx="108" cy="118" r="18" class="muted"/><circle cx="162" cy="118" r="18" class="muted"/><circle cx="216" cy="118" r="18" class="muted"/>
+  </g>
+  <text x="1313" y="590" text-anchor="middle" class="small">Different selected identities</text>
+
+  <path d="M510 450 H565" stroke="#7fa4cb" stroke-width="5" stroke-linecap="round"/>
+  <path d="M552 438 L568 450 L552 462" fill="none" stroke="#7fa4cb" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M1023 450 H1078" stroke="#7fa4cb" stroke-width="5" stroke-linecap="round"/>
+  <path d="M1065 438 L1081 450 L1065 462" fill="none" stroke="#7fa4cb" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="72" y="660" width="1456" height="102" rx="18" fill="#ffffff"/>
+  <circle cx="124" cy="711" r="28" fill="url(#accent)"/>
+  <text x="124" y="719" text-anchor="middle" style="font:700 26px Arial,Helvetica,sans-serif;fill:#fff">?</text>
+  <text x="176" y="700" style="font:700 26px Arial,Helvetica,sans-serif;fill:#102a47">Allocation identity asks:</text>
+  <text x="176" y="735" style="font:700 31px Arial,Helvetica,sans-serif;fill:#17385f">Who actually receives the finite action — and who changed?</text>
+  <rect x="1185" y="683" width="286" height="55" rx="14" fill="url(#accent)"/>
+  <text x="1328" y="718" text-anchor="middle" style="font:700 22px Arial,Helvetica,sans-serif;fill:#fff">RIDI makes it observable</text>
+</svg>
