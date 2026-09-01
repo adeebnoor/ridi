@@ -19,7 +19,7 @@
 
 ---
 
-![RIDI framework: measure, attribute, certify, control and validate allocation identity](assets/ridi-framework.svg)
+[![Allocation identity: same reported audit, different selected entities](assets/allocation-identity-hero.svg)](https://htmlpreview.github.io/?https://github.com/adeebnoor/ridi/blob/main/demo/index.html)
 
 ## The missing estimand
 
