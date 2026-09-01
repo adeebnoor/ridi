@@ -1,6 +1,6 @@
 cff-version: 1.2.0
-message: "If you use RIDI or ridi-audit, please cite this software and the accompanying manuscript."
-title: "RIDI (Reproducibility of Identity Decisions Index): decision-identity reproducibility audit"
+message: "If you use RIDI or ridi-audit to study allocation identity in a capacity-limited system, please cite this software and the accompanying manuscript."
+title: "RIDI: allocation-identity audit and control toolkit for capacity-limited AI"
 type: software
 authors:
   - family-names: Noor
@@ -12,10 +12,13 @@ repository-code: "https://github.com/adeebnoor/ridi"
 url: "https://github.com/adeebnoor/ridi"
 license: MIT
 keywords:
-  - reproducibility
-  - Reproducibility of Identity Decisions Index
+  - allocation identity
+  - AI evaluation
+  - capacity-limited AI
   - decision identity
-  - representation intervention
+  - Reproducibility of Identity Decisions Index
   - ranking stability
   - top-k selection
-  - audit
+  - score-to-action boundary
+  - algorithmic auditing
+  - reproducibility
