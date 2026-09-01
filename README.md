@@ -13,13 +13,13 @@
 [![License: MIT](https://img.shields.io/badge/code-MIT-2ea44f.svg)](LICENSE)
 [![ORCID](https://img.shields.io/badge/ORCID-0000--0002--8251--1853-A6CE39.svg)](https://orcid.org/0000-0002-8251-1853)
 
-[**Try the 60-second experiment**](https://htmlpreview.github.io/?https://github.com/adeebnoor/ridi/blob/main/demo/index.html) · [**Run in Colab**](https://colab.research.google.com/github/adeebnoor/ridi/blob/main/notebooks/RIDI_60_Second_Experiment.ipynb) · [**Audit your model**](#audit-your-own-scores) · [**Install**](#install)
+[**Research site**](https://ridi-research-lab.onrender.com/) · [**Try the 60-second experiment**](https://ridi-research-lab.onrender.com/demo/) · [**Research docs**](https://ridi-research-lab.onrender.com/docs/) · [**Run in Colab**](https://colab.research.google.com/github/adeebnoor/ridi/blob/main/notebooks/RIDI_60_Second_Experiment.ipynb) · [**Audit your model**](#audit-your-own-scores)
 
 </div>
 
 ---
 
-[![Allocation identity: same reported audit, different selected entities](assets/allocation-identity-hero.svg)](https://htmlpreview.github.io/?https://github.com/adeebnoor/ridi/blob/main/demo/index.html)
+[![Allocation identity: same reported audit, different selected entities](assets/allocation-identity-hero.svg)](https://ridi-research-lab.onrender.com/demo/)
 
 ## The missing estimand
 
@@ -132,7 +132,11 @@ The exact selector then finds the minimum-turnover top-`k` set within a prospect
 
 ## Try the paradox in 60 seconds
 
-Run:
+Open the live browser experiment:
+
+https://ridi-research-lab.onrender.com/demo/
+
+Or run:
 
 ```bash
 python examples/identity_paradox.py
