@@ -1,0 +1,1 @@
+Temporary placeholder to verify write path. This file will be removed after the research portal update.
