@@ -1,3 +1,5 @@
-2026-09-02T11:00:00+03:00
+2026-09-02T11:42:00+03:00
 purpose=prospective-preregistration-input-preparation-only
+attempt=2
+fix=pyserini-2.1.0-transformers-5
 no_language_model_generation=true
