@@ -18,7 +18,7 @@ env:
 
 jobs:
   assemble:
-    name: assemble-v2-${{ matrix.dataset }}
+    name: assemble-v3-${{ matrix.dataset }}
     runs-on: ubuntu-latest
     timeout-minutes: 240
     strategy:
@@ -58,7 +58,7 @@ jobs:
           done
       - name: Assemble compact inputs with hardened provenance
         run: >-
-          python rag-nature/code/assemble_prereg_inputs.py
+          python rag-nature/code/assemble_prereg_inputs_v3.py
           --dataset ${{ matrix.dataset }}
           --root .prep/${{ matrix.dataset }}
       - name: Show provenance and deterministic pre-panel exclusions
@@ -68,7 +68,7 @@ jobs:
           cat .prep/${{ matrix.dataset }}/protocol/input_reports/${{ matrix.dataset }}_prepanel_exclusions.json
       - uses: actions/upload-artifact@v4
         with:
-          name: prepared-v2-${{ matrix.dataset }}
+          name: prepared-v3-${{ matrix.dataset }}
           path: |
             .prep/${{ matrix.dataset }}/data
             .prep/${{ matrix.dataset }}/runs
