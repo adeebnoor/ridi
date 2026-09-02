@@ -1,0 +1,126 @@
+name: Prepare RIDI-RAG preregistration inputs
+
+on:
+  push:
+    branches: [ridi-rag-prereg-20260902]
+    paths:
+      - rag-nature/PREPARE_TRIGGER
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONHASHSEED: "0"
+  TOKENIZERS_PARALLELISM: "false"
+
+jobs:
+  retrieve:
+    name: retrieve-${{ matrix.dataset }}-${{ matrix.retriever }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        dataset: [nq, hotpotqa, fever, scifact]
+        retriever: [bm25, splade]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: rag-nature/code/requirements-prep.txt
+      - name: Install frozen preparation stack
+        run: python -m pip install -U pip && pip install -r rag-nature/code/requirements-prep.txt
+      - name: Generate top-100 run
+        run: >-
+          python rag-nature/code/retrieve_pyserini.py
+          --dataset ${{ matrix.dataset }}
+          --retriever ${{ matrix.retriever }}
+          --root .prep/${{ matrix.dataset }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run-${{ matrix.dataset }}-${{ matrix.retriever }}
+          path: .prep/${{ matrix.dataset }}/runs/${{ matrix.dataset }}/${{ matrix.retriever }}.trec
+          if-no-files-found: error
+          retention-days: 14
+
+  dense_scifact:
+    name: retrieve-scifact-contriever
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: rag-nature/code/requirements-prep.txt
+      - name: Install frozen preparation stack
+        run: python -m pip install -U pip && pip install -r rag-nature/code/requirements-prep.txt
+      - name: Generate dense top-100 run
+        run: >-
+          python rag-nature/code/retrieve_pyserini.py
+          --dataset scifact --retriever contriever --root .prep/scifact
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run-scifact-contriever
+          path: .prep/scifact/runs/scifact/contriever.trec
+          if-no-files-found: error
+          retention-days: 14
+
+  assemble:
+    name: assemble-${{ matrix.dataset }}
+    needs: [retrieve, dense_scifact]
+    if: ${{ always() && needs.retrieve.result == 'success' && needs.dense_scifact.result == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      matrix:
+        dataset: [nq, hotpotqa, fever, scifact]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: rag-nature/code/requirements-prep.txt
+      - name: Install frozen preparation stack
+        run: python -m pip install -U pip && pip install -r rag-nature/code/requirements-prep.txt
+      - name: Download retrieval runs
+        uses: actions/download-artifact@v4
+        with:
+          pattern: run-${{ matrix.dataset }}-*
+          path: .prep/${{ matrix.dataset }}/runs/${{ matrix.dataset }}
+          merge-multiple: true
+      - name: Assemble BEIR compact inputs and independently sourced gold
+        run: >-
+          python rag-nature/code/prepare_inputs_pyserini.py
+          --dataset ${{ matrix.dataset }}
+          --root .prep/${{ matrix.dataset }}
+          --skip-retrieval
+      - name: Show provenance report
+        run: cat .prep/${{ matrix.dataset }}/protocol/input_reports/${{ matrix.dataset }}.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prepared-${{ matrix.dataset }}
+          path: |
+            .prep/${{ matrix.dataset }}/data
+            .prep/${{ matrix.dataset }}/runs
+            .prep/${{ matrix.dataset }}/protocol/input_reports
+          if-no-files-found: error
+          retention-days: 14
