@@ -1,5 +1,5 @@
-2026-09-02T12:08:00+03:00
+2026-09-02T12:18:00+03:00
 purpose=prospective-preregistration-input-preparation-only
-attempt=4
-fix=castorini-eval-topics-qrels-layout
+attempt=5
+fix=pin-splade-and-contriever-query-encoder-snapshots
 no_language_model_generation=true
