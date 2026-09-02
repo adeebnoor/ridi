@@ -2,7 +2,7 @@ name: Prepare RIDI-RAG preregistration inputs
 
 on:
   push:
-    branches: [ridi-rag-prereg-20260902]
+    branches: [main, ridi-rag-prereg-20260902]
     paths:
       - rag-nature/PREPARE_TRIGGER
   workflow_dispatch:
