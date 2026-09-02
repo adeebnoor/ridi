@@ -2,7 +2,7 @@ name: Prepare RIDI-RAG preregistration inputs
 
 on:
   push:
-    branches: [main, ridi-rag-prereg-20260902]
+    branches: [main, ridi-rag-prereg-20260902, ridi-rag-nature-main-hardening-20260902]
     paths:
       - rag-nature/PREPARE_TRIGGER
   workflow_dispatch:
@@ -37,7 +37,7 @@ jobs:
           cache-dependency-path: rag-nature/code/requirements-prep.txt
       - name: Install frozen preparation stack
         run: python -m pip install -U pip && pip install -r rag-nature/code/requirements-prep.txt
-      - name: Generate top-100 run
+      - name: Generate top-100 run from canonical local topics
         run: >-
           python rag-nature/code/retrieve_pyserini.py
           --dataset ${{ matrix.dataset }}
@@ -46,7 +46,9 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: run-${{ matrix.dataset }}-${{ matrix.retriever }}
-          path: .prep/${{ matrix.dataset }}/runs/${{ matrix.dataset }}/${{ matrix.retriever }}.trec
+          path: |
+            .prep/${{ matrix.dataset }}/runs/${{ matrix.dataset }}/${{ matrix.retriever }}.trec
+            .prep/${{ matrix.dataset }}/.beir_resources
           if-no-files-found: error
           retention-days: 14
 
@@ -67,14 +69,16 @@ jobs:
           cache-dependency-path: rag-nature/code/requirements-prep.txt
       - name: Install frozen preparation stack
         run: python -m pip install -U pip && pip install -r rag-nature/code/requirements-prep.txt
-      - name: Generate dense top-100 run
+      - name: Generate additional dense top-100 run
         run: >-
           python rag-nature/code/retrieve_pyserini.py
           --dataset scifact --retriever contriever --root .prep/scifact
       - uses: actions/upload-artifact@v4
         with:
           name: run-scifact-contriever
-          path: .prep/scifact/runs/scifact/contriever.trec
+          path: |
+            .prep/scifact/runs/scifact/contriever.trec
+            .prep/scifact/.beir_resources
           if-no-files-found: error
           retention-days: 14
 
@@ -101,15 +105,25 @@ jobs:
           cache-dependency-path: rag-nature/code/requirements-prep.txt
       - name: Install frozen preparation stack
         run: python -m pip install -U pip && pip install -r rag-nature/code/requirements-prep.txt
-      - name: Download retrieval runs
+      - name: Download retrieval runs and canonical benchmark resources
         uses: actions/download-artifact@v4
         with:
           pattern: run-${{ matrix.dataset }}-*
-          path: .prep/${{ matrix.dataset }}/runs/${{ matrix.dataset }}
+          path: .prep/${{ matrix.dataset }}
           merge-multiple: true
-      - name: Assemble BEIR compact inputs and independently sourced gold
+      - name: Normalize downloaded run layout
+        shell: bash
+        run: |
+          mkdir -p .prep/${{ matrix.dataset }}/runs/${{ matrix.dataset }}
+          for f in .prep/${{ matrix.dataset }}/*.trec .prep/${{ matrix.dataset }}/runs/${{ matrix.dataset }}/*.trec; do
+            [ -e "$f" ] || continue
+            if [ "$(dirname "$f")" != ".prep/${{ matrix.dataset }}/runs/${{ matrix.dataset }}" ]; then
+              mv "$f" .prep/${{ matrix.dataset }}/runs/${{ matrix.dataset }}/
+            fi
+          done
+      - name: Assemble compact inputs and independently sourced gold
         run: >-
-          python rag-nature/code/prepare_inputs_pyserini.py
+          python rag-nature/code/prepare_inputs_local.py
           --dataset ${{ matrix.dataset }}
           --root .prep/${{ matrix.dataset }}
           --skip-retrieval
@@ -122,5 +136,7 @@ jobs:
             .prep/${{ matrix.dataset }}/data
             .prep/${{ matrix.dataset }}/runs
             .prep/${{ matrix.dataset }}/protocol/input_reports
+            .prep/${{ matrix.dataset }}/.beir_resources
+            .prep/${{ matrix.dataset }}/.source_cache
           if-no-files-found: error
           retention-days: 14
