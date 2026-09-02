@@ -5,6 +5,8 @@ from __future__ import annotations
 import argparse, subprocess, sys
 from pathlib import Path
 
+from beir_local_resources import ensure_resources
+
 SPLADE_ID = "naver/splade-cocondenser-ensembledistil"
 CONTRIEVER_ID = "facebook/contriever-msmarco"
 CONTRIEVER_REV = "abe8c1493371369031bcb1e02acb754cf4e162fa"
@@ -22,9 +24,13 @@ def main():
     ap.add_argument('--root', type=Path, required=True)
     a=ap.parse_args(); d=a.dataset; r=a.retriever; root=a.root.resolve()
     if r=='contriever' and d!='scifact':
-        raise SystemExit('Contriever is preregistered only for SciFact')
+        raise SystemExit('Contriever is preregistered only for the additional SciFact dense-retrieval check')
+
+    resources=ensure_resources(d, root/'.beir_resources')
+    topic=resources['topics_path']
+    print(f"BEIR topics: {topic} sha256={resources['topics_sha256']}", flush=True)
+
     out=root/'runs'/d/f'{r}.trec'; out.parent.mkdir(parents=True,exist_ok=True)
-    topic=f'beir-v1.0.0-{d}-test'
     if r=='bm25':
         cmd=[sys.executable,'-m','pyserini.search.lucene','--threads','16','--batch-size','128',
              '--index',f'beir-v1.0.0-{d}.flat','--topics',topic,'--output',out,
