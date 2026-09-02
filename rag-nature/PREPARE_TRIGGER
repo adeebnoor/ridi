@@ -1,5 +1,5 @@
-2026-09-02T12:47:00+03:00
+2026-09-02T13:18:00+03:00
 purpose=prospective-preregistration-input-assembly-only
 source_retrieval_run=33613288993
-assembly_version=v2-exact-gold-and-prepanel-exclusions
+assembly_version=v3-nq-exact-gold-subset-and-prepanel-exclusions
 no_language_model_generation=true
