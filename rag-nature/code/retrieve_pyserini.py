@@ -8,6 +8,7 @@ from pathlib import Path
 from beir_local_resources import ensure_resources
 
 SPLADE_ID = "naver/splade-cocondenser-ensembledistil"
+SPLADE_REV = "49cf4c7b0db5b870a401ddf5e2669993ef3699c7"
 CONTRIEVER_ID = "facebook/contriever-msmarco"
 CONTRIEVER_REV = "abe8c1493371369031bcb1e02acb754cf4e162fa"
 
@@ -15,6 +16,13 @@ CONTRIEVER_REV = "abe8c1493371369031bcb1e02acb754cf4e162fa"
 def run(cmd):
     print("+", " ".join(map(str, cmd)), flush=True)
     subprocess.run([str(x) for x in cmd], check=True)
+
+
+def frozen_snapshot(repo_id: str, revision: str) -> str:
+    from huggingface_hub import snapshot_download
+    snapshot=snapshot_download(repo_id=repo_id,revision=revision)
+    print(f"HF snapshot {repo_id}@{revision}: {snapshot}", flush=True)
+    return snapshot
 
 
 def main():
@@ -36,12 +44,12 @@ def main():
              '--index',f'beir-v1.0.0-{d}.flat','--topics',topic,'--output',out,
              '--output-format','trec','--hits','100','--bm25','--remove-query']
     elif r=='splade':
+        snapshot=frozen_snapshot(SPLADE_ID,SPLADE_REV)
         cmd=[sys.executable,'-m','pyserini.search.lucene','--threads','16','--batch-size','128',
-             '--index',f'beir-v1.0.0-{d}.splade-pp-ed','--topics',topic,'--encoder',SPLADE_ID,
+             '--index',f'beir-v1.0.0-{d}.splade-pp-ed','--topics',topic,'--encoder',snapshot,
              '--output',out,'--output-format','trec','--hits','100','--impact','--pretokenized','--remove-query']
     else:
-        from huggingface_hub import snapshot_download
-        snapshot=snapshot_download(repo_id=CONTRIEVER_ID,revision=CONTRIEVER_REV)
+        snapshot=frozen_snapshot(CONTRIEVER_ID,CONTRIEVER_REV)
         cmd=[sys.executable,'-m','pyserini.search.faiss','--encoder-class','contriever','--encoder',snapshot,
              '--index','beir-v1.0.0-scifact.contriever-msmarco','--topics',topic,
              '--output',out,'--output-format','trec','--hits','100','--batch','64','--threads','4']
