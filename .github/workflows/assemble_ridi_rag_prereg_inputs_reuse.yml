@@ -1,0 +1,85 @@
+name: Assemble RIDI-RAG preregistration inputs from frozen runs
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: Successful retrieval workflow run to reuse
+        required: false
+        default: "33613288993"
+  push:
+    branches: [ridi-rag-nature-main-hardening-20260902]
+    paths:
+      - rag-nature/ASSEMBLE_TRIGGER
+
+permissions:
+  contents: read
+  actions: read
+
+env:
+  PYTHONHASHSEED: "0"
+  TOKENIZERS_PARALLELISM: "false"
+  SOURCE_RUN_ID: ${{ inputs.source_run_id || '33613288993' }}
+
+jobs:
+  assemble:
+    name: assemble-v2-${{ matrix.dataset }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      matrix:
+        dataset: [nq, hotpotqa, fever, scifact]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: rag-nature/code/requirements-prep.txt
+      - name: Install frozen preparation stack
+        run: python -m pip install -U pip && pip install -r rag-nature/code/requirements-prep.txt
+      - name: Download already successful retrieval artifacts
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ env.SOURCE_RUN_ID }}
+          pattern: run-${{ matrix.dataset }}-*
+          path: .prep/${{ matrix.dataset }}
+          merge-multiple: true
+      - name: Normalize downloaded run layout
+        shell: bash
+        run: |
+          mkdir -p .prep/${{ matrix.dataset }}/runs/${{ matrix.dataset }}
+          for f in .prep/${{ matrix.dataset }}/*.trec .prep/${{ matrix.dataset }}/runs/${{ matrix.dataset }}/*.trec; do
+            [ -e "$f" ] || continue
+            if [ "$(dirname "$f")" != ".prep/${{ matrix.dataset }}/runs/${{ matrix.dataset }}" ]; then
+              mv "$f" .prep/${{ matrix.dataset }}/runs/${{ matrix.dataset }}/
+            fi
+          done
+          find .prep/${{ matrix.dataset }} -maxdepth 4 -type f -print
+      - name: Hardened compact assembly and exact gold provenance
+        run: >-
+          python rag-nature/code/assemble_prereg_inputs.py
+          --dataset ${{ matrix.dataset }}
+          --root .prep/${{ matrix.dataset }}
+      - name: Show provenance and exclusions
+        shell: bash
+        run: |
+          cat .prep/${{ matrix.dataset }}/protocol/input_reports/${{ matrix.dataset }}.json
+          cat .prep/${{ matrix.dataset }}/protocol/input_reports/${{ matrix.dataset }}_prepanel_exclusions.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prepared-v2-${{ matrix.dataset }}
+          path: |
+            .prep/${{ matrix.dataset }}/data
+            .prep/${{ matrix.dataset }}/runs
+            .prep/${{ matrix.dataset }}/protocol/input_reports
+            .prep/${{ matrix.dataset }}/.beir_resources
+            .prep/${{ matrix.dataset }}/.source_cache
+          if-no-files-found: error
+          retention-days: 14
