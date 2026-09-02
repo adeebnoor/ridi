@@ -1,12 +1,8 @@
 """Local, hashable BEIR topics/qrels for prospective RIDI-RAG preparation.
 
-Why this exists
----------------
-Pyserini/Anserini may resolve named topic resources through the JVM. That adds a
-network-dependent step that is unnecessary for a preregistration pipeline. This module
-downloads the canonical Anserini topic/qrel files with Python, parses them locally, and
-exposes their SHA-256 hashes so the exact benchmark inputs can be frozen before any LLM
-call.
+Pyserini/Anserini may resolve named evaluation resources through the JVM. For a
+prospective preregistration we instead download the canonical Castorini evaluation files
+with Python, parse them locally, and record exact SHA-256 hashes before any LLM call.
 """
 from __future__ import annotations
 
@@ -17,7 +13,8 @@ import urllib.request
 from pathlib import Path
 
 DATASETS = {"nq", "hotpotqa", "fever", "scifact"}
-BASE = "https://raw.githubusercontent.com/castorini/anserini-tools/master/topics-and-qrels"
+TOPICS_BASE = "https://raw.githubusercontent.com/castorini/eval/master/topics"
+QRELS_BASE = "https://raw.githubusercontent.com/castorini/eval/master/qrels"
 USER_AGENT = "RIDI-RAG-Nature-prereg-input-prep/1.0"
 
 
@@ -34,8 +31,8 @@ def resource_urls(dataset: str) -> tuple[str, str]:
         raise ValueError(dataset)
     stem = f"beir-v1.0.0-{dataset}.test"
     return (
-        f"{BASE}/topics.{stem}.tsv.gz",
-        f"{BASE}/qrels.{stem}.txt",
+        f"{TOPICS_BASE}/topics.{stem}.tsv.gz",
+        f"{QRELS_BASE}/qrels.{stem}.txt",
     )
 
 
