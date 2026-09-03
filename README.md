@@ -98,7 +98,7 @@ This case is illustrative; the preregistered aggregate experiment supplies the i
 
 ## Why this is an audit-sufficiency question
 
-The manuscript does **not** claim that practitioners believe nDCG mathematically determines a generated answer. The narrower point is that aggregate retrieval evaluation is used operationally to compare or select RAG configurations, while those summaries need not certify the identities occupying the finite context. Official examples are documented by Amazon Bedrock, Microsoft Azure Architecture Center and Azure Databricks.
+The manuscript does **not** claim that conventional retrieval metrics should mathematically determine a generated answer. The narrower point is that aggregate retrieval metrics are widely used in operational evaluation and configuration selection, including on leading cloud platforms, while those summaries need not certify the identities occupying the finite context. The manuscript cites the corresponding official platform documentation as concrete evidence of this evaluation practice.
 
 ---
 
@@ -127,6 +127,15 @@ gamma_k > 2*epsilon
 ```
 
 where `gamma_k` is the baseline score margin at the top-k boundary and `epsilon` is the maximum paired score perturbation.
+
+### Constructive solution: exact identity–utility frontier
+
+The current Nature manuscript presents the exact identity–utility frontier as **Main Fig. 5**, rather than relegating it to Extended Data. It computes the minimum membership change compatible with a declared updated-score utility-regret budget, using stored scores and no retraining.
+
+- **GraphSAGE:** at `eta = 0.001`, mean changed slots fell from **31.1 to 13.3** per query–cutoff cell; **78.8%** of representation-associated turnover was avoidable (95% query-bootstrap interval **76.0–81.4%**), while mean RIDI fell from **0.11574 to 0.04314**.
+- **Text retrieval:** at `k=100`, mean changed documents fell from **45.8 to 33.3**; **28.7%** of turnover was avoidable (95% interval **27.6–29.7%**), while label-based nDCG and recall changed only by **−0.0037** and **−0.0019**.
+
+This is the constructive endpoint of the paper: allocation identity is not only measurable; unnecessary turnover can be bounded under an explicit utility budget.
 
 ---
 
