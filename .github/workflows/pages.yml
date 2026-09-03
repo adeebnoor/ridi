@@ -1,4 +1,4 @@
-name: Deploy RIDI Research Lab to GitHub Pages
+name: Validate and deploy RIDI research site
 
 on:
   push:
@@ -27,22 +27,40 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  site:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Configure Pages
+
+      - name: Validate required site entry points
+        run: |
+          test -s index.html
+          test -s paper/index.html
+          test -s paper/README.md
+          test -s projects/ridi/index.html
+          test -s publications/index.html
+          grep -q "Identical audits, different AI decisions" paper/index.html
+          grep -q "Identical audits, different AI decisions" paper/README.md
+
+      - name: Configure Pages if repository Pages is enabled
+        id: pages_config
+        continue-on-error: true
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
-      - name: Upload site
+
+      - name: Upload Pages artifact
+        if: steps.pages_config.outcome == 'success'
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
+
       - name: Deploy to GitHub Pages
         id: deployment
+        if: steps.pages_config.outcome == 'success'
         uses: actions/deploy-pages@v4
+
+      - name: Record GitHub-native fallback
+        if: steps.pages_config.outcome != 'success'
+        run: |
+          echo "GitHub Pages is not enabled for this repository."
+          echo "The paper remains available as a GitHub-native rendered Markdown page at paper/README.md."
