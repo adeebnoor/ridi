@@ -1,6 +1,6 @@
 # Numerical provenance
 
-This page prevents headline values from drifting across the manuscript, Source Data, preregistered outputs and public repository. The current manuscript is **“Identical audits, different AI decisions.”** The submission Source Data file is `RIDI_Nature_Source_Data_v58.xlsx`; frozen primary artifacts remain the numerical source of record.
+This page prevents headline values from drifting across the manuscript, Source Data, preregistered outputs and public repository. The current manuscript is **“Identical audits, different AI decisions.”** The submission Source Data file is `RIDI_Nature_Source_Data_v59.xlsx`; frozen primary artifacts remain the numerical source of record.
 
 ## Preregistered RAG — decisive prospective result
 
@@ -43,17 +43,25 @@ Protocol: `RIDI-CYBER-NATURAL-UPDATE-v1`.
 
 The sealed canonical numerical result key has been reproduced exactly in two external software environments. These runs are cross-environment numerical reproductions, not neutral person-level certification.
 
-## Other locked/supportive endpoints retained in v58
+## Constructive solution — Main Fig. 5
+
+The v59 manuscript promotes the exact identity–utility frontier from Extended Data to **Main Fig. 5**. The frontier computes the minimum membership change compatible with a declared updated-score utility-regret budget using stored scores; no retraining is required.
+
+- GraphSAGE at eta=0.001: mean changed slots 31.1→13.3 per query–cutoff cell; 78.8% avoidable turnover, 95% query-bootstrap interval 76.0–81.4%; mean RIDI 0.11574→0.04314.
+- Text retrieval at k=100: mean changed documents 45.8→33.3; 28.7% avoidable, 95% interval 27.6–29.7%; label-based nDCG and recall change −0.0037 and −0.0019.
+
+These results establish a constructive control procedure, not a claim that identity preservation is always beneficial. The control is evaluated only within explicit utility or outcome budgets.
+
+## Other locked/supportive endpoints retained in v59
 
 - Synthetic margin-certificate sweep: 33,958 certified cases among 168,000, with zero false certificates.
-- GraphSAGE exact control: 78.8% avoidable turnover at eta=0.001.
-- Text-retrieval exact control: 28.7% avoidable turnover at eta=0.001.
+- Controlled cross-modal, CIFAR-10 vision-retrieval, ReVerb45K, non-graph text-retrieval and DistMult analyses are retained as supportive attribution/transport tests rather than headline claims.
 - Registered RxNorm and Open Targets results are retained as claim-bounding failures/limits rather than hidden exceptions.
 - CMS HVBP annual score updates are a retrospective transport check; the analytical top-k is not a statutory CMS cutoff and no payment or clinical-effect estimate is claimed.
 
 ## Source-data and archive status
 
-`RIDI_Nature_Source_Data_v58.xlsx` is the submission workbook for Figs. 1–4 and Extended Data Figs. 1–9, with panel-level provenance to frozen artifacts. Public development code and reproducibility documentation are at https://github.com/adeebnoor/ridi.
+`RIDI_Nature_Source_Data_v59.xlsx` is the submission workbook for **Figs. 1–5 and Extended Data Figs. 1–8**, with panel-level provenance to frozen artifacts. Extended Data numbering in v59 follows the first-citation order used in the main text; the former Extended Data Fig. 9 is now Main Fig. 5. Public development code and reproducibility documentation are at https://github.com/adeebnoor/ridi.
 
 Do **not** describe Zenodo DOI `10.5281/zenodo.22072275` as public unless it resolves without authentication. A reserved/draft identifier is not evidence of a public immutable archive.
 
