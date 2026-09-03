@@ -5,6 +5,13 @@ on:
     branches: ["main"]
     paths:
       - "index.html"
+      - "paper/**"
+      - "projects/**"
+      - "publications/**"
+      - "research/**"
+      - "people/**"
+      - "join/**"
+      - "docs/**"
       - "demo/**"
       - "assets/**"
       - ".github/workflows/pages.yml"
