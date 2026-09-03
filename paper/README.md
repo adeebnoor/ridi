@@ -52,9 +52,7 @@ This is an illustration of the registered aggregate result, not a separate infer
 
 ## Why this is an audit-sufficiency question
 
-The paper does **not** claim that practitioners believe nDCG mathematically determines a generated answer. The narrower point is that aggregate retrieval evaluation is used operationally to compare or select RAG configurations, while those summaries need not certify the identities occupying the finite context.
-
-Official examples include Amazon Bedrock RAG evaluations, Microsoft Azure Architecture Center retrieval guidance, and Azure Databricks retrieval-quality evaluation.
+The paper does **not** claim that conventional retrieval metrics should mathematically determine a generated answer. The narrower point is that aggregate retrieval evaluation is used operationally to compare and select RAG configurations, including on leading cloud platforms, while those summaries need not certify the identities occupying the finite context. The manuscript cites official platform documentation as concrete evidence of this evaluation practice.
 
 ## Cross-system evidence
 
@@ -62,6 +60,15 @@ Official examples include Amazon Bedrock RAG evaluations, Microsoft Azure Archit
 - **EPSS:** the production v2→v3 update replaced 565 of the top 1,000 remediation priorities (`RIDI=0.722`) versus 0 and 7 in adjacent same-version controls. Delayed CISA KEV value was capacity-dependent, so turnover is not equated with harm.
 - **CMS HVBP:** annual Total Performance Score updates provide a second independently governed production scoring system for transport.
 - **Registered failures/boundaries:** RxNorm and Open Targets results are retained to show that magnitude, mechanism and downstream value are system- and cutoff-dependent.
+
+## Constructive solution: exact identity–utility frontier
+
+The manuscript closes the loop from diagnosis to control. **Main Fig. 5** presents an exact identity–utility frontier that computes the minimum membership change compatible with a declared updated-score utility-regret budget. Stored scores are sufficient; no retraining is required.
+
+- **GraphSAGE:** at `eta=0.001`, mean changed slots fall from **31.1 to 13.3** per query–cutoff cell; **78.8%** of representation-associated turnover is avoidable (95% query-bootstrap interval **76.0–81.4%**), while mean RIDI falls from **0.11574 to 0.04314**.
+- **Text retrieval:** at `k=100`, mean changed documents fall from **45.8 to 33.3**; **28.7%** is avoidable (95% interval **27.6–29.7%**), while independent label-based nDCG and recall change only by **−0.0037** and **−0.0019**.
+
+The constructive claim is deliberately bounded: identity preservation is useful only inside an explicit outcome- or utility-checked budget.
 
 ## Scientific boundaries
 
