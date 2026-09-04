@@ -4,15 +4,15 @@ The repository is configured for tokenless PyPI publication using **PyPI Trusted
 
 ## One-time PyPI account step
 
-In PyPI, create a **pending trusted publisher** for a new project with these exact values:
+In PyPI, open your account sidebar → **Publishing**, then create a **pending trusted publisher** for a new project with these exact values:
 
 - **PyPI project name:** `ridi-audit`
 - **GitHub owner:** `adeebnoor`
 - **GitHub repository:** `ridi`
 - **Workflow filename:** `release.yml`
-- **Environment:** leave blank
+- **Environment:** `pypi`
 
-The workflow lives at `.github/workflows/release.yml`.
+The authorized workflow lives at `.github/workflows/release.yml` and grants `id-token: write` only to the publishing job.
 
 ## First publication
 
@@ -21,7 +21,8 @@ After the pending trusted publisher has been saved in PyPI:
 1. Open **Actions → Publish ridi-audit to PyPI** in GitHub.
 2. Choose **Run workflow** on `main`.
 3. The workflow runs the tests, builds both wheel and source distribution, validates package metadata with Twine, then publishes through OIDC.
-4. Verify the package from a clean environment:
+4. PyPI will create the `ridi-audit` project on first successful publication and convert the pending publisher into a normal trusted publisher.
+5. Verify the package from a clean environment:
 
 ```bash
 python -m venv /tmp/ridi-pypi-check
@@ -48,6 +49,13 @@ For later versions:
 4. Publish a GitHub Release for the version. The same workflow will publish the corresponding distributions automatically.
 
 PyPI versions are immutable: never reuse an already-published version number.
+
+## Security notes
+
+- Keep publishing isolated to `.github/workflows/release.yml`.
+- Keep `id-token: write` scoped to the publishing job only.
+- Use the dedicated `pypi` GitHub environment; it can later be configured with manual approval rules if desired.
+- Review any proposed changes to the release workflow as carefully as you would review a package-upload credential.
 
 ## Scientific boundary
 
