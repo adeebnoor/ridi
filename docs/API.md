@@ -1,14 +1,50 @@
 # Python API
 
-## High-level entry point
+RIDI has two researcher-facing entry points. Use the lightest one that matches the data your pipeline already exposes.
+
+## 1. Selected identities only — `compare_allocations`
+
+If you already have the finite sets that received action, this is the shortest path.
 
 ```python
-from ridi_audit import audit
+from ridi_audit import compare_allocations
+
+reference = ["doc-17", "doc-4", "doc-92", "doc-31"]
+alternative = ["doc-17", "doc-4", "doc-11", "doc-31"]
+
+report = compare_allocations(reference, alternative)
+print(report)
 ```
 
-### `audit(before, after, *, k, id_col="id", score_col="score")`
+Typical output:
 
-Audits allocation identity between two pandas DataFrames containing the same candidate universe.
+```text
+RIDI Allocation Comparison
+--------------------------
+Before size:   4
+After size:    4
+Overlap:       3
+Changed slots: 1
+RIDI:          0.400000
+```
+
+This works directly for retrieved-document IDs, shortlists, alert queues, remediation lists or any other realized finite allocation. The two lists may have different sizes; `changed_slots` is defined only when capacity is equal.
+
+Useful methods and attributes:
+
+```python
+report.ridi
+report.overlap
+report.changed_slots
+report.removed_ids
+report.added_ids
+report.to_dict()
+report.to_markdown()
+```
+
+## 2. Candidate scores — `audit`
+
+Use `audit` when you have the same candidate universe scored before and after a model, data, policy or representation change.
 
 ```python
 import pandas as pd
@@ -17,14 +53,16 @@ from ridi_audit import audit
 before = pd.read_csv("before.csv")
 after = pd.read_csv("after.csv")
 report = audit(before, after, k=[10, 50, 100])
+print(report)
 ```
+
+### `audit(before, after, *, k, id_col="id", score_col="score")`
 
 Rows may appear in different orders. Candidate identities are aligned deterministically by `id_col`.
 
 ### `AuditReport`
 
 ```python
-print(report)
 result_dict = report.to_dict()
 markdown = report.to_markdown()
 controlled = report.control(k=100, eta=0.001)
@@ -78,7 +116,7 @@ from ridi_audit import (
 )
 ```
 
-The high-level API is recommended for ordinary use because it handles table alignment and preserves the aligned inputs for downstream control.
+Use `compare_allocations` for realized identity lists and `audit` for full score tables. The low-level functions are intended for custom research workflows.
 
 ## Scope
 
