@@ -81,9 +81,12 @@ The community CODECHECK request is registered; formal checking has not yet begun
 
 Allocation identity measures **who receives finite action**. It does not by itself establish harm, benefit, individual fairness, causal fairness or model superiority. Benchmark qrels are incomplete, so qrel-zero passages are called **metric-zero**, not semantically irrelevant. Correctness flips are bidirectional. Confirmatory generators are deterministic open-weight 7–8B models rather than hosted frontier systems. EPSS downstream-value effects are cutoff- and endpoint-specific. Sufficiently fine or explicitly identity-aware audits can recover membership and escape non-identification.
 
-## Explore
+## Use or test the idea
 
+- [Open the 60-second notebook in Colab](https://colab.research.google.com/github/adeebnoor/ridi/blob/main/notebooks/RIDI_60_Second_Experiment.ipynb)
+- [60-second Quick Start](../docs/QUICKSTART.md)
+- [Python API](../docs/API.md)
+- [Copy-paste use cases](../docs/USE_CASES.md)
+- [Allocation Identity Reporting Checklist](../docs/REPORTING_CHECKLIST.md)
+- [Independent replication / new-domain issue forms](https://github.com/adeebnoor/ridi/issues/new/choose)
 - [RIDI repository home](../README.md)
-- [Audit toolkit and methods](../docs/)
-- [60-second identity experiment](../demo/)
-- [Project source page](../projects/ridi/)
