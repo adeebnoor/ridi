@@ -47,3 +47,25 @@ def test_audit_rejects_mismatched_candidate_universe():
         assert "same candidate identities" in str(exc)
     else:
         raise AssertionError("mismatched candidate universe should fail")
+
+
+def test_audit_rejects_missing_identity():
+    before, after = _frames()
+    before.loc[0, "id"] = None
+    try:
+        audit(before, after, k=3)
+    except ValueError as exc:
+        assert "missing candidate identities" in str(exc)
+    else:
+        raise AssertionError("missing identity should fail")
+
+
+def test_audit_rejects_string_identity_collision():
+    before = pd.DataFrame({"id": [1, "1", 2], "score": [0.9, 0.8, 0.7]})
+    after = before.copy()
+    try:
+        audit(before, after, k=2)
+    except ValueError as exc:
+        assert "unique when converted to strings" in str(exc)
+    else:
+        raise AssertionError("string-normalized identity collision should fail")
