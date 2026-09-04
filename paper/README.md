@@ -4,7 +4,7 @@
 Department of Information Technology, Faculty of Computing and Information Technology, King Abdulaziz University, Jeddah, Saudi Arabia  
 ORCID: 0000-0002-8251-1853
 
-> **Manuscript status:** prepared for journal submission; not peer reviewed, accepted or published.
+> **Manuscript status:** public synopsis synchronized to **v65.1 formatting lock, 5 September 2026**. Scientific content is unchanged from the v65 Final Scientific Lock. The manuscript is prepared for journal submission; it is not peer reviewed, accepted or published.
 
 ## Central result
 
@@ -71,6 +71,20 @@ The sealed deterministic EPSS workflow has been reproduced by **two independent 
 - **EPSS:** at `eta=0.0001`, **14.34%** of turnover is avoidable while retaining all 12 delayed KEV positives in the primary top-1,000 window.
 
 The constructive claim is deliberately bounded: identity preservation is useful only inside an explicit outcome- or utility-checked budget.
+
+## Current figure architecture
+
+The v65.1 manuscript contains exactly **three Main Figures** and **four Extended Data Figures**:
+
+- **Main Fig. 1:** preregistered RAG consequence.
+- **Main Fig. 2:** EPSS production update.
+- **Main Fig. 3:** exact identity–utility frontier.
+- **Extended Data Fig. 1:** RAG structural ambiguity / capacity / order controls.
+- **Extended Data Fig. 2:** sufficient stability certificate.
+- **Extended Data Fig. 3:** four EPSS production transitions.
+- **Extended Data Fig. 4:** registered failures (RxNorm / Open Targets).
+
+v65.1 is a formatting-only lock created after a full figure-reference audit; it does not alter the scientific results.
 
 ## Registered failures and boundaries
 
