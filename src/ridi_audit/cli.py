@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pandas as pd
 
+from .api import audit as audit_frames
 from .core import audit_scores
 from .report import render_markdown_report
 from .selector import identity_utility_frontier, select_identity_control
@@ -48,6 +49,22 @@ def _write_json(payload: dict, output: str) -> None:
         Path(output).write_text(text + "\n", encoding="utf-8")
 
 
+def _demo_frames() -> tuple[pd.DataFrame, pd.DataFrame]:
+    before = pd.DataFrame(
+        {
+            "id": [f"candidate_{i}" for i in range(1, 11)],
+            "score": [0.99, 0.94, 0.90, 0.85, 0.81, 0.76, 0.70, 0.64, 0.58, 0.51],
+        }
+    )
+    after = pd.DataFrame(
+        {
+            "id": [f"candidate_{i}" for i in range(1, 11)],
+            "score": [0.98, 0.93, 0.72, 0.86, 0.80, 0.89, 0.69, 0.63, 0.57, 0.50],
+        }
+    )
+    return before, after
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="ridi-audit",
@@ -55,6 +72,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--version", action="version", version="ridi-audit 1.1.0")
     subparsers = parser.add_subparsers(dest="command", required=True)
+
+    demo = subparsers.add_parser(
+        "demo", help="Run a zero-file synthetic allocation-identity audit"
+    )
+    demo.add_argument("--k", nargs="+", type=int, default=[3, 5])
 
     compare = subparsers.add_parser(
         "compare", help="Audit allocation identity between two candidate-score tables"
@@ -87,6 +109,13 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main() -> None:
     args = build_parser().parse_args()
+
+    if args.command == "demo":
+        before, after = _demo_frames()
+        print("Synthetic example only — not manuscript evidence.\n")
+        print(audit_frames(before, after, k=args.k))
+        return
+
     aligned = _align(args.r0, args.r1, args.id_col, args.score_col)
     ids = aligned[args.id_col].astype(str).to_numpy()
     scores_r0 = aligned.score_r0.to_numpy()
