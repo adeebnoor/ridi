@@ -1,5 +1,6 @@
-"""RIDI: Reproducibility of Identity Decisions Index."""
+"""RIDI: allocation-identity auditing for capacity-limited AI."""
 
+from .api import AuditReport, audit
 from .core import (
     audit_scores,
     changed_slots,
@@ -15,7 +16,9 @@ from .selector import (
 )
 
 __all__ = [
+    "AuditReport",
     "Frontier",
+    "audit",
     "audit_scores",
     "changed_slots",
     "deterministic_percentiles",
@@ -26,4 +29,4 @@ __all__ = [
     "select_identity_control",
 ]
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
