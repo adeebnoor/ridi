@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Iterable, Sequence
+from typing import Sequence
 
 import numpy as np
 import pandas as pd
@@ -32,6 +32,8 @@ def _aligned_frames(
         missing = [name for name in (id_col, score_col) if name not in frame.columns]
         if missing:
             raise ValueError(f"{label} is missing required column(s): {', '.join(missing)}")
+        if frame[id_col].isna().any():
+            raise ValueError(f"{label} contains missing candidate identities")
         if frame[id_col].duplicated().any():
             raise ValueError(f"{label} contains duplicate candidate identities")
 
@@ -46,8 +48,12 @@ def _aligned_frames(
     )
     if not (merged["_merge"] == "both").all():
         raise ValueError("before and after must contain exactly the same candidate identities")
-    merged = merged.drop(columns="_merge").sort_values(id_col, kind="mergesort")
-    ids = merged[id_col].astype(str).to_numpy()
+    merged = merged.drop(columns="_merge")
+    merged["_ridi_id_key"] = merged[id_col].astype(str)
+    if merged["_ridi_id_key"].duplicated().any():
+        raise ValueError("candidate identities must remain unique when converted to strings")
+    merged = merged.sort_values("_ridi_id_key", kind="mergesort")
+    ids = merged["_ridi_id_key"].to_numpy()
     scores_r0 = merged["score_r0"].to_numpy(dtype=float)
     scores_r1 = merged["score_r1"].to_numpy(dtype=float)
     return ids, scores_r0, scores_r1
@@ -77,7 +83,7 @@ class AuditReport:
 
     @property
     def cutoffs(self) -> list[dict]:
-        return list(self.result["cutoffs"])
+        return [dict(row) for row in self.result["cutoffs"]]
 
     def to_dict(self) -> dict:
         return {
