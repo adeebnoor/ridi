@@ -1,8 +1,6 @@
-# RIDI
+# Identical audits can yield different AI decisions. 17.27% of RAG decisions flip.
 
-### Allocation identity for capacity-limited AI
-
-> **See what aggregate evaluation can miss: who actually received the scarce slots.**
+> **Preregistered primary condition:** Qwen3-8B · BM25 · k=10 · 800 frozen queries · 95% CI **14.60–20.03%**. Most benchmark-defined outcomes remained stable; the result establishes that behavioral non-equivalence can exist inside an exactly audit-equivalent class.
 
 [![tests](https://github.com/adeebnoor/ridi/actions/workflows/tests.yml/badge.svg)](https://github.com/adeebnoor/ridi/actions/workflows/tests.yml)
 [![PyPI](https://img.shields.io/pypi/v/ridi-audit.svg)](https://pypi.org/project/ridi-audit/)
@@ -17,11 +15,10 @@
 </p>
 
 <p align="center">
+  <a href="./"><b>Try the SciFact 275 demo</b></a> ·
   <a href="https://pypi.org/project/ridi-audit/"><b>PyPI</b></a> ·
   <a href="https://colab.research.google.com/github/adeebnoor/ridi/blob/main/notebooks/RIDI_60_Second_Experiment.ipynb"><b>Open in Colab</b></a> ·
   <a href="docs/QUICKSTART.md"><b>60-second Quick Start</b></a> ·
-  <a href="docs/API.md"><b>Python API</b></a> ·
-  <a href="docs/REPORTING_CHECKLIST.md"><b>Reporting checklist</b></a> ·
   <a href="paper/README.md"><b>Paper & evidence</b></a>
 </p>
 
@@ -34,6 +31,14 @@ Performance, fairness, calibration and ranking metrics remain necessary. RIDI as
 > **Which identities occupy the finite queue, shortlist or context window—and did those identities change?**
 
 Two systems can be exactly indistinguishable under a declared audit while assigning scarce slots to different identities. In the preregistered RAG experiment behind this project, that difference sometimes changed the downstream AI decision itself.
+
+---
+
+## Try the decisive case first
+
+The repository landing page now opens directly on the preregistered **SciFact 275** case: the positive passage stays at rank 1 and `precision@10`, `recall@10`, `nDCG@10`, `MRR@10`, `MAP@10` and the complete relevance-grade vector are unchanged, while replacing nine metric-zero identities changes the verdict **SUPPORTS → REFUTES** (`RIDI=0.947`). The same-query order-only permutation remains **SUPPORTS**.
+
+The demo is a transparent replay of the locked case, **not a live LLM call**.
 
 ---
 
@@ -65,8 +70,6 @@ Overlap:       3
 Changed slots: 1
 RIDI:          0.400000
 ```
-
-This is the shortest path for **RAG contexts, shortlists, alert queues, remediation lists and other realized top-k allocations**.
 
 Have paired candidate scores?
 
@@ -118,8 +121,8 @@ Most RAG benchmark-defined outcomes remained stable. The claim is **behavioral n
 
 - The sealed EPSS numerical workflow was reproduced by **two independent external executors** in separate environments.
 - SciFact 275 was independently regenerated **twice, blind**, by external executors using distinct serving environments.
-- **Mohammed Hamdan:** all registered retrieval-audit quantities remained identical; reference and identity control were `SUPPORTS` (the identity output was byte-identical to reference), the order-only permutation remained `SUPPORTS`, and the audit-equivalent identity substitution produced `REFUTES`. His run used the same frozen inputs and prompt conditioning but, because of hardware limits, used a disclosed Q4_K_M `qwen3:8b` llama.cpp/Ollama serving path rather than the frozen bf16 Hugging Face pipeline.
-- **Théophile Ossard:** independently reproduced the same substantive `SUPPORTS` versus `REFUTES` pattern on a distinct GPU/software stack. His regenerated reference prefixed the verdict with `Verdict:`, exposing a strict-parser boundary that is retained transparently.
+- **Mohammed Hamdan:** reference and identity control were `SUPPORTS` (identity byte-identical to reference), the order-only permutation remained `SUPPORTS`, and the audit-equivalent identity substitution produced `REFUTES`. Hardware limits required a disclosed Q4_K_M `qwen3:8b` llama.cpp/Ollama serving path rather than the frozen bf16 Hugging Face pipeline.
+- **Théophile Ossard:** independently reproduced the same substantive `SUPPORTS` versus `REFUTES` pattern on a distinct GPU/software stack. His regenerated reference prefixed the verdict with `Verdict:`, exposing a strict-parser boundary retained transparently.
 - These are **independent computational regenerations, not a CODECHECK certificate**. Community CODECHECK request #208 is registered; formal checking has not begun.
 
 [Read the evidence and boundaries →](paper/README.md)
@@ -138,8 +141,6 @@ Most RAG benchmark-defined outcomes remained stable. The claim is **behavioral n
 
 **Reproducible by default.** Deterministic tie handling, CI on Python 3.10–3.12, locked research workflows, negative results retained, and explicit verification boundaries.
 
-Common settings: RAG and information retrieval · cybersecurity remediation · clinical alerts · fraud/compliance triage · inspection queues · hiring/shortlisting · grant review · moderation · any budget-constrained ranking or finite action set.
-
 [Copy-paste recipes →](docs/USE_CASES.md)
 
 ---
@@ -148,11 +149,7 @@ Common settings: RAG and information retrieval · cybersecurity remediation · c
 
 The [Allocation Identity Reporting Checklist](docs/REPORTING_CHECKLIST.md) covers capacity, selection rule, comparator, identity metrics, controls, conventional evaluation, privacy and downstream outcomes.
 
-A minimal methods sentence is:
-
 > We audited allocation identity at the prespecified capacity by reporting selected-set overlap, changed slots and RIDI alongside the domain’s conventional evaluation metrics.
-
-Adapt it to the design; do not claim endpoints you did not test.
 
 ---
 
