@@ -40,8 +40,8 @@ jobs:
           test -s paper/README.md
           test -s projects/ridi/index.html
           test -s publications/index.html
-          grep -q "Identical audits, different AI decisions" paper/index.html
-          grep -q "Identical audits, different AI decisions" paper/README.md
+          grep -q "Identical audits can yield different AI decisions" paper/index.html
+          grep -q "Identical audits can yield different AI decisions" paper/README.md
 
       - name: Configure Pages if repository Pages is enabled
         id: pages_config
