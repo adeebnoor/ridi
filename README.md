@@ -10,6 +10,8 @@
 ![license](https://img.shields.io/badge/license-MIT-2ea44f)
 ![status](https://img.shields.io/badge/manuscript-prepared%20for%20submission-6f42c1)
 
+> **CURRENT PUBLIC MANUSCRIPT LOCK — v65.1 · 5 Sep 2026.** Scientific content is unchanged from the v65 Final Scientific Lock; v65.1 corrects figure and Extended Data cross-references after a full formatting audit. Public software remains **`ridi-audit==1.1.1`**.
+
 <p align="center">
   <img src="assets/ridi_graphical_abstract.svg" alt="RIDI graphical abstract: identical audits can yield different AI decisions" width="100%">
 </p>
@@ -112,7 +114,7 @@ RIDI is **not** a replacement for AUROC, precision, recall, nDCG, calibration, r
 
 Most RAG benchmark-defined outcomes remained stable. The claim is **behavioral non-equivalence can exist inside an exactly audit-equivalent class**, not that every allocation change is harmful or that all AI systems are fragile.
 
-### Independent verification status — 4 Sep 2026
+### Independent verification status — 5 Sep 2026
 
 - The sealed EPSS numerical workflow was reproduced by **two independent external executors** in separate environments.
 - SciFact 275 was independently regenerated **twice, blind**, by external executors using distinct serving environments.
@@ -166,7 +168,7 @@ Independent reproductions, boundary cases, discrepancies and null results are we
 
 **Identical audits can yield different AI decisions**
 
-The public repository is synchronized to the current science/product lock as of **4 Sep 2026**. The manuscript is prepared for journal submission; it is **not peer reviewed, accepted or published**.
+The public repository is synchronized to **v65.1 (5 Sep 2026)**. The science is the v65 Final Scientific Lock; v65.1 contains only formatting/cross-reference corrections after a full figure-reference audit. The current article architecture is **Main Figs. 1–3** and **Extended Data Figs. 1–4**. The manuscript is prepared for journal submission; it is **not peer reviewed, accepted or published**.
 
 Registered RxNorm and Open Targets failures remain part of the project record to delimit the claim. Allocation identity alone does not establish correctness, fairness, causal harm, benefit, clinical utility or model superiority.
 
