@@ -1,13 +1,13 @@
 cff-version: 1.2.0
-message: "If you use RIDI or ridi-audit to study allocation identity in a capacity-limited system, please cite this software and the accompanying manuscript."
+message: "If you use RIDI or ridi-audit to study allocation identity in a capacity-limited system, please cite this software and the accompanying manuscript when a public bibliographic record is available."
 title: "RIDI: allocation-identity audit and control toolkit for capacity-limited AI"
 type: software
 authors:
   - family-names: Noor
     given-names: Adeeb
     orcid: "https://orcid.org/0000-0002-8251-1853"
-version: 1.0.0
-date-released: 2026-08-24
+version: 1.1.0
+date-released: 2026-09-04
 repository-code: "https://github.com/adeebnoor/ridi"
 url: "https://github.com/adeebnoor/ridi"
 license: MIT
