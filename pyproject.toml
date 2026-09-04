@@ -33,6 +33,7 @@ classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Intended Audience :: Science/Research",
   "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
@@ -41,19 +42,22 @@ classifiers = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "pytest-cov>=5", "build>=1.2"]
+dev = ["pytest>=8", "pytest-cov>=5", "build>=1.2", "twine>=5"]
 
 [project.scripts]
 ridi-audit = "ridi_audit.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/adeebnoor/ridi"
+PyPI = "https://pypi.org/project/ridi-audit/"
 Documentation = "https://github.com/adeebnoor/ridi/tree/main/docs"
 Quickstart = "https://github.com/adeebnoor/ridi/blob/main/docs/QUICKSTART.md"
 Colab = "https://colab.research.google.com/github/adeebnoor/ridi/blob/main/notebooks/RIDI_60_Second_Experiment.ipynb"
 Reporting = "https://github.com/adeebnoor/ridi/blob/main/docs/REPORTING_CHECKLIST.md"
 Evidence = "https://github.com/adeebnoor/ridi/blob/main/paper/README.md"
 Demo = "https://ridi-research-lab.onrender.com/demo/"
+Changelog = "https://github.com/adeebnoor/ridi/blob/main/CHANGELOG.md"
+Citation = "https://github.com/adeebnoor/ridi/blob/main/CITATION.cff"
 Source = "https://github.com/adeebnoor/ridi"
 Issues = "https://github.com/adeebnoor/ridi/issues"
 
