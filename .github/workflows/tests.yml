@@ -30,7 +30,15 @@ jobs:
         run: |
           python - <<'PY'
           import pandas as pd
-          from ridi_audit import audit
+          from ridi_audit import audit, compare_allocations
+
+          direct = compare_allocations(
+              ['doc-1', 'doc-2', 'doc-3'],
+              ['doc-1', 'doc-2', 'doc-4'],
+          )
+          assert direct.changed_slots == 1
+          assert abs(direct.ridi - 0.5) < 1e-12
+
           before = pd.read_csv('examples/r0.csv')
           after = pd.read_csv('examples/r1.csv')
           report = audit(before, after, k=[3, 5])
@@ -38,6 +46,7 @@ jobs:
           assert len(report.cutoffs) == 2
           controlled = report.control(k=5, eta=0.001)
           assert len(controlled['selected_ids']) == 5
+          print(direct)
           print(report)
           PY
       - name: Smoke-test CLI
