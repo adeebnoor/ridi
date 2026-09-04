@@ -1,17 +1,17 @@
-# CODECHECK status
+# CODECHECK and external-verification status
 
-**Current manuscript:** *Identical audits, different AI decisions* (Nature v63 submission package)  
+**Current manuscript:** *Identical audits can yield different AI decisions*  
 **Community register:** https://github.com/codecheckers/register/issues/208  
-**Status (4 September 2026):** cross-environment numerical reproduction complete; formal CODECHECK certificate pending.
+**Status date:** 4 September 2026
 
-The sealed EPSS canonical numerical result key has been reproduced exactly at value level in two external software environments.
+## What is complete
 
-The current evidence is deliberately separated into three levels:
+1. **EPSS independent computational execution:** complete with two external executors in separate environments. The sealed deterministic workflow reproduced the locked headline numerical values, including the top-1,000 turnover result and adjacent same-version controls.
+2. **Targeted RAG external regeneration:** one blind external executor has completed SciFact query 275 on a distinct GPU/software stack and reproduced the substantive reference/permutation `SUPPORTS` versus audit-equivalent identity-substitution `REFUTES` pattern. The raw reference output prefixed the label with `Verdict:`, which the registered strict first-token parser labelled unparseable; this is retained transparently as a parser boundary.
+3. **Second targeted RAG execution:** requested from a second external executor; result not yet incorporated at this status date.
 
-1. **Cross-environment numerical reproduction:** complete. Two external environments reproduced the sealed numerical key at value level.
-2. **Unaffiliated independent execution:** not yet claimed as complete. The Windows executor had a prior supervised research-internship relationship with the author. The signed Linux execution reproduced the values exactly and records a blind run, but its returned relationship-disclosure section contains unresolved placeholder wording; a corrected re-signed disclosure has been requested.
-3. **Formal community CODECHECK certification:** pending under issue #208. No certificate has been issued.
+## What is not complete
 
-The repository exposes the deterministic EPSS workflow, locked inputs/manifest, expected value key, execution instructions and audit trail. An additional unaffiliated executor is being sought publicly at issue #6 and by direct invitation.
+**Formal community CODECHECK certification has not begun. No CODECHECK certificate has been issued or claimed.**
 
-No completed unaffiliated independent verification or CODECHECK certificate is claimed unless and until the supporting documentation is complete.
+The CODECHECK team indicated that volunteer checking should be requested again when there is a public preprint or when the manuscript is under journal review. The repository therefore distinguishes external computational execution from formal CODECHECK throughout.

@@ -51,19 +51,18 @@ def _write_json(payload: dict, output: str) -> None:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="ridi-audit",
-        description="Measure, certify and control decision identity under a representation intervention",
+        description="Audit and control allocation identity in capacity-limited score-to-action systems",
     )
-    parser.add_argument("--version", action="version", version="ridi-audit 1.0.0")
+    parser.add_argument("--version", action="version", version="ridi-audit 1.1.0")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     compare = subparsers.add_parser(
-        "compare", help="Compare two aligned candidate-score tables"
+        "compare", help="Audit allocation identity between two candidate-score tables"
     )
-    for command in (compare,):
-        command.add_argument("--r0", required=True)
-        command.add_argument("--r1", required=True)
-        command.add_argument("--id-col", default="id")
-        command.add_argument("--score-col", default="score")
+    compare.add_argument("--r0", required=True, help="Baseline CSV")
+    compare.add_argument("--r1", required=True, help="Updated CSV")
+    compare.add_argument("--id-col", default="id")
+    compare.add_argument("--score-col", default="score")
     compare.add_argument("--k", nargs="+", type=int, required=True)
     compare.add_argument("--out", default="-", help="JSON path, or - for stdout")
     compare.add_argument("--report", default=None, help="Optional Markdown report path")
@@ -71,8 +70,8 @@ def build_parser() -> argparse.ArgumentParser:
     control = subparsers.add_parser(
         "control", help="Select the minimum-turnover set within a utility-regret budget"
     )
-    control.add_argument("--r0", required=True)
-    control.add_argument("--r1", required=True)
+    control.add_argument("--r0", required=True, help="Baseline CSV")
+    control.add_argument("--r1", required=True, help="Updated CSV")
     control.add_argument("--id-col", default="id")
     control.add_argument("--score-col", default="score")
     control.add_argument("--k", type=int, required=True)
@@ -80,7 +79,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--eta",
         type=float,
         required=True,
-        help="Maximum normalized utility regret (0.001 means 0.1%%)",
+        help="Maximum normalized updated-score utility regret (0.001 means 0.1%%)",
     )
     control.add_argument("--out", default="-", help="JSON path, or - for stdout")
     return parser
@@ -110,4 +109,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

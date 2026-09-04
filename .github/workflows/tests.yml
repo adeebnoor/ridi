@@ -26,8 +26,25 @@ jobs:
         run: python -m pip install -e ".[dev]"
       - name: Test
         run: pytest -q
+      - name: Smoke-test Python API
+        run: |
+          python - <<'PY'
+          import pandas as pd
+          from ridi_audit import audit
+          before = pd.read_csv('examples/r0.csv')
+          after = pd.read_csv('examples/r1.csv')
+          report = audit(before, after, k=[3, 5])
+          assert report.n_candidates == 10
+          assert len(report.cutoffs) == 2
+          controlled = report.control(k=5, eta=0.001)
+          assert len(controlled['selected_ids']) == 5
+          print(report)
+          PY
       - name: Smoke-test CLI
         run: |
           python examples/identity_paradox.py
+          ridi-audit --version
           ridi-audit compare --r0 examples/r0.csv --r1 examples/r1.csv --k 3 5 --out /tmp/audit.json
           ridi-audit control --r0 examples/r0.csv --r1 examples/r1.csv --k 5 --eta 0.001 --out /tmp/control.json
+      - name: Build wheel and source distribution
+        run: python -m build

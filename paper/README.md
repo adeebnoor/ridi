@@ -1,4 +1,4 @@
-# Identical audits, different AI decisions
+# Identical audits can yield different AI decisions
 
 **Adeeb Noor**  
 Department of Information Technology, Faculty of Computing and Information Technology, King Abdulaziz University, Jeddah, Saudi Arabia  
@@ -8,9 +8,9 @@ ORCID: 0000-0002-8251-1853
 
 ## Central result
 
-Capacity-limited AI systems convert scores into a finite queue, shortlist, action set or context window. This manuscript asks whether a conventional aggregate audit identifies **which entities actually occupy those scarce slots**.
+Capacity-limited AI systems convert scores into finite queues, shortlists, action sets or context windows. This manuscript asks whether the reported audit identifies **which entities actually occupy those scarce slots**.
 
-The decisive prospective test is a preregistered retrieval-augmented generation experiment in which the complete relevance-grade-by-position vector and all registered retrieval metrics are held exactly fixed while only passage identities assigned zero benchmark relevance are changed.
+The decisive prospective test is a preregistered retrieval-augmented generation experiment in which the complete relevance-grade-by-position vector and every registered retrieval metric are held exactly fixed while only metric-zero passage identities are changed.
 
 ### Preregistered RAG result
 
@@ -22,21 +22,20 @@ The decisive prospective test is a preregistered retrieval-augmented generation 
 - Equal-dataset-weight macro benchmark-defined correctness flip: **17.27%** (95% stratified-bootstrap interval **14.60–20.03%**).
 - Order-only control with identical membership: **4.8%** macro correctness flips.
 - Identity-dose ladder: realized RIDI **0.446 → 0.655 → 0.953**, with correctness flips **6.97% → 11.07% → 17.27%**.
-- Registered transport gates passed across three generator families and both BM25 and SPLADE++; Contriever/SciFact is an additional dense-retrieval sensitivity.
 
-For transparency, the pooled descriptive rates differ from the preregistered equal-dataset-weight macro estimands: `134/800 = 16.75%` correctness flips and `286/800 = 35.75%` canonical-output changes.
+Most benchmark-defined outcomes remained stable. The confirmatory result estimates the prevalence of behavioral non-equivalence inside an exactly audit-equivalent class; it is not a claim of universal fragility or net harm.
 
 ## Concrete SciFact case
 
 Claim 275: **“Combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors is effective at treating KRAS mutant tumors.”** Gold label: `SUPPORTS`.
 
-Both reference and identity-altered contexts have the same relevance-grade vector:
+Reference and identity-substituted contexts share the same relevance-grade vector
 
 ```text
 [1,0,0,0,0,0,0,0,0,0]
 ```
 
-and the same registered retrieval metrics:
+and the same registered metrics:
 
 ```text
 precision@10 = 0.10
@@ -46,51 +45,41 @@ MRR@10       = 1.00
 MAP@10       = 0.3333
 ```
 
-The positive passage stays fixed at rank 1. Replacing nine metric-zero identities changes the canonical verdict `SUPPORTS → REFUTES` (`RIDI=0.947`). The same-query order-only permutation control retains `SUPPORTS` with identical membership (`RIDI=0`).
+The positive passage stays fixed at rank 1. Replacing nine metric-zero identities changes the verdict `SUPPORTS → REFUTES` (`RIDI=0.947`). The same-query order-only permutation retains `SUPPORTS` with identical membership (`RIDI=0`).
 
-This is an illustration of the registered aggregate result, not a separate inferential test.
+A targeted blind external regeneration on a distinct GPU/software stack reproduced the substantive pattern. The regenerated reference text began with `Verdict: SUPPORTS`, so the preregistered strict first-token parser labelled that one raw output unparseable even though its semantic verdict was unambiguous. This external run is therefore reported as a targeted robustness/reproducibility check rather than a replacement for the registered aggregate endpoint.
 
-## Why this is an audit-sufficiency question
+## Production stress test
 
-The paper does **not** claim that conventional retrieval metrics should mathematically determine a generated answer. The narrower point is that aggregate retrieval evaluation is used operationally to compare and select RAG configurations, including on leading cloud platforms, while those summaries need not certify the identities occupying the finite context. The manuscript cites official platform documentation as concrete evidence of this evaluation practice.
+**EPSS:** the production v2→v3 update replaced **565 of the top 1,000** remediation priorities (`RIDI=0.722`), versus **0** and **7** in adjacent same-version controls. Delayed CISA KEV evidence was sparse and cutoff-dependent, so turnover is not equated with harm or benefit.
 
-## Cross-system evidence
-
-- **COMPAS:** constructive audit-equivalent research cohorts show that progressively refined selected-count audits can sharply constrain membership without necessarily identifying the selected people.
-- **EPSS:** the production v2→v3 update replaced 565 of the top 1,000 remediation priorities (`RIDI=0.722`) versus 0 and 7 in adjacent same-version controls. Delayed CISA KEV value was capacity-dependent, so turnover is not equated with harm.
-- **CMS HVBP:** annual Total Performance Score updates provide a second independently governed production scoring system for transport.
-- **Registered failures/boundaries:** RxNorm and Open Targets results are retained to show that magnitude, mechanism and downstream value are system- and cutoff-dependent.
+The sealed deterministic EPSS workflow has been reproduced by **two independent external executors** in separate environments. These are independent computational executions; no CODECHECK certificate is claimed.
 
 ## Constructive solution: exact identity–utility frontier
 
-The manuscript closes the loop from diagnosis to control. **Main Fig. 5** presents an exact identity–utility frontier that computes the minimum membership change compatible with a declared updated-score utility-regret budget. Stored scores are sufficient; no retraining is required.
+**Main Fig. 3** presents the exact identity–utility frontier: the minimum membership change compatible with an explicit updated-score utility-regret budget, using stored scores and no retraining.
 
-- **GraphSAGE:** at `eta=0.001`, mean changed slots fall from **31.1 to 13.3** per query–cutoff cell; **78.8%** of representation-associated turnover is avoidable (95% query-bootstrap interval **76.0–81.4%**), while mean RIDI falls from **0.11574 to 0.04314**.
-- **Text retrieval:** at `k=100`, mean changed documents fall from **45.8 to 33.3**; **28.7%** is avoidable (95% interval **27.6–29.7%**), while independent label-based nDCG and recall change only by **−0.0037** and **−0.0019**.
+- **GraphSAGE:** at `eta=0.001`, mean changed slots fall from **31.1 to 13.3**; **78.8%** of representation-associated turnover is avoidable (95% query-bootstrap interval **76.0–81.4%**).
+- **Text retrieval:** at `k=100`, mean changed documents fall from **45.8 to 33.3**; **28.7%** is avoidable (95% interval **27.6–29.7%**) with small label-based nDCG/recall changes.
+- **EPSS:** at `eta=0.0001`, **14.34%** of turnover is avoidable while retaining all 12 delayed KEV positives in the primary top-1,000 window.
 
 The constructive claim is deliberately bounded: identity preservation is useful only inside an explicit outcome- or utility-checked budget.
 
-## Scientific boundaries
+## Registered failures and boundaries
 
-Allocation identity measures **who receives finite action**. It does not by itself establish harm, benefit, individual fairness, causal fairness or model superiority.
-
-Important limits:
-
-- benchmark qrels are incomplete, so qrel-zero passages are called **metric-zero**, not semantically irrelevant;
-- correctness flips are bidirectional and no net-harm claim is made;
-- the registered generators are deterministic open-weight 7–8B models rather than hosted frontier systems;
-- COMPAS is a retrospective constructive secondary analysis;
-- EPSS effects are cutoff- and endpoint-specific;
-- sufficiently fine or explicitly identity-aware audits can recover membership and escape non-identification.
+RxNorm and Open Targets registered tests are retained as failures/boundaries rather than recast as positive evidence. Earlier exploratory COMPAS and crude CVE-year analyses remain archived but do not support the current main claims.
 
 ## Reproducibility
 
 - **RAG preregistration:** https://osf.io/txwdv/
 - **Repository:** https://github.com/adeebnoor/ridi
-- **Community CODECHECK #208:** https://github.com/codecheckers/register/issues/208
-- **Local CODECHECK audit trail:** https://github.com/adeebnoor/ridi/issues/2
+- **Community CODECHECK request #208:** https://github.com/codecheckers/register/issues/208
 
-The sealed EPSS canonical numerical key has been reproduced in two external software environments. Those runs are treated as cross-environment numerical reproduction only. **No CODECHECK certificate is claimed unless and until one is formally issued.**
+The community CODECHECK request is registered; formal checking has not yet begun and **no certificate is claimed**.
+
+## Scientific boundaries
+
+Allocation identity measures **who receives finite action**. It does not by itself establish harm, benefit, individual fairness, causal fairness or model superiority. Benchmark qrels are incomplete, so qrel-zero passages are called **metric-zero**, not semantically irrelevant. Correctness flips are bidirectional. Confirmatory generators are deterministic open-weight 7–8B models rather than hosted frontier systems. EPSS downstream-value effects are cutoff- and endpoint-specific. Sufficiently fine or explicitly identity-aware audits can recover membership and escape non-identification.
 
 ## Explore
 

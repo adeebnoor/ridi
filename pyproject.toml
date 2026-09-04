@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ridi-audit"
-version = "1.0.0"
-description = "Measure, certify and control decision-identity turnover under representation interventions"
+version = "1.1.0"
+description = "Audit and control allocation identity in capacity-limited AI systems"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
@@ -18,11 +18,12 @@ dependencies = [
   "scipy>=1.10"
 ]
 keywords = [
+  "allocation identity",
+  "AI evaluation",
   "reproducibility",
   "decision identity",
-  "representation intervention",
   "ranking stability",
-  "audit",
+  "algorithmic auditing",
   "top-k selection"
 ]
 classifiers = [
@@ -37,13 +38,15 @@ classifiers = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "pytest-cov>=5"]
+dev = ["pytest>=8", "pytest-cov>=5", "build>=1.2"]
 
 [project.scripts]
 ridi-audit = "ridi_audit.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/adeebnoor/ridi"
+Documentation = "https://github.com/adeebnoor/ridi/tree/main/docs"
+Demo = "https://ridi-research-lab.onrender.com/demo/"
 Source = "https://github.com/adeebnoor/ridi"
 Issues = "https://github.com/adeebnoor/ridi/issues"
 
@@ -53,4 +56,3 @@ where = ["src"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra"
-
