@@ -54,6 +54,15 @@ jobs:
           python examples/identity_paradox.py
           ridi-audit --version
           ridi-audit demo
+          printf 'doc-1\ndoc-2\ndoc-3\n' > /tmp/before_ids.txt
+          printf 'doc-1\ndoc-2\ndoc-4\n' > /tmp/after_ids.txt
+          ridi-audit allocation --before /tmp/before_ids.txt --after /tmp/after_ids.txt --out /tmp/allocation.json --report /tmp/allocation.md
+          python - <<'PY'
+          import json
+          result = json.load(open('/tmp/allocation.json'))
+          assert result['changed_slots'] == 1
+          assert abs(result['ridi'] - 0.5) < 1e-12
+          PY
           ridi-audit compare --r0 examples/r0.csv --r1 examples/r1.csv --k 3 5 --out /tmp/audit.json
           ridi-audit control --r0 examples/r0.csv --r1 examples/r1.csv --k 5 --eta 0.001 --out /tmp/control.json
       - name: Build wheel and source distribution
