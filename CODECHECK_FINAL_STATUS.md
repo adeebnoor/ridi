@@ -1,6 +1,6 @@
 # CODECHECK status
 
-**Current manuscript:** *Identical audits, different AI decisions* (Nature v61 submission package)  
+**Current manuscript:** *Identical audits, different AI decisions* (Nature v62 submission package)  
 **Community register:** https://github.com/codecheckers/register/issues/208  
 **Status (4 September 2026):** cross-environment numerical reproduction complete; formal CODECHECK certificate pending.
 
