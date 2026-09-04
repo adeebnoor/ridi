@@ -9,10 +9,6 @@ on:
         description: "Exact package version to publish (for example 1.1.0)"
         required: true
         default: "1.1.0"
-  push:
-    branches: [main]
-    paths:
-      - ".pypi-release-1.1.0"
 
 permissions:
   contents: read
@@ -54,20 +50,11 @@ jobs:
               echo "Release tag must be ${EXPECTED_TAG}; got ${{ github.event.release.tag_name }}"
               exit 1
             fi
-          elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+          else
             if [[ "${{ inputs.version }}" != "${PACKAGE_VERSION}" ]]; then
               echo "workflow_dispatch version must equal ${PACKAGE_VERSION}; got ${{ inputs.version }}"
               exit 1
             fi
-          elif [[ "${{ github.event_name }}" == "push" ]]; then
-            if [[ "${PACKAGE_VERSION}" != "1.1.0" ]]; then
-              echo "One-time push trigger is locked to 1.1.0; got ${PACKAGE_VERSION}"
-              exit 1
-            fi
-            test -f .pypi-release-1.1.0
-          else
-            echo "Unsupported release event: ${{ github.event_name }}"
-            exit 1
           fi
 
       - name: Run test suite
