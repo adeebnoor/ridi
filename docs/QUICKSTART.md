@@ -10,38 +10,44 @@ One command from GitHub:
 python -m pip install "git+https://github.com/adeebnoor/ridi.git"
 ```
 
-For development or full examples:
+## First run — no files needed
 
 ```bash
-git clone https://github.com/adeebnoor/ridi.git
-cd ridi
-python -m pip install -e ".[dev]"
+ridi-audit demo
 ```
 
+This runs a built-in synthetic audit and prints changed slots, overlap, RIDI, global Spearman agreement and the sufficient stability-certificate status. The demo is explicitly synthetic and is **not manuscript evidence**.
+
 ## Python
+
+A fully runnable example:
 
 ```python
 import pandas as pd
 from ridi_audit import audit
 
-before = pd.read_csv("before.csv")
-after = pd.read_csv("after.csv")
+before = pd.DataFrame({
+    "id": ["a", "b", "c", "d", "e", "f"],
+    "score": [0.99, 0.94, 0.90, 0.85, 0.81, 0.76],
+})
+after = pd.DataFrame({
+    "id": ["a", "b", "c", "d", "e", "f"],
+    "score": [0.98, 0.93, 0.72, 0.86, 0.80, 0.89],
+})
 
-report = audit(before, after, k=[10, 50, 100])
+report = audit(before, after, k=[3, 5])
 print(report)
 ```
-
-Expected output is a compact allocation audit containing, for each requested cutoff, selected-set overlap, changed slots, RIDI and score-margin stability information.
 
 Move directly from measurement to minimum-turnover control:
 
 ```python
-controlled = report.control(k=100, eta=0.001)
+controlled = report.control(k=5, eta=0.001)
 print(controlled["avoidable_turnover_fraction"])
 print(controlled["selected_ids"])
 ```
 
-## CLI
+## Your own CSVs
 
 ```bash
 ridi-audit compare \
@@ -52,7 +58,7 @@ ridi-audit compare \
   --k 10 50 100
 ```
 
-## Control turnover inside a utility budget
+Control turnover inside a utility budget:
 
 ```bash
 ridi-audit control \
@@ -76,6 +82,15 @@ candidate_2,0.702
 ```
 
 They must contain the same unique candidate identities; row order may differ.
+
+## Development install
+
+```bash
+git clone https://github.com/adeebnoor/ridi.git
+cd ridi
+python -m pip install -e ".[dev]"
+pytest -q
+```
 
 ## Interpretation
 
