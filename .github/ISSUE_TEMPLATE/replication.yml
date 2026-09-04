@@ -1,0 +1,48 @@
+name: Independent replication
+about: Report an independent execution or replication of a RIDI result
+labels: [replication]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for independently testing RIDI. Positive, null and discrepant results are all useful.
+  - type: input
+    id: target
+    attributes:
+      label: Result or workflow replicated
+      placeholder: e.g. EPSS v2→v3, SciFact 275, allocation API example
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Python, hardware, package/model versions and relevant commit/tag.
+    validations:
+      required: true
+  - type: textarea
+    id: procedure
+    attributes:
+      label: Procedure
+      description: What you ran and any deviations from the documented workflow.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Result
+      description: Report the raw numerical/behavioral result and whether it agrees with the reference claim.
+    validations:
+      required: true
+  - type: textarea
+    id: artifacts
+    attributes:
+      label: Logs / hashes / artifacts
+      description: Links or hashes that make the execution inspectable, when shareable.
+  - type: checkboxes
+    id: independence
+    attributes:
+      label: Independence
+      options:
+        - label: I performed this execution independently and have disclosed any relevant collaboration or conflict.
+          required: true
