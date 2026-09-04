@@ -20,42 +20,48 @@
 
 ## Use RIDI in 30 seconds
 
-### Install
+### 1. Install
 
 ```bash
 python -m pip install "git+https://github.com/adeebnoor/ridi.git"
 ```
 
-For development and the included examples:
+### 2. First run — no files needed
 
 ```bash
-git clone https://github.com/adeebnoor/ridi.git
-cd ridi
-python -m pip install -e ".[dev]"
+ridi-audit demo
 ```
 
-### Python
+The built-in example is synthetic and is **not manuscript evidence**. It exists so a new user can see changed slots, overlap, RIDI, rank agreement and stability-certificate output immediately after installation.
+
+### 3. Python — fully runnable
 
 ```python
 import pandas as pd
 from ridi_audit import audit
 
-before = pd.read_csv("before.csv")
-after = pd.read_csv("after.csv")
+before = pd.DataFrame({
+    "id": ["a", "b", "c", "d", "e", "f"],
+    "score": [0.99, 0.94, 0.90, 0.85, 0.81, 0.76],
+})
+after = pd.DataFrame({
+    "id": ["a", "b", "c", "d", "e", "f"],
+    "score": [0.98, 0.93, 0.72, 0.86, 0.80, 0.89],
+})
 
-report = audit(before, after, k=[10, 50, 100])
+report = audit(before, after, k=[3, 5])
 print(report)
 ```
 
-The high-level `AuditReport` keeps the aligned inputs, so you can move directly from measurement to control:
+Move directly from measurement to control:
 
 ```python
-controlled = report.control(k=100, eta=0.001)
+controlled = report.control(k=5, eta=0.001)
 print(controlled["avoidable_turnover_fraction"])
 print(controlled["selected_ids"])
 ```
 
-### CLI
+### Your own CSVs
 
 ```bash
 ridi-audit compare \
