@@ -6,10 +6,10 @@ authors:
   - family-names: Noor
     given-names: Adeeb
     orcid: "https://orcid.org/0000-0002-8251-1853"
-version: 1.1.0
+version: 1.1.1
 date-released: 2026-09-04
 repository-code: "https://github.com/adeebnoor/ridi"
-url: "https://github.com/adeebnoor/ridi"
+url: "https://pypi.org/project/ridi-audit/"
 license: MIT
 keywords:
   - allocation identity
