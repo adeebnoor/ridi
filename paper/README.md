@@ -47,7 +47,14 @@ MAP@10       = 0.3333
 
 The positive passage stays fixed at rank 1. Replacing nine metric-zero identities changes the verdict `SUPPORTS → REFUTES` (`RIDI=0.947`). The same-query order-only permutation retains `SUPPORTS` with identical membership (`RIDI=0`).
 
-A targeted blind external regeneration on a distinct GPU/software stack reproduced the substantive pattern. The regenerated reference text began with `Verdict: SUPPORTS`, so the preregistered strict first-token parser labelled that one raw output unparseable even though its semantic verdict was unambiguous. This external run is therefore reported as a targeted robustness/reproducibility check rather than a replacement for the registered aggregate endpoint.
+### Independent blind regeneration
+
+The substantive SciFact pattern has now been regenerated **twice by independent external executors without access to the held author comparison result before return**.
+
+- **Mohammed Hamdan:** the frozen audit checks passed with no mismatches; reference and identity-control outputs were `SUPPORTS`, with the identity output byte-identical to reference; the order-only permutation remained `SUPPORTS`; the audit-equivalent identity substitution produced `REFUTES`. Because the executor's host could not run the pinned bf16 Hugging Face stack, the same frozen inputs and prompt conditioning were served through a disclosed `qwen3:8b` Q4_K_M llama.cpp/Ollama path. This is therefore a cross-serving/quantization robustness regeneration rather than a byte-identical pipeline reproduction.
+- **Théophile Ossard:** a separate blind regeneration on a distinct GPU/software stack reproduced the same substantive reference/permutation `SUPPORTS` versus identity-substitution `REFUTES` pattern. His regenerated reference began with `Verdict: SUPPORTS`, so the preregistered strict first-token parser labelled that raw output unparseable despite an unambiguous semantic verdict. That parser boundary is retained transparently rather than silently corrected.
+
+These targeted external runs support robustness of the **SciFact 275 behavioral reversal**. They do not replace the preregistered aggregate 800-query endpoint and are not presented as CODECHECK certification.
 
 ## Production stress test
 
@@ -73,6 +80,7 @@ RxNorm and Open Targets registered tests are retained as failures/boundaries rat
 
 - **RAG preregistration:** https://osf.io/txwdv/
 - **Repository:** https://github.com/adeebnoor/ridi
+- **PyPI package:** https://pypi.org/project/ridi-audit/
 - **Community CODECHECK request #208:** https://github.com/codecheckers/register/issues/208
 
 The community CODECHECK request is registered; formal checking has not yet begun and **no certificate is claimed**.
@@ -83,6 +91,7 @@ Allocation identity measures **who receives finite action**. It does not by itse
 
 ## Use or test the idea
 
+- [Install `ridi-audit` from PyPI](https://pypi.org/project/ridi-audit/)
 - [Open the 60-second notebook in Colab](https://colab.research.google.com/github/adeebnoor/ridi/blob/main/notebooks/RIDI_60_Second_Experiment.ipynb)
 - [60-second Quick Start](../docs/QUICKSTART.md)
 - [Python API](../docs/API.md)
