@@ -6,7 +6,7 @@
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
-pip install ridi-audit==1.1.0
+pip install ridi-audit==1.1.1
 ridi-audit --version
 ridi-audit demo
 ```
@@ -20,7 +20,7 @@ python -m pip install -e ".[dev]"
 pytest -q
 ```
 
-GitHub Actions tests Python 3.10, 3.11 and 3.12. The PyPI release workflow additionally performs strict metadata validation and a clean-wheel smoke test before publication.
+GitHub Actions tests Python 3.10, 3.11 and 3.12. The PyPI release workflow performs strict metadata validation, a clean-wheel smoke test before publication, and then installs the newly published version again from the **public PyPI index** and smoke-tests the CLI and API.
 
 ## Current manuscript evidence
 
@@ -52,12 +52,12 @@ Together, these runs support robustness of the **SciFact 275 phenomenon**. They 
 
 ## PyPI software release
 
-`ridi-audit==1.1.0` is published at https://pypi.org/project/ridi-audit/ through GitHub OIDC Trusted Publishing. The publication workflow generated PyPI/Sigstore attestations after tests, strict Twine checks and an isolated wheel-install smoke test.
+`ridi-audit==1.1.1` is published at https://pypi.org/project/ridi-audit/ through GitHub OIDC Trusted Publishing. The publication workflow generated PyPI/Sigstore attestations after tests, strict Twine checks and an isolated wheel-install smoke test. A subsequent job installed `1.1.1` from the public PyPI index and successfully ran the CLI demo and Python API smoke test.
 
-Published SHA-256 digests:
+Published SHA-256 digests for 1.1.1:
 
-- wheel: `351d7e7de5bfc27db87abed6326b5c45a2e1503b0ddbdbfa830bd27623326563`
-- source distribution: `a6993fe069f34cb8af7a06f5a203c819f7cf5ac9c1a08a7783d89d153f53bf25`
+- wheel: `b91dcf6cf227a3a579d88318029c02d78e378d16510a2223d17223acbf7bb6f7`
+- source distribution: `a2af6f98171cb5b5a307911eeca2824dd401e014d595c6af69c94ddcf3d5440e`
 
 Software publication is not evidence of peer review or scientific certification.
 
