@@ -6,17 +6,11 @@ RIDI audits **allocation identity**: who actually occupies a finite action set b
 
 ## Install
 
-Until the first PyPI release is activated:
-
-```bash
-python -m pip install "git+https://github.com/adeebnoor/ridi.git"
-```
-
-After PyPI publication the command becomes:
-
 ```bash
 pip install ridi-audit
 ```
+
+PyPI: https://pypi.org/project/ridi-audit/
 
 ## Fastest path: you already have two selected lists
 
@@ -117,4 +111,4 @@ pytest -q
 
 RIDI answers **who changed?** It does not by itself establish harm, fairness, correctness or model superiority. Pair allocation-identity auditing with the performance, outcome and fairness checks appropriate to your application.
 
-Next: [Use cases](USE_CASES.md) · [Python API](API.md) · [Reporting checklist](REPORTING_CHECKLIST.md)
+Next: [Use cases](USE_CASES.md) · [Python API](API.md) · [Reporting checklist](REPORTING_CHECKLIST.md) · [Evidence](../paper/README.md)
