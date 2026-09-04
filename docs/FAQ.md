@@ -2,24 +2,40 @@
 
 ## What does RIDI stand for?
 
-RIDI is the **Reproducibility of Identity Decisions Index**. It asks whether the same identities receive a finite set of decision slots after a controlled computational change.
+RIDI is the **Reproducibility of Identity Decisions Index**. It measures how much the membership of a finite selected set changes between two aligned score states.
+
+## Is RIDI the main scientific claim?
+
+No. RIDI is an instrument. The broader scientific object is **allocation identity**: whether a reported audit identifies the finite entities that actually receive scarce action, attention or context. The current manuscript tests whether exact audit equivalence can coexist with allocation and downstream decision non-equivalence.
 
 ## Is RIDI just Jaccard distance?
 
-The numerical set-distance primitive is Jaccard distance. The contribution is the decision-reproducibility estimand and protocol around it: a controlled representation intervention, mechanism-matched controls, retraining calibration, a score-margin certificate, independent outcome testing and exact identity-constrained selection. The claim is therefore not that a new set-similarity formula was invented, but that finite decision identity can be measured, attributed, certified, controlled and validated as a distinct reproducibility axis.
+Its set-distance primitive is Jaccard distance. The toolkit's contribution is not a claim to have invented a new set-similarity formula; it operationalizes allocation-identity auditing around finite decisions, including deterministic top-k selection, sufficient zero-turnover certification and exact identity–utility control.
 
 ## Why not use Spearman or Kendall correlation?
 
-Global rank statistics average over the full candidate universe. Finite decisions depend on membership near a cutoff. Two rankings can have correlation arbitrarily close to one while their top-*k* sets are disjoint as the universe grows.
+Global rank statistics average over the full candidate universe. Finite decisions depend on membership near a cutoff. High global agreement therefore does not certify that the same entities occupy a finite top-k set.
 
-## Is change necessarily bad?
+## Is turnover necessarily bad?
 
-No. A new representation can surface better candidates. Independent outcomes should determine whether changed identity is progress. RIDI makes the turnover visible and constrains only the portion that is unnecessary for a declared utility target.
+No. Turnover can be beneficial, neutral or harmful. RIDI makes membership change observable. Outcome or utility evidence must determine whether preserving identity is desirable in a particular application.
 
 ## How should eta be chosen?
 
-Prospectively, from domain costs, review capacity, safety requirements and stakeholder policy. `eta = 0.001` is a demonstration choice representing 0.1% normalized utility regret, not a universal standard.
+Prospectively, from application-specific utility, safety, review capacity and stakeholder constraints. `eta = 0.001` means a maximum normalized updated-score utility regret of 0.1%; it is not a universal standard.
 
-## Does a non-zero RIDI prove that representation caused the change?
+## Does non-zero RIDI prove a particular mechanism caused the change?
 
-Only when the intervention design freezes source evidence, inference, candidate universe and decision rules, and when stochasticity is removed or calibrated. Otherwise it is a diagnostic difference, not causal attribution.
+No. Causal attribution requires a design that freezes or calibrates competing mechanisms. Without such a design, RIDI is a diagnostic measure of realized membership change.
+
+## Does audit equivalence imply the same AI output?
+
+Not necessarily. In the preregistered RAG experiment, the complete relevance-grade-by-position vector and all registered retrieval metrics were held exactly fixed while metric-zero passage identities were changed. Benchmark-defined correctness diverged in a non-zero fraction of cases, establishing behavioral non-equivalence within the registered audit-equivalence class.
+
+## Are qrel-zero passages semantically irrelevant?
+
+No. They are called **metric-zero** because the declared benchmark audit assigns them zero relevance. Incomplete qrels mean a metric-zero passage can still contain semantically influential text.
+
+## Is the external verification a CODECHECK certificate?
+
+No. The EPSS workflow has been reproduced by two independent external executors, and the SciFact 275 case has a targeted blind external regeneration. The community CODECHECK request is registered, but formal checking has not begun and no certificate is claimed.
