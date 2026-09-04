@@ -2,9 +2,11 @@
 
 ## Allocation identity for capacity-limited AI
 
-**Current manuscript:** **Identical audits can yield different AI decisions**
+> **CURRENT PUBLIC LOCK — 4 Sep 2026 · `ridi-audit` 1.1.0**  
+> Manuscript: **Identical audits can yield different AI decisions**  
+> This page is synchronized to the current science/product lock. If an older page is cached in your browser, reload the `main` branch.
 
-![version](https://img.shields.io/badge/ridi--audit-1.1.0-1f6feb) ![python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-3776ab) ![license](https://img.shields.io/badge/license-MIT-2ea44f) ![status](https://img.shields.io/badge/manuscript-prepared%20for%20submission-6f42c1)
+![version](https://img.shields.io/badge/ridi--audit-1.1.0-1f6feb) ![python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-3776ab) ![license](https://img.shields.io/badge/license-MIT-2ea44f) ![tests](https://img.shields.io/badge/CI-passing-2ea44f) ![status](https://img.shields.io/badge/manuscript-prepared%20for%20submission-6f42c1)
 
 > **Core result:** an audit can remain exactly unchanged while the finite identities receiving scarce slots change — and the downstream AI decision can change with them.
 
@@ -12,29 +14,36 @@
   <img src="assets/ridi_graphical_abstract.svg" alt="RIDI graphical abstract: identical audits can yield different AI decisions" width="100%">
 </p>
 
-**Try it:** [60-second interactive experiment](https://ridi-research-lab.onrender.com/demo/) · [Quick Start](docs/QUICKSTART.md) · [Python API](docs/API.md) · [Paper page](paper/README.md) · [RAG preregistration](https://osf.io/txwdv/) · [CODECHECK request #208](https://github.com/codecheckers/register/issues/208)
+**Start here:** [60-second Quick Start](docs/QUICKSTART.md) · [Python API](docs/API.md) · [Paper overview](paper/README.md) · [Interactive experiment](https://ridi-research-lab.onrender.com/demo/) · [RAG preregistration](https://osf.io/txwdv/) · [CODECHECK #208](https://github.com/codecheckers/register/issues/208)
 
-> **Verification status — 4 Sep 2026:** the sealed EPSS numerical workflow has been reproduced by **two independent external executors** in separate environments. A targeted blind external regeneration of the central SciFact 275 case has reproduced the substantive `SUPPORTS → REFUTES` identity-substitution reversal on a distinct GPU/software stack. These are independent computational executions, not a CODECHECK certificate. The community request is registered; formal CODECHECK has not yet begun.
+### Verification status
+
+As of **4 Sep 2026**:
+
+- the sealed **EPSS** numerical workflow has been reproduced by **two independent external executors** in separate environments;
+- a targeted blind external regeneration of **SciFact 275** reproduced the substantive `SUPPORTS → REFUTES` identity-substitution reversal on a distinct GPU/software stack;
+- these are independent computational executions, **not** a CODECHECK certificate;
+- the community CODECHECK request is registered, but formal checking has not yet begun.
 
 ---
 
 ## Use RIDI in 30 seconds
 
-### 1. Install
+### Install today
+
+Until the first PyPI publication is activated, install directly from the current `main` branch:
 
 ```bash
 python -m pip install "git+https://github.com/adeebnoor/ridi.git"
 ```
 
-### 2. First run — no files needed
+Then run a zero-file demo:
 
 ```bash
 ridi-audit demo
 ```
 
-The built-in example is synthetic and is **not manuscript evidence**. It exists so a new user can see changed slots, overlap, RIDI, rank agreement and stability-certificate output immediately after installation.
-
-### 3. Python — fully runnable
+### Python
 
 ```python
 import pandas as pd
@@ -61,7 +70,7 @@ print(controlled["avoidable_turnover_fraction"])
 print(controlled["selected_ids"])
 ```
 
-### Your own CSVs
+### CLI
 
 ```bash
 ridi-audit compare \
@@ -78,6 +87,14 @@ ridi-audit control \
   --r1 after.csv \
   --k 100 \
   --eta 0.001
+```
+
+### PyPI
+
+The repository is now configured for **tokenless PyPI Trusted Publishing via GitHub OIDC**. The one-time PyPI account binding still has to be authorized before the first upload; see [PyPI publishing setup](docs/PYPI_PUBLISHING.md). After publication, the public install command will become:
+
+```bash
+pip install ridi-audit
 ```
 
 ---
@@ -175,23 +192,21 @@ Allocation identity measures **who receives finite action** and how that set cha
 
 ---
 
-## Reproducibility and documentation
+## Documentation
 
 - [Quick Start](docs/QUICKSTART.md)
 - [Python API](docs/API.md)
-- [Documentation index](docs/README.md)
 - [Methods](docs/METHODS.md)
 - [Reproducibility guide](docs/REPRODUCIBILITY.md)
-- [Current results at a glance](docs/RESULTS_AT_A_GLANCE.md)
+- [Results at a glance](docs/RESULTS_AT_A_GLANCE.md)
 - [FAQ](docs/FAQ.md)
+- [PyPI Trusted Publishing](docs/PYPI_PUBLISHING.md)
 - [RAG preregistration](https://osf.io/txwdv/)
 - [Community CODECHECK request #208](https://github.com/codecheckers/register/issues/208)
 
-The CODECHECK request is registered, but formal checking has not yet begun and **no certificate is claimed**.
-
 ## Citation
 
-If you use RIDI or `ridi-audit`, please cite the software using [`CITATION.cff`](CITATION.cff) and the accompanying manuscript when a public bibliographic record is available.
+If you use RIDI or `ridi-audit`, cite the software using [`CITATION.cff`](CITATION.cff) and the accompanying manuscript when a public bibliographic record is available.
 
 ## Author
 
