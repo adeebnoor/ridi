@@ -1,57 +1,72 @@
 # Reproducibility guide
 
-## Software verification
+## Install and verify the software
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
+pip install ridi-audit==1.1.0
+ridi-audit --version
+ridi-audit demo
+```
+
+For development verification:
+
+```bash
+git clone https://github.com/adeebnoor/ridi.git
+cd ridi
 python -m pip install -e ".[dev]"
 pytest -q
 ```
 
-The test suite covers identity and disjoint-set endpoints, deterministic score ties, certified zero-turnover examples, input validation, exact frontier optimality against brute-force enumeration, minimum-feasible-turnover selection, and the researcher-facing `audit()` API. GitHub Actions runs the suite on Python 3.10, 3.11 and 3.12.
-
-## Minimum audit inputs
-
-Two score tables are required. Each must contain one unique candidate identifier and one finite score, and both must contain exactly the same identities. Row order may differ. Record the source version, representation versions, score-generation procedure, cutoff, tie rule and integrity hashes outside the score tables.
+GitHub Actions tests Python 3.10, 3.11 and 3.12. The PyPI release workflow additionally performs strict metadata validation and a clean-wheel smoke test before publication.
 
 ## Current manuscript evidence
 
-The current manuscript is **“Identical audits can yield different AI decisions.”** Its decisive prospective experiment is registered at:
-
-- RAG preregistration: https://osf.io/txwdv/
+The current manuscript is **“Identical audits can yield different AI decisions.”** Its decisive prospective experiment is registered at https://osf.io/txwdv/.
 
 The registration freezes the study matrix, query panels, prompts, model revisions, retrievers, intervention rules, falsification thresholds, analysis plan and cryptographic manifest before registered generation.
 
-The submission reproducibility package preserves the preregistered RAG protocol and outputs, exact execution provenance and cryptographic manifests, candidate-universe hashes, row/query-level Source Data, transport analyses, adverse controls and failed gates, the SciFact illustrative case, and publication-linked derived tables.
-
 ## EPSS independent execution
 
-The deterministic EPSS workflow (`RIDI-CYBER-NATURAL-UPDATE-v1`) has been reproduced by **two independent external executors** in separate environments. The locked headline values were reproduced, including the top-1,000 production update turnover of 565 changed priorities (`RIDI=0.722`) and the adjacent same-version controls of 0 and 7.
+The deterministic EPSS workflow (`RIDI-CYBER-NATURAL-UPDATE-v1`) has been reproduced by **two independent external executors** in separate environments. The locked headline values were reproduced, including 565 changed priorities in the top 1,000 (`RIDI=0.722`) and adjacent same-version controls of 0 and 7.
 
-These runs are reported as **independent computational executions**. They are not described as journal certification or CODECHECK certification.
+These are **independent computational executions**, not journal certification or CODECHECK certification.
 
-## Targeted SciFact 275 external regeneration
+## SciFact 275 — two blind external regenerations
 
-A separate blind external execution regenerated the frozen SciFact query 275 contexts on a distinct GPU/software stack using the pinned Qwen3-8B revision and deterministic decoding settings. The substantive pattern was reproduced:
+The targeted SciFact 275 behavioral reversal has now been regenerated **twice independently and blind**.
 
-- reference / identity control: `SUPPORTS` semantically,
-- membership-preserving permutation: `SUPPORTS`,
-- audit-equivalent identity substitution: `REFUTES`.
+### Mohammed Hamdan
 
-The regenerated reference text began with `Verdict: SUPPORTS`. Because the preregistered parser required the canonical label at the first token, that raw output was labelled `UNPARSEABLE` by the strict registered parser even though its semantic verdict was explicit. This is reported transparently as a parser-robustness boundary; no registered endpoint is silently rewritten.
+The frozen audit checks passed with no mismatches. Reference and identity-control outputs were `SUPPORTS`, and the identity output was byte-identical to reference. The membership-preserving permutation remained `SUPPORTS`; the audit-equivalent identity substitution produced `REFUTES` (`RIDI=0.947368...`).
+
+The executor's host could not run the pinned bf16 Hugging Face stack. The same frozen inputs and prompt conditioning were therefore served through a disclosed `qwen3:8b` Q4_K_M llama.cpp/Ollama path. No frozen input or runner file was modified. This is a **cross-serving/quantization robustness regeneration**, not an exact backend reproduction.
+
+### Théophile Ossard
+
+A separate blind regeneration on a distinct GPU/software stack reproduced the same substantive reference/permutation `SUPPORTS` versus identity-substitution `REFUTES` pattern. The regenerated reference began with `Verdict: SUPPORTS`; the preregistered strict first-token parser therefore labelled that raw output `UNPARSEABLE` despite its unambiguous semantic verdict. The parser discrepancy is retained transparently.
+
+Together, these runs support robustness of the **SciFact 275 phenomenon**. They do not replace the preregistered aggregate 800-query endpoint.
+
+## PyPI software release
+
+`ridi-audit==1.1.0` is published at https://pypi.org/project/ridi-audit/ through GitHub OIDC Trusted Publishing. The publication workflow generated PyPI/Sigstore attestations after tests, strict Twine checks and an isolated wheel-install smoke test.
+
+Published SHA-256 digests:
+
+- wheel: `351d7e7de5bfc27db87abed6326b5c45a2e1503b0ddbdbfa830bd27623326563`
+- source distribution: `a6993fe069f34cb8af7a06f5a203c819f7cf5ac9c1a08a7783d89d153f53bf25`
+
+Software publication is not evidence of peer review or scientific certification.
 
 ## CODECHECK boundary
 
 Community request: https://github.com/codecheckers/register/issues/208
 
-The request is registered, but formal checking has **not yet begun** and no certificate is claimed. The CODECHECK team invited renewed contact when a public preprint exists or when the manuscript is undergoing journal review.
-
-## Archive status
-
-Development source is public in this repository. Do not describe a reserved or draft archival DOI as publicly available unless it resolves without authentication. When a permanent public archival record is activated, cite that record explicitly and update this page rather than inferring public status from a reserved identifier.
+The request is registered, but formal checking has **not begun** and no certificate is claimed. The CODECHECK team invited renewed contact when a public preprint exists or when the manuscript is undergoing journal review.
 
 ## Reproduction discipline
 
-Do not replace a failed control, gate or endpoint after observing results. If an implementation error is discovered, preserve the original output, document the correction, rerun the locked estimand, and report both lineage and impact. Independent execution files should be preserved unedited with hashes and declarations.
+Do not replace a failed control, gate or endpoint after observing results. If an implementation error is discovered, preserve the original output, document the correction, rerun the locked estimand, and report lineage and impact. Independent execution files should be preserved unedited with hashes and declarations.
