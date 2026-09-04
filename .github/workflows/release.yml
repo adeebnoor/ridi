@@ -6,9 +6,13 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Exact package version to publish (for example 1.1.0)"
+        description: "Exact package version to publish (for example 1.1.1)"
         required: true
-        default: "1.1.0"
+        default: "1.1.1"
+  push:
+    branches: [main]
+    paths:
+      - ".pypi-release-1.1.1"
 
 permissions:
   contents: read
@@ -50,11 +54,20 @@ jobs:
               echo "Release tag must be ${EXPECTED_TAG}; got ${{ github.event.release.tag_name }}"
               exit 1
             fi
-          else
+          elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             if [[ "${{ inputs.version }}" != "${PACKAGE_VERSION}" ]]; then
               echo "workflow_dispatch version must equal ${PACKAGE_VERSION}; got ${{ inputs.version }}"
               exit 1
             fi
+          elif [[ "${{ github.event_name }}" == "push" ]]; then
+            if [[ "${PACKAGE_VERSION}" != "1.1.1" ]]; then
+              echo "One-time push trigger is locked to 1.1.1; got ${PACKAGE_VERSION}"
+              exit 1
+            fi
+            test -f .pypi-release-1.1.1
+          else
+            echo "Unsupported release event: ${{ github.event_name }}"
+            exit 1
           fi
 
       - name: Run test suite
@@ -112,3 +125,52 @@ jobs:
         with:
           attestations: true
           print-hash: true
+
+  verify-public-index:
+    name: Verify clean install from public PyPI
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Read package version
+        id: version
+        shell: bash
+        run: |
+          PACKAGE_VERSION=$(python - <<'PY'
+          import tomllib
+          with open('pyproject.toml', 'rb') as fh:
+              print(tomllib.load(fh)['project']['version'])
+          PY
+          )
+          echo "version=${PACKAGE_VERSION}" >> "$GITHUB_OUTPUT"
+
+      - name: Wait for PyPI propagation and install from public index
+        shell: bash
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          python -m pip install --upgrade pip
+          for attempt in 1 2 3 4 5 6 7 8 9 10; do
+            if python -m pip install --no-cache-dir --index-url https://pypi.org/simple "ridi-audit==${VERSION}"; then
+              break
+            fi
+            if [[ "${attempt}" == "10" ]]; then
+              echo "Package did not become installable from public PyPI in time."
+              exit 1
+            fi
+            sleep 10
+          done
+          ridi-audit --version
+          ridi-audit demo
+          python - <<'PY'
+          from ridi_audit import compare_allocations
+          result = compare_allocations(['a', 'b', 'c'], ['a', 'b', 'd'])
+          assert result.changed_slots == 1
+          print('public PyPI install and API smoke test: OK')
+          PY
