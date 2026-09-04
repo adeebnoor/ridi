@@ -2,6 +2,16 @@
 
 All notable public changes are documented here.
 
+## 1.1.1 — verification/documentation patch — 2026-09-04
+
+- Synchronized the public PyPI package metadata and long description with the current researcher-facing README.
+- Recorded the completed second blind external SciFact 275 regeneration by Mohammed Hamdan, including the exact `SUPPORTS / SUPPORTS / SUPPORTS / REFUTES` canonical pattern across reference, identity-control, order-only permutation and audit-equivalent identity substitution.
+- Preserved the executor-declared hardware/backend deviation: frozen inputs and audit checks were unchanged, but generation used a disclosed Q4_K_M `qwen3:8b` llama.cpp/Ollama serving path on a CPU-only host rather than the frozen bf16 Hugging Face runtime.
+- Retained Théophile Ossard's independent blind SciFact regeneration and its strict first-token parser boundary (`Verdict: SUPPORTS`) transparently.
+- Clarified that the two targeted SciFact regenerations strengthen cross-environment robustness of the decisive case but do not replace the preregistered 800-query aggregate endpoint or constitute CODECHECK certification.
+- Added public-index verification to the PyPI release workflow so future releases are reinstalled from PyPI itself after upload and smoke-tested again.
+- Kept the scientific API unchanged from 1.1.0.
+
 ## 1.1.0 — researcher-first API — 2026-09-04
 
 - Published `ridi-audit==1.1.0` to PyPI through tokenless GitHub OIDC Trusted Publishing with PyPI/Sigstore attestations.
@@ -16,9 +26,7 @@ All notable public changes are documented here.
 - Hardened the release path with exact version checks, strict Twine validation, clean-wheel installation tests, release concurrency, artifact hashes and publish attestations.
 - Aligned the public narrative to the current manuscript **Identical audits can yield different AI decisions** and its three-display architecture: preregistered RAG consequence, EPSS production stress test and exact identity–utility frontier.
 - Recorded that the sealed EPSS numerical workflow has been reproduced by two independent external executors in separate environments.
-- Recorded **two independent blind external SciFact 275 regenerations** of the substantive reference/permutation `SUPPORTS` versus audit-equivalent identity-substitution `REFUTES` pattern.
-- Hamdan's blind regeneration preserved every registered audit quantity, produced a byte-identical identity-control output, retained `SUPPORTS` under order-only permutation and produced `REFUTES` after metric-zero identity substitution. His disclosed hardware constraint required a Q4_K_M `qwen3:8b` llama.cpp/Ollama serving path rather than the frozen bf16 Hugging Face pipeline.
-- Théophile's separate blind regeneration reproduced the same substantive pattern on a distinct GPU/software stack and exposed a strict first-token parser boundary when the reference output was prefixed with `Verdict:`; the raw discrepancy remains disclosed.
+- Recorded two independent blind external SciFact 275 regenerations of the substantive reference/permutation `SUPPORTS` versus audit-equivalent identity-substitution `REFUTES` pattern.
 - Corrected CODECHECK wording: request registered; formal checking has not begun; no certificate is claimed.
 - Preserved registered failures and negative/boundary results rather than converting them into positive evidence.
 
