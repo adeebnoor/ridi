@@ -47,6 +47,9 @@ jobs:
     name: Publish to PyPI via Trusted Publishing
     needs: build
     runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/ridi-audit
     permissions:
       id-token: write
     steps:
