@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Sequence
+from typing import Iterable, Sequence
 
 import numpy as np
 import pandas as pd
 
-from .core import audit_scores
+from .core import audit_scores, ridi as _ridi
 from .report import render_markdown_report
 from .selector import identity_utility_frontier, select_identity_control
 
@@ -18,6 +18,18 @@ def _cutoffs(k: int | Sequence[int]) -> list[int]:
     if not values:
         raise ValueError("k must contain at least one cutoff")
     return values
+
+
+def _identity_list(values: Iterable[object], label: str) -> list[str]:
+    if isinstance(values, (str, bytes)):
+        raise TypeError(f"{label} must be an iterable of identities, not a string")
+    raw = list(values)
+    if any(value is None for value in raw):
+        raise ValueError(f"{label} contains a missing identity")
+    normalized = [str(value) for value in raw]
+    if len(set(normalized)) != len(normalized):
+        raise ValueError(f"{label} identities must be unique after string conversion")
+    return normalized
 
 
 def _aligned_frames(
@@ -57,6 +69,100 @@ def _aligned_frames(
     scores_r0 = merged["score_r0"].to_numpy(dtype=float)
     scores_r1 = merged["score_r1"].to_numpy(dtype=float)
     return ids, scores_r0, scores_r1
+
+
+@dataclass(frozen=True)
+class AllocationReport:
+    """Direct comparison of two finite identity allocations.
+
+    This is the lightest-weight entry point for RAG contexts, shortlists,
+    alert queues and other pipelines that already expose the selected IDs.
+    """
+
+    before_size: int
+    after_size: int
+    overlap: int
+    removed_ids: tuple[str, ...]
+    added_ids: tuple[str, ...]
+    ridi: float
+
+    @property
+    def same_capacity(self) -> bool:
+        return self.before_size == self.after_size
+
+    @property
+    def changed_slots(self) -> int | None:
+        return len(self.removed_ids) if self.same_capacity else None
+
+    def to_dict(self, *, include_ids: bool = True) -> dict:
+        payload = {
+            "before_size": self.before_size,
+            "after_size": self.after_size,
+            "same_capacity": self.same_capacity,
+            "overlap": self.overlap,
+            "changed_slots": self.changed_slots,
+            "ridi": self.ridi,
+        }
+        if include_ids:
+            payload["removed_ids"] = list(self.removed_ids)
+            payload["added_ids"] = list(self.added_ids)
+        return payload
+
+    def to_markdown(self) -> str:
+        changed = "n/a (capacities differ)" if self.changed_slots is None else str(self.changed_slots)
+        return "\n".join(
+            [
+                "# RIDI allocation comparison",
+                "",
+                "| Field | Value |",
+                "|---|---:|",
+                f"| Before size | {self.before_size} |",
+                f"| After size | {self.after_size} |",
+                f"| Overlap | {self.overlap} |",
+                f"| Changed slots | {changed} |",
+                f"| RIDI | {self.ridi:.6f} |",
+                "",
+                "> RIDI reports identity turnover. It does not by itself establish harm, fairness or correctness.",
+            ]
+        )
+
+    def __str__(self) -> str:
+        changed = "n/a" if self.changed_slots is None else str(self.changed_slots)
+        return "\n".join(
+            [
+                "RIDI Allocation Comparison",
+                "--------------------------",
+                f"Before size:   {self.before_size}",
+                f"After size:    {self.after_size}",
+                f"Overlap:       {self.overlap}",
+                f"Changed slots: {changed}",
+                f"RIDI:          {self.ridi:.6f}",
+            ]
+        )
+
+
+def compare_allocations(
+    before_ids: Iterable[object],
+    after_ids: Iterable[object],
+) -> AllocationReport:
+    """Compare two realized finite allocations directly.
+
+    Use this when your system already exposes selected identity lists—for
+    example retrieved document IDs, shortlisted cases or a top-k alert queue.
+    The two allocations may have different capacities; ``changed_slots`` is
+    reported only when their sizes are equal.
+    """
+    before = _identity_list(before_ids, "before_ids")
+    after = _identity_list(after_ids, "after_ids")
+    left, right = set(before), set(after)
+    return AllocationReport(
+        before_size=len(before),
+        after_size=len(after),
+        overlap=len(left & right),
+        removed_ids=tuple(sorted(left - right)),
+        added_ids=tuple(sorted(right - left)),
+        ridi=_ridi(before, after),
+    )
 
 
 @dataclass
