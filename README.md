@@ -12,7 +12,7 @@
   <img src="assets/ridi_graphical_abstract.svg" alt="RIDI graphical abstract: identical audits can yield different AI decisions" width="100%">
 </p>
 
-**Try it:** [60-second interactive experiment](https://ridi-research-lab.onrender.com/demo/) · [Quick Start](docs/QUICKSTART.md) · [Paper page](paper/README.md) · [RAG preregistration](https://osf.io/txwdv/) · [CODECHECK request #208](https://github.com/codecheckers/register/issues/208)
+**Try it:** [60-second interactive experiment](https://ridi-research-lab.onrender.com/demo/) · [Quick Start](docs/QUICKSTART.md) · [Python API](docs/API.md) · [Paper page](paper/README.md) · [RAG preregistration](https://osf.io/txwdv/) · [CODECHECK request #208](https://github.com/codecheckers/register/issues/208)
 
 > **Verification status — 4 Sep 2026:** the sealed EPSS numerical workflow has been reproduced by **two independent external executors** in separate environments. A targeted blind external regeneration of the central SciFact 275 case has reproduced the substantive `SUPPORTS → REFUTES` identity-substitution reversal on a distinct GPU/software stack. These are independent computational executions, not a CODECHECK certificate. The community request is registered; formal CODECHECK has not yet begun.
 
@@ -23,9 +23,15 @@
 ### Install
 
 ```bash
+python -m pip install "git+https://github.com/adeebnoor/ridi.git"
+```
+
+For development and the included examples:
+
+```bash
 git clone https://github.com/adeebnoor/ridi.git
 cd ridi
-python -m pip install .
+python -m pip install -e ".[dev]"
 ```
 
 ### Python
@@ -34,36 +40,37 @@ python -m pip install .
 import pandas as pd
 from ridi_audit import audit
 
-before = pd.read_csv("examples/r0.csv")
-after = pd.read_csv("examples/r1.csv")
+before = pd.read_csv("before.csv")
+after = pd.read_csv("after.csv")
 
-report = audit(before, after, k=[3, 5])
+report = audit(before, after, k=[10, 50, 100])
 print(report)
 ```
 
-The high-level `AuditReport` also keeps the aligned inputs, so you can move directly from measurement to control:
+The high-level `AuditReport` keeps the aligned inputs, so you can move directly from measurement to control:
 
 ```python
-controlled = report.control(k=5, eta=0.001)
+controlled = report.control(k=100, eta=0.001)
 print(controlled["avoidable_turnover_fraction"])
+print(controlled["selected_ids"])
 ```
 
 ### CLI
 
 ```bash
 ridi-audit compare \
-  --r0 examples/r0.csv \
-  --r1 examples/r1.csv \
-  --k 3 5 \
+  --r0 before.csv \
+  --r1 after.csv \
+  --k 10 50 100 \
   --out audit.json \
   --report audit.md
 ```
 
 ```bash
 ridi-audit control \
-  --r0 examples/r0.csv \
-  --r1 examples/r1.csv \
-  --k 5 \
+  --r0 before.csv \
+  --r1 after.csv \
+  --k 100 \
   --eta 0.001
 ```
 
@@ -165,6 +172,7 @@ Allocation identity measures **who receives finite action** and how that set cha
 ## Reproducibility and documentation
 
 - [Quick Start](docs/QUICKSTART.md)
+- [Python API](docs/API.md)
 - [Documentation index](docs/README.md)
 - [Methods](docs/METHODS.md)
 - [Reproducibility guide](docs/REPRODUCIBILITY.md)
