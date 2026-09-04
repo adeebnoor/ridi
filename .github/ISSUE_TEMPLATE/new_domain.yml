@@ -1,0 +1,51 @@
+name: New domain application
+about: Propose or report RIDI in a new capacity-limited system
+labels: [research, new-domain]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Bring a real score-to-action system, counterexample or boundary case. Negative results are welcome.
+  - type: input
+    id: domain
+    attributes:
+      label: Domain / system
+      placeholder: e.g. clinical alerts, retrieval, fraud triage, grant review
+    validations:
+      required: true
+  - type: textarea
+    id: decision
+    attributes:
+      label: Decision object and capacity
+      description: What receives action, and what is the operational or analytical capacity/threshold?
+    validations:
+      required: true
+  - type: textarea
+    id: comparator
+    attributes:
+      label: Comparator
+      description: What changes between the two allocations (version, data, model, policy, representation, etc.)?
+    validations:
+      required: true
+  - type: textarea
+    id: conventional
+    attributes:
+      label: Conventional audit
+      description: Which performance/fairness/ranking/safety metrics are relevant and what happens to them?
+  - type: textarea
+    id: identity
+    attributes:
+      label: Allocation-identity result or hypothesis
+      description: Overlap, changed slots, RIDI, or the question you want to test.
+  - type: textarea
+    id: controls
+    attributes:
+      label: Controls / outcome gate
+      description: What falsification control or independent downstream outcome is available?
+  - type: checkboxes
+    id: data
+    attributes:
+      label: Data handling
+      options:
+        - label: I will not post confidential, patient-level, proprietary or otherwise restricted data in this issue.
+          required: true
