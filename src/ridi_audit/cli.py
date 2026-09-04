@@ -7,6 +7,7 @@ from pathlib import Path
 import pandas as pd
 
 from .api import audit as audit_frames
+from .api import compare_allocations
 from .core import audit_scores
 from .report import render_markdown_report
 from .selector import identity_utility_frontier, select_identity_control
@@ -17,6 +18,14 @@ def _read(path: str, id_col: str, score_col: str) -> pd.DataFrame:
     if id_col not in frame or score_col not in frame:
         raise SystemExit(f"Missing required columns in {path}: {id_col}, {score_col}")
     return frame[[id_col, score_col]].copy()
+
+
+def _read_ids(path: str) -> list[str]:
+    values = [line.strip() for line in Path(path).read_text(encoding="utf-8").splitlines()]
+    values = [value for value in values if value]
+    if not values:
+        raise SystemExit(f"Identity file is empty: {path}")
+    return values
 
 
 def _align(
@@ -78,6 +87,19 @@ def build_parser() -> argparse.ArgumentParser:
     )
     demo.add_argument("--k", nargs="+", type=int, default=[3, 5])
 
+    allocation = subparsers.add_parser(
+        "allocation", help="Compare two realized identity lists directly"
+    )
+    allocation.add_argument("--before", required=True, help="Text file with one baseline identity per line")
+    allocation.add_argument("--after", required=True, help="Text file with one updated identity per line")
+    allocation.add_argument("--out", default="-", help="JSON path, or - for stdout")
+    allocation.add_argument(
+        "--no-ids",
+        action="store_true",
+        help="Omit added/removed identity values from JSON output",
+    )
+    allocation.add_argument("--report", default=None, help="Optional Markdown report path")
+
     compare = subparsers.add_parser(
         "compare", help="Audit allocation identity between two candidate-score tables"
     )
@@ -114,6 +136,13 @@ def main() -> None:
         before, after = _demo_frames()
         print("Synthetic example only — not manuscript evidence.\n")
         print(audit_frames(before, after, k=args.k))
+        return
+
+    if args.command == "allocation":
+        report = compare_allocations(_read_ids(args.before), _read_ids(args.after))
+        _write_json(report.to_dict(include_ids=not args.no_ids), args.out)
+        if args.report:
+            Path(args.report).write_text(report.to_markdown() + "\n", encoding="utf-8")
         return
 
     aligned = _align(args.r0, args.r1, args.id_col, args.score_col)
