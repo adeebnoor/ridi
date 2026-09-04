@@ -15,11 +15,14 @@ Choose the shortest path for what you want to do.
 - **[Results at a glance](RESULTS_AT_A_GLANCE.md)** — current manuscript-linked headline results.
 - **[FAQ](FAQ.md)** — scope and common interpretation questions.
 
-## Reproduce it
+## Reproduce and release it
 
 - **[Reproducibility](REPRODUCIBILITY.md)** — verification and execution discipline.
 - **[Numerical provenance](NUMERICAL_PROVENANCE.md)** — provenance of reported numerical results.
-- **[PyPI Trusted Publishing](PYPI_PUBLISHING.md)** — tokenless release workflow and clean-install verification.
+- **[PyPI Trusted Publishing](PYPI_PUBLISHING.md)** — exact pending-publisher fields, hardened OIDC workflow and clean-install verification.
+- **[ridi-audit 1.1.0 release notes](RELEASE_NOTES_1.1.0.md)** — public API, reproducibility and supply-chain release summary.
+
+Canonical PyPI URL after the first trusted upload: **https://pypi.org/project/ridi-audit/**
 
 ## Contribute research
 
