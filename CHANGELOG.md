@@ -12,7 +12,8 @@ All notable public changes are documented here.
 - Added dedicated GitHub issue forms for independent replication and new-domain applications; positive, null and discrepant results are explicitly welcome.
 - Rebuilt the repository and public landing pages around the scientific object—allocation identity—rather than internal development history.
 - Moved historical submission, CODECHECK administration, verifier templates and superseded reporting/release notes into `archive/` while preserving Git provenance.
-- Added a secure tokenless PyPI Trusted Publishing workflow using GitHub OIDC; first publication awaits the one-time PyPI account-side publisher binding.
+- Added tokenless PyPI Trusted Publishing through GitHub OIDC and hardened the release path with exact version checks, strict Twine validation, clean-wheel installation tests, release concurrency, published artifact hashes and PyPI/Sigstore attestations.
+- Added the canonical future PyPI project URL and discovery links for Colab, reporting guidance, evidence, changelog and citation metadata.
 - Aligned the public narrative to the current manuscript **Identical audits can yield different AI decisions** and its three-display architecture: preregistered RAG consequence, EPSS production stress test and exact identity–utility frontier.
 - Recorded that the sealed EPSS numerical workflow has been reproduced by two independent external executors in separate environments.
 - Recorded a targeted blind external regeneration of the SciFact 275 substantive `SUPPORTS → REFUTES` identity-substitution pattern on a distinct GPU/software stack, including the strict-parser `Verdict:` prefix boundary.
