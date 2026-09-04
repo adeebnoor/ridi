@@ -1,26 +1,52 @@
 # RIDI in 60 seconds
 
-RIDI audits **allocation identity**: who actually occupies a finite top-k action set before and after a score update or other controlled system change.
+RIDI audits **allocation identity**: who actually occupies a finite action set before and after a system change.
+
+[Open the runnable notebook in Colab](https://colab.research.google.com/github/adeebnoor/ridi/blob/main/notebooks/RIDI_60_Second_Experiment.ipynb)
 
 ## Install
 
-One command from GitHub:
+Until the first PyPI release is activated:
 
 ```bash
 python -m pip install "git+https://github.com/adeebnoor/ridi.git"
 ```
 
-## First run — no files needed
+After PyPI publication the command becomes:
 
 ```bash
-ridi-audit demo
+pip install ridi-audit
 ```
 
-This runs a built-in synthetic audit and prints changed slots, overlap, RIDI, global Spearman agreement and the sufficient stability-certificate status. The demo is explicitly synthetic and is **not manuscript evidence**.
+## Fastest path: you already have two selected lists
 
-## Python
+```python
+from ridi_audit import compare_allocations
 
-A fully runnable example:
+before = ["doc-1", "doc-2", "doc-3", "doc-4"]
+after  = ["doc-1", "doc-2", "doc-9", "doc-4"]
+
+report = compare_allocations(before, after)
+print(report)
+```
+
+Output:
+
+```text
+RIDI Allocation Comparison
+--------------------------
+Before size:   4
+After size:    4
+Overlap:       3
+Changed slots: 1
+RIDI:          0.400000
+```
+
+That is enough for RAG contexts, shortlists, alert queues and other pipelines that already expose selected identity lists.
+
+## Score-table path
+
+Use `audit()` when you have the same candidate universe with paired scores.
 
 ```python
 import pandas as pd
@@ -47,6 +73,14 @@ print(controlled["avoidable_turnover_fraction"])
 print(controlled["selected_ids"])
 ```
 
+## Zero-file CLI demo
+
+```bash
+ridi-audit demo
+```
+
+The built-in demo is synthetic and is **not manuscript evidence**. It exists so a new user can inspect changed slots, overlap, RIDI, rank agreement and the stability certificate immediately after installation.
+
 ## Your own CSVs
 
 ```bash
@@ -70,19 +104,6 @@ ridi-audit control \
 
 `eta=0.001` means the selected set may lose at most 0.1% of normalized updated-score utility relative to the unconstrained updated top-k solution.
 
-## Input contract
-
-Both CSV/DataFrame inputs need:
-
-```text
-id,score
-candidate_1,0.913
-candidate_2,0.702
-...
-```
-
-They must contain the same unique candidate identities; row order may differ.
-
 ## Development install
 
 ```bash
@@ -94,6 +115,6 @@ pytest -q
 
 ## Interpretation
 
-RIDI answers **who changed?** It does not by itself establish harm, fairness, correctness or model superiority. Pair identity auditing with the performance, outcome and fairness checks appropriate to your application.
+RIDI answers **who changed?** It does not by itself establish harm, fairness, correctness or model superiority. Pair allocation-identity auditing with the performance, outcome and fairness checks appropriate to your application.
 
-For the complete API, see [API.md](API.md).
+Next: [Use cases](USE_CASES.md) · [Python API](API.md) · [Reporting checklist](REPORTING_CHECKLIST.md)
