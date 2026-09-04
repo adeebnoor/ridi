@@ -1,5 +1,7 @@
 # Reproducibility guide
 
+> **Current manuscript lock:** v65.1 formatting lock, 5 September 2026. Scientific content is unchanged from the v65 Final Scientific Lock.
+
 ## Install and verify the software
 
 ```bash
@@ -27,6 +29,8 @@ GitHub Actions tests Python 3.10, 3.11 and 3.12. The PyPI release workflow perfo
 The current manuscript is **“Identical audits can yield different AI decisions.”** Its decisive prospective experiment is registered at https://osf.io/txwdv/.
 
 The registration freezes the study matrix, query panels, prompts, model revisions, retrievers, intervention rules, falsification thresholds, analysis plan and cryptographic manifest before registered generation.
+
+The v65.1 article contains three Main Figures (RAG, EPSS, identity–utility frontier) and four Extended Data Figures (RAG controls, sufficient certificate, four EPSS transitions, registered failures). v65.1 changes cross-references only; no scientific result was altered.
 
 ## EPSS independent execution
 
