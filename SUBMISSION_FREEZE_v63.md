@@ -14,16 +14,17 @@
 ## v63 editorial changes
 
 - Sharpened the novelty boundary in the Introduction: the contribution is not identity variation per se, but non-identification of realized membership under exact audit equivalence.
-- Added the same distinction to the Nature cover letter, explicitly separating the work from prediction churn, top-k instability, predictive multiplicity, allocation multiplicity and RAG context sensitivity.
-- Updated the cover-letter reproducibility statement to note that one unaffiliated value-identical execution is documented by a signed independent declaration.
+- Added the same distinction to the Nature cover letter, explicitly separating the work from prediction churn, predictive multiplicity, allocation multiplicity and RAG context sensitivity.
 - Synchronized the Source Data workbook filename and version labels to v63.
 - No scientific result, figure, registered endpoint or analysis rule changed.
 
 ## Verification status
 
-Cross-environment numerical reproduction of the sealed EPSS canonical key is complete. One unaffiliated signed execution declaration records an exact value-level match and states that the held comparison key was not inspected before execution. Formal independent community CODECHECK certification remains pending; no certificate is claimed.
+Cross-environment numerical reproduction of the sealed EPSS canonical key is complete in two external software environments. These executions are not currently represented as completed unaffiliated independent verification or as formal certification.
 
-A second unaffiliated executor is being sought through public issue #6 and direct invitations. A clean re-signed copy of the existing declaration has been requested solely to remove residual template instructions from the PDF; execution values are unchanged.
+One Windows executor, Ahmad Raza Khan, previously completed a research internship under the author's direct supervision; that execution is therefore retained only as cross-environment numerical reproduction. A signed Linux execution by Mohammed Hamdan P S reproduced the locked values exactly and states that the held comparison key was not inspected before execution, but the returned relationship-disclosure section retained unresolved placeholder wording. A corrected re-signed disclosure has been requested before that run is described as unaffiliated independent verification.
+
+An additional unaffiliated executor is being sought through public issue #6 and direct invitations. Formal community CODECHECK #208 remains pending; no certificate is claimed unless and until one is formally issued.
 
 ## Submission display map
 
