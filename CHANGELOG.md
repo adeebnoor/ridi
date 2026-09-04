@@ -4,11 +4,16 @@ All notable public changes are documented here.
 
 ## Unreleased — 1.1.0 researcher-first API — 2026-09-04
 
-- Added a single high-level Python entry point: `from ridi_audit import audit`.
-- Added `AuditReport` with compact text, dictionary and Markdown output plus direct identity-control selection.
-- Added a 60-second Quick Start and documentation index.
-- Refocused the repository home on the current manuscript **Identical audits can yield different AI decisions**.
-- Aligned the public narrative to the current three-display manuscript architecture: preregistered RAG consequence, EPSS production stress test and exact identity–utility frontier.
+- Added `compare_allocations(before_ids, after_ids)` and `AllocationReport`, a framework-agnostic direct path for RAG contexts, shortlists, alert queues and other already-selected finite allocations.
+- Added the high-level score-table path `from ridi_audit import audit` with `AuditReport`, compact text/dictionary/Markdown output and direct identity-control selection.
+- Added a zero-file CLI demo and rebuilt the Colab notebook so a new researcher can install and execute the actual package in one session.
+- Added copy-paste research recipes for retrieval/RAG, top-k model or data updates and shortlist comparison.
+- Added the Allocation Identity Reporting Checklist with publication-oriented capacity, comparator, controls, privacy and downstream-outcome fields.
+- Added dedicated GitHub issue forms for independent replication and new-domain applications; positive, null and discrepant results are explicitly welcome.
+- Rebuilt the repository and public landing pages around the scientific object—allocation identity—rather than internal development history.
+- Moved historical submission, CODECHECK administration, verifier templates and superseded reporting/release notes into `archive/` while preserving Git provenance.
+- Added a secure tokenless PyPI Trusted Publishing workflow using GitHub OIDC; first publication awaits the one-time PyPI account-side publisher binding.
+- Aligned the public narrative to the current manuscript **Identical audits can yield different AI decisions** and its three-display architecture: preregistered RAG consequence, EPSS production stress test and exact identity–utility frontier.
 - Recorded that the sealed EPSS numerical workflow has been reproduced by two independent external executors in separate environments.
 - Recorded a targeted blind external regeneration of the SciFact 275 substantive `SUPPORTS → REFUTES` identity-substitution pattern on a distinct GPU/software stack, including the strict-parser `Verdict:` prefix boundary.
 - Corrected CODECHECK wording: request registered; formal checking has not begun; no certificate is claimed.
