@@ -1,83 +1,69 @@
 # Publish `ridi-audit` to PyPI
 
-Public package target: **`ridi-audit`**  
-Canonical project URL after the first successful upload: **https://pypi.org/project/ridi-audit/**
+Public package: **https://pypi.org/project/ridi-audit/**
 
-The repository is configured for tokenless publication using **PyPI Trusted Publishing (GitHub OIDC)**. No long-lived PyPI password or API token should be stored in GitHub.
+Current release: **`ridi-audit==1.1.1`**
 
-## One-time PyPI account authorization
+The project is published through **PyPI Trusted Publishing (GitHub OIDC)**. No long-lived PyPI password or API token is stored in GitHub.
 
-This is the only account-bound step. While signed in to PyPI, open:
+## Current trusted-publisher identity
 
-**https://pypi.org/manage/account/publishing/**
-
-Create a **pending GitHub Trusted Publisher** for a new project using these exact values:
-
-| PyPI field | Exact value |
+| Field | Value |
 |---|---|
-| PyPI project name | `ridi-audit` |
+| PyPI project | `ridi-audit` |
 | GitHub owner | `adeebnoor` |
 | GitHub repository | `ridi` |
-| Workflow filename | `release.yml` |
+| Workflow | `release.yml` |
 | Environment | `pypi` |
 
-Do not change capitalization, add `.github/workflows/` to the workflow field, or omit the environment. PyPI matches these fields against the OIDC claims emitted by the publishing job.
+The first trusted upload created the PyPI project successfully. The 1.1.1 release was then published through the same OIDC binding.
 
-A pending publisher does **not** reserve the project name. The project is created only when the first trusted upload succeeds.
+## Release pipeline
 
-## First publication
+`.github/workflows/release.yml` performs, in order:
 
-After the pending publisher has been saved:
+1. exact package-version verification;
+2. the full test suite;
+3. wheel and source-distribution build;
+4. strict Twine metadata validation;
+5. installation of the built wheel into a fresh virtual environment;
+6. CLI and Python API smoke tests;
+7. PyPI Trusted Publishing with PyPI/Sigstore attestations;
+8. a second clean installation from the **public PyPI index** after publication;
+9. another CLI/API smoke test against the public package.
 
-1. Open the repository's GitHub Actions page.
-2. Select **Publish ridi-audit to PyPI**.
-3. Choose **Run workflow** on `main`.
-4. Enter version **`1.1.0`** exactly.
-5. The workflow will:
-   - verify the requested version against `pyproject.toml`;
-   - run the test suite;
-   - build wheel and source distributions;
-   - run strict Twine metadata validation;
-   - install the built wheel into a fresh virtual environment and smoke-test the public API and CLI;
-   - upload through PyPI Trusted Publishing;
-   - generate and upload PyPI/Sigstore attestations;
-   - print distribution hashes in the workflow log.
+The 1.1.1 public-index verification completed successfully.
 
-On the first successful upload, PyPI creates the project and converts the pending publisher into a normal trusted publisher.
-
-## Clean-install verification
-
-After publication:
+## Current public install
 
 ```bash
-python -m venv /tmp/ridi-pypi-check
-source /tmp/ridi-pypi-check/bin/activate
-python -m pip install --upgrade pip
-pip install ridi-audit==1.1.0
+pip install ridi-audit==1.1.1
 ridi-audit --version
 ridi-audit demo
-python - <<'PY'
-from ridi_audit import audit, compare_allocations
-
-result = compare_allocations(
-    ['doc-1', 'doc-2', 'doc-3'],
-    ['doc-1', 'doc-2', 'doc-4'],
-)
-assert result.changed_slots == 1
-print('ridi-audit 1.1.0: clean PyPI install OK')
-PY
 ```
 
-On Windows, use the standard Windows virtual-environment activation command instead of `source`.
+Or simply install the latest release:
+
+```bash
+pip install ridi-audit
+```
+
+## 1.1.1 artifact hashes
+
+- wheel SHA-256: `b91dcf6cf227a3a579d88318029c02d78e378d16510a2223d17223acbf7bb6f7`
+- source distribution SHA-256: `a2af6f98171cb5b5a307911eeca2824dd401e014d595c6af69c94ddcf3d5440e`
+
+The publishing action also generated upload attestations recorded in the public transparency infrastructure used by PyPI/Sigstore.
 
 ## Future releases
 
 For each later version:
 
 1. update the version in both `pyproject.toml` and `src/ridi_audit/__init__.py`;
-2. update `CHANGELOG.md` and release notes;
+2. update `CITATION.cff`, `CHANGELOG.md` and release notes;
 3. require green CI on all supported Python versions;
-4. publish a GitHub Release tagged exactly `v<version>`; the release workflow verifies that the tag matches package metadata before publishing.
+4. run `Publish ridi-audit to PyPI` with the exact version, or publish a GitHub Release tagged `v<version>`;
+5. require the public-index verification job to pass before considering the release complete.
 
 PyPI versions are immutable. Never overwrite or reuse a published version.
 
@@ -85,14 +71,14 @@ PyPI versions are immutable. Never overwrite or reuse a published version.
 
 - Publishing is isolated to `.github/workflows/release.yml`.
 - `id-token: write` is scoped only to the publishing job.
-- Build/test steps run in a separate job without OIDC publishing permission.
-- The `pypi` GitHub environment is included in the trusted identity.
+- Build/test steps run separately without OIDC publishing permission.
+- The `pypi` GitHub environment is part of the trusted identity.
 - Release concurrency prevents overlapping uploads for the same ref.
-- Trusted Publishing generates short-lived credentials rather than storing a long-lived PyPI token.
+- Trusted Publishing uses short-lived credentials rather than a stored PyPI token.
 - PyPI attestations bind uploaded artifacts to the GitHub Actions publisher identity.
 
 Review any proposed modification to `release.yml` as carefully as a package-upload credential.
 
 ## Scientific boundary
 
-Publishing the software package does **not** imply peer review, journal acceptance, independent certification, or endorsement of the accompanying manuscript. Software release status and manuscript status remain separate.
+Publishing the software package does **not** imply peer review, journal acceptance, independent scientific certification or endorsement of the accompanying manuscript. Software release status and manuscript status remain separate.
