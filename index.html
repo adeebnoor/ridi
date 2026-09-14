@@ -1,105 +1,27 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Adeeb Noor — Professor, researcher and builder advancing AI, decision intelligence, digital health, education and institutional transformation.">
-  <title>Adeeb Noor — Research, Innovation & Impact</title>
-  <link rel="stylesheet" href="home-v2.css?v=20260909-final">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RIDI — Measure and budget selection change</title>
+<meta name="description" content="RIDI measures how much a ranking update changes selected membership and computes the exact minimum turnover compatible with a declared utility budget.">
+<style>
+:root{--ink:#10202a;--muted:#52636d;--line:#dce5e9;--blue:#135d8c;--blue2:#eaf4f9;--gold:#a56d12;--bg:#f7fafb}*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:#fff;line-height:1.55}a{color:var(--blue)}.wrap{width:min(1100px,calc(100% - 36px));margin:auto}.top{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:10}.nav{height:64px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{font-weight:800;letter-spacing:.08em;text-decoration:none;color:var(--ink)}.links{display:flex;gap:18px;flex-wrap:wrap}.links a{text-decoration:none;font-weight:650;font-size:.94rem}.hero{padding:84px 0 62px;background:linear-gradient(135deg,#f8fbfc 0%,#eef7fa 100%)}.eyebrow{font-size:.84rem;text-transform:uppercase;letter-spacing:.14em;font-weight:800;color:var(--blue)}h1{font-size:clamp(2.7rem,6vw,5.5rem);line-height:.97;max-width:900px;margin:14px 0 22px;letter-spacing:-.045em}.lede{font-size:clamp(1.15rem,2.2vw,1.52rem);max-width:820px;color:#31454f}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}.btn{display:inline-block;padding:11px 16px;border:1px solid var(--ink);border-radius:8px;text-decoration:none;font-weight:750;color:var(--ink);background:#fff}.btn.primary{background:var(--ink);color:#fff}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}.card{border:1px solid var(--line);border-radius:14px;padding:22px;background:#fff}.card b{display:block;font-size:1.55rem;margin-bottom:5px}.card p{margin:0;color:var(--muted)}section{padding:58px 0}.section-title{font-size:2rem;margin:0 0 12px}.sub{max-width:800px;color:var(--muted)}.frontier{display:grid;grid-template-columns:1.2fr .8fr;gap:26px;align-items:start}.formula{background:#0f202a;color:#f6fbfd;padding:24px;border-radius:14px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.96rem}.evidence{background:var(--bg)}table{width:100%;border-collapse:collapse;margin-top:22px;background:#fff}th,td{text-align:left;padding:13px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:.84rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}.note{padding:16px 18px;border-left:4px solid var(--gold);background:#fff8e9;margin-top:22px}.limits{display:grid;grid-template-columns:1fr 1fr;gap:18px}.footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem}@media(max-width:800px){.grid,.frontier,.limits{grid-template-columns:1fr}.links{gap:10px}.hero{padding-top:58px}}
+</style>
 </head>
 <body>
-  <div class="shell">
-    <header class="wrap topbar">
-      <a class="brand" href="index.html">ADEEB NOOR</a>
-      <nav class="nav" aria-label="Primary navigation">
-        <div class="navitem active"><a href="index.html">Home</a></div>
-        <div class="navitem"><a href="about.html">About</a><div class="drop"><a href="about.html">Profile & Experience</a><a href="phd.html">Doctoral Foundations</a></div></div>
-        <div class="navitem"><a href="research.html">Research</a><div class="drop"><a href="research.html">Research Overview</a><a href="publications.html">Publications & Profiles</a><a href="demo/">RIDI Interactive Demo</a></div></div>
-        <div class="navitem"><a href="ventures.html">Ventures</a><div class="drop"><a href="ventures.html">Venture Portfolio</a><a href="ventures.html#genomefit">GenomeFit</a><a href="ventures.html#healthx">HEALTHx</a><a href="ventures.html#shifaa">SHIFAA</a></div></div>
-        <div class="navitem"><a href="teaching.html">Teaching</a><div class="drop"><a href="teaching.html">Teaching Overview</a><a href="https://adeebnoor.github.io/CPIT/">CPIT-455</a></div></div>
-        <div class="navitem"><a href="collaborate.html">Impact</a><div class="drop"><a href="collaborate.html#researchers">Research Collaboration</a><a href="collaborate.html#organizations">Advisory</a><a href="collaborate.html#investors">Investors & Partners</a></div></div>
-        <div class="navitem"><a href="mailto:adeeb.noor@gmail.com">Contact</a></div>
-      </nav>
-      <div class="nav-actions"><span class="search-icon" aria-hidden="true"></span><a class="connect" href="mailto:adeeb.noor@gmail.com">Let's Connect &nbsp; →</a></div>
-    </header>
+<header class="top"><div class="wrap nav"><a class="brand" href="./">RIDI</a><nav class="links"><a href="#frontier">Frontier</a><a href="#evidence">Evidence</a><a href="demo/">Demo</a><a href="paper/README.md">Paper</a><a href="https://github.com/adeebnoor/ridi">GitHub</a></nav></div></header>
 
-    <section class="hero">
-      <div class="wrap hero-grid">
-        <div class="hero-copy">
-          <div class="eyebrow">People &nbsp;×&nbsp; AI &nbsp;×&nbsp; Real-World Impact</div>
-          <h1><span class="gold">Adeeb</span> Noor</h1>
-          <div class="hero-role">Professor · Researcher · Builder</div>
-          <p class="hero-lede">Advancing AI, decision intelligence, digital health, education, and institutional transformation.</p>
-          <div class="location"><span class="pin" aria-hidden="true"></span><span>King Abdulaziz University &nbsp;·&nbsp; Jeddah, Saudi Arabia</span></div>
-          <div class="cta-row">
-            <a class="btn primary" href="collaborate.html#researchers">Collaborate on Research <span>→</span></a>
-            <a class="btn dark" href="collaborate.html#organizations">Request Advisory</a>
-            <a class="btn dark" href="ventures.html">Explore Ventures</a>
-          </div>
-        </div>
-        <div class="hero-visual" role="img" aria-label="Portrait of Adeeb Noor in Jeddah, Saudi Arabia"></div>
-      </div>
-    </section>
-  </div>
+<main>
+<section class="hero"><div class="wrap"><div class="eyebrow">Ranking updates · Selection identity · Auditability</div><h1>Measure what changed.<br>Budget what had to change.</h1><p class="lede">RIDI measures how much a ranking update changes the selected items, then computes the <b>exact minimum turnover</b> compatible with a declared rank-utility budget. The goal is not to freeze old decisions; it is to make update-induced churn explicit, measurable and auditable.</p><div class="actions"><a class="btn primary" href="demo/">Open the RAG demo →</a><a class="btn" href="paper/README.md">Read the evidence</a><a class="btn" href="https://pypi.org/project/ridi-audit/">Install ridi-audit</a></div><div class="grid"><div class="card"><b>17.27%</b><p>Primary RAG correctness-change rate under exact retrieval-audit equality across 800 preregistered queries.</p></div><div class="card"><b>565 / 1,000</b><p>Priorities replaced by the EPSS v2→v3 production update at the primary capacity.</p></div><div class="card"><b>14.34%</b><p>EPSS turnover avoided at a 0.01% rank-utility budget while retaining all 12 later KEV hits.</p></div></div></div></section>
 
-  <section class="stats">
-    <div class="wrap stats-grid">
-      <div class="stat"><div class="stat-icon"><svg viewBox="0 0 40 40"><rect x="7" y="8" width="26" height="25" rx="2"/><line x1="12" y1="5" x2="12" y2="12"/><line x1="28" y1="5" x2="28" y2="12"/><line x1="7" y1="15" x2="33" y2="15"/><line x1="12" y1="20" x2="16" y2="20"/><line x1="22" y1="20" x2="26" y2="20"/><line x1="12" y1="26" x2="16" y2="26"/><line x1="22" y1="26" x2="26" y2="26"/></svg></div><div><strong>17+ Years</strong><span>Across government, higher education and healthcare</span></div></div>
-      <div class="stat"><div class="stat-icon"><svg viewBox="0 0 40 40"><circle cx="20" cy="12" r="5"/><circle cx="9" cy="16" r="4"/><circle cx="31" cy="16" r="4"/><path d="M12 32v-7c0-5 3-8 8-8s8 3 8 8v7"/><path d="M3 31v-5c0-4 2-6 6-6 2 0 4 1 5 3"/><path d="M37 31v-5c0-4-2-6-6-6-2 0-4 1-5 3"/></svg></div><div><strong>540,000+<br>Educators</strong><span>Reached through national programs</span></div></div>
-      <div class="stat"><div class="stat-icon"><svg viewBox="0 0 40 40"><rect x="7" y="23" width="6" height="10"/><rect x="17" y="16" width="6" height="17"/><rect x="27" y="8" width="6" height="25"/></svg></div><div><strong>1,000,000+<br>Users</strong><span>Digital platforms at scale</span></div></div>
-      <div class="stat"><div class="stat-icon"><svg viewBox="0 0 40 40"><path d="M5 12l15-7 15 7-15 7z"/><path d="M5 20l15 7 15-7"/><path d="M5 27l15 7 15-7"/></svg></div><div><strong>5 AI Platforms</strong><span>Built and deployed in real-world settings</span></div></div>
-    </div>
-  </section>
+<section id="frontier"><div class="wrap frontier"><div><div class="eyebrow">Constructive contribution</div><h2 class="section-title">The identity–utility frontier</h2><p class="sub">For a baseline top-k set and updated scores, RIDI evaluates the best updated-score utility attainable at every replacement count. The exact solution with <i>j</i> outsiders retains the highest-ranked incumbents and adds the highest-ranked outsiders; sorted prefix sums recover the full frontier in O(n log n) time.</p><p>The frontier answers a practical question: <b>given the scoring objective we have chosen, what is the smallest selection change that keeps us within an explicit utility-loss tolerance?</b></p><p>No retraining and no training data are required. The result is conditional on the declared objective and tolerance; it is not a claim that keeping old selections is always desirable.</p></div><div class="formula">baseline set A₀<br>updated scores s₁<br>capacity k<br><br>for every j = 0…k:<br>  retain top k-j incumbents<br>  add top j outsiders<br>  compute updated-rank utility<br><br>choose smallest j<br>with relative regret ≤ η</div></div></section>
 
-  <main>
-    <section class="section">
-      <div class="wrap">
-        <div class="kicker-row"><div class="kicker">Featured Work <span class="kicker-rule"></span></div><div class="mini-strap">Ideas → Systems → People → A Better Tomorrow</div></div>
-        <h2 class="section-title">Research. Innovation. Real-World Impact.</h2>
-        <div class="cards">
-          <article class="work-card"><div class="thumb ridi"><span class="card-visual-label"></span></div><div class="card-body"><h3>RIDI</h3><div class="card-sub">Allocation Identity in AI</div><p>Same scores. Different allocations.<br>Different decisions.</p><a class="card-link" href="demo/">Explore RIDI &nbsp;→</a></div></article>
-          <article class="work-card"><div class="thumb genome"><span class="card-visual-label"></span></div><div class="card-body"><h3>GenomeFit</h3><div class="card-sub">Personalized Medicine</div><p>Co-founded startup. Computational tool for genetic screening and drug analysis. TAQADAM-backed.</p><a class="card-link" href="ventures.html#genomefit">Explore GenomeFit &nbsp;→</a></div></article>
-          <article class="work-card"><div class="thumb healthx"><span class="card-visual-label"></span></div><div class="card-body"><h3>HEALTHx</h3><div class="card-sub">AI-Enabled Clinical Innovation</div><p>Turning hospital innovations into licensable digital health IP, APIs, AI models, and health-as-a-service.</p><a class="card-link" href="ventures.html#healthx">Explore HEALTHx &nbsp;→</a></div></article>
-          <article class="work-card"><div class="thumb cpit"><span class="card-visual-label"></span></div><div class="card-body"><h3>CPIT-455</h3><div class="card-sub">Software Engineering II</div><p>Reliability, safety, security, reuse, distributed systems, and systems of systems.</p><a class="card-link" href="https://adeebnoor.github.io/CPIT/">View Course Site &nbsp;→</a></div></article>
-        </div>
-      </div>
-    </section>
+<section class="evidence" id="evidence"><div class="wrap"><div class="eyebrow">Evidence chain</div><h2 class="section-title">Why selected identity deserves its own audit</h2><p class="sub">The supporting experiments separate evaluation equality, selected membership and downstream outcomes rather than treating them as interchangeable.</p><table><thead><tr><th>Setting</th><th>Result</th><th>What it establishes</th></tr></thead><tbody><tr><td><b>Preregistered RAG</b></td><td>17.27% benchmark-defined correctness changes with the complete assessed grade sequence and five retrieval metrics exactly unchanged.</td><td>Exact equality in this audit does not identify the evidence or certify behavioral equivalence.</td></tr><tr><td><b>Structural ambiguity</b></td><td>No primary query had uniquely identified passage membership; median compatible passage sets exceeded 10¹².</td><td>The omitted membership information is structural, not merely noisy estimation.</td></tr><tr><td><b>EPSS production update</b></td><td>565/1,000 priorities changed; adjacent same-version controls changed 0 and 7.</td><td>Production updates can redirect scarce attention far beyond ordinary daily drift.</td></tr><tr><td><b>Frontier applications</b></td><td>78.8% mean avoidable turnover in GraphSAGE versus 28.7% in 20 Newsgroups at the same 0.1% rank-utility budget.</td><td>How much churn is required depends on the score landscape and should be measured rather than assumed.</td></tr></tbody></table><div class="note"><b>Important:</b> RAG correctness changes were bidirectional (60 correct→incorrect, 74 incorrect→correct). EPSS outcomes are sparse and retrospective. Exploratory drug-interaction analyses are not clinical validation. RIDI does not turn identity stability into a safety, fairness or benefit claim.</div></div></section>
 
-    <section class="section" id="impact">
-      <div class="wrap">
-        <div class="kicker">Work With Me <span class="kicker-rule"></span></div>
-        <div class="workwith-head"><h2 class="section-title">Different Partners. A Shared Mission.</h2><div class="quote-line">“Stronger systems. Brighter people. Greater possibilities.”</div></div>
-        <div class="partner-grid">
-          <a class="partner" href="collaborate.html#researchers"><div class="partner-icon"><svg viewBox="0 0 40 40"><path d="M4 14l16-8 16 8-16 8z"/><path d="M9 18v8c6 5 16 5 22 0v-8"/><path d="M36 14v10"/></svg></div><div><h3>For Researchers</h3><p>Joint studies, replication,<br>AI evaluation, health informatics.</p></div><div class="arrow">›</div></a>
-          <a class="partner" href="collaborate.html#organizations"><div class="partner-icon"><svg viewBox="0 0 40 40"><path d="M9 34V13l11-7 11 7v21"/><path d="M5 34h30"/><path d="M16 17h3v4h-3zM23 17h3v4h-3zM16 25h3v4h-3zM23 25h3v4h-3z"/></svg></div><div><h3>For Organizations</h3><p>AI strategy, governance,<br>operating models, digital transformation.</p></div><div class="arrow">›</div></a>
-          <a class="partner" href="collaborate.html#investors"><div class="partner-icon"><svg viewBox="0 0 40 40"><path d="M7 31h27"/><path d="M10 27l7-8 6 4 9-12"/><path d="M26 11h6v6"/></svg></div><div><h3>For Investors & Partners</h3><p>HealthTech, EdTech, AI products,<br>commercialization.</p></div><div class="arrow">›</div></a>
-        </div>
-      </div>
-    </section>
+<section><div class="wrap"><div class="eyebrow">Reproducibility</div><h2 class="section-title">What has — and has not — been independently checked</h2><div class="limits"><div class="card"><h3>Checked</h3><p>The sealed EPSS numerical workflow was reproduced by two external executors. Both also performed targeted blind regeneration of the illustrative SciFact case in distinct environments. Registered RAG code, inputs and analysis are frozen through the OSF record.</p></div><div class="card"><h3>Boundaries</h3><p>The targeted SciFact runs did not both reproduce a strict-scored correctness change because one pinned-model reference began with <code>Verdict:</code> and was rejected by the frozen parser. A post hoc 300-query parser sensitivity is reported separately. No longer-generation sensitivity has yet been completed.</p></div></div><div class="note"><b>CODECHECK:</b> no formal certificate has been issued. Register issue #208 was closed with an invitation to return once a public preprint is available or the manuscript is under journal review.</div><div class="actions"><a class="btn primary" href="https://osf.io/txwdv/">OSF preregistration →</a><a class="btn" href="https://github.com/codecheckers/register/issues/208">CODECHECK record</a><a class="btn" href="docs/REPRODUCIBILITY.md">Reproducibility guide</a></div></div></section>
+</main>
 
-    <section class="quick-section">
-      <div class="wrap">
-        <div class="quick-head"><div class="kicker">Quick Links <span class="kicker-rule"></span></div><div class="mini-strap">Key Resources and Profiles</div></div>
-        <div class="quick-grid">
-          <a class="quick" href="https://scholar.google.com/citations?user=XUQD1WAAAAAJ&hl=en"><svg viewBox="0 0 28 28"><path d="M3 10l11-6 11 6-11 6z"/><path d="M7 13v7c4 3 10 3 14 0v-7"/></svg><span>Google Scholar</span></a>
-          <a class="quick" href="https://cemse.kaust.edu.sa/profiles/adeeb-noor"><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="10"/><path d="M14 4v20M4 14h20M7 8c5 3 9 3 14 0M7 20c5-3 9-3 14 0"/></svg><span>KAUST Profile</span></a>
-          <a class="quick" href="https://www.linkedin.com/in/adeeb-noor"><svg viewBox="0 0 28 28"><rect x="4" y="4" width="20" height="20" rx="2"/><path d="M9 12v8M9 9v.1M13 20v-8M13 15c1-3 6-4 6 1v4"/></svg><span>LinkedIn</span></a>
-          <a class="quick" href="https://www.researchgate.net/profile/Adeeb-Noor-2"><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="10"/><path d="M9 20V8h5c5 0 5 7 0 7H9M15 15l5 5"/></svg><span>ResearchGate</span></a>
-          <a class="quick" href="https://cemse.kaust.edu.sa/topics/personalized-medicine"><svg viewBox="0 0 28 28"><path d="M10 4c7 3 7 17 0 20M18 4c-7 3-7 17 0 20M9 8h10M9 14h10M9 20h10"/></svg><span>Personalized<br>Medicine</span></a>
-          <a class="quick" href="https://www.generalassemb.ly/instructors/dr-adeeb-noor/23954"><svg viewBox="0 0 28 28"><circle cx="9" cy="10" r="3"/><circle cx="19" cy="10" r="3"/><circle cx="14" cy="8" r="3"/><path d="M4 22c0-5 2-8 5-8s5 3 5 8M14 22c0-5 2-8 5-8s5 3 5 8"/></svg><span>General<br>Assembly</span></a>
-          <a class="quick" href="https://cbrcconferences.kaust.edu.sa/speakers/2016-kaust-research-conference-speakers-adeeb-noor"><svg viewBox="0 0 28 28"><rect x="10" y="4" width="8" height="13" rx="4"/><path d="M6 13c0 5 3 8 8 8s8-3 8-8M14 21v4M9 25h10"/></svg><span>KAUST Speaker</span></a>
-          <a class="quick" href="https://adeebnoor.github.io/CPIT/"><svg viewBox="0 0 28 28"><path d="M5 5h15c2 0 3 1 3 3v15H8c-2 0-3-1-3-3z"/><path d="M8 23V8c0-2-1-3-3-3M12 10h7M12 14h7"/></svg><span>CPIT Course</span></a>
-          <a class="quick" href="phd.html"><svg viewBox="0 0 28 28"><path d="M5 4h18v20H5z"/><path d="M9 4v20M12 9h7M12 13h7M12 17h5"/></svg><span>PhD Dissertation</span></a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="wrap">
-      <div class="footer-top"><div><div class="footer-brand">ADEEB NOOR</div><p>Professor · Researcher · Builder</p><p>King Abdulaziz University · Jeddah, Saudi Arabia</p></div><div class="footer-tag">A more intelligent, healthier, and more equitable tomorrow.</div><div class="footer-social"><a href="https://www.linkedin.com/in/adeeb-noor">in</a><a href="https://scholar.google.com/citations?user=XUQD1WAAAAAJ&hl=en">G</a><a href="mailto:adeeb.noor@gmail.com">✉</a></div></div>
-      <div class="footer-bottom"><span>© 2026 Adeeb Noor. All rights reserved.</span><span>Research &nbsp; | &nbsp; Advisory &nbsp; | &nbsp; Ventures</span></div>
-    </div>
-  </footer>
+<footer class="footer"><div class="wrap"><b>Adeeb Noor</b> · King Abdulaziz University · ORCID 0000-0002-8251-1853<br>Working manuscript: <i>Measuring and controlling what changes when a ranking system is updated</i>. Not peer reviewed, accepted or published.</div></footer>
 </body>
 </html>
