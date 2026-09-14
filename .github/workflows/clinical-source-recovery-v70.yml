@@ -1,0 +1,64 @@
+name: Recover public clinical inputs v70
+on:
+  push:
+    branches: ['research/clinical-replay-v70-20260914']
+    paths: ['.github/workflows/clinical-source-recovery-v70.yml']
+permissions:
+  contents: read
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Download public source snapshots and verify file signatures
+        shell: bash
+        run: |
+          mkdir -p clinical-inputs
+          python3 - <<'PY'
+          import urllib.request, hashlib, json, concurrent.futures, time
+          from pathlib import Path
+          from datetime import datetime, timezone
+          out=Path('clinical-inputs')
+          urls={}
+          for cycle,year in [('I',2015),('J',2017)]:
+              for stem in ['RXQ_RX','DEMO']:
+                  name=f'{stem}_{cycle}.xpt'
+                  urls[name]=f'https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/{year}/DataFiles/{name}'
+          for name in ['prescriptions.csv.gz','patients.csv.gz','admissions.csv.gz','emar.csv.gz','emar_detail.csv.gz']:
+              urls[name]='https://physionet.org/files/mimic-iv-demo/2.2/hosp/'+name
+          urls['MIMIC_SHA256SUMS.txt']='https://physionet.org/files/mimic-iv-demo/2.2/SHA256SUMS.txt'
+          urls['ONC_High_Priority_Mapped.csv']='https://raw.githubusercontent.com/dbmi-pitt/public-PDDI-analysis/8199ee66b60bcb337f777889a210dd0d72a96e8f/PDDI-Datasets/ONC-High-Priority/ONC_High_Priority_Mapped.csv'
+          for letter in 'ABDH LPRV'.replace(' ',''):
+              name=f'ddinter_downloads_code_{letter}.csv'
+              urls[name]='https://ddinter.scbdd.com/static/media/download/'+name
+          def get(item):
+              name,url=item
+              receipt={'name':name,'url':url,'retrieved_utc':datetime.now(timezone.utc).isoformat()}
+              for attempt in range(3):
+                  try:
+                      req=urllib.request.Request(url,headers={'User-Agent':'RIDI-reproducibility/1.0 (public academic data retrieval)'})
+                      with urllib.request.urlopen(req,timeout=60) as r:
+                          b=r.read(); receipt['final_url']=r.url
+                      if name.endswith('.xpt') and not b.startswith(b'HEADER RECORD'):raise ValueError('Not SAS XPORT')
+                      if name.endswith('.gz') and not b.startswith(b'\x1f\x8b'):raise ValueError('Not GZIP')
+                      if name.endswith('.csv') and (b'<html' in b[:300].lower() or b'<!doctype' in b[:300].lower()):raise ValueError('HTML instead of CSV')
+                      (out/name).write_bytes(b)
+                      receipt.update(status='downloaded',bytes=len(b),sha256=hashlib.sha256(b).hexdigest())
+                      return receipt
+                  except Exception as e:
+                      receipt['error']=str(e)
+                      time.sleep(2)
+              receipt['status']='failed'; return receipt
+          with concurrent.futures.ThreadPoolExecutor(max_workers=5) as pool:
+              receipts=list(pool.map(get,urls.items()))
+          (out/'DOWNLOAD_RECEIPTS.json').write_text(json.dumps(receipts,indent=2)+'\n')
+          print(json.dumps(receipts,indent=2))
+          # Partial recovery is retained transparently; downstream analysis must reject missing inputs.
+          PY
+      - name: Retain temporary retrieval artifact, not a manuscript release
+        uses: actions/upload-artifact@v4
+        with:
+          name: clinical-public-inputs-v70
+          path: clinical-inputs/
+          retention-days: 1
+          if-no-files-found: error
