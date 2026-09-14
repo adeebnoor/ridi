@@ -1,6 +1,6 @@
 {
-  "title": "RIDI: allocation-identity auditing for capacity-limited AI",
-  "description": "Software, protocols and reproducibility materials for measuring, testing, certifying and controlling allocation identity when model scores are converted into finite action sets, shortlists or context windows. Companion materials support the manuscript 'Identical audits can yield different AI decisions'.",
+  "title": "RIDI: selection-change auditing and the identity-utility frontier",
+  "description": "Software, protocols and reproducibility materials for measuring how much a ranking update changes selected membership and computing the exact minimum turnover compatible with a declared rank-utility budget. Companion research includes a preregistered retrieval-evaluation experiment, a production EPSS case study and cross-domain frontier applications. The working manuscript is not peer reviewed, accepted or published.",
   "creators": [
     {
       "name": "Noor, Adeeb",
@@ -8,15 +8,17 @@
       "affiliation": "King Abdulaziz University"
     }
   ],
-  "version": "1.1.0",
+  "version": "1.1.1",
   "license": "MIT",
   "upload_type": "software",
   "access_right": "open",
   "keywords": [
     "allocation identity",
+    "selection change",
+    "identity-utility frontier",
+    "ranking updates",
     "AI evaluation",
     "capacity-limited AI",
-    "decision identity",
     "reproducibility",
     "RAG evaluation",
     "ranking stability",
