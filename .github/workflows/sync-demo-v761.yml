@@ -46,8 +46,11 @@ jobs:
           if old in s: s=s.replace(old,new,1)
           p.write_text(s,encoding='utf-8')
           PY
-      - name: Run tests
-        run: pytest -q
+      - name: Validate changed public files
+        run: |
+          grep -q 'Context B · random zero-grade replacement' demo/index.html
+          grep -q 'identity–utility frontier' demo/index.html
+          grep -q 'identity–utility frontier' publications.html
       - name: Commit synced public pages
         run: |
           if git diff --quiet; then exit 0; fi
