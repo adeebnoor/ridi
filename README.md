@@ -1,77 +1,41 @@
-# Identical audits can yield different AI decisions. 17.27% of RAG decisions flip.
+# RIDI — measure and budget selection change in ranking updates
 
-> **Preregistered primary condition:** Qwen3-8B · BM25 · k=10 · 800 frozen queries · 95% CI **14.60–20.03%**. Most benchmark-defined outcomes remained stable; the result establishes that behavioral non-equivalence can exist inside an exactly audit-equivalent class.
+> **Research + open-source audit toolkit.** RIDI measures how much a ranking update changes the selected items and computes the **exact minimum turnover compatible with a declared rank-utility budget**.
 
 [![tests](https://github.com/adeebnoor/ridi/actions/workflows/tests.yml/badge.svg)](https://github.com/adeebnoor/ridi/actions/workflows/tests.yml)
 [![PyPI](https://img.shields.io/pypi/v/ridi-audit.svg)](https://pypi.org/project/ridi-audit/)
 ![python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-3776ab)
 ![license](https://img.shields.io/badge/license-MIT-2ea44f)
-![status](https://img.shields.io/badge/manuscript-prepared%20for%20submission-6f42c1)
-
-> **CURRENT PUBLIC MANUSCRIPT LOCK — v65.1 · 5 Sep 2026.** Scientific content is unchanged from the v65 Final Scientific Lock; v65.1 corrects figure and Extended Data cross-references after a full formatting audit. Public software remains **`ridi-audit==1.1.1`**.
+![status](https://img.shields.io/badge/manuscript-working%20version-6f42c1)
 
 <p align="center">
-  <img src="assets/ridi_graphical_abstract.svg" alt="RIDI graphical abstract: identical audits can yield different AI decisions" width="100%">
-</p>
-
-<p align="center">
-  <a href="./"><b>Try the SciFact 275 demo</b></a> ·
+  <a href="./"><b>Project page</b></a> ·
+  <a href="demo/"><b>SciFact demo</b></a> ·
   <a href="https://pypi.org/project/ridi-audit/"><b>PyPI</b></a> ·
-  <a href="https://colab.research.google.com/github/adeebnoor/ridi/blob/main/notebooks/RIDI_60_Second_Experiment.ipynb"><b>Open in Colab</b></a> ·
-  <a href="docs/QUICKSTART.md"><b>60-second Quick Start</b></a> ·
+  <a href="https://osf.io/txwdv/"><b>RAG preregistration</b></a> ·
   <a href="paper/README.md"><b>Paper & evidence</b></a>
 </p>
 
 ---
 
-## The one-line idea
+## The problem
 
-Performance, fairness, calibration and ranking metrics remain necessary. RIDI asks a different question at the **score-to-action boundary**:
+A ranking system can be updated while its summary evaluation remains stable or improves. But a team acts on a **finite selection**: passages in a context window, vulnerabilities in a review queue, documents in a shortlist, or relationships proposed for follow-up.
 
-> **Which identities occupy the finite queue, shortlist or context window—and did those identities change?**
+RIDI asks two questions that aggregate scores do not answer:
 
-Two systems can be exactly indistinguishable under a declared audit while assigning scarce slots to different identities. In the preregistered RAG experiment behind this project, that difference sometimes changed the downstream AI decision itself.
+1. **What changed in the selected set?**
+2. **How much of that change was actually required by the updated scoring objective?**
 
----
-
-## Try the decisive case first
-
-The repository landing page now opens directly on the preregistered **SciFact 275** case: the positive passage stays at rank 1 and `precision@10`, `recall@10`, `nDCG@10`, `MRR@10`, `MAP@10` and the complete relevance-grade vector are unchanged, while replacing nine metric-zero identities changes the verdict **SUPPORTS → REFUTES** (`RIDI=0.947`). The same-query order-only permutation remains **SUPPORTS**.
-
-The demo is a transparent replay of the locked case, **not a live LLM call**.
+The first is a measurement problem. The second is a constrained optimization problem.
 
 ---
 
-## Install and use it in seconds
+## The constructive result: the identity–utility frontier
 
-```bash
-pip install ridi-audit
-ridi-audit demo
-```
+For a baseline top-k set and updated scores, RIDI computes the best attainable updated-score utility for every possible number of replacements. The exact optimum with exactly `j` outsiders is obtained by retaining the highest-ranked incumbents and adding the highest-ranked outsiders. Sorted prefix sums evaluate the full trade-off curve in `O(n log n)` time, dominated by sorting.
 
-Already have two selected lists?
-
-```python
-from ridi_audit import compare_allocations
-
-reference = ["doc-1", "doc-2", "doc-3", "doc-4"]
-updated   = ["doc-1", "doc-2", "doc-9", "doc-4"]
-
-report = compare_allocations(reference, updated)
-print(report)
-```
-
-```text
-RIDI Allocation Comparison
---------------------------
-Before size:   4
-After size:    4
-Overlap:       3
-Changed slots: 1
-RIDI:          0.400000
-```
-
-Have paired candidate scores?
+Given a declared relative utility-loss tolerance `eta`, the frontier returns the **minimum number of replacements** compatible with that budget.
 
 ```python
 import pandas as pd
@@ -84,102 +48,119 @@ report = audit(before, after, k=[10, 50, 100])
 controlled = report.control(k=100, eta=0.001)
 ```
 
+The resulting avoidable-turnover fraction is conditional on the stated objective and tolerance. It is **not** a claim that preserving old selections is always desirable.
+
 ---
 
-## What RIDI adds
+## Measuring selection identity
 
-| You already report | RIDI adds |
-|---|---|
-| performance / accuracy | whether the identities receiving action changed |
-| group fairness | realized membership change inside or across groups |
-| rank correlation | finite top-k membership stability |
-| retrieval quality | which passages actually entered the context window |
-| model/version comparison | a direct allocation-level comparator |
+Already have two selected lists?
 
-For equal-size selected sets `A` and `B`:
+```python
+from ridi_audit import compare_allocations
+
+reference = ["doc-1", "doc-2", "doc-3", "doc-4"]
+updated   = ["doc-1", "doc-2", "doc-9", "doc-4"]
+
+print(compare_allocations(reference, updated))
+```
+
+For equal-size selected sets `A` and `B`, RIDI reports changed slots and the Jaccard distance:
 
 ```text
 RIDI(A, B) = 1 - |A ∩ B| / |A ∪ B|
 ```
 
-RIDI is **not** a replacement for AUROC, precision, recall, nDCG, calibration, robustness, safety or fairness. It makes realized membership observable.
+RIDI complements conventional evaluation; it does not replace AUROC, precision, recall, nDCG, calibration, robustness, safety or fairness.
 
 ---
 
-## Evidence behind the project
+## Evidence behind the research program
 
-| Test | Current result |
-|---|---|
-| **Preregistered RAG, 800 queries** | Exact registered retrieval-audit equivalence with **17.27%** benchmark-defined correctness divergence at the primary condition (95% CI **14.60–20.03%**) |
-| **SciFact 275** | Same positive passage, rank and registered retrieval metrics; identity substitution changes **SUPPORTS → REFUTES**; order-only control remains SUPPORTS |
-| **EPSS production update** | **565 / 1,000** priorities changed (`RIDI=0.722`) vs adjacent same-version controls of **0** and **7** |
-| **Exact identity–utility frontier** | Separates necessary from avoidable turnover under an explicit utility-regret budget, with no retraining |
+### 1) Exact evaluation equality can leave membership unresolved
 
-Most RAG benchmark-defined outcomes remained stable. The claim is **behavioral non-equivalence can exist inside an exactly audit-equivalent class**, not that every allocation change is harmful or that all AI systems are fragile.
+A preregistered retrieval experiment held a fixed language model and the **complete assessed relevance-grade sequence** constant while replacing only passages that earned zero credit under the benchmark audit. Thus `precision@k`, `recall@k`, `nDCG@k`, `MRR@k` and `MAP@k` were numerically identical.
 
-### Independent verification status — 5 Sep 2026
+- **800 frozen queries** across Natural Questions, HotpotQA, FEVER and SciFact.
+- Primary benchmark-defined correctness-change rate: **17.27%** (95% stratified-bootstrap interval **14.60–20.03%**, equal weight across datasets).
+- Direction: **60 correct→incorrect** and **74 incorrect→correct**; this is not a net-harm claim.
+- Order-only control with unchanged membership: **4.80%**.
+- For none of the 800 primary queries did the grade-by-position audit uniquely identify passage membership; the median number of compatible passage sets exceeded **10¹²**.
 
-- The sealed EPSS numerical workflow was reproduced by **two independent external executors** in separate environments.
-- SciFact 275 was independently regenerated **twice, blind**, by external executors using distinct serving environments.
-- **Mohammed Hamdan:** reference and identity control were `SUPPORTS` (identity byte-identical to reference), the order-only permutation remained `SUPPORTS`, and the audit-equivalent identity substitution produced `REFUTES`. Hardware limits required a disclosed Q4_K_M `qwen3:8b` llama.cpp/Ollama serving path rather than the frozen bf16 Hugging Face pipeline.
-- **Théophile Ossard:** independently reproduced the same substantive `SUPPORTS` versus `REFUTES` pattern on a distinct GPU/software stack. His regenerated reference prefixed the verdict with `Verdict:`, exposing a strict-parser boundary retained transparently.
-- These are **independent computational regenerations, not a CODECHECK certificate**. Community CODECHECK request #208 is registered; formal checking has not begun.
+This experiment does **not** claim to discover that context matters. Prior work already established context sensitivity and imperfect alignment between retrieval metrics and downstream accuracy. The narrower result is that **exact equality in the tested audit does not identify the evidence or certify behavioral equivalence**.
 
-[Read the evidence and boundaries →](paper/README.md)
+A post hoc formatting sensitivity rescored all 300 FEVER/SciFact primary queries under two declared prefix-tolerant rules. Both rules agreed: **53 classification correctness changes** (two-dataset mean **17.67%**) versus **58** (**19.33%**) under the registered strict parser. The registered four-dataset endpoint remains unchanged. No longer-generation sensitivity has yet been completed.
 
----
+### 2) A production update changed scarce priorities
 
-## Designed to drop into research workflows
+For the EPSS v2→v3 production update:
 
-**Framework-agnostic.** RIDI needs identities—and optionally scores—not a particular model library.
+- **565 / 1,000** priorities changed (`RIDI=0.722`).
+- Adjacent same-version controls changed **0** and **7** slots.
+- Subsequent KEV hits at the primary cutoff increased from **8 to 12**, while full-pool AUROC decreased from **0.665 to 0.610**.
+- At a **0.01%** rank-utility tolerance, the exact frontier avoided **14.34%** of replacements while retaining all **12** later KEV hits.
+- At **0.1%**, **40.88%** were avoided but only **10/12** later KEV hits were retained.
 
-**Two entry points.** `compare_allocations()` for selected IDs; `audit()` for paired score tables.
+These sparse retrospective outcomes do not establish causal benefit. They show why the utility budget and downstream outcome must both remain visible.
 
-**Publication-ready output.** Reports can emit dictionaries or Markdown records.
+### 3) Avoidable turnover differs across domains
 
-**Control, not only measurement.** `AuditReport.control()` exposes the exact identity–utility frontier.
+At a locked **0.1%** rank-utility budget:
 
-**Reproducible by default.** Deterministic tie handling, CI on Python 3.10–3.12, locked research workflows, negative results retained, and explicit verification boundaries.
+- **GraphSAGE / biomedical knowledge graph:** mean avoidable turnover **78.8%** (95% interval **76.0–81.4%**).
+- **20 Newsgroups retrieval, k=100:** mean avoidable turnover **28.7%** (95% interval **27.6–29.7%**).
 
-[Copy-paste recipes →](docs/USE_CASES.md)
+The contrast is the point: how much churn an update requires is measured rather than assumed.
 
----
-
-## Use it in a paper
-
-The [Allocation Identity Reporting Checklist](docs/REPORTING_CHECKLIST.md) covers capacity, selection rule, comparator, identity metrics, controls, conventional evaluation, privacy and downstream outcomes.
-
-> We audited allocation identity at the prespecified capacity by reporting selected-set overlap, changed slots and RIDI alongside the domain’s conventional evaluation metrics.
+Exploratory drug-interaction and medication-context analyses are retained as boundary tests, not as clinical validation. No patient harm, delivered-alert effect or clinical interchangeability claim is made.
 
 ---
 
-## Replicate it. Challenge it. Extend it.
+## Verification boundaries
 
-Independent reproductions, boundary cases, discrepancies and null results are welcome. Use the dedicated GitHub issue forms for an **Independent replication** or a **New domain application**.
+- The sealed EPSS numerical workflow was reproduced by **two external executors** in separate environments.
+- Both executors performed targeted blind regeneration of the illustrative SciFact 275 case.
+- Hamdan's disclosed Q4_K_M serving path reproduced a strict-scored correctness change.
+- Ossard used the pinned Qwen3-8B Hugging Face revision; his reference began `Verdict: SUPPORTS` and was rejected by the frozen strict parser, so his run reproduced the substantive SUPPORTS→REFUTES contrast but **not** the strict-scored correctness change.
+- These targeted checks do **not** independently replicate the aggregate 800-query endpoint.
+- **No formal CODECHECK certificate has been issued.** Register issue #208 was closed with an invitation to return once a public preprint is available or the manuscript is under journal review.
 
-[Contributing guide →](CONTRIBUTING.md)
+[Evidence and manuscript synopsis →](paper/README.md)
 
 ---
 
-## Current manuscript
+## Current manuscript direction
 
-**Identical audits can yield different AI decisions**
+**Working title:** *Measuring and controlling what changes when a ranking system is updated*
 
-The public repository is synchronized to **v65.1 (5 Sep 2026)**. The science is the v65 Final Scientific Lock; v65.1 contains only formatting/cross-reference corrections after a full figure-reference audit. The current article architecture is **Main Figs. 1–3** and **Extended Data Figs. 1–4**. The manuscript is prepared for journal submission; it is **not peer reviewed, accepted or published**.
+The current frontier-led working manuscript treats the RAG experiment as evidence that evaluation equality can leave selection identity unresolved, then makes the constructive contribution central: the **identity–utility frontier** provides an exact, auditable budget for selection turnover.
 
-Registered RxNorm and Open Targets failures remain part of the project record to delimit the claim. Allocation identity alone does not establish correctness, fairness, causal harm, benefit, clinical utility or model superiority.
+The working manuscript is **not peer reviewed, accepted or published**. Registered failures (RxNorm and Open Targets), parser limitations, sparse EPSS outcomes and exploratory clinical boundaries are retained in the research record.
 
-- [Paper overview](paper/README.md)
-- [RAG preregistration](https://osf.io/txwdv/)
+---
+
+## Install
+
+```bash
+pip install ridi-audit
+ridi-audit demo
+```
+
+Resources:
+
+- [60-second Quick Start](docs/QUICKSTART.md)
+- [Python API](docs/API.md)
+- [Use cases](docs/USE_CASES.md)
+- [Allocation Identity Reporting Checklist](docs/REPORTING_CHECKLIST.md)
 - [Reproducibility guide](docs/REPRODUCIBILITY.md)
-- [Numerical provenance](docs/NUMERICAL_PROVENANCE.md)
-- [CODECHECK request #208](https://github.com/codecheckers/register/issues/208)
+- [RAG preregistration](https://osf.io/txwdv/)
+- [CODECHECK register issue #208](https://github.com/codecheckers/register/issues/208)
 
 ---
 
 ## Citation
 
-If you use RIDI or `ridi-audit`, cite the software using [`CITATION.cff`](CITATION.cff) and the accompanying manuscript when a public bibliographic record is available.
+If you use RIDI or `ridi-audit`, cite the software through [`CITATION.cff`](CITATION.cff) and cite the accompanying manuscript when a public bibliographic record becomes available.
 
 **Adeeb Noor**  
 Department of Information Technology, Faculty of Computing and Information Technology  
