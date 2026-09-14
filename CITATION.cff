@@ -1,6 +1,6 @@
 cff-version: 1.2.0
-message: "If you use RIDI or ridi-audit to study allocation identity in a capacity-limited system, please cite this software and the accompanying manuscript when a public bibliographic record is available."
-title: "RIDI: allocation-identity audit and control toolkit for capacity-limited AI"
+message: "If you use RIDI or ridi-audit to measure or control selection change in a capacity-limited ranking system, please cite this software and the accompanying manuscript when a public bibliographic record is available."
+title: "RIDI: selection-change auditing and the identity-utility frontier"
 type: software
 authors:
   - family-names: Noor
@@ -13,12 +13,12 @@ url: "https://pypi.org/project/ridi-audit/"
 license: MIT
 keywords:
   - allocation identity
+  - selection change
+  - identity-utility frontier
+  - ranking updates
   - AI evaluation
   - capacity-limited AI
-  - decision identity
-  - Reproducibility of Identity Decisions Index
   - ranking stability
   - top-k selection
-  - score-to-action boundary
   - algorithmic auditing
   - reproducibility
