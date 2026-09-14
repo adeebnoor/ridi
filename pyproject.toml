@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "ridi-audit"
 version = "1.1.1"
-description = "Audit and control allocation identity in capacity-limited AI systems"
+description = "Measure ranking-update selection change and compute the exact identity-utility frontier"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
@@ -19,11 +19,13 @@ dependencies = [
 ]
 keywords = [
   "allocation identity",
+  "selection change",
+  "identity-utility frontier",
+  "ranking updates",
   "AI evaluation",
   "RAG evaluation",
   "information retrieval",
   "reproducibility",
-  "decision identity",
   "ranking stability",
   "algorithmic auditing",
   "top-k selection",
