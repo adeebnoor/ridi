@@ -1,0 +1,66 @@
+name: DDI v69 encrypted priority-source transport
+on:
+  push:
+    branches: ['research/ddi-v69-source-audit-20260914']
+    paths: ['.github/workflows/ddi_v69_priority_intake.yml']
+permissions:
+  contents: read
+jobs:
+  intake:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Install transport encryption library
+        run: python3 -m pip install --quiet cryptography==44.0.3
+      - name: Fetch public sources in memory and encrypt for the author
+        run: |
+          python3 - <<'PY'
+          import urllib.request,io,zipfile,json,hashlib,os,datetime
+          from pathlib import Path
+          from cryptography.hazmat.primitives.serialization import load_pem_public_key
+          from cryptography.hazmat.primitives.asymmetric import padding
+          from cryptography.hazmat.primitives import hashes
+          from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+          public_key=b'''-----BEGIN PUBLIC KEY-----
+          MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAz5HeGJ0cwM52+M6brYtc
+          xfbrquxENh+po5aeWx0CE4UGr2LPoHbhbvwn2Z34uCmbEwJkmLt7MyAjmU4VzvFu
+          WJ6KlNjEIPpfMyCyVgSd31l9a6f/QiP4LWE9aBDEQacZcEIOIkkv9aAYb5NjLv7t
+          t0xu4fbw8YimEOzHQpb+kIcgGYMPpKAjzg5AlcNqGFbNjlqd04UfDAFUxcOnDEpM
+          A5wVq1r8O3xTqKLxRyBtpgt4wNhLPdD+V46KG+kEl3ZIUZ1XtB8bONkXMNV9DKeO
+          PQwpyDwdosEtOlUOHQ73rgkdV3qufPjBWo7i7se6qzRWnYKBmC/KciLnsxxOzvRd
+          sdY5IZ8qCEKKfxBuzHoY+RvkU8BAQ28OSuv48lRIWaE4znNL3Ly0yWhEl7HiWMHZ
+          LB06VuqTtyA/XGtpN4Hu0ngXVutkylrofArOadggXS1QRnX9OsgwFz6P5fbjRRSB
+          9HjrShyicJXRPxM61IIL0+2y+a+Ut8IbdEjdDjV4E3jJAgMBAAE=
+          -----END PUBLIC KEY-----'''
+          public_key=b'\n'.join(x.strip() for x in public_key.splitlines())
+          root='https://raw.githubusercontent.com/dbmi-pitt/public-PDDI-analysis/8199ee66b60bcb337f777889a210dd0d72a96e8f/'
+          sources={
+          'onc_high.csv':('PDDI-Datasets/ONC-High-Priority/ONC_High_Priority_Mapped.csv','6478cc0ff57244ed66f84a6f534596f8d3f6267af5fb2bad869c60aa53ef37e7'),
+          'onc_non_formatted.csv':('PDDI-Datasets/ONC-Non-Interuptive/ONC_Non_Interuptive_List_Mapped_Formatted.csv','8d5d5702a3c8ad46b1b2d5c1e5536a3d690113cfeb1522559fdfe96818b6ee1d'),
+          'onc_non_expanded.csv':('PDDI-Datasets/ONC-Non-Interuptive/ONC_Non_Interuptive_Mapped.csv',None)}
+          manifest=[];buf=io.BytesIO()
+          with zipfile.ZipFile(buf,'w',zipfile.ZIP_DEFLATED) as z:
+              for name,(path,expected) in sources.items():
+                  url=root+path
+                  with urllib.request.urlopen(url,timeout=40) as r: data=r.read()
+                  sha=hashlib.sha256(data).hexdigest()
+                  if expected and sha!=expected: raise ValueError('Source hash mismatch: '+name)
+                  z.writestr(name,data)
+                  manifest.append(dict(name=name,url=url,bytes=len(data),sha256=sha,retrieved_utc=datetime.datetime.now(datetime.timezone.utc).isoformat()))
+              z.writestr('manifest.json',json.dumps(manifest,indent=2))
+          key=AESGCM.generate_key(bit_length=256);nonce=os.urandom(12)
+          payload=AESGCM(key).encrypt(nonce,buf.getvalue(),b'RIDI-v69-public-source-private-transport')
+          encrypted_key=load_pem_public_key(public_key).encrypt(key,padding.OAEP(mgf=padding.MGF1(hashes.SHA256()),algorithm=hashes.SHA256(),label=None))
+          out=Path('encrypted-intake');out.mkdir()
+          (out/'payload.aesgcm').write_bytes(nonce+payload)
+          (out/'key.rsa-oaep').write_bytes(encrypted_key)
+          (out/'source_manifest.json').write_text(json.dumps(manifest,indent=2))
+          (out/'NOTICE.md').write_text('Publicly accessible source material retrieved for author-side research. Original source repository declares no licence; raw files and pair-level derivatives must not be included in the public research package. This transport artifact contains authenticated encrypted bytes only; the private key is not in GitHub. No credentials or access controls were bypassed. No patient data are involved. Only source manifests and aggregate scientific results may be published. Temporary artifact expires in one day.\n')
+          print(json.dumps({'sources_verified':len(manifest),'plaintext_published':False,'artifact':'encrypted transport only'}))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ddi-v69-encrypted-priority-intake
+          path: encrypted-intake/
+          retention-days: 1
+          if-no-files-found: error
