@@ -1,0 +1,25 @@
+{
+  "analysis_id": "RIDI-CMS-TABLE16B-OUTCOME-v1",
+  "lock_date": "2026-09-16",
+  "status": "PRE_OUTCOME_LOCK_NOT_YET_OSF_REGISTERED",
+  "local_registration_package_sha256": "7b8278c6a17fd555f764a064adbded0b9f793e33e40b56de4c0673ad576cab18",
+  "files": {
+    "NORMALIZATION_SPEC.md": {
+      "bytes": 1587,
+      "sha256": "827228bb029c26b9d6a71dda12767f9c3f5bdb762cbb99406efd8305962f2ebc"
+    },
+    "PREREGISTRATION_PROTOCOL.md": {
+      "bytes": 8196,
+      "sha256": "d223edb525dbc77fb38b7e679179d48e2fa175c1d49823f010607d998b520d4d"
+    },
+    "analyze_table16b.py": {
+      "bytes": 6673,
+      "sha256": "c7eb5f5c4646dee624fb1527bf9af9c67eab70141f9593dd3c388890f3e7dadd"
+    },
+    "test_synthetic.py": {
+      "bytes": 865,
+      "sha256": "9f5069c4ac0d6a9d1b5dddee875676f0f5d625808e59b4b7ba2c4a91058dab5f"
+    }
+  },
+  "note": "GitHub branch provides a public pre-outcome timestamp. This is not described as an OSF preregistration until the exact package is deposited and publicly timestamped on OSF."
+}
