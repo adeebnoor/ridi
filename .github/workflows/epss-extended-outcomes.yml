@@ -1,0 +1,45 @@
+name: EPSS extended outcomes
+
+on:
+  push:
+    branches:
+      - nature-v79-epss-extended-outcomes
+    paths:
+      - 'experiments/cyber_natural_update/extended_outcome/**'
+      - '.github/workflows/epss-extended-outcomes.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  extended-outcomes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch source-pinned inputs
+        run: |
+          python experiments/cyber_natural_update/fetch_inputs.py --out /tmp/ridi_epss_inputs
+
+      - name: Run 1y/2y/3y delayed-outcome analysis
+        run: |
+          mkdir -p /tmp/ridi_epss_extended
+          python experiments/cyber_natural_update/extended_outcome/run_extended_outcome.py \
+            --inputs /tmp/ridi_epss_inputs \
+            --out /tmp/ridi_epss_extended
+          cp /tmp/ridi_epss_inputs/input_manifest.json /tmp/ridi_epss_extended/input_manifest.json
+          sha256sum /tmp/ridi_epss_extended/* > /tmp/ridi_epss_extended/SHA256SUMS.txt
+
+      - name: Upload immutable result bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: epss-extended-outcomes-v1
+          path: /tmp/ridi_epss_extended/
+          if-no-files-found: error
