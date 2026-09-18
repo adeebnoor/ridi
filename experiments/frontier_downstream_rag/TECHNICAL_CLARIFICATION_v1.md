@@ -39,3 +39,10 @@ GitHub Actions run `35349531324` also failed before retrieval because the initia
 GitHub Actions run `35349689574` reached the retrieval step after the dependency repair but failed before any TREC output was written because the manually specified topic URL used the historical `castorini/anserini-tools/topics-and-qrels` path, which now returns HTTP 404. Inspection of the upstream GitHub repository showed that `castorini/anserini-tools` has moved to `castorini/eval`, where topics and qrels are stored in separate `topics/` and `qrels/` directories. The exact four BEIR qrel paths were verified as UTF-8 files, and the four topic paths were verified to exist (GitHub rejected only because they are gzip binaries). No retrieval score, frontier result or language-model endpoint output was produced by the failed run.
 
 The acquisition code is therefore repaired to use the same BEIR topic/qrel filenames from the current `castorini/eval` repository. This is an upstream-path migration only; query definitions, sample seed, retrievers, depths, k, eta and endpoints are unchanged.
+
+
+## Assembly-only repair after successful retrieval
+
+The third full preparation run (`35350211540`) successfully completed all eight locked retrieval jobs (BM25 and SPLADE++ for all four datasets), producing the top-1,000 TREC artifacts. Its assembly jobs then failed before sample selection because a repository-editing operation had inserted a literal `\\n` token into the Python source between `QREL_BASE` and `INDEX_FLAT`, causing a syntax error. No 100-query sample, frontier selection or language-model output was produced by that failure.
+
+The syntax defect was repaired at commit `59c4e145ff2bdfd704a11e26bf6f1bf065979fc3`. To avoid rerunning or changing the already successful retrievals, the next step consumes the immutable retrieval artifacts from run `35350211540` and performs assembly only. The retrieval artifacts themselves are not recomputed.
