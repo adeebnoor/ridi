@@ -26,6 +26,7 @@ import sys
 import tarfile
 import tempfile
 import urllib.request
+import zipfile
 from collections import defaultdict
 from pathlib import Path
 from typing import Any, Iterable
@@ -84,16 +85,40 @@ def topic_text(v: Any) -> str:
     raise ValueError(f"unrecognized topic record: {v!r}")
 
 
-def pyserini_topics_qrels(dataset: str):
-    from pyserini.search import get_topics, get_qrels
-    key = TOPIC_KEYS[dataset]
-    topics_raw = get_topics(key)
-    qrels_raw = get_qrels(key)
-    topics = {str(q): topic_text(v) for q, v in topics_raw.items()}
-    qrels: dict[str, dict[str, int]] = {}
-    for q, ds in qrels_raw.items():
-        qrels[str(q)] = {str(d): int(v) for d, v in ds.items()}
-    return topics, qrels
+BEIR_BASE = "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets"
+
+def _zip_member(z: zipfile.ZipFile, suffix: str) -> str:
+    hits=[n for n in z.namelist() if n.endswith(suffix)]
+    if len(hits)!=1:
+        raise RuntimeError(f"expected one {suffix}, got {hits[:10]}")
+    return hits[0]
+
+def beir_topics_qrels(dataset: str, root: Path):
+    """Load query texts and qrels from the official BEIR dataset archive.
+
+    This replaces only the failed Java/GitHub topic-download transport path;
+    the BEIR query set and qrels are unchanged.
+    """
+    cache=root/".source_cache"/f"{dataset}.beir.zip"
+    if not cache.exists():
+        download(f"{BEIR_BASE}/{dataset}.zip",cache)
+    topics={}
+    qrels: dict[str, dict[str, int]] = defaultdict(dict)
+    with zipfile.ZipFile(cache) as z:
+        qname=_zip_member(z,"/queries.jsonl")
+        with z.open(qname) as fh:
+            for raw in io.TextIOWrapper(fh,encoding="utf-8"):
+                if not raw.strip(): continue
+                o=json.loads(raw); topics[str(o["_id"])]=str(o["text"])
+        qname=_zip_member(z,"/qrels/test.tsv")
+        with z.open(qname) as fh:
+            reader=csv.DictReader(io.TextIOWrapper(fh,encoding="utf-8"),delimiter="\t")
+            for row in reader:
+                qid=str(row.get("query-id",row.get("query_id","")))
+                did=str(row.get("corpus-id",row.get("corpus_id","")))
+                score=int(row.get("score","0"))
+                if qid and did: qrels[qid][did]=score
+    return topics, dict(qrels)
 
 
 def make_runs(dataset: str, root: Path, include_dense: bool) -> dict[str, Path]:
@@ -321,7 +346,7 @@ def main() -> int:
     args = ap.parse_args()
     root = args.root.resolve(); root.mkdir(parents=True, exist_ok=True)
     dataset = args.dataset
-    topics, qrels = pyserini_topics_qrels(dataset)
+    topics, qrels = beir_topics_qrels(dataset, root)
     if not topics or not qrels:
         raise RuntimeError(f"{dataset}: Pyserini topics/qrels unavailable")
     include_dense = dataset == "scifact"

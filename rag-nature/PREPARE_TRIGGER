@@ -5,3 +5,4 @@ fix=pyserini-2.1.0-transformers-5
 no_language_model_generation=true
 
 frontier-downstream-rag-lock: 383830dbd7c67f1898e88422bab8a49e5e91e9de
+\nfrontier-downstream-rag-retry-local-beir-topics\n
