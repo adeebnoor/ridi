@@ -114,6 +114,7 @@ def main():
  ap=argparse.ArgumentParser();ap.add_argument("--dataset",choices=list(EXPECTED_GZ),required=True)
  ap.add_argument("--out",type=Path,default=Path("/tmp/ridi_frontier_generation"))
  ap.add_argument("--batch-size",type=int,default=4)
+ ap.add_argument("--emit-archive-b64",action="store_true")
  a=ap.parse_args();d=a.dataset;a.out.mkdir(parents=True,exist_ok=True)
  raw=get(f"{BASE}/{d}_sample.jsonl.gz")
  if sha_bytes(raw)!=EXPECTED_GZ[d]:raise RuntimeError("frozen sample gzip SHA-256 mismatch")
