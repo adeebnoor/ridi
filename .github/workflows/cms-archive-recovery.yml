@@ -9,117 +9,61 @@ jobs:
   recover:
     runs-on: ubuntu-latest
     steps:
-      - name: Download exact official CMS target snapshots
+      - name: Download official CMS IPPS Table 16B files
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p out/raw out/tps out/logs
+          mkdir -p out/raw out/inner out/logs
           python - <<'PY'
-          import urllib.request, json, hashlib, zipfile, io, datetime, pathlib, re
+          import urllib.request, pathlib, hashlib, json, zipfile, datetime
 
           OUT=pathlib.Path("out")
-          API="https://data.cms.gov/provider-data/api/1/archive/aggregate/theme/hospitals/relative"
-          TARGETS={
-              "2024-10-30":15146617,
-              "2025-02-19":15297582,
-              "2026-02-25":13806586,
+          URLS={
+            "FY2024":"https://www.cms.gov/files/zip/fy24-ipps-final-rule-16b.zip",
+            "FY2025":"https://www.cms.gov/files/zip/fy-2025-ipps-final-rule-table-16-b.zip",
+            "FY2026":"https://www.cms.gov/files/zip/fy2026-ipps-table-16b.zip",
           }
-
-          def get(url):
+          def sha256(b): return hashlib.sha256(b).hexdigest()
+          manifest={"source":"Centers for Medicare & Medicaid Services (CMS), IPPS Final Rule Table 16B","retrievals":[]}
+          for fy,url in URLS.items():
               req=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0 (RIDI reproducibility audit)"})
-              with urllib.request.urlopen(req,timeout=240) as r:
-                  return getattr(r,"status",200), r.read(), dict(r.headers)
-
-          def sha256(b):
-              return hashlib.sha256(b).hexdigest()
-
-          status,api_bytes,api_headers=get(API)
-          if status != 200:
-              raise RuntimeError(f"archive API HTTP {status}")
-          (OUT/"logs"/"archive_api_response.json").write_bytes(api_bytes)
-          api=json.loads(api_bytes)
-          rows=api["data"]
-          bydate={x["date"]:x for x in rows if x.get("type")=="theme"}
-
-          manifest={
-              "source":"Centers for Medicare & Medicaid Services (CMS) Provider Data Catalog",
-              "archive_api":API,
-              "archive_api_retrieval_utc":datetime.datetime.now(datetime.timezone.utc).isoformat(),
-              "targets":[]
-          }
-
-          for date,expected_size in TARGETS.items():
-              if date not in bydate:
-                  raise RuntimeError(f"target {date} absent from CMS archive API")
-              meta=bydate[date]
-              if int(meta["size"]) != expected_size:
-                  raise RuntimeError(f"{date} CMS metadata size changed: {meta['size']} != {expected_size}")
-              rel=meta["url"]
-              url=rel if rel.startswith("http") else "https://data.cms.gov"+rel
               retrieved=datetime.datetime.now(datetime.timezone.utc).isoformat()
-              http,data,headers=get(url)
-              raw=OUT/"raw"/f"hospitals_{date}.zip"
-              # Save raw bytes before inspecting archive contents.
+              with urllib.request.urlopen(req,timeout=240) as r:
+                  status=getattr(r,"status",200); data=r.read()
+              raw=OUT/"raw"/f"{fy}_Table16B.zip"
               raw.write_bytes(data)
-              raw_size=raw.stat().st_size
               raw_hash=sha256(data)
-              if http != 200:
-                  raise RuntimeError(f"{date}: HTTP {http}")
-              if raw_size != expected_size:
-                  raise RuntimeError(f"{date}: downloaded bytes {raw_size} != CMS metadata {expected_size}")
-
               z=zipfile.ZipFile(raw,"r")
-              listing=[i.filename for i in z.infolist()]
-              (OUT/"logs"/f"zip_listing_{date}.txt").write_text("\n".join(listing),encoding="utf-8")
-
-              candidates=[]
-              for info in z.infolist():
-                  if info.is_dir() or not info.filename.lower().endswith(".csv"):
-                      continue
-                  # Read enough to identify schema after raw archive has been preserved and hashed.
-                  with z.open(info) as fh:
-                      head=fh.read(200000)
-                  txt=head.decode("utf-8-sig","replace").lower()
-                  if "total performance score" in txt and ("facility id" in txt or "provider id" in txt):
-                      candidates.append(info.filename)
-
-              exact=[n for n in candidates if pathlib.PurePosixPath(n).name.lower()=="hvbp_tps.csv"]
-              if len(exact)==1:
-                  member=exact[0]
-              elif len(candidates)==1:
-                  member=candidates[0]
-              else:
-                  raise RuntimeError(f"{date}: expected one TPS CSV; exact={exact}, candidates={candidates}")
-
-              tps=z.read(member)
-              tps_path=OUT/"tps"/f"{date}_hvbp_tps.csv"
-              tps_path.write_bytes(tps)
-              entry={
-                  "date":date,
-                  "cms_archive_id":meta.get("id"),
-                  "cms_name":meta.get("name"),
-                  "official_url":url,
-                  "cms_reported_bytes":expected_size,
-                  "retrieval_utc":retrieved,
-                  "http_status":http,
-                  "raw_zip_bytes":raw_size,
-                  "raw_zip_sha256":raw_hash,
-                  "tps_archive_member":member,
-                  "tps_bytes":len(tps),
-                  "tps_sha256":sha256(tps),
-                  "zip_member_count":len(listing),
+              members=[i.filename for i in z.infolist() if not i.is_dir()]
+              (OUT/"logs"/f"{fy}_listing.txt").write_text("\n".join(members),encoding="utf-8")
+              books=[m for m in members if pathlib.PurePosixPath(m).suffix.lower() in {".xlsx",".xlsm",".xls"}]
+              if len(books)!=1:
+                  raise RuntimeError(f"{fy}: expected exactly one workbook, got {books}")
+              member=books[0]
+              b=z.read(member)
+              suffix=pathlib.PurePosixPath(member).suffix.lower()
+              inner=OUT/"inner"/f"{fy}_Table16B{suffix}"
+              inner.write_bytes(b)
+              ent={
+                "fiscal_year":fy,
+                "official_url":url,
+                "retrieval_utc":retrieved,
+                "http_status":status,
+                "raw_zip_bytes":len(data),
+                "raw_zip_sha256":raw_hash,
+                "workbook_member":member,
+                "workbook_bytes":len(b),
+                "workbook_sha256":sha256(b),
               }
-              manifest["targets"].append(entry)
-              print(json.dumps(entry,indent=2))
-
+              manifest["retrievals"].append(ent)
+              print(json.dumps(ent,indent=2))
           (OUT/"manifest.json").write_text(json.dumps(manifest,indent=2),encoding="utf-8")
           PY
-          sha256sum out/raw/*.zip out/tps/*.csv > out/logs/SHA256SUMS.txt
-          echo '=== manifest ==='
+          sha256sum out/raw/* out/inner/* > out/logs/SHA256SUMS.txt
           cat out/manifest.json
-      - name: Upload exact snapshots and provenance
+      - name: Upload Table 16B files
         uses: actions/upload-artifact@v4
         with:
-          name: cms-target-hospital-snapshots
+          name: cms-table16b-official
           path: out/
           retention-days: 3
