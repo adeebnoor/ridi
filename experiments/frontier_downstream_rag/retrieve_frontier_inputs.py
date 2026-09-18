@@ -4,7 +4,7 @@ import argparse, pathlib, subprocess, sys, time, urllib.request
 
 DATASETS=("nq","hotpotqa","fever","scifact")
 SPLADE_ID="naver/splade-cocondenser-ensembledistil"
-TOPIC_BASE="https://raw.githubusercontent.com/castorini/anserini-tools/master/topics-and-qrels"
+TOPIC_BASE="https://raw.githubusercontent.com/castorini/eval/master/topics"
 
 def download(url: str, dest: pathlib.Path):
     dest.parent.mkdir(parents=True,exist_ok=True)
