@@ -1,0 +1,31 @@
+{
+  "study": "RIDI-EPSS-FRONTIER-CHANGED-SLOT-UNCERTAINTY-v1",
+  "status": "post_hoc_descriptive_composition_sensitivity",
+  "draws": 100000,
+  "seed": 20260918,
+  "unit": "observed changed slot",
+  "method": "percentile bootstrap",
+  "interpretation": "Point estimates are exact finite-transition quantities; intervals are not superpopulation confidence intervals for vulnerabilities.",
+  "results": {
+    "eta_0_0001": {
+      "delta": 565,
+      "j_eta": 484,
+      "avoidable_slots": 81,
+      "avoidable_fraction": 0.1433628318584071,
+      "ci95": [
+        0.11504424778761062,
+        0.17345132743362832
+      ]
+    },
+    "eta_0_001": {
+      "delta": 565,
+      "j_eta": 334,
+      "avoidable_slots": 231,
+      "avoidable_fraction": 0.4088495575221239,
+      "ci95": [
+        0.368141592920354,
+        0.4495575221238938
+      ]
+    }
+  }
+}
