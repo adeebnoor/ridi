@@ -65,5 +65,42 @@
     "220052",
     "390057"
   ],
-  "claim_boundary": "Descriptive factor linkage only; no dollar, causal, patient-outcome, hospital-quality, policy-benefit/harm, or statutory-cutoff claim."
+  "claim_boundary": "Descriptive factor linkage only; no dollar, causal, patient-outcome, hospital-quality, policy-benefit/harm, or statutory-cutoff claim.",
+  "frontier_changed_slot_uncertainty": {
+    "status": "post_hoc_descriptive_composition_sensitivity",
+    "draws": 100000,
+    "seed": 20260918,
+    "unit": "observed changed slot classified as avoidable versus required",
+    "method": "percentile bootstrap",
+    "interpretation": "Point estimates are exact finite-transition quantities; intervals are not superpopulation confidence intervals for hospitals.",
+    "transitions": {
+      "FY2024_to_FY2025": {
+        "avoidable_fraction": 0.1076923076923077,
+        "ci95": [
+          0.06666666666666667,
+          0.15384615384615385
+        ]
+      },
+      "FY2025_to_FY2026": {
+        "avoidable_fraction": 0.10396039603960396,
+        "ci95": [
+          0.06435643564356436,
+          0.1485148514851485
+        ]
+      }
+    }
+  },
+  "historical_methodology_eligibility": {
+    "screened_before_historical_tps_acquisition": true,
+    "fiscal_year_pairs": [
+      "FY2017_to_FY2018",
+      "FY2018_to_FY2019",
+      "FY2019_to_FY2020",
+      "FY2020_to_FY2021"
+    ],
+    "strict_rule": "same measure set, domain structure/weights, and material performance-period/scoring definitions",
+    "eligible_pairs": [],
+    "historical_tps_panel_acquired": false,
+    "discontinuity_FY2022_FY2023": "CMS did not calculate a TPS in either fiscal year after measure suppressions/pauses; Table 16B was not necessary in either year."
+  }
 }
