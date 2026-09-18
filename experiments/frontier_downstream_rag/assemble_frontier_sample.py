@@ -13,8 +13,8 @@ from collections import defaultdict
 
 import numpy as np
 
-TOPIC_BASE="https://raw.githubusercontent.com/castorini/anserini-tools/master/topics-and-qrels"
-INDEX_FLAT={d:f"beir-v1.0.0-{d}.flat" for d in ("nq","hotpotqa","fever","scifact")}
+TOPIC_BASE="https://raw.githubusercontent.com/castorini/eval/master/topics"
+QREL_BASE="https://raw.githubusercontent.com/castorini/eval/master/qrels"\nINDEX_FLAT={d:f"beir-v1.0.0-{d}.flat" for d in ("nq","hotpotqa","fever","scifact")}
 SEED=20260918
 
 def sha256_file(path: pathlib.Path) -> str:
@@ -106,7 +106,7 @@ def main():
     qrels_path=src/f"qrels.beir-v1.0.0-{d}.test.txt"
     if not topics_path.exists():
         download(f"{TOPIC_BASE}/topics.beir-v1.0.0-{d}.test.tsv.gz",topics_path)
-    download(f"{TOPIC_BASE}/qrels.beir-v1.0.0-{d}.test.txt",qrels_path)
+    download(f"{QREL_BASE}/qrels.beir-v1.0.0-{d}.test.txt",qrels_path)
 
     topics=read_topics(topics_path)
     qrels=read_qrels(qrels_path)
