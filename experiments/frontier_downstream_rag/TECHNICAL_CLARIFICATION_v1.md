@@ -1,0 +1,29 @@
+# Technical clarification after failed preparation run
+
+Protocol: `RIDI-NATURE-FRONTIER-DOWNSTREAM-v1`
+
+This note is timestamped **before any successful retrieval output or language-model endpoint output** from the extension.
+
+## Failed run
+
+The first preparation attempt, GitHub Actions run `35347356145` from commit `1455a7e53671995beffdc110a6ab45b640fb7060`, failed in every retrieval job before a TREC run was produced. The failure was technical: Anserini's Java topic downloader could not retrieve the BEIR topic file from `raw.githubusercontent.com`. No retrieval scores, frontier results or model answers from the extension were inspected.
+
+## Locked implementation clarification
+
+The original protocol defined the candidate universe as the union of the two frozen retriever candidate lists but did not state how to obtain a score from one retriever for a candidate surfaced only by the other retriever.
+
+Before successful retrieval, the implementation is clarified as follows:
+
+1. Each retriever (BM25 and SPLADE++) is executed to depth **1,000** for every query.
+2. The frontier candidate universe is the union of **BM25 top-100** and **SPLADE++ top-100** document identities.
+3. A query is eligible only if **every identity in that top-100 union has an emitted score in both top-1,000 runs**. No missing score is imputed.
+4. Baseline and updated score vectors used by the exact frontier are therefore genuine emitted BM25 and SPLADE++ scores on the same fixed candidate universe.
+5. The primary and sensitivity selection capacities remain `k={10; 5,20}`; tolerances remain `eta={0.001; 0.0001}`.
+6. For each dataset independently, 100 query IDs are sampled without replacement from the sorted eligible IDs using NumPy `default_rng(20260918)`. Sampling occurs before any language-model generation.
+7. Candidate passage text is truncated to the first 1,200 Unicode characters, matching the registered RAG prompt standardization.
+
+This clarification changes neither the scientific question nor any endpoint. It prevents arbitrary score completion for cross-retriever candidates.
+
+## Topic/qrel acquisition repair
+
+To avoid the Java downloader failure, the new preparation workflow downloads the same Anserini BEIR topic and qrel files directly over HTTPS with retries, records their SHA-256 hashes, and passes the local topic file to Pyserini. This is an acquisition repair only.
