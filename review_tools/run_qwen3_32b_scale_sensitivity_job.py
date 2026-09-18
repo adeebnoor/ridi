@@ -13,7 +13,7 @@ import csv, hashlib, io, json, os, sys, tempfile, time, urllib.request, zipfile
 from pathlib import Path
 import requests
 
-SHARE="l5ppqdrXbxy_"
+SHARE="s6JIVF2c5iO0"
 API=f"https://api.firestorage.ai/dev/file/shares/{SHARE}"
 PROMPT_BUNDLE_SHA="f12394567a0dde9e1e4b2aa34452770b47e3e8e0891ea0001c295e060a3dfe62"
 PROMPT_JSONL_SHA="ce1da238040e9c2e74744c9e5de4867975acc7fc5ced485cfff80393097a7033"
