@@ -1,0 +1,38 @@
+{
+  "protocol_id": "RIDI-CMS-HVBP-HISTORICAL-EXTENSION-v1",
+  "execution_status": "completed",
+  "failures": {
+    "2017": "no official theme-level hospital archive snapshot in locked fiscal-year window",
+    "2018": "no official theme-level hospital archive snapshot in locked fiscal-year window",
+    "2019": "RuntimeError: expected exactly one hvbp_tps.csv, found 0: []",
+    "2020": "RuntimeError: expected exactly one hvbp_tps.csv, found 0: []"
+  },
+  "primary_k": 500,
+  "primary_eta": 0.001,
+  "results": [
+    {
+      "transition": "FY2017_to_FY2018",
+      "status": "unavailable",
+      "methodology_annotation": "domain structure/weights and measure set changed",
+      "reason": "missing parsed FY data: fy0 not in data_by_fy=True, fy1 not in data_by_fy=True"
+    },
+    {
+      "transition": "FY2018_to_FY2019",
+      "status": "unavailable",
+      "methodology_annotation": "measure set changed",
+      "reason": "missing parsed FY data: fy0 not in data_by_fy=True, fy1 not in data_by_fy=True"
+    },
+    {
+      "transition": "FY2019_to_FY2020",
+      "status": "unavailable",
+      "methodology_annotation": "four 25% domains persisted, but THA/TKA complication performance period changed",
+      "reason": "missing parsed FY data: fy0 not in data_by_fy=True, fy1 not in data_by_fy=True"
+    },
+    {
+      "transition": "FY2020_to_FY2021",
+      "status": "unavailable",
+      "methodology_annotation": "scoring inputs/measure set changed",
+      "reason": "missing parsed FY data: fy0 not in data_by_fy=True, fy1 not in data_by_fy=False"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+transition,status,methodology_annotation,reason
+FY2017_to_FY2018,unavailable,domain structure/weights and measure set changed,"missing parsed FY data: fy0 not in data_by_fy=True, fy1 not in data_by_fy=True"
+FY2018_to_FY2019,unavailable,measure set changed,"missing parsed FY data: fy0 not in data_by_fy=True, fy1 not in data_by_fy=True"
+FY2019_to_FY2020,unavailable,"four 25% domains persisted, but THA/TKA complication performance period changed","missing parsed FY data: fy0 not in data_by_fy=True, fy1 not in data_by_fy=True"
+FY2020_to_FY2021,unavailable,scoring inputs/measure set changed,"missing parsed FY data: fy0 not in data_by_fy=True, fy1 not in data_by_fy=False"

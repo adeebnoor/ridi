@@ -1,0 +1,50 @@
+{
+  "protocol_id": "RIDI-CMS-HVBP-HISTORICAL-EXTENSION-v1",
+  "executed_utc": "2026-09-18T11:30:06.884048+00:00",
+  "archive_api": "https://data.cms.gov/provider-data/api/1/archive/aggregate/theme/hospitals/relative",
+  "archive_api_sha256": "56845bd7dc5275794b8eedd283feb8b948b9b6a2d260b054e18f1fd28e10e273",
+  "fiscal_years": {
+    "2019": {
+      "archive_date": "2019-07-31",
+      "cms_archive_id": "6701",
+      "cms_name": "Theme: hospitals (2019-07-31) Snapshot",
+      "official_url": "https://data.cms.gov/provider-data/sites/default/files/dataset-archives/theme/hospitals/hospitals_2019-07-31.zip",
+      "cms_reported_bytes": "21768646",
+      "http_status": 200,
+      "raw_zip_bytes": 21768646,
+      "raw_zip_sha256": "c8d33b44ca7d039c99ae241160df2eae27a68867d73055cb1a1fbf5a4ac11912",
+      "failure": "RuntimeError: expected exactly one hvbp_tps.csv, found 0: []"
+    },
+    "2020": {
+      "archive_date": "2020-07-04",
+      "cms_archive_id": "6721",
+      "cms_name": "Theme: hospitals (2020-07-04) Snapshot",
+      "official_url": "https://data.cms.gov/provider-data/sites/default/files/dataset-archives/theme/hospitals/hospitals_2020-07-04.zip",
+      "cms_reported_bytes": "13002445",
+      "http_status": 200,
+      "raw_zip_bytes": 13002445,
+      "raw_zip_sha256": "11928234440d6dc6f8e0f6f263602167ae444cb7a781e4eb719365e2d677a8c0",
+      "failure": "RuntimeError: expected exactly one hvbp_tps.csv, found 0: []"
+    },
+    "2021": {
+      "archive_date": "2021-07-21",
+      "cms_archive_id": "6746",
+      "cms_name": "Theme: hospitals (2021-07-21) Snapshot",
+      "official_url": "https://data.cms.gov/provider-data/sites/default/files/dataset-archives/theme/hospitals/hospitals_2021-07-21.zip",
+      "cms_reported_bytes": "14374687",
+      "http_status": 200,
+      "raw_zip_bytes": 14374687,
+      "raw_zip_sha256": "2eae19c287e7a7e9999cae01ec1fdb2e61d4446554f17374fcdbdf66cd0a0810",
+      "tps_archive_member": "hvbp_tps.csv",
+      "tps_bytes": 684592,
+      "tps_sha256": "ad5cc922eb07aa50e5a55f33d7d83ab2fcb01617119ee547b471328dd7a76f3a",
+      "rows_in_csv": 2676,
+      "rows_target_fy_finite_tps": 2676,
+      "columns": {
+        "fiscal_year": "Fiscal Year",
+        "facility_id": "Facility ID",
+        "total_performance_score": "Total Performance Score"
+      }
+    }
+  }
+}
