@@ -1,0 +1,113 @@
+{
+  "bootstrap": {
+    "draws": 100000,
+    "seed": 20260918,
+    "stratification": "dataset, resampling queries with replacement within each dataset"
+  },
+  "dataset": {
+    "fever": {
+      "answer_changed_n": 1,
+      "answer_text_disagreement": 0.01,
+      "controlled_accuracy": 0.83,
+      "correctness_status_disagreement": 0.01,
+      "improved_correctness_n": 1,
+      "max_utility_regret": 0.0009606147934678159,
+      "mean_avoidable_turnover_fraction_among_changed": 0.05621031746031746,
+      "mean_changed_slots_controlled": 5.44,
+      "mean_changed_slots_reduction": 0.29,
+      "mean_changed_slots_unconstrained": 5.73,
+      "n": 100,
+      "paired_accuracy_difference": 0.01,
+      "updated_accuracy": 0.82,
+      "worsened_correctness_n": 0
+    },
+    "hotpotqa": {
+      "answer_changed_n": 4,
+      "answer_text_disagreement": 0.04,
+      "controlled_accuracy": 0.32,
+      "correctness_status_disagreement": 0.0,
+      "improved_correctness_n": 0,
+      "max_utility_regret": 0.0009724473257699681,
+      "mean_avoidable_turnover_fraction_among_changed": 0.034765873015873014,
+      "mean_changed_slots_controlled": 6.09,
+      "mean_changed_slots_reduction": 0.22,
+      "mean_changed_slots_unconstrained": 6.31,
+      "n": 100,
+      "paired_accuracy_difference": 0.0,
+      "updated_accuracy": 0.32,
+      "worsened_correctness_n": 0
+    },
+    "nq": {
+      "answer_changed_n": 2,
+      "answer_text_disagreement": 0.02,
+      "controlled_accuracy": 0.46,
+      "correctness_status_disagreement": 0.01,
+      "improved_correctness_n": 1,
+      "max_utility_regret": 0.0009756097560974224,
+      "mean_avoidable_turnover_fraction_among_changed": 0.06799603174603176,
+      "mean_changed_slots_controlled": 5.41,
+      "mean_changed_slots_reduction": 0.31,
+      "mean_changed_slots_unconstrained": 5.72,
+      "n": 100,
+      "paired_accuracy_difference": 0.01,
+      "updated_accuracy": 0.45,
+      "worsened_correctness_n": 0
+    },
+    "scifact": {
+      "answer_changed_n": 4,
+      "answer_text_disagreement": 0.04,
+      "controlled_accuracy": 0.67,
+      "correctness_status_disagreement": 0.03,
+      "improved_correctness_n": 0,
+      "max_utility_regret": 0.0009950248756218734,
+      "mean_avoidable_turnover_fraction_among_changed": 0.12091666666666664,
+      "mean_changed_slots_controlled": 4.6,
+      "mean_changed_slots_reduction": 0.55,
+      "mean_changed_slots_unconstrained": 5.15,
+      "n": 100,
+      "paired_accuracy_difference": -0.03,
+      "updated_accuracy": 0.7,
+      "worsened_correctness_n": 3
+    }
+  },
+  "equal_dataset_weight_macro": {
+    "answer_changed_n": 11,
+    "answer_text_disagreement": 0.027499999999999997,
+    "answer_text_disagreement_ci95": [
+      0.0125,
+      0.045
+    ],
+    "controlled_accuracy": 0.57,
+    "correctness_status_disagreement": 0.0125,
+    "correctness_status_disagreement_ci95": [
+      0.0025,
+      0.025
+    ],
+    "improved_correctness_n": 2,
+    "mean_avoidable_turnover_fraction_among_changed": 0.06997222222222221,
+    "mean_avoidable_turnover_fraction_among_changed_ci95": [
+      0.05842063492063493,
+      0.08247819940476189
+    ],
+    "mean_changed_slots_controlled": 5.385,
+    "mean_changed_slots_reduction": 0.3425,
+    "mean_changed_slots_reduction_ci95": [
+      0.295,
+      0.39249999999999996
+    ],
+    "mean_changed_slots_unconstrained": 5.727499999999999,
+    "paired_accuracy_difference": -0.0024999999999999996,
+    "paired_accuracy_difference_ci95": [
+      -0.0125,
+      0.007500000000000001
+    ],
+    "updated_accuracy": 0.5725,
+    "worsened_correctness_n": 3
+  },
+  "interpretation_boundary": "Finite 400-query common-retrievable panel; descriptive benchmark correctness. No non-inferiority claim and no universal eta claim.",
+  "primary_cell": {
+    "eta": 0.001,
+    "k": 10
+  },
+  "protocol_id": "RIDI-NATURE-FRONTIER-DOWNSTREAM-v1"
+}
