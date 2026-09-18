@@ -135,7 +135,7 @@ def build_gold_map(helper, dataset: str, root: pathlib.Path, topics: dict[str,st
 
     if dataset=="fever":
         source=cache/"fever_labelled_dev.parquet"
-        url="https://huggingface.co/datasets/fever/fever/resolve/main/v1.0/fever-labelled_dev.parquet?download=true"
+        url="https://huggingface.co/datasets/fever/fever/resolve/55e20b98b435ba817a6c9b4e05871932bd164645/v1.0/fever-labelled_dev.parquet?download=true"
         if not source.exists():
             download(url,source)
         df=pd.read_parquet(source,columns=["id","label","claim"])
