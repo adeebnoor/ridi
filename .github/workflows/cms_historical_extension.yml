@@ -1,0 +1,48 @@
+name: CMS historical extension
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "experiments/cms_historical/**"
+      - ".github/workflows/cms_historical_extension.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  locked-historical-extension:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install locked analysis dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e . pandas numpy
+
+      - name: Execute public protocol lock
+        run: |
+          python experiments/cms_historical/run_historical_extension.py --out out/cms_historical
+
+      - name: Display report
+        if: always()
+        run: |
+          if [ -f out/cms_historical/REPORT.md ]; then
+            cat out/cms_historical/REPORT.md
+          fi
+
+      - name: Upload locked outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cms-historical-extension-locked
+          path: out/cms_historical/
+          retention-days: 90
+          if-no-files-found: warn
