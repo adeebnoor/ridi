@@ -99,21 +99,21 @@ For the EPSS v2→v3 production update:
 - **565 / 1,000** priorities changed (`RIDI=0.722`).
 - Adjacent same-version controls changed **0** and **7** slots.
 - Subsequent KEV hits at the primary cutoff increased from **8 to 12**, while full-pool AUROC decreased from **0.665 to 0.610**.
-- At a **0.01%** rank-utility tolerance, the exact frontier avoided **14.34%** of replacements while retaining all **12** later KEV hits.
-- At **0.1%**, **40.88%** were avoided but only **10/12** later KEV hits were retained.
+- At a **0.01%** rank-utility tolerance, the exact frontier avoided **14.34%** of replacements (95% descriptive changed-slot bootstrap interval **11.50–17.35%**) while retaining all **12** later KEV hits.
+- At **0.1%**, **40.88%** were avoided (95% descriptive changed-slot bootstrap interval **36.81–44.96%**) but only **10/12** later KEV hits were retained.
 
 These sparse retrospective outcomes do not establish causal benefit. In a post hoc extension using the same pinned score inputs and KEV catalogue, the top-1,000 outcome count difference narrowed from **8→12 (+4)** at 365 days to **20→21 (+1)** at two years and **32→33 (+1)** at three years; full-universe AUROC and average precision remained lower for v3 at both longer windows. The 365-day window remains primary.
 
 ### 3) Annual hospital scores can leave payment-factor movement unrecorded
 
-For two US Hospital Value-Based Purchasing annual transitions, the exact identity–utility frontier at a locked **0.1%** rank-utility budget reduced the required replacement counts from **195 to 174** and **202 to 181**. A separate payment-factor linkage was then prospectively registered at OSF 9guc5 before FY2024–FY2026 IPPS Table 16B outcome files were acquired.
+For two US Hospital Value-Based Purchasing annual transitions, the exact identity–utility frontier at a locked **0.1%** rank-utility budget reduced the required replacement counts from **195 to 174** and **202 to 181**, corresponding to **10.77%** avoidable turnover (95% descriptive changed-slot bootstrap interval **6.67–15.38%**) and **10.40%** (**6.44–14.85%**). A separate payment-factor linkage was then prospectively registered at OSF 9guc5 before FY2024–FY2026 IPPS Table 16B outcome files were acquired.
 
 - Actual CMS VBP payment adjustment factors changed across fiscal years for **19 of 20** matched hospital transitions with exactly unchanged published Total Performance Score.
 - The pooled mean absolute factor change was **0.006525** among 84 frontier-displaceable transition identities versus **0.005505** among 4,642 stable comparison transitions.
 - The preregistered transition-stratified mean difference was **0.001020** (100,000-resample 95% interval **0.000077–0.002008**; seed 20260916).
 - Seven FY2026 TPS-only CCNs remained unmatched and were not imputed.
 
-These are descriptive factor differences. They are not converted to dollars and are not interpreted as causal effects, hospital or patient harm, policy error, or evidence that top-500 is a statutory CMS cutoff.
+These are descriptive factor differences. They are not converted to dollars and are not interpreted as causal effects, hospital or patient harm, policy error, or evidence that top-500 is a statutory CMS cutoff. Before acquiring any older hospital-level TPS data, an official-rule screen of consecutive FY2017–FY2021 pairs found **no pair** with invariant measure set, domain structure/weights and material performance-period/scoring definitions; no pre-COVID panel was therefore pooled with the current panel. CMS also did not calculate a TPS for FY2022 or FY2023 after measure suppressions/pauses, and Table 16B was not necessary in either year; the manuscript treats this as a documented scoring-regime discontinuity.
 
 ### 4) Avoidable turnover differs across domains
 
