@@ -1,10 +1,10 @@
-# Measuring and controlling what changes when a ranking system is updated
+# Public systems change what they prioritise without recording it
 
 **Adeeb Noor**  
 Department of Information Technology, Faculty of Computing and Information Technology, King Abdulaziz University, Jeddah, Saudi Arabia  
 ORCID: 0000-0002-8251-1853
 
-> **Status — 15 September 2026:** public synopsis of the current frontier-led working manuscript. It is not peer reviewed, accepted or published. The public repository records the evidence and software; the manuscript remains subject to further robustness work and author finalization.
+> **Status — 18 September 2026:** public synopsis of the current frontier-led working manuscript. It is not peer reviewed, accepted or published. The public repository records the evidence and software; the manuscript remains subject to further robustness work and author finalization.
 
 ## Central contribution
 
@@ -41,7 +41,7 @@ A post hoc formatting analysis rescored all 300 FEVER/SciFact primary queries un
 - registered classification correctness changes: **58 / 300** (two-dataset mean **19.33%**)
 - prefix-tolerant result: **53 changes** — 52 persisted, six resolved, one new change appeared (two-dataset mean **17.67%**)
 
-This classification-only sensitivity is **not** the four-dataset primary endpoint and is not human semantic adjudication. The registered result remains unchanged. No longer-generation sensitivity has yet been completed.
+This classification-only sensitivity is **not** the four-dataset primary endpoint and is not human semantic adjudication. The registered result remains unchanged. A separate post hoc 512-token generation-length sensitivity reran the same frozen 800-query Qwen3-8B/BM25/k=10 reference-versus-random comparison and reproduced **all 134 registered correctness-change indicators with zero query-level discordance**; the equal-dataset-weight macro remained **17.27%**.
 
 ## Illustrative SciFact case
 
@@ -87,7 +87,21 @@ The identity–utility frontier shows:
 - `eta=0.0001` (0.01% relative rank-utility loss): **14.34%** of replacements avoided, **12/12** later KEV hits retained
 - `eta=0.001` (0.1%): **40.88%** avoided, **10/12** retained
 
-With only twelve delayed outcome events at the primary cutoff, these retrospective counts do not establish a consistent benefit or causal effect. They show why score preservation and downstream outcomes must be inspected separately.
+With only twelve delayed outcome events at the primary cutoff, these retrospective counts do not establish a consistent benefit or causal effect. A post hoc extension using the same pinned inputs reproduced the 365-day **8→12** headline first, then yielded **20→21** at two years and **32→33** at three years. Full-universe AUROC remained lower for v3 at both longer windows (**0.683 vs 0.715** at two years; **0.695 vs 0.720** at three years), as did average precision. The primary window remains 365 days.
+
+## Production application: CMS Hospital Value-Based Purchasing
+
+Two locked annual Total Performance Score comparisons changed **195/500** selected hospitals in FY2024→FY2025 and **202/500** in FY2025→FY2026. At a **0.1%** updated rank-utility budget, the exact identity–utility frontier required **174** and **181** replacements, respectively.
+
+Because the same-fiscal-year archive files originally labelled as controls were later shown to be byte-identical republications, they are retained only as provenance checks. A separate outcome linkage to actual IPPS Table 16B Hospital VBP payment adjustment factors was publicly preregistered at **OSF 9guc5 before outcome-file access**.
+
+- Exactly unchanged published TPS: factor changed in **14/15** FY2024→FY2025 matched transitions and **5/5** FY2025→FY2026, or **19/20 pooled**.
+- Frontier-displaceable identities: **84** transition identities total, mean absolute factor change **0.006525**.
+- Stable comparison transitions: **4,642**, mean absolute factor change **0.005505**.
+- Transition-stratified mean difference: **0.001020**, 100,000-resample 95% interval **0.000077–0.002008**, seed 20260916.
+- Seven FY2026 TPS-only CCNs were unmatched to Table 16B and remained unimputed.
+
+The linkage is descriptive. It does not estimate dollar revenue, attribute factor movement causally to RIDI or score turnover, assess patient outcomes or hospital quality, label policy as harmful/beneficial, or treat top-500 as a statutory CMS threshold.
 
 ## Generality of the frontier
 
@@ -127,13 +141,14 @@ Registered RxNorm and Open Targets failures remain visible as boundaries of the 
 ## Reproducibility
 
 - **RAG preregistration:** https://osf.io/txwdv/
+- **CMS Table 16B linkage preregistration:** https://osf.io/9guc5/
 - **Repository:** https://github.com/adeebnoor/ridi
 - **PyPI:** https://pypi.org/project/ridi-audit/
 - **CODECHECK register issue #208:** https://github.com/codecheckers/register/issues/208
 
 ## Scientific boundaries
 
-RIDI measures and controls selected membership under a declared objective. It does not by itself establish correctness, fairness, harm, benefit, clinical utility or model superiority. Correctness changes in the RAG study are bidirectional. Benchmark qrels are incomplete, so zero-grade passages are called **metric-zero**, not semantically irrelevant. The registered RAG generators are open-weight 7–8B models under a fixed 128-token regime; no longer-generation sensitivity has yet been completed. EPSS outcome evidence is sparse and retrospective. A sufficiently identity-aware audit can remove the membership ambiguity by recording selected identities directly.
+RIDI measures and controls selected membership under a declared objective. It does not by itself establish correctness, fairness, harm, benefit, clinical utility or model superiority. Correctness changes in the RAG study are bidirectional. Benchmark qrels are incomplete, so zero-grade passages are called **metric-zero**, not semantically irrelevant. The registered RAG generators are open-weight 7–8B models under a fixed 128-token regime; the completed 512-token rerun is post hoc and does not replace that registered regime. A larger-model scale sensitivity and independent aggregate 800-query execution remain pending and are not claimed. EPSS outcome evidence is sparse and retrospective. A sufficiently identity-aware audit can remove the membership ambiguity by recording selected identities directly.
 
 ## Use or test the method
 
