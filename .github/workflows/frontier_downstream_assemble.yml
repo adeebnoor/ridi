@@ -1,0 +1,61 @@
+name: Frontier downstream RAG assembly only
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "experiments/frontier_downstream_rag/ASSEMBLE_TRIGGER"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+env:
+  PYTHONHASHSEED: "0"
+  TOKENIZERS_PARALLELISM: "false"
+  SOURCE_RETRIEVAL_RUN: "35350211540"
+
+jobs:
+  assemble:
+    name: assemble-${{ matrix.dataset }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      matrix:
+        dataset: [nq, hotpotqa, fever, scifact]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install locked preparation stack
+        run: python -m pip install -U pip && pip install -r experiments/frontier_downstream_rag/requirements-frontier.txt
+      - name: Download frozen retrieval artifacts from successful run
+        uses: actions/download-artifact@v4
+        with:
+          pattern: frontier-run-${{ matrix.dataset }}-*
+          path: .prep/${{ matrix.dataset }}
+          merge-multiple: true
+          repository: adeebnoor/ridi
+          run-id: ${{ env.SOURCE_RETRIEVAL_RUN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Freeze outcome-blind 100-query sample
+        run: >-
+          python experiments/frontier_downstream_rag/assemble_frontier_sample.py
+          --dataset ${{ matrix.dataset }}
+          --root .prep/${{ matrix.dataset }}
+          --repo-root .
+      - name: Record environment
+        run: python -m pip freeze > .prep/${{ matrix.dataset }}/frozen/${{ matrix.dataset }}_pip_freeze.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: frontier-prepared-${{ matrix.dataset }}
+          path: .prep/${{ matrix.dataset }}/frozen
+          if-no-files-found: error
+          retention-days: 30
