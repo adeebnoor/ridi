@@ -1,0 +1,42 @@
+{
+  "study": "RIDI-EPSS-EXTENDED-OUTCOME-WINDOWS-v1",
+  "status": "post_hoc_sensitivity",
+  "primary_window_days": 365,
+  "n_candidates": 195886,
+  "windows": {
+    "365": {
+      "window_end": "2024-03-07",
+      "n_future_kev_universe": 58,
+      "v2_top1000_future_kev": 8,
+      "v3_top1000_future_kev": 12,
+      "difference_v3_minus_v2": 4,
+      "v2_full_universe_auroc": 0.6647895355741457,
+      "v3_full_universe_auroc": 0.6096852762417124,
+      "v2_full_universe_average_precision": 0.013532346004342678,
+      "v3_full_universe_average_precision": 0.010557663785379697
+    },
+    "2_year": {
+      "window_end": "2025-03-07",
+      "n_future_kev_universe": 105,
+      "v2_top1000_future_kev": 20,
+      "v3_top1000_future_kev": 21,
+      "difference_v3_minus_v2": 1,
+      "v2_full_universe_auroc": 0.715106626670568,
+      "v3_full_universe_auroc": 0.6834309034803465,
+      "v2_full_universe_average_precision": 0.034876031968093205,
+      "v3_full_universe_average_precision": 0.01472698497762981
+    },
+    "3_year": {
+      "window_end": "2026-03-07",
+      "n_future_kev_universe": 148,
+      "v2_top1000_future_kev": 32,
+      "v3_top1000_future_kev": 33,
+      "difference_v3_minus_v2": 1,
+      "v2_full_universe_auroc": 0.7201514786864847,
+      "v3_full_universe_auroc": 0.6951929226685534,
+      "v2_full_universe_average_precision": 0.04647173616063692,
+      "v3_full_universe_average_precision": 0.017901626131628056
+    }
+  },
+  "guardrail": "The frozen 365-day n=195,886 and 8→12 headline had to reproduce exactly before longer windows were interpreted."
+}
