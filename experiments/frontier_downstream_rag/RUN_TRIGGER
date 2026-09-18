@@ -1,3 +1,5 @@
 2026-09-18T13:00:00Z
 protocol_lock=383830dbd7c67f1898e88422bab8a49e5e91e9de
 technical_repair_after_failed_run=35347356145
+
+retry_after_dependency_repair=e7a33113e1c775e96a818ec7f2eca2f32c9c420b
