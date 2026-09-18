@@ -13,6 +13,7 @@ import urllib.request
 from collections import defaultdict
 
 import numpy as np
+import pandas as pd
 
 TOPIC_BASE="https://raw.githubusercontent.com/castorini/eval/master/topics"
 QREL_BASE="https://raw.githubusercontent.com/castorini/eval/master/qrels"
@@ -96,16 +97,93 @@ def load_old_gold_helper(repo_root: pathlib.Path):
 def build_gold_map(helper, dataset: str, root: pathlib.Path, topics: dict[str,str]):
     cache=root/".source_cache"
     cache.mkdir(parents=True,exist_ok=True)
-    ext={"nq":".csv","hotpotqa":".json","fever":".jsonl","scifact":".tar.gz"}[dataset]
+
+    # Two original hosting endpoints became unreliable during the locked run.
+    # Use stable Hugging Face dataset parquet mirrors with identical task labels.
+    if dataset=="hotpotqa":
+        source=cache/"hotpotqa_fullwiki_validation.parquet"
+        url="https://huggingface.co/datasets/hotpotqa/hotpot_qa/resolve/main/fullwiki/validation-00000-of-00001.parquet?download=true"
+        if not source.exists():
+            download(url,source)
+        df=pd.read_parquet(source,columns=["id","question","answer"])
+        gold={}
+        by_text={}
+        collisions=set()
+        for row in df.itertuples(index=False):
+            qid=str(row.id)
+            rec={"_id":qid,"answers":[str(row.answer)]}
+            gold[qid]=rec
+            key=helper.norm_text(str(row.question))
+            if key in by_text:
+                collisions.add(key)
+            else:
+                by_text[key]=rec
+        for key in collisions:
+            by_text.pop(key,None)
+        mapped={}
+        missing=[]
+        for qid,q in topics.items():
+            rec=gold.get(str(qid)) or by_text.get(helper.norm_text(q))
+            if rec is None:
+                missing.append(qid)
+            else:
+                mapped[str(qid)]={"_id":str(qid),"answers":list(rec["answers"])}
+        report={"source_records":int(len(df)),"ambiguous_text_keys":int(len(collisions)),
+                "missing":missing,"mapped":len(mapped),"source_url":url,
+                "source_sha256":sha256_file(source),"source_kind":"HF parquet mirror of HotpotQA fullwiki validation"}
+        return mapped,report,source
+
+    if dataset=="fever":
+        source=cache/"fever_labelled_dev.parquet"
+        url="https://huggingface.co/datasets/fever/fever/resolve/main/v1.0/fever-labelled_dev.parquet?download=true"
+        if not source.exists():
+            download(url,source)
+        df=pd.read_parquet(source,columns=["id","label","claim"])
+        # The parquet contains repeated rows per evidence annotation; task label/claim are constant per id.
+        compact=df.drop_duplicates(subset=["id","label","claim"])
+        by_id={}
+        by_text={}
+        collisions=set()
+        for row in compact.itertuples(index=False):
+            qid=str(row.id)
+            lab=str(row.label).upper().strip().replace(" ","_")
+            if lab not in {"SUPPORTS","REFUTES","NOT_ENOUGH_INFO"}:
+                raise RuntimeError(f"FEVER unexpected label {lab!r} for {qid}")
+            rec={"_id":qid,"labels":[lab],"claim":str(row.claim)}
+            old=by_id.get(qid)
+            if old is not None and (old["labels"]!=rec["labels"] or helper.norm_text(old["claim"])!=helper.norm_text(rec["claim"])):
+                raise RuntimeError(f"FEVER conflicting rows for id {qid}")
+            by_id[qid]=rec
+            key=helper.norm_text(str(row.claim))
+            if key in by_text:
+                collisions.add(key)
+            else:
+                by_text[key]=rec
+        for key in collisions:
+            by_text.pop(key,None)
+        mapped={}
+        missing=[]
+        for qid,q in topics.items():
+            rec=by_id.get(str(qid))
+            if rec is not None and helper.norm_text(rec["claim"])!=helper.norm_text(q):
+                rec=None
+            rec=rec or by_text.get(helper.norm_text(q))
+            if rec is None:
+                missing.append(qid)
+            else:
+                mapped[str(qid)]={"_id":str(qid),"labels":list(rec["labels"])}
+        report={"source_records":int(len(df)),"unique_task_rows":int(len(compact)),
+                "ambiguous_text_keys":int(len(collisions)),"missing":missing,"mapped":len(mapped),
+                "source_url":url,"source_sha256":sha256_file(source),
+                "source_kind":"HF parquet conversion of FEVER v1.0 labelled_dev"}
+        return mapped,report,source
+
+    ext={"nq":".csv","scifact":".tar.gz"}[dataset]
     source=cache/f"{dataset}{ext}"
     if not source.exists():
         helper.download(helper.SOURCE_URLS[dataset],source)
     if dataset=="nq":
         gold,report=helper.gold_nq(source,topics)
-    elif dataset=="hotpotqa":
-        gold,report=helper.gold_hotpot(source,topics)
-    elif dataset=="fever":
-        gold,report=helper.gold_fever(source,topics)
     elif dataset=="scifact":
         gold,report=helper.gold_scifact(source,topics)
     else:
@@ -114,6 +192,7 @@ def build_gold_map(helper, dataset: str, root: pathlib.Path, topics: dict[str,st
     report["mapped"]=len(gold)
     report["source_url"]=helper.SOURCE_URLS[dataset]
     report["source_sha256"]=sha256_file(source)
+    report["source_kind"]="registered-study source"
     return gold,report,source
 
 def ordered_ids(ids, scores, k):
