@@ -13,6 +13,7 @@
   <a href="demo/"><b>SciFact demo</b></a> ·
   <a href="https://pypi.org/project/ridi-audit/"><b>PyPI</b></a> ·
   <a href="https://osf.io/txwdv/"><b>RAG preregistration</b></a> ·
+  <a href="https://osf.io/9guc5/"><b>CMS Table 16B preregistration</b></a> ·
   <a href="paper/README.md"><b>Paper & evidence</b></a>
 </p>
 
@@ -89,7 +90,7 @@ A preregistered retrieval experiment held a fixed language model and the **compl
 
 This experiment does **not** claim to discover that context matters. Prior work already established context sensitivity and imperfect alignment between retrieval metrics and downstream accuracy. The narrower result is that **exact equality in the tested audit does not identify the evidence or certify behavioral equivalence**.
 
-A post hoc formatting sensitivity rescored all 300 FEVER/SciFact primary queries under two declared prefix-tolerant rules. Both rules agreed: **53 classification correctness changes** (two-dataset mean **17.67%**) versus **58** (**19.33%**) under the registered strict parser. The registered four-dataset endpoint remains unchanged. No longer-generation sensitivity has yet been completed.
+A post hoc formatting sensitivity rescored all 300 FEVER/SciFact primary queries under two declared prefix-tolerant rules. Both rules agreed: **53 classification correctness changes** (two-dataset mean **17.67%**) versus **58** (**19.33%**) under the registered strict parser. The registered four-dataset endpoint remains unchanged. A separate post hoc generation-length rerun increased the cap from 128 to 512 new tokens on the same 800 frozen primary queries: **all 134 registered correctness changes persisted, no new change appeared, and the equal-dataset-weight macro remained 17.27%**.
 
 ### 2) A production update changed scarce priorities
 
@@ -101,9 +102,20 @@ For the EPSS v2→v3 production update:
 - At a **0.01%** rank-utility tolerance, the exact frontier avoided **14.34%** of replacements while retaining all **12** later KEV hits.
 - At **0.1%**, **40.88%** were avoided but only **10/12** later KEV hits were retained.
 
-These sparse retrospective outcomes do not establish causal benefit. They show why the utility budget and downstream outcome must both remain visible.
+These sparse retrospective outcomes do not establish causal benefit. In a post hoc extension using the same pinned score inputs and KEV catalogue, the top-1,000 outcome count difference narrowed from **8→12 (+4)** at 365 days to **20→21 (+1)** at two years and **32→33 (+1)** at three years; full-universe AUROC and average precision remained lower for v3 at both longer windows. The 365-day window remains primary.
 
-### 3) Avoidable turnover differs across domains
+### 3) Annual hospital scores can leave payment-factor movement unrecorded
+
+For two US Hospital Value-Based Purchasing annual transitions, the exact identity–utility frontier at a locked **0.1%** rank-utility budget reduced the required replacement counts from **195 to 174** and **202 to 181**. A separate payment-factor linkage was then prospectively registered at OSF 9guc5 before FY2024–FY2026 IPPS Table 16B outcome files were acquired.
+
+- Actual CMS VBP payment adjustment factors changed across fiscal years for **19 of 20** matched hospital transitions with exactly unchanged published Total Performance Score.
+- The pooled mean absolute factor change was **0.006525** among 84 frontier-displaceable transition identities versus **0.005505** among 4,642 stable comparison transitions.
+- The preregistered transition-stratified mean difference was **0.001020** (100,000-resample 95% interval **0.000077–0.002008**; seed 20260916).
+- Seven FY2026 TPS-only CCNs remained unmatched and were not imputed.
+
+These are descriptive factor differences. They are not converted to dollars and are not interpreted as causal effects, hospital or patient harm, policy error, or evidence that top-500 is a statutory CMS cutoff.
+
+### 4) Avoidable turnover differs across domains
 
 At a locked **0.1%** rank-utility budget:
 
@@ -131,7 +143,7 @@ Exploratory drug-interaction and medication-context analyses are retained as bou
 
 ## Current manuscript direction
 
-**Working title:** *Measuring and controlling what changes when a ranking system is updated*
+**Working title:** *Public systems change what they prioritise without recording it*
 
 The current frontier-led working manuscript treats the RAG experiment as evidence that evaluation equality can leave selection identity unresolved, then makes the constructive contribution central: the **identity–utility frontier** provides an exact, auditable budget for selection turnover.
 
@@ -154,6 +166,7 @@ Resources:
 - [Allocation Identity Reporting Checklist](docs/REPORTING_CHECKLIST.md)
 - [Reproducibility guide](docs/REPRODUCIBILITY.md)
 - [RAG preregistration](https://osf.io/txwdv/)
+- [CMS Table 16B preregistration](https://osf.io/9guc5/)
 - [CODECHECK register issue #208](https://github.com/codecheckers/register/issues/208)
 
 ---
