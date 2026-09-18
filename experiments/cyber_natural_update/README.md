@@ -24,8 +24,14 @@ The production v2→v3 update changed 565 of the top 1,000 identities
 (`RIDI=0.722`), compared with 0 and 7 changes in the adjacent same-version
 daily controls. Top-1,000 recovery of CVEs added to CISA KEV during the next
 year increased from 8 to 12 even though full-universe AUROC decreased from
-0.665 to 0.610. The primary `eta=0.001` control avoided 40.9% of turnover but
-retained 10 of 12 delayed outcomes, failing the locked 95% retention gate.
+0.665 to 0.610. At `eta=0.0001`, 14.34% of turnover was avoidable
+(95% descriptive changed-slot bootstrap interval 11.50–17.35%) while retaining
+12/12 delayed outcomes. At the primary `eta=0.001`, 40.88% was avoidable
+(interval 36.81–44.96%) but only 10/12 delayed outcomes were retained, failing
+the locked 95% retention gate. These post hoc intervals resample the 565
+observed changed slots as avoidable versus required; the point estimates remain
+exact finite-transition quantities and the intervals are not superpopulation
+confidence intervals for vulnerabilities.
 
 These are decision-system results, not estimates of exploit onset, complete
 ground truth, or representation attribution. See `results/locked_results.json`.
