@@ -9,92 +9,54 @@ jobs:
   recover:
     runs-on: ubuntu-latest
     steps:
-      - name: Download official CMS yearly hospital archives and extract target TPS files
+      - name: Discover current official CMS archive download endpoints
         shell: bash
         run: |
-          set -euo pipefail
-          mkdir -p out/raw out/extracted out/logs
+          set -u
+          mkdir -p out
+          PAGE='https://data.cms.gov/provider-data/archived-data/hospitals'
+          echo "FETCH $PAGE"
+          curl -L -A 'Mozilla/5.0' -D out/headers.txt -o out/archive.html -w 'HTTP=%{http_code} bytes=%{size_download}\n' "$PAGE" || true
+          echo '--- headers ---'
+          head -40 out/headers.txt || true
+          echo '--- target dates in HTML ---'
+          grep -nE '2024-10-30|2025-02-19|2026-02-25' out/archive.html | head -40 || true
+          echo '--- zip-like URLs/paths in HTML ---'
+          grep -oE 'https?[^"'"'"' <>]+\.zip[^"'"'"' <>]*|/[^"'"'"' <>]+\.zip[^"'"'"' <>]*' out/archive.html | head -100 || true
+          echo '--- API/archive-like paths in HTML ---'
+          grep -oE 'https?[^"'"'"' <>]+|/provider-data/[^"'"'"' <>]+' out/archive.html | grep -Ei 'archive|api|snapshot|download' | head -100 || true
+          echo '--- script src values ---'
           python - <<'PY'
-          import os, io, re, csv, json, hashlib, zipfile, urllib.request
-          from pathlib import Path
-
-          OUT=Path("out")
-          targets={2024:"2024-10-30",2025:"2025-02-19",2026:"2026-02-25"}
-          base="https://data.cms.gov/provider-data/sites/default/files/archive/Hospitals/{year}/hospitals_{year}.zip"
-          manifest={"source":"CMS Provider Data Catalog official archive","downloads":[],"targets":targets}
-
-          def sha256(b):
-              return hashlib.sha256(b).hexdigest()
-
-          def date_tokens(s):
-              s=s.lower().replace("_","-").replace("/","-").replace(".","-")
-              return s
-
-          def csv_has_tps(b):
-              try:
-                  head=b[:120000].decode("utf-8-sig","replace").splitlines()[:8]
-              except Exception:
-                  return False
-              joined="\n".join(head).lower()
-              return "total performance score" in joined and ("facility id" in joined or "provider id" in joined)
-
-          for year,target in targets.items():
-              url=base.format(year=year)
-              req=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0"})
-              with urllib.request.urlopen(req, timeout=180) as r:
-                  data=r.read()
-                  status=getattr(r,"status",200)
-              raw=OUT/"raw"/f"hospitals_{year}.zip"
-              raw.write_bytes(data)
-              entry={"year":year,"target":target,"url":url,"http_status":status,"bytes":len(data),"sha256":sha256(data),"candidates":[]}
-              z=zipfile.ZipFile(io.BytesIO(data))
-              listing=[i.filename for i in z.infolist()]
-              (OUT/"logs"/f"listing_{year}.txt").write_text("\n".join(listing),encoding="utf-8")
-              # inspect top-level files and nested ZIPs. Prefer entries whose path/name identifies the target date.
-              blobs=[]
-              for info in z.infolist():
-                  if info.is_dir():
-                      continue
-                  name=info.filename
-                  b=z.read(info)
-                  blobs.append((name,b,"yearly"))
-                  if name.lower().endswith(".zip"):
-                      try:
-                          nz=zipfile.ZipFile(io.BytesIO(b))
-                          for ni in nz.infolist():
-                              if ni.is_dir():
-                                  continue
-                              blobs.append((name+"::"+ni.filename,nz.read(ni),"nested"))
-                      except zipfile.BadZipFile:
-                          pass
-              target_norm=date_tokens(target)
-              # date variants, because CMS archive naming changed over time
-              mm,dd,yyyy=target[5:7],target[8:10],target[:4]
-              variants=[target_norm, f"{mm}-{dd}-{yyyy}", f"{mm}-{dd}-{yyyy[2:]}", f"{yyyy}-{int(mm):02d}-{int(dd):02d}"]
-              tps=[]
-              for name,b,level in blobs:
-                  if not name.lower().endswith(".csv"):
-                      continue
-                  if not csv_has_tps(b):
-                      continue
-                  n=date_tokens(name)
-                  score=2 if any(v in n for v in variants) else 0
-                  # yearly snapshots often place date on parent/nested ZIP, already part of name via '::'
-                  tps.append((score,name,b,level))
-              tps.sort(key=lambda x:(x[0],len(x[1])),reverse=True)
-              for idx,(score,name,b,level) in enumerate(tps[:20]):
-                  safe=re.sub(r"[^A-Za-z0-9._-]+","_",name)[-180:]
-                  p=OUT/"extracted"/f"{year}_{idx:02d}_score{score}_{safe}"
-                  p.write_bytes(b)
-                  entry["candidates"].append({"score":score,"archive_member":name,"bytes":len(b),"sha256":sha256(b),"output":str(p)})
-              manifest["downloads"].append(entry)
-          (OUT/"manifest.json").write_text(json.dumps(manifest,indent=2),encoding="utf-8")
+          import re, pathlib
+          s=pathlib.Path('out/archive.html').read_text(errors='replace')
+          srcs=re.findall(r'<script[^>]+src=["\x27]([^"\x27]+)',s,re.I)
+          print('\n'.join(srcs))
+          pathlib.Path('out/scripts.txt').write_text('\n'.join(srcs))
           PY
-          sha256sum out/raw/*.zip > out/logs/yearly_sha256.txt
-          cat out/manifest.json
-      - name: Upload recovery artifact
+          i=0
+          while IFS= read -r src; do
+            [ -z "$src" ] && continue
+            case "$src" in
+              http*) url="$src";;
+              //*) url="https:$src";;
+              /*) url="https://data.cms.gov$src";;
+              *) url="https://data.cms.gov/provider-data/archived-data/$src";;
+            esac
+            i=$((i+1))
+            echo "SCRIPT[$i] $url"
+            curl -L -A 'Mozilla/5.0' -sS --max-time 60 "$url" -o "out/script_$i.js" || continue
+            grep -aoEi '.{0,160}(archived-data|archive|snapshot|download.{0,40}zip|\.zip).{0,240}' "out/script_$i.js" | head -20 || true
+          done < out/scripts.txt
+          echo '--- common candidate APIs ---'
+          for u in             'https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items/ypbt-wvdk?show-reference-ids'             'https://data.cms.gov/provider-data/api/1/archives/hospitals'             'https://data.cms.gov/provider-data/api/1/archived-data/hospitals'             'https://data.cms.gov/provider-data/api/1/archive/hospitals'
+          do
+            echo "API $u"
+            curl -L -A 'Mozilla/5.0' -sS --max-time 30 -w '\nHTTP=%{http_code}\n' "$u" | head -c 3000
+            echo
+          done
+      - name: Upload diagnostics
         uses: actions/upload-artifact@v4
         with:
-          name: cms-hospital-archive-recovery
+          name: cms-archive-discovery
           path: out/
           retention-days: 3
