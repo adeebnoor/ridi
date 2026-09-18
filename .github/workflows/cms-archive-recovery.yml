@@ -9,36 +9,27 @@ jobs:
   recover:
     runs-on: ubuntu-latest
     steps:
-      - name: Inspect CMS Provider Data frontend bundle for archive endpoint
+      - name: Query CMS archive aggregate API
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p out
-          JS='https://data.cms.gov/provider-data/js/index.js'
-          curl -fL -A 'Mozilla/5.0' "$JS" -o out/index.js
-          echo "index.js bytes=$(wc -c < out/index.js)"
-          echo '--- archive/snapshot endpoint contexts ---'
-          python - <<'PY'
-          import pathlib,re
-          s=pathlib.Path('out/index.js').read_text(errors='replace')
-          terms=['archived-data','archive','snapshot','archives','download all','yearly','provider-data/sites/default/files']
-          for term in terms:
-              print('\n### TERM',term)
-              for m in list(re.finditer(re.escape(term),s,re.I))[:40]:
-                  a=max(0,m.start()-500); b=min(len(s),m.end()+800)
-                  print(s[a:b].replace('\n',' ')[:1400])
-          # extract URL-ish strings containing archive/snapshot
-          vals=set(re.findall(r'["\x27]([^"\x27]{4,500})["\x27]',s))
-          cand=sorted(v for v in vals if re.search(r'archive|snapshot',v,re.I))
-          pathlib.Path('out/candidates.txt').write_text('\n'.join(cand),encoding='utf-8')
-          print('\n--- CANDIDATE STRINGS ---')
-          print('\n'.join(cand[:300]))
-          PY
-        env:
-          PYTHONUNBUFFERED: '1'
-      - name: Upload diagnostics
+          for base in             'https://data.cms.gov/provider-data/api/1'             'https://data.cms.gov/provider-data/api'             'https://data.cms.gov/api/1'
+          do
+            u="$base/archive/aggregate/theme/hospitals/relative"
+            echo "=== $u"
+            code=$(curl -L -A 'Mozilla/5.0' -sS -o out/resp.json -w '%{http_code}' "$u" || true)
+            echo "HTTP=$code bytes=$(wc -c < out/resp.json)"
+            head -c 6000 out/resp.json || true
+            echo
+            if [ "$code" = "200" ]; then
+              cp out/resp.json out/archive_hospitals.json
+              break
+            fi
+          done
+      - name: Upload API response
         uses: actions/upload-artifact@v4
         with:
-          name: cms-archive-js-discovery
+          name: cms-archive-api-response
           path: out/
           retention-days: 3
