@@ -1,0 +1,58 @@
+name: Archive frontier downstream raw result
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "experiments/frontier_downstream_rag/RESULT_FETCH_TRIGGER.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Download and verify frozen result
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, pathlib, urllib.request, hashlib, zipfile, shutil
+          trig=json.loads(pathlib.Path("experiments/frontier_downstream_rag/RESULT_FETCH_TRIGGER.json").read_text())
+          d=trig["dataset"]
+          url=trig["url"]
+          exp=trig["sha256"]
+          outdir=pathlib.Path("experiments/frontier_downstream_rag/results")/d
+          rawdir=outdir/"raw"
+          outdir.mkdir(parents=True,exist_ok=True);rawdir.mkdir(parents=True,exist_ok=True)
+          zpath=rawdir/f"RIDI_FRONTIER_DOWNSTREAM_{d.upper()}_RESULTS.zip"
+          req=urllib.request.Request(url,headers={"User-Agent":"RIDI-result-archiver/1.0"})
+          with urllib.request.urlopen(req,timeout=180) as r, zpath.open("wb") as f:
+              shutil.copyfileobj(r,f)
+          got=hashlib.sha256(zpath.read_bytes()).hexdigest()
+          if got!=exp: raise RuntimeError((got,exp))
+          with zipfile.ZipFile(zpath) as z:
+              for n in z.namelist():
+                  if n.endswith("_summary.json") or n.endswith("_environment.json"):
+                      target=outdir/pathlib.PurePosixPath(n).name
+                      target.write_bytes(z.read(n))
+          rec={"dataset":d,"source_url":url,"zip_sha256":got,"bytes":zpath.stat().st_size,
+               "archive_status":"downloaded and committed from generation-job upload"}
+          (outdir/"ARCHIVE_RECORD.json").write_text(json.dumps(rec,indent=2)+"\n")
+          print(json.dumps(rec,indent=2))
+          PY
+      - name: Commit archived result
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Prof. Adeeb Noor"
+          git config user.email "adeebnoor@users.noreply.github.com"
+          git add experiments/frontier_downstream_rag/results
+          git commit -m "Archive frontier downstream raw result from generation job"
+          git push origin HEAD:main

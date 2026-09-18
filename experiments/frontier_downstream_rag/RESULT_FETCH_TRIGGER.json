@@ -1,0 +1,8 @@
+{
+  "dataset": "nq",
+  "url": "https://tmpfiles.org/dl/w8wjNbvCmqOZ/ridi_frontier_downstream_nq_results.zip",
+  "sha256": "f392b7a85a61ac24cee91c31d63ce6ee6f702bd02d1df39591a21b4e24d1b353",
+  "generation_job_id": "6aad4e0a51992417dfcc6f64",
+  "generation_lock_commit": "cdd6649a3c8c18f3b83f46be9f682c150013923a",
+  "analysis_lock_commit": "c2da9f3bb223588ed29b359604ee791d68b71edc"
+}
