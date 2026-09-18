@@ -14,7 +14,8 @@ from collections import defaultdict
 import numpy as np
 
 TOPIC_BASE="https://raw.githubusercontent.com/castorini/eval/master/topics"
-QREL_BASE="https://raw.githubusercontent.com/castorini/eval/master/qrels"\nINDEX_FLAT={d:f"beir-v1.0.0-{d}.flat" for d in ("nq","hotpotqa","fever","scifact")}
+QREL_BASE="https://raw.githubusercontent.com/castorini/eval/master/qrels"
+INDEX_FLAT={d:f"beir-v1.0.0-{d}.flat" for d in ("nq","hotpotqa","fever","scifact")}
 SEED=20260918
 
 def sha256_file(path: pathlib.Path) -> str:
