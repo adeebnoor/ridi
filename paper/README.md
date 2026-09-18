@@ -84,14 +84,14 @@ For the EPSS v2→v3 update, after the documented outcome-window exclusions:
 
 The identity–utility frontier shows:
 
-- `eta=0.0001` (0.01% relative rank-utility loss): **14.34%** of replacements avoided, **12/12** later KEV hits retained
-- `eta=0.001` (0.1%): **40.88%** avoided, **10/12** retained
+- `eta=0.0001` (0.01% relative rank-utility loss): **14.34%** of replacements avoided (95% descriptive changed-slot bootstrap interval **11.50–17.35%**), **12/12** later KEV hits retained
+- `eta=0.001` (0.1%): **40.88%** avoided (95% descriptive changed-slot bootstrap interval **36.81–44.96%**), **10/12** retained
 
 With only twelve delayed outcome events at the primary cutoff, these retrospective counts do not establish a consistent benefit or causal effect. A post hoc extension using the same pinned inputs reproduced the 365-day **8→12** headline first, then yielded **20→21** at two years and **32→33** at three years. Full-universe AUROC remained lower for v3 at both longer windows (**0.683 vs 0.715** at two years; **0.695 vs 0.720** at three years), as did average precision. The primary window remains 365 days.
 
 ## Production application: CMS Hospital Value-Based Purchasing
 
-Two locked annual Total Performance Score comparisons changed **195/500** selected hospitals in FY2024→FY2025 and **202/500** in FY2025→FY2026. At a **0.1%** updated rank-utility budget, the exact identity–utility frontier required **174** and **181** replacements, respectively.
+Two locked annual Total Performance Score comparisons changed **195/500** selected hospitals in FY2024→FY2025 and **202/500** in FY2025→FY2026. At a **0.1%** updated rank-utility budget, the exact identity–utility frontier required **174** and **181** replacements, respectively: **10.77%** avoidable turnover (95% descriptive changed-slot bootstrap interval **6.67–15.38%**) and **10.40%** (**6.44–14.85%**).
 
 Because the same-fiscal-year archive files originally labelled as controls were later shown to be byte-identical republications, they are retained only as provenance checks. A separate outcome linkage to actual IPPS Table 16B Hospital VBP payment adjustment factors was publicly preregistered at **OSF 9guc5 before outcome-file access**.
 
@@ -102,6 +102,8 @@ Because the same-fiscal-year archive files originally labelled as controls were 
 - Seven FY2026 TPS-only CCNs were unmatched to Table 16B and remained unimputed.
 
 The linkage is descriptive. It does not estimate dollar revenue, attribute factor movement causally to RIDI or score turnover, assess patient outcomes or hospital quality, label policy as harmful/beneficial, or treat top-500 as a statutory CMS threshold.
+
+Before acquiring any pre-COVID hospital-level TPS data, official CMS programme/final-rule records were screened for consecutive FY2017–FY2021 pairs under a strict like-for-like rule requiring the same measure set, domain structure/weights and material performance-period/scoring definitions. **No pair qualified**, so no heterogeneous historical TPS panel was acquired or pooled with the current post-resumption panel. CMS also did not calculate a TPS for FY2022 or FY2023 after measure suppressions/pauses, and Table 16B was not necessary in either year. The manuscript treats FY2022–FY2023 as an explicit scoring-regime discontinuity rather than silently bridging the series.
 
 ## Generality of the frontier
 
