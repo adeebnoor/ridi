@@ -17,6 +17,8 @@ This folder records the completed outcome-linkage extension used in the RIDI Nat
 | FY2024→FY2025 | 195 | 174 | 0.0009273454032447684 |
 | FY2025→FY2026 | 202 | 181 | 0.0009921372408863474 |
 
+The deterministic avoidable-turnover fractions are **10.77%** for FY2024→FY2025 and **10.40%** for FY2025→FY2026. A post hoc 100,000-draw changed-slot bootstrap (seed 20260918) gives descriptive composition-sensitivity intervals of **6.67–15.38%** and **6.44–14.85%**, respectively. These are not superpopulation confidence intervals for hospitals.
+
 ## Preregistered outcome linkage
 
 - Exactly unchanged published TPS: payment adjustment factor changed in 14/15 FY2024→FY2025 transitions and 5/5 FY2025→FY2026 transitions (**19/20 pooled**).
@@ -36,3 +38,9 @@ The analysis is descriptive. It does not convert factors to dollars, attribute f
 | 2026 | https://www.cms.gov/files/zip/fy2026-ipps-table-16b.zip | 8ad7910ee4e6fbc77819e03d594f954d53e46323f3d0bc3e5165c85551b2f20f | 0d7d0bf506ee16740d28b97083e8bc983c658f1526573ceceaedd62073b8cd78 |
 
 The full byte-preserved execution package is maintained with the manuscript Source Data / author archive rather than duplicating binary CMS files in Git.
+
+## Historical methodology eligibility screen
+
+Before acquiring historical hospital-level TPS data, official CMS records were screened for consecutive FY2017–FY2021 pairs under a strict comparability rule requiring invariant measure set, domain structure/weights and material performance-period/scoring definitions. No pair qualified: FY2017→FY2018 changed domain structure/weights and measures; FY2018→FY2019 changed measures; FY2019→FY2020 changed the THA/TKA complication performance period; FY2020→FY2021 changed scoring inputs/measures. No pre-COVID TPS panel was therefore acquired or pooled.
+
+CMS did not calculate a TPS for FY2022 or FY2023 after measure suppressions/pauses, and Table 16B was not necessary in either year. This is recorded as a documented scoring-regime discontinuity, without inference about motive or concealment.
