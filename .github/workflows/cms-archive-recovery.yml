@@ -9,54 +9,36 @@ jobs:
   recover:
     runs-on: ubuntu-latest
     steps:
-      - name: Discover current official CMS archive download endpoints
+      - name: Inspect CMS Provider Data frontend bundle for archive endpoint
         shell: bash
         run: |
-          set -u
+          set -euo pipefail
           mkdir -p out
-          PAGE='https://data.cms.gov/provider-data/archived-data/hospitals'
-          echo "FETCH $PAGE"
-          curl -L -A 'Mozilla/5.0' -D out/headers.txt -o out/archive.html -w 'HTTP=%{http_code} bytes=%{size_download}\n' "$PAGE" || true
-          echo '--- headers ---'
-          head -40 out/headers.txt || true
-          echo '--- target dates in HTML ---'
-          grep -nE '2024-10-30|2025-02-19|2026-02-25' out/archive.html | head -40 || true
-          echo '--- zip-like URLs/paths in HTML ---'
-          grep -oE 'https?[^"'"'"' <>]+\.zip[^"'"'"' <>]*|/[^"'"'"' <>]+\.zip[^"'"'"' <>]*' out/archive.html | head -100 || true
-          echo '--- API/archive-like paths in HTML ---'
-          grep -oE 'https?[^"'"'"' <>]+|/provider-data/[^"'"'"' <>]+' out/archive.html | grep -Ei 'archive|api|snapshot|download' | head -100 || true
-          echo '--- script src values ---'
+          JS='https://data.cms.gov/provider-data/js/index.js'
+          curl -fL -A 'Mozilla/5.0' "$JS" -o out/index.js
+          echo "index.js bytes=$(wc -c < out/index.js)"
+          echo '--- archive/snapshot endpoint contexts ---'
           python - <<'PY'
-          import re, pathlib
-          s=pathlib.Path('out/archive.html').read_text(errors='replace')
-          srcs=re.findall(r'<script[^>]+src=["\x27]([^"\x27]+)',s,re.I)
-          print('\n'.join(srcs))
-          pathlib.Path('out/scripts.txt').write_text('\n'.join(srcs))
+          import pathlib,re
+          s=pathlib.Path('out/index.js').read_text(errors='replace')
+          terms=['archived-data','archive','snapshot','archives','download all','yearly','provider-data/sites/default/files']
+          for term in terms:
+              print('\n### TERM',term)
+              for m in list(re.finditer(re.escape(term),s,re.I))[:40]:
+                  a=max(0,m.start()-500); b=min(len(s),m.end()+800)
+                  print(s[a:b].replace('\n',' ')[:1400])
+          # extract URL-ish strings containing archive/snapshot
+          vals=set(re.findall(r'["\x27]([^"\x27]{4,500})["\x27]',s))
+          cand=sorted(v for v in vals if re.search(r'archive|snapshot',v,re.I))
+          pathlib.Path('out/candidates.txt').write_text('\n'.join(cand),encoding='utf-8')
+          print('\n--- CANDIDATE STRINGS ---')
+          print('\n'.join(cand[:300]))
           PY
-          i=0
-          while IFS= read -r src; do
-            [ -z "$src" ] && continue
-            case "$src" in
-              http*) url="$src";;
-              //*) url="https:$src";;
-              /*) url="https://data.cms.gov$src";;
-              *) url="https://data.cms.gov/provider-data/archived-data/$src";;
-            esac
-            i=$((i+1))
-            echo "SCRIPT[$i] $url"
-            curl -L -A 'Mozilla/5.0' -sS --max-time 60 "$url" -o "out/script_$i.js" || continue
-            grep -aoEi '.{0,160}(archived-data|archive|snapshot|download.{0,40}zip|\.zip).{0,240}' "out/script_$i.js" | head -20 || true
-          done < out/scripts.txt
-          echo '--- common candidate APIs ---'
-          for u in             'https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items/ypbt-wvdk?show-reference-ids'             'https://data.cms.gov/provider-data/api/1/archives/hospitals'             'https://data.cms.gov/provider-data/api/1/archived-data/hospitals'             'https://data.cms.gov/provider-data/api/1/archive/hospitals'
-          do
-            echo "API $u"
-            curl -L -A 'Mozilla/5.0' -sS --max-time 30 -w '\nHTTP=%{http_code}\n' "$u" | head -c 3000
-            echo
-          done
+        env:
+          PYTHONUNBUFFERED: '1'
       - name: Upload diagnostics
         uses: actions/upload-artifact@v4
         with:
-          name: cms-archive-discovery
+          name: cms-archive-js-discovery
           path: out/
           retention-days: 3
