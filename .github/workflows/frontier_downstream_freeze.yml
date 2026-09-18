@@ -1,0 +1,125 @@
+name: Freeze frontier downstream 400-query panel
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "experiments/frontier_downstream_rag/FREEZE_TRIGGER"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  freeze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download NQ and SciFact frozen samples
+        uses: actions/download-artifact@v4
+        with:
+          pattern: frontier-prepared-*
+          path: /tmp/run_a
+          merge-multiple: false
+          repository: adeebnoor/ridi
+          run-id: 35354499495
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download HotpotQA frozen sample
+        uses: actions/download-artifact@v4
+        with:
+          pattern: frontier-prepared-hotpotqa
+          path: /tmp/run_b
+          merge-multiple: false
+          repository: adeebnoor/ridi
+          run-id: 35355285245
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download FEVER frozen sample
+        uses: actions/download-artifact@v4
+        with:
+          pattern: frontier-prepared-fever
+          path: /tmp/run_c
+          merge-multiple: false
+          repository: adeebnoor/ridi
+          run-id: 35355809360
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Verify and stage frozen panel
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="experiments/frontier_downstream_rag/frozen"
+          rm -rf "$out"
+          mkdir -p "$out"
+
+          cp /tmp/run_a/frontier-prepared-nq/nq_sample.jsonl /tmp/nq_sample.jsonl
+          cp /tmp/run_a/frontier-prepared-nq/nq_manifest.json "$out/nq_manifest.json"
+          cp /tmp/run_a/frontier-prepared-scifact/scifact_sample.jsonl /tmp/scifact_sample.jsonl
+          cp /tmp/run_a/frontier-prepared-scifact/scifact_manifest.json "$out/scifact_manifest.json"
+          cp /tmp/run_b/frontier-prepared-hotpotqa/hotpotqa_sample.jsonl /tmp/hotpotqa_sample.jsonl
+          cp /tmp/run_b/frontier-prepared-hotpotqa/hotpotqa_manifest.json "$out/hotpotqa_manifest.json"
+          cp /tmp/run_c/frontier-prepared-fever/fever_sample.jsonl /tmp/fever_sample.jsonl
+          cp /tmp/run_c/frontier-prepared-fever/fever_manifest.json "$out/fever_manifest.json"
+
+          python - <<'PY'
+          import hashlib, json, pathlib
+          for d in ["nq","hotpotqa","fever","scifact"]:
+              p=pathlib.Path(f"/tmp/{d}_sample.jsonl")
+              m=json.loads(pathlib.Path(f"experiments/frontier_downstream_rag/frozen/{d}_manifest.json").read_text())
+              h=hashlib.sha256(p.read_bytes()).hexdigest()
+              exp=m["artifacts"]["frozen_sample"]["sha256"]
+              n=sum(1 for _ in p.open(encoding="utf-8"))
+              assert h==exp,(d,h,exp)
+              assert n==100,(d,n)
+              print(d,n,h)
+          PY
+
+          for d in nq hotpotqa fever scifact; do
+            gzip -n -9 -c "/tmp/${d}_sample.jsonl" > "$out/${d}_sample.jsonl.gz"
+          done
+
+          python - <<'PY'
+          import hashlib,json,pathlib
+          root=pathlib.Path("experiments/frontier_downstream_rag/frozen")
+          runs={"nq":35354499495,"scifact":35354499495,"hotpotqa":35355285245,"fever":35355809360}
+          artifacts={
+            "nq":{"id":10551193981,"digest":"sha256:972691aae57bb1210fd1cb8b1b6cad18b14b665119f540b96584234f2d084704"},
+            "scifact":{"id":10551103803,"digest":"sha256:48dfc5c4ec7f1f5ff5ab0e552fd1d68712fda1ffc0196c53dd6666c223d36dce"},
+            "hotpotqa":{"id":10551697361,"digest":"sha256:b123ba781ca73796d70b5ce623e564b8d47a88f6ff95d08005662204fe77c3ed"},
+            "fever":{"id":10552420907,"digest":"sha256:d95439d746ff25a413f96cf40f517b3901ca3159284647801e8a3f3c34fbdfe7"},
+          }
+          out={"protocol_id":"RIDI-NATURE-FRONTIER-DOWNSTREAM-v1",
+               "amendment":"AMENDMENT_1_PRE_GENERATION.md",
+               "status":"400-query panel frozen before Qwen3-8B generation",
+               "datasets":{}}
+          for d in ["nq","hotpotqa","fever","scifact"]:
+              mf=root/f"{d}_manifest.json"; gz=root/f"{d}_sample.jsonl.gz"
+              m=json.loads(mf.read_text())
+              out["datasets"][d]={
+                  "n":100,
+                  "sample_uncompressed_sha256":m["artifacts"]["frozen_sample"]["sha256"],
+                  "sample_gzip_sha256":hashlib.sha256(gz.read_bytes()).hexdigest(),
+                  "manifest_sha256":hashlib.sha256(mf.read_bytes()).hexdigest(),
+                  "source_actions_run":runs[d],
+                  "source_artifact":artifacts[d],
+                  "primary_identity_summary":m["primary_identity_summary"],
+              }
+          (root/"FROZEN_PANEL_MANIFEST.json").write_text(json.dumps(out,indent=2)+"\n")
+          PY
+
+      - name: Commit immutable frozen panel
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Prof. Adeeb Noor"
+          git config user.email "adeebnoor@users.noreply.github.com"
+          git add experiments/frontier_downstream_rag/frozen
+          git diff --cached --stat
+          git commit -m "Freeze 400-query frontier downstream panel before model generation"
+          git push origin HEAD:main
