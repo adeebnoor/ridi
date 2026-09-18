@@ -27,3 +27,8 @@ This clarification changes neither the scientific question nor any endpoint. It 
 ## Topic/qrel acquisition repair
 
 To avoid the Java downloader failure, the new preparation workflow downloads the same Anserini BEIR topic and qrel files directly over HTTPS with retries, records their SHA-256 hashes, and passes the local topic file to Pyserini. This is an acquisition repair only.
+
+
+## Second preparation failure
+
+GitHub Actions run `35349531324` also failed before retrieval because the initially pinned dependency set was internally inconsistent: current Pyserini 2.1.0 requires Transformers >=5, while the first repaired requirements file pinned Transformers 4.57.6. No retrieval command executed and no extension endpoint output was produced. The dependency set was therefore repaired, still before retrieval, to the versions resolved successfully by the immediately preceding Pyserini installation environment: Pyserini 2.1.0, huggingface_hub 1.32.0, Transformers 5.17.0, Torch 2.14.0 and NumPy 2.5.3.
