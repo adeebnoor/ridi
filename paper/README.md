@@ -105,6 +105,20 @@ The linkage is descriptive. It does not estimate dollar revenue, attribute facto
 
 Before acquiring any pre-COVID hospital-level TPS values, official CMS programme/final-rule records were screened for consecutive FY2017–FY2021 pairs under a strict like-for-like rule requiring the same measure set, domain structure/weights and material performance-period/scoring definitions. **No pair qualified** under that strict methodology screen. A separate historical extension was then **publicly locked before historical hospital-level TPS acquisition** as `RIDI-CMS-HVBP-HISTORICAL-EXTENSION-v1` (protocol/code commit `5f151cbe3e2c2dfbe06fdb901289c32314472eb4`). The lock prespecified the official CMS archive endpoint, deterministic fiscal-year snapshot rule, `k={100,500,1000}`, `eta={0,0.0001,0.001}`, tie breaking, all-ties sensitivity and failure rules. Its first automated execution (GitHub Actions run `35339908821`) recovered FY2021 TPS but **no adjacent pre-pause TPS pair** under the locked source rule: FY2017 and FY2018 had no theme-level archive snapshot in the prespecified fiscal-year windows, and the selected FY2019/FY2020 archives contained no `hvbp_tps.csv`. The protocol forbade switching archive dates or substitute sources after execution, so no historical turnover estimate was generated. The execution record/results are archived at commit `2d69ba1aa063da229a10a6dc9c7d241cc7ee7a12` (artifact SHA-256 `26ddf7a0feb32d5fb3ccc871b3c298a7a97dc7d9405683591707a2106fe19072`). This is a timestamped public outcome-naive lock, **not** an OSF preregistration and not a retroactive registration of the original FY2024–FY2026 TPS/frontier analysis. CMS also did not calculate a TPS for FY2022 or FY2023 after measure suppressions/pauses, and Table 16B was not necessary in either year. The manuscript therefore treats the two analysed post-pause transitions as finite descriptive observations, not a long-run annual turnover rate.
 
+## Prospective frontier-to-downstream control
+
+A separate public lock tested the frontier as an end-to-end intervention after a real retriever update. Before Qwen3-8B generation, 400 queries (100 each Natural Questions, HotpotQA, FEVER and SciFact) were frozen from a **common-retrievable** candidate universe: the intersection of BM25 and SPLADE++ top-1,000 candidates. The primary cell was `k=10, eta=0.001`.
+
+- Mean changed slots: **5.7275 → 5.3850**, absolute reduction **0.3425** (100,000-draw stratified-bootstrap 95% interval **0.2950–0.3925**).
+- Mean query-level avoidable-turnover fraction among changed queries: **7.00%** (95% interval **5.84–8.25%**).
+- Benchmark accuracy: **57.25% → 57.00%**; paired difference **−0.25 percentage points** (95% interval **−1.25 to +0.75**).
+- Correctness status changed in **5/400 (1.25%)** queries; normalized answer text changed in **11/400 (2.75%)**.
+- Directional correctness changes were **2 improved / 3 worsened** after identity control.
+
+The result is deliberately not presented as non-inferiority or downstream benefit. It shows the realized finite-panel trade-off under a tight rank-utility budget. The extension was publicly locked before generation, but it is **not an OSF preregistration**. Protocol lock: `383830dbd7c67f1898e88422bab8a49e5e91e9de`; frozen panel: `f98be71b4402d95a3337dac78f272c3aa55cbd62`; exact per-query replay archive: `d2162d26754917d6b635d23d7d80163d7a00ef2d`; locked aggregate: `a13864d63198fce111651090dcc0924dce644a01`.
+
+A compact recovery that changed tensor/batch composition produced a few different greedy outputs and was excluded. An exact replay preserving all twelve original states per query, their order and batches of four reproduced the original aggregate summaries and raw-output SHA-256 values. The executed path is therefore reported explicitly rather than claiming batch-shape-independent determinism.
+
 ## Generality of the frontier
 
 At the locked 0.1% rank-utility budget:
