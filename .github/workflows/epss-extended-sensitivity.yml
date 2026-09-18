@@ -1,0 +1,124 @@
+name: EPSS extended outcome sensitivity
+on:
+  push:
+    paths:
+      - '.github/workflows/epss-extended-sensitivity.yml'
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download pinned inputs and run frozen analysis
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p inputs out
+          python - <<'PY'
+          import urllib.request, pathlib, hashlib, json
+          files={
+            "epss_2023_03_05.csv.gz":("https://raw.githubusercontent.com/empiricalsec/epss_scores/3b3ae5b793011090800848c75ceea4cecaa9d309/2023/epss_scores-2023-03-05.csv.gz","3ad1f533d7511c544f09be5e054ceba09685653cb3cdaac47859c0dcf5f21188",786067),
+            "epss_2023_03_06.csv.gz":("https://raw.githubusercontent.com/empiricalsec/epss_scores/3b3ae5b793011090800848c75ceea4cecaa9d309/2023/epss_scores-2023-03-06.csv.gz","d83aabcce3bb14b22143736f697798335e97ac31d8acc096a514e1c8e63ceb5d",785972),
+            "epss_2023_03_07.csv.gz":("https://raw.githubusercontent.com/empiricalsec/epss_scores/3b3ae5b793011090800848c75ceea4cecaa9d309/2023/epss_scores-2023-03-07.csv.gz","33aa8ddc141676fde8faedac7024524c3e66fd9524e86785ab524a20a84a875b",1226422),
+            "epss_2023_03_08.csv.gz":("https://raw.githubusercontent.com/empiricalsec/epss_scores/3b3ae5b793011090800848c75ceea4cecaa9d309/2023/epss_scores-2023-03-08.csv.gz","8a57d7759166f4015a0160bf6bcfae7cc8b82457280cef9f1f01536e9dece6b2",1260629),
+            "known_exploited_vulnerabilities.csv":("https://raw.githubusercontent.com/cisagov/kev-data/fea466c2e713d1f44e74c903ad4f60b81470bb22/known_exploited_vulnerabilities.csv","e18d3e843ce865c453bf314931ad5759c32f900ea714b6fced49bd0de63a793a",956599)
+          }
+          manifest={"protocol_id":"RIDI-CYBER-NATURAL-UPDATE-v1","files":{}}
+          for name,(url,sha,nbytes) in files.items():
+              req=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0 RIDI reproducibility"})
+              with urllib.request.urlopen(req,timeout=120) as r: data=r.read()
+              p=pathlib.Path("inputs")/name; p.write_bytes(data)
+              actual=hashlib.sha256(data).hexdigest()
+              if len(data)!=nbytes or actual!=sha:
+                  raise RuntimeError(f"{name}: got bytes={len(data)} sha={actual}")
+              manifest["files"][name]={"bytes":nbytes,"sha256":sha,"url":url}
+              print(name,len(data),actual)
+          pathlib.Path("inputs/manifest.json").write_text(json.dumps(manifest,indent=2))
+          PY
+          python -m pip install --quiet numpy scipy
+          cat > run_epss.py <<'PY'
+          #!/usr/bin/env python3
+          import csv,gzip,hashlib,json
+          from datetime import date
+          from pathlib import Path
+          import numpy as np
+          from scipy.stats import rankdata
+
+          DATES=["2023_03_05","2023_03_06","2023_03_07","2023_03_08"]; K=1000
+          START=date(2023,3,8)
+          WINDOWS={"365":date(2024,3,7),"2_year":date(2025,3,7),"3_year":date(2026,3,7)}
+          EXPECT={"n_candidates":195886,"v2_hits":8,"v3_hits":12}
+          root=Path("inputs")
+          man=json.loads((root/"manifest.json").read_text())
+          def sh(p):
+              h=hashlib.sha256(); h.update(p.read_bytes()); return h.hexdigest()
+          verified={}
+          for name,meta in man["files"].items():
+              p=root/name
+              if p.stat().st_size!=meta["bytes"] or sh(p)!=meta["sha256"]: raise RuntimeError("input mismatch "+name)
+              verified[name]={"bytes":p.stat().st_size,"sha256":sh(p)}
+          def load_epss(p):
+              out={}
+              with gzip.open(p,"rt",encoding="utf-8",newline="") as h:
+                  rd=csv.DictReader(line for line in h if not line.startswith("#"))
+                  for r in rd: out[r["cve"].strip()]=float(r["epss"])
+              return out
+          def load_kev(p):
+              out={}
+              with p.open(encoding="utf-8-sig",newline="") as h:
+                  for r in csv.DictReader(h): out[r["cveID"].strip()]=date.fromisoformat(r["dateAdded"].strip())
+              return out
+          def topk(ids,scores):
+              o=np.lexsort((ids.astype(str),-scores)); return set(map(str,ids[o[:K]]))
+          def auc(labels,scores):
+              pos=int(labels.sum()); neg=len(labels)-pos
+              ranks=rankdata(scores,method="average")
+              return float((ranks[labels].sum()-pos*(pos+1)/2)/(pos*neg)) if pos and neg else None
+          def ap(labels,scores,ids):
+              pos=int(labels.sum())
+              if not pos:return None
+              o=np.lexsort((ids.astype(str),-scores)); y=labels[o].astype(int)
+              pr=np.cumsum(y)/np.arange(1,len(y)+1)
+              return float(pr[y==1].sum()/pos)
+          sm={s:load_epss(root/f"epss_{s}.csv.gz") for s in DATES}
+          kev=load_kev(root/"known_exploited_vulnerabilities.csv")
+          common=set.intersection(*(set(x) for x in sm.values()))
+          prior={c for c,d in kev.items() if d<=date(2023,3,6)}
+          ids=np.asarray(sorted(common-prior),dtype=object)
+          scores={s:np.asarray([sm[s][str(c)] for c in ids],dtype=float) for s in DATES}
+          v2=scores["2023_03_06"]; v3=scores["2023_03_07"]
+          t2=topk(ids,v2); t3=topk(ids,v3); universe=set(map(str,ids))
+          out={"study":"RIDI-EPSS-EXTENDED-OUTCOME-WINDOWS-v1","status":"post_hoc_sensitivity","primary_window_days":365,"input_verification":verified,"n_candidates":len(ids),"windows":{}}
+          for lab,end in WINDOWS.items():
+              pos={c for c,d in kev.items() if START<=d<=end} & universe
+              y=np.asarray([str(c) in pos for c in ids],dtype=bool)
+              out["windows"][lab]={
+                "window_end":end.isoformat(),"n_future_kev_universe":len(pos),
+                "v2_top1000_future_kev":len(t2&pos),"v3_top1000_future_kev":len(t3&pos),
+                "difference_v3_minus_v2":len(t3&pos)-len(t2&pos),
+                "entrants_future_kev":len((t3-t2)&pos),"leavers_future_kev":len((t2-t3)&pos),
+                "retained_future_kev":len((t2&t3)&pos),
+                "v2_full_universe_auroc":auc(y,v2),"v3_full_universe_auroc":auc(y,v3),
+                "v2_full_universe_average_precision":ap(y,v2,ids),"v3_full_universe_average_precision":ap(y,v3,ids)
+              }
+          p=out["windows"]["365"]
+          if len(ids)!=EXPECT["n_candidates"] or p["v2_top1000_future_kev"]!=EXPECT["v2_hits"] or p["v3_top1000_future_kev"]!=EXPECT["v3_hits"]:
+              raise RuntimeError("locked 365-day headline did not reproduce")
+          Path("out/EPSS_extended_outcomes.json").write_text(json.dumps(out,indent=2,sort_keys=True)+"\n")
+          with Path("out/EPSS_extended_outcomes.csv").open("w",newline="") as h:
+              fields=["window","window_end","n_future_kev_universe","v2_top1000_future_kev","v3_top1000_future_kev","difference_v3_minus_v2","entrants_future_kev","leavers_future_kev","retained_future_kev","v2_full_universe_auroc","v3_full_universe_auroc","v2_full_universe_average_precision","v3_full_universe_average_precision"]
+              w=csv.DictWriter(h,fieldnames=fields);w.writeheader()
+              for lab,row in out["windows"].items(): w.writerow({"window":lab,**row})
+          print(json.dumps(out,indent=2))
+          PY
+          python run_epss.py
+          sha256sum inputs/* out/* run_epss.py > out/SHA256SUMS.txt
+      - name: Upload EPSS results
+        uses: actions/upload-artifact@v4
+        with:
+          name: epss-extended-sensitivity
+          path: |
+            out/
+            inputs/manifest.json
+            run_epss.py
+          retention-days: 3
