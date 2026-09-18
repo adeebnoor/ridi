@@ -30,6 +30,23 @@ retained 10 of 12 delayed outcomes, failing the locked 95% retention gate.
 These are decision-system results, not estimates of exploit onset, complete
 ground truth, or representation attribution. See `results/locked_results.json`.
 
+## Post hoc delayed-outcome window sensitivity
+
+On 18 September 2026 the same pinned EPSS score inputs and pinned CISA KEV
+catalogue were reused to extend the delayed-outcome window. The script first
+requires exact reproduction of the locked 365-day headline
+(`n=195,886`, top-1,000 future-KEV counts `8→12`) before reporting any
+longer-window result.
+
+- 365 days: **8→12** (+4); AUROC **0.665→0.610**
+- 2 years: **20→21** (+1); AUROC **0.715→0.683**
+- 3 years: **32→33** (+1); AUROC **0.720→0.695**
+
+Average precision was also lower for v3 at both longer windows. This extension
+is post hoc; it does not replace the registered 365-day primary window. See
+`run_extended_outcome_windows.py` and
+`results/extended_outcome_windows.json`.
+
 ## Blind independent execution
 
 A second team can start with `replication/INSTRUCTIONS.md`. The sealed runner
