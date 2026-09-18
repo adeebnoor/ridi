@@ -46,3 +46,15 @@ The acquisition code is therefore repaired to use the same BEIR topic/qrel filen
 The third full preparation run (`35350211540`) successfully completed all eight locked retrieval jobs (BM25 and SPLADE++ for all four datasets), producing the top-1,000 TREC artifacts. Its assembly jobs then failed before sample selection because a repository-editing operation had inserted a literal `\\n` token into the Python source between `QREL_BASE` and `INDEX_FLAT`, causing a syntax error. No 100-query sample, frontier selection or language-model output was produced by that failure.
 
 The syntax defect was repaired at commit `59c4e145ff2bdfd704a11e26bf6f1bf065979fc3`. To avoid rerunning or changing the already successful retrievals, the next step consumes the immutable retrieval artifacts from run `35350211540` and performs assembly only. The retrieval artifacts themselves are not recomputed.
+
+
+## Gold-source hosting repairs before model generation
+
+The amended assembly succeeded for NQ and SciFact, but the HotpotQA original CMU fullwiki host timed out and the historical FEVER S3 endpoint returned HTTP 403. These are source-host availability failures, not analysis failures, and no Qwen3-8B output has yet been generated.
+
+Before retrying those two datasets, gold acquisition is repaired as follows:
+
+- HotpotQA: use the `hotpotqa/hotpot_qa` Hugging Face dataset's `fullwiki/validation` parquet conversion, retaining the original `id`, `question` and `answer` fields and matching by original question ID first.
+- FEVER: use the `fever/fever` Hugging Face `v1.0/labelled_dev` parquet conversion, retaining original `id`, `claim` and `label`; repeated evidence rows are collapsed only after confirming a single label/claim per ID.
+
+The original benchmark query IDs and retrieval qrels remain those already frozen from Castorini `eval`. No query is selected based on model output. SHA-256 provenance for the downloaded parquet files is recorded in each frozen sample manifest.
