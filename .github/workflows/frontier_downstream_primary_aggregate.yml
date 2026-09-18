@@ -1,0 +1,32 @@
+name: Aggregate frontier downstream primary result
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "experiments/frontier_downstream_rag/results/AGGREGATE_TRIGGER"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  aggregate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy==2.5.3
+      - run: python experiments/frontier_downstream_rag/results/aggregate_primary_results.py
+      - name: Commit aggregate result
+        run: |
+          git config user.name "Prof. Adeeb Noor"
+          git config user.email "adeebnoor@users.noreply.github.com"
+          git add experiments/frontier_downstream_rag/results/primary_replay/PRIMARY_AGGREGATE_RESULTS.json
+          git add experiments/frontier_downstream_rag/results/primary_replay/PRIMARY_AGGREGATE_RESULTS.md
+          git commit -m "Archive locked frontier downstream primary aggregate"
+          git push origin HEAD:main

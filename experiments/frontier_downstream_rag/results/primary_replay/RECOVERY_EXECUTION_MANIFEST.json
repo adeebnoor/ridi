@@ -1,0 +1,371 @@
+{
+  "protocol_id": "RIDI-NATURE-FRONTIER-DOWNSTREAM-v1",
+  "frozen_panel_commit": "f98be71b4402d95a3337dac78f272c3aa55cbd62",
+  "recovery_script_commit": "4fca2cd78941a5613c7a38d733b5b96cb705dfc2",
+  "recovery_note_commit": "521edcc6773c02a70e6105fc09a0853da3cbd6cb",
+  "status": "exact execution-path replay matches completed full-state primary aggregates and raw hashes",
+  "jobs": {
+    "nq": "6aad7a2f51992417dfcc7876",
+    "hotpotqa": "6aad7a3252d0dbd7f1d6b123",
+    "fever": "6aad7a3451992417dfcc7878",
+    "scifact": "6aad7a3651992417dfcc787c"
+  },
+  "datasets": {
+    "nq": {
+      "n": 100,
+      "full_state_summary": {
+        "cells": {
+          "k10_eta_0_0001": {
+            "answer_text_disagreement": 0,
+            "controlled_accuracy_primary": 0.45,
+            "controlled_accuracy_sensitivity": 0.65,
+            "correctness_status_disagreement_primary": 0,
+            "paired_accuracy_difference_primary": 0,
+            "paired_accuracy_difference_sensitivity": 0,
+            "updated_accuracy_primary": 0.45,
+            "updated_accuracy_sensitivity": 0.65
+          },
+          "k10_eta_0_001": {
+            "answer_text_disagreement": 0.02,
+            "controlled_accuracy_primary": 0.46,
+            "controlled_accuracy_sensitivity": 0.66,
+            "correctness_status_disagreement_primary": 0.01,
+            "paired_accuracy_difference_primary": 0.010000000000000009,
+            "paired_accuracy_difference_sensitivity": 0.010000000000000009,
+            "updated_accuracy_primary": 0.45,
+            "updated_accuracy_sensitivity": 0.65
+          },
+          "k20_eta_0_0001": {
+            "answer_text_disagreement": 0,
+            "controlled_accuracy_primary": 0.45,
+            "controlled_accuracy_sensitivity": 0.66,
+            "correctness_status_disagreement_primary": 0,
+            "paired_accuracy_difference_primary": 0,
+            "paired_accuracy_difference_sensitivity": 0,
+            "updated_accuracy_primary": 0.45,
+            "updated_accuracy_sensitivity": 0.66
+          },
+          "k20_eta_0_001": {
+            "answer_text_disagreement": 0.1,
+            "controlled_accuracy_primary": 0.45,
+            "controlled_accuracy_sensitivity": 0.65,
+            "correctness_status_disagreement_primary": 0.02,
+            "paired_accuracy_difference_primary": 0,
+            "paired_accuracy_difference_sensitivity": -0.010000000000000009,
+            "updated_accuracy_primary": 0.45,
+            "updated_accuracy_sensitivity": 0.66
+          },
+          "k5_eta_0_0001": {
+            "answer_text_disagreement": 0,
+            "controlled_accuracy_primary": 0.44,
+            "controlled_accuracy_sensitivity": 0.64,
+            "correctness_status_disagreement_primary": 0,
+            "paired_accuracy_difference_primary": 0,
+            "paired_accuracy_difference_sensitivity": 0,
+            "updated_accuracy_primary": 0.44,
+            "updated_accuracy_sensitivity": 0.64
+          },
+          "k5_eta_0_001": {
+            "answer_text_disagreement": 0.02,
+            "controlled_accuracy_primary": 0.44,
+            "controlled_accuracy_sensitivity": 0.63,
+            "correctness_status_disagreement_primary": 0,
+            "paired_accuracy_difference_primary": 0,
+            "paired_accuracy_difference_sensitivity": -0.010000000000000009,
+            "updated_accuracy_primary": 0.44,
+            "updated_accuracy_sensitivity": 0.64
+          }
+        },
+        "dataset": "nq",
+        "elapsed_seconds": 431.3705334663391,
+        "enable_thinking": false,
+        "environment": {
+          "accelerate": "1.14.0",
+          "cuda": "12.8",
+          "gpu": "NVIDIA A100-SXM4-80GB",
+          "huggingface_hub": "0.36.2",
+          "python": "3.12.14",
+          "torch": "2.11.0+cu128",
+          "transformers": "4.57.6"
+        },
+        "frozen_panel_commit": "f98be71b4402d95a3337dac78f272c3aa55cbd62",
+        "generation_calls": 1200,
+        "max_new_tokens": 128,
+        "model_id": "Qwen/Qwen3-8B",
+        "n": 100,
+        "raw_sha256": "c42fb1c4027c75c0a752f80a46fab591b1443b9ce473345cf6136f057bca356f",
+        "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+        "seed": 20260902,
+        "study": "RIDI-NATURE-FRONTIER-DOWNSTREAM-v1"
+      },
+      "primary_record_count": 100
+    },
+    "hotpotqa": {
+      "n": 100,
+      "full_state_summary": {
+        "cells": {
+          "k10_eta_0_0001": {
+            "answer_text_disagreement": 0,
+            "controlled_accuracy_primary": 0.32,
+            "controlled_accuracy_sensitivity": 0.37,
+            "correctness_status_disagreement_primary": 0,
+            "paired_accuracy_difference_primary": 0,
+            "paired_accuracy_difference_sensitivity": 0,
+            "updated_accuracy_primary": 0.32,
+            "updated_accuracy_sensitivity": 0.37
+          },
+          "k10_eta_0_001": {
+            "answer_text_disagreement": 0.04,
+            "controlled_accuracy_primary": 0.32,
+            "controlled_accuracy_sensitivity": 0.36,
+            "correctness_status_disagreement_primary": 0,
+            "paired_accuracy_difference_primary": 0,
+            "paired_accuracy_difference_sensitivity": -0.010000000000000009,
+            "updated_accuracy_primary": 0.32,
+            "updated_accuracy_sensitivity": 0.37
+          },
+          "k20_eta_0_0001": {
+            "answer_text_disagreement": 0,
+            "controlled_accuracy_primary": 0.33,
+            "controlled_accuracy_sensitivity": 0.37,
+            "correctness_status_disagreement_primary": 0,
+            "paired_accuracy_difference_primary": 0,
+            "paired_accuracy_difference_sensitivity": 0,
+            "updated_accuracy_primary": 0.33,
+            "updated_accuracy_sensitivity": 0.37
+          },
+          "k20_eta_0_001": {
+            "answer_text_disagreement": 0.05,
+            "controlled_accuracy_primary": 0.35,
+            "controlled_accuracy_sensitivity": 0.39,
+            "correctness_status_disagreement_primary": 0.04,
+            "paired_accuracy_difference_primary": 0.019999999999999962,
+            "paired_accuracy_difference_sensitivity": 0.020000000000000018,
+            "updated_accuracy_primary": 0.33,
+            "updated_accuracy_sensitivity": 0.37
+          },
+          "k5_eta_0_0001": {
+            "answer_text_disagreement": 0,
+            "controlled_accuracy_primary": 0.33,
+            "controlled_accuracy_sensitivity": 0.36,
+            "correctness_status_disagreement_primary": 0,
+            "paired_accuracy_difference_primary": 0,
+            "paired_accuracy_difference_sensitivity": 0,
+            "updated_accuracy_primary": 0.33,
+            "updated_accuracy_sensitivity": 0.36
+          },
+          "k5_eta_0_001": {
+            "answer_text_disagreement": 0.02,
+            "controlled_accuracy_primary": 0.32,
+            "controlled_accuracy_sensitivity": 0.35,
+            "correctness_status_disagreement_primary": 0.01,
+            "paired_accuracy_difference_primary": -0.010000000000000009,
+            "paired_accuracy_difference_sensitivity": -0.010000000000000009,
+            "updated_accuracy_primary": 0.33,
+            "updated_accuracy_sensitivity": 0.36
+          }
+        },
+        "dataset": "hotpotqa",
+        "elapsed_seconds": 291.34512734413147,
+        "enable_thinking": false,
+        "environment": {
+          "accelerate": "1.14.0",
+          "cuda": "12.8",
+          "gpu": "NVIDIA A100-SXM4-80GB",
+          "huggingface_hub": "0.36.2",
+          "python": "3.12.14",
+          "torch": "2.11.0+cu128",
+          "transformers": "4.57.6"
+        },
+        "frozen_panel_commit": "f98be71b4402d95a3337dac78f272c3aa55cbd62",
+        "generation_calls": 1200,
+        "max_new_tokens": 128,
+        "model_id": "Qwen/Qwen3-8B",
+        "n": 100,
+        "raw_sha256": "46d14a347d7576eb6fb5ad1f483a7f3a5b5985af00898c3ffefa9cf25b73b924",
+        "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+        "seed": 20260902,
+        "study": "RIDI-NATURE-FRONTIER-DOWNSTREAM-v1"
+      },
+      "primary_record_count": 100
+    },
+    "fever": {
+      "n": 100,
+      "full_state_summary": {
+        "cells": {
+          "k10_eta_0_0001": {
+            "answer_text_disagreement": 0,
+            "controlled_accuracy_primary": 0.82,
+            "controlled_accuracy_sensitivity": 0.82,
+            "correctness_status_disagreement_primary": 0,
+            "paired_accuracy_difference_primary": 0,
+            "paired_accuracy_difference_sensitivity": 0,
+            "updated_accuracy_primary": 0.82,
+            "updated_accuracy_sensitivity": 0.82
+          },
+          "k10_eta_0_001": {
+            "answer_text_disagreement": 0.01,
+            "controlled_accuracy_primary": 0.83,
+            "controlled_accuracy_sensitivity": 0.83,
+            "correctness_status_disagreement_primary": 0.01,
+            "paired_accuracy_difference_primary": 0.010000000000000009,
+            "paired_accuracy_difference_sensitivity": 0.010000000000000009,
+            "updated_accuracy_primary": 0.82,
+            "updated_accuracy_sensitivity": 0.82
+          },
+          "k20_eta_0_0001": {
+            "answer_text_disagreement": 0,
+            "controlled_accuracy_primary": 0.86,
+            "controlled_accuracy_sensitivity": 0.86,
+            "correctness_status_disagreement_primary": 0,
+            "paired_accuracy_difference_primary": 0,
+            "paired_accuracy_difference_sensitivity": 0,
+            "updated_accuracy_primary": 0.86,
+            "updated_accuracy_sensitivity": 0.86
+          },
+          "k20_eta_0_001": {
+            "answer_text_disagreement": 0.05,
+            "controlled_accuracy_primary": 0.85,
+            "controlled_accuracy_sensitivity": 0.85,
+            "correctness_status_disagreement_primary": 0.05,
+            "paired_accuracy_difference_primary": -0.010000000000000009,
+            "paired_accuracy_difference_sensitivity": -0.010000000000000009,
+            "updated_accuracy_primary": 0.86,
+            "updated_accuracy_sensitivity": 0.86
+          },
+          "k5_eta_0_0001": {
+            "answer_text_disagreement": 0,
+            "controlled_accuracy_primary": 0.85,
+            "controlled_accuracy_sensitivity": 0.85,
+            "correctness_status_disagreement_primary": 0,
+            "paired_accuracy_difference_primary": 0,
+            "paired_accuracy_difference_sensitivity": 0,
+            "updated_accuracy_primary": 0.85,
+            "updated_accuracy_sensitivity": 0.85
+          },
+          "k5_eta_0_001": {
+            "answer_text_disagreement": 0.01,
+            "controlled_accuracy_primary": 0.84,
+            "controlled_accuracy_sensitivity": 0.84,
+            "correctness_status_disagreement_primary": 0.01,
+            "paired_accuracy_difference_primary": -0.010000000000000009,
+            "paired_accuracy_difference_sensitivity": -0.010000000000000009,
+            "updated_accuracy_primary": 0.85,
+            "updated_accuracy_sensitivity": 0.85
+          }
+        },
+        "dataset": "fever",
+        "elapsed_seconds": 341.9719514846802,
+        "enable_thinking": false,
+        "environment": {
+          "accelerate": "1.14.0",
+          "cuda": "12.8",
+          "gpu": "NVIDIA A100-SXM4-80GB",
+          "huggingface_hub": "0.36.2",
+          "python": "3.12.14",
+          "torch": "2.11.0+cu128",
+          "transformers": "4.57.6"
+        },
+        "frozen_panel_commit": "f98be71b4402d95a3337dac78f272c3aa55cbd62",
+        "generation_calls": 1200,
+        "max_new_tokens": 128,
+        "model_id": "Qwen/Qwen3-8B",
+        "n": 100,
+        "raw_sha256": "dacc4e9d587ba021d1ce748d8edd39b3fe01e30246ea21406e290ecd371cf5e8",
+        "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+        "seed": 20260902,
+        "study": "RIDI-NATURE-FRONTIER-DOWNSTREAM-v1"
+      },
+      "primary_record_count": 100
+    },
+    "scifact": {
+      "n": 100,
+      "full_state_summary": {
+        "cells": {
+          "k10_eta_0_0001": {
+            "answer_text_disagreement": 0,
+            "controlled_accuracy_primary": 0.7,
+            "controlled_accuracy_sensitivity": 0.7,
+            "correctness_status_disagreement_primary": 0,
+            "paired_accuracy_difference_primary": 0,
+            "paired_accuracy_difference_sensitivity": 0,
+            "updated_accuracy_primary": 0.7,
+            "updated_accuracy_sensitivity": 0.7
+          },
+          "k10_eta_0_001": {
+            "answer_text_disagreement": 0.04,
+            "controlled_accuracy_primary": 0.67,
+            "controlled_accuracy_sensitivity": 0.67,
+            "correctness_status_disagreement_primary": 0.03,
+            "paired_accuracy_difference_primary": -0.029999999999999916,
+            "paired_accuracy_difference_sensitivity": -0.029999999999999916,
+            "updated_accuracy_primary": 0.7,
+            "updated_accuracy_sensitivity": 0.7
+          },
+          "k20_eta_0_0001": {
+            "answer_text_disagreement": 0.02,
+            "controlled_accuracy_primary": 0.67,
+            "controlled_accuracy_sensitivity": 0.67,
+            "correctness_status_disagreement_primary": 0.02,
+            "paired_accuracy_difference_primary": 0,
+            "paired_accuracy_difference_sensitivity": 0,
+            "updated_accuracy_primary": 0.67,
+            "updated_accuracy_sensitivity": 0.67
+          },
+          "k20_eta_0_001": {
+            "answer_text_disagreement": 0.03,
+            "controlled_accuracy_primary": 0.66,
+            "controlled_accuracy_sensitivity": 0.66,
+            "correctness_status_disagreement_primary": 0.03,
+            "paired_accuracy_difference_primary": -0.010000000000000009,
+            "paired_accuracy_difference_sensitivity": -0.010000000000000009,
+            "updated_accuracy_primary": 0.67,
+            "updated_accuracy_sensitivity": 0.67
+          },
+          "k5_eta_0_0001": {
+            "answer_text_disagreement": 0,
+            "controlled_accuracy_primary": 0.69,
+            "controlled_accuracy_sensitivity": 0.69,
+            "correctness_status_disagreement_primary": 0,
+            "paired_accuracy_difference_primary": 0,
+            "paired_accuracy_difference_sensitivity": 0,
+            "updated_accuracy_primary": 0.69,
+            "updated_accuracy_sensitivity": 0.69
+          },
+          "k5_eta_0_001": {
+            "answer_text_disagreement": 0.02,
+            "controlled_accuracy_primary": 0.7,
+            "controlled_accuracy_sensitivity": 0.7,
+            "correctness_status_disagreement_primary": 0.01,
+            "paired_accuracy_difference_primary": 0.010000000000000009,
+            "paired_accuracy_difference_sensitivity": 0.010000000000000009,
+            "updated_accuracy_primary": 0.69,
+            "updated_accuracy_sensitivity": 0.69
+          }
+        },
+        "dataset": "scifact",
+        "elapsed_seconds": 525.880496263504,
+        "enable_thinking": false,
+        "environment": {
+          "accelerate": "1.14.0",
+          "cuda": "12.8",
+          "gpu": "NVIDIA A100-SXM4-80GB",
+          "huggingface_hub": "0.36.2",
+          "python": "3.12.14",
+          "torch": "2.11.0+cu128",
+          "transformers": "4.57.6"
+        },
+        "frozen_panel_commit": "f98be71b4402d95a3337dac78f272c3aa55cbd62",
+        "generation_calls": 1200,
+        "max_new_tokens": 128,
+        "model_id": "Qwen/Qwen3-8B",
+        "n": 100,
+        "raw_sha256": "6d0902082802aa7c05d68c44000c9789c992a23cb3d5a6df427119f10c3c2c11",
+        "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+        "seed": 20260902,
+        "study": "RIDI-NATURE-FRONTIER-DOWNSTREAM-v1"
+      },
+      "primary_record_count": 100
+    }
+  }
+}\n
