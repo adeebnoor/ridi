@@ -1,0 +1,69 @@
+{
+  "protocol_id": "RIDI-CMS-HVBP-TABLE16B-v1",
+  "osf_registration": "https://osf.io/9guc5/",
+  "completed": "2026-09-18",
+  "transitions": {
+    "FY2024_to_FY2025": {
+      "candidate_count": 2377,
+      "observed_replacements": 195,
+      "j_eta_0_001": 174,
+      "utility_regret": 0.0009273454032447684,
+      "unchanged_tps": {
+        "n": 15,
+        "factor_changed_n": 14,
+        "factor_changed_proportion": 0.9333333333333333
+      },
+      "avoidable_entrants_n": 21,
+      "retainable_incumbents_n": 21,
+      "stable_comparison_n": 2335
+    },
+    "FY2025_to_FY2026": {
+      "candidate_count": 2349,
+      "observed_replacements": 202,
+      "j_eta_0_001": 181,
+      "utility_regret": 0.0009921372408863475,
+      "unchanged_tps": {
+        "n": 5,
+        "factor_changed_n": 5,
+        "factor_changed_proportion": 1
+      },
+      "avoidable_entrants_n": 21,
+      "retainable_incumbents_n": 21,
+      "stable_comparison_n": 2307
+    }
+  },
+  "pooled_unchanged_tps": {
+    "n": 20,
+    "factor_changed_n": 19,
+    "factor_changed_proportion": 0.95,
+    "mean_abs_delta_factor": 0.002248527235
+  },
+  "pooled_frontier_displaceable": {
+    "n": 84,
+    "mean_abs_delta_factor": 0.006524793923809524
+  },
+  "pooled_stable_comparison": {
+    "n": 4642,
+    "mean_abs_delta_factor": 0.005504977934575614
+  },
+  "bootstrap": {
+    "draws": 100000,
+    "seed": 20260916,
+    "stratification": "transition",
+    "mean_difference": 0.0010198159892339112,
+    "ci95": [
+      0.00007740307129059688,
+      0.002007883877135269
+    ]
+  },
+  "unmatched_fy2026_tps_only_ccns": [
+    "010087",
+    "050002",
+    "050122",
+    "130049",
+    "150069",
+    "220052",
+    "390057"
+  ],
+  "claim_boundary": "Descriptive factor linkage only; no dollar, causal, patient-outcome, hospital-quality, policy-benefit/harm, or statutory-cutoff claim."
+}
