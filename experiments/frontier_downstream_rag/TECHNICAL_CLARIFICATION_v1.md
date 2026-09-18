@@ -32,3 +32,10 @@ To avoid the Java downloader failure, the new preparation workflow downloads the
 ## Second preparation failure
 
 GitHub Actions run `35349531324` also failed before retrieval because the initially pinned dependency set was internally inconsistent: current Pyserini 2.1.0 requires Transformers >=5, while the first repaired requirements file pinned Transformers 4.57.6. No retrieval command executed and no extension endpoint output was produced. The dependency set was therefore repaired, still before retrieval, to the versions resolved successfully by the immediately preceding Pyserini installation environment: Pyserini 2.1.0, huggingface_hub 1.32.0, Transformers 5.17.0, Torch 2.14.0 and NumPy 2.5.3.
+
+
+## Third preparation failure and upstream repository migration
+
+GitHub Actions run `35349689574` reached the retrieval step after the dependency repair but failed before any TREC output was written because the manually specified topic URL used the historical `castorini/anserini-tools/topics-and-qrels` path, which now returns HTTP 404. Inspection of the upstream GitHub repository showed that `castorini/anserini-tools` has moved to `castorini/eval`, where topics and qrels are stored in separate `topics/` and `qrels/` directories. The exact four BEIR qrel paths were verified as UTF-8 files, and the four topic paths were verified to exist (GitHub rejected only because they are gzip binaries). No retrieval score, frontier result or language-model endpoint output was produced by the failed run.
+
+The acquisition code is therefore repaired to use the same BEIR topic/qrel filenames from the current `castorini/eval` repository. This is an upstream-path migration only; query definitions, sample seed, retrievers, depths, k, eta and endpoints are unchanged.
