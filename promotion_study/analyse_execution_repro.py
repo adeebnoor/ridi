@@ -31,13 +31,13 @@ def main():
     ap=argparse.ArgumentParser();ap.add_argument("raw",nargs="+");ap.add_argument("--out",type=Path,default=Path("AJSE_AGGREGATE.json"));a=ap.parse_args()
     rows=load(a.raw)
     models=sorted(set(r["model"] for r in rows))
-    results={"study":"LLM-EXEC-REPRO-AJSE-v1","models":{},"bootstrap":{"draws":DRAWS,"seed":SEED}}
+    results={"study":"LLM-EXEC-REPRO-AJSE-v1","primary_contrast":"B_vs_C_fixed_batch_size_8","models":{},"bootstrap":{"draws":DRAWS,"seed":SEED}}
     for model in models:
         mr=[r for r in rows if r["model"]==model]
         by={}
         for d in DATASETS:
             rr=[r for r in mr if r["dataset"]==d]
-            f=[flags(r,"A","C") for r in rr]
+            f=[flags(r,"B","C") for r in rr]
             by[d]={"n":len(rr),"A_repeat_failure":sum(not x[0] for x in f),"C_repeat_failure":sum(not x[1] for x in f),
                    "exact_divergence":sum(x[2] for x in f),"exact_rate":rate([x[2] for x in f]),
                    "normalized_divergence":sum(x[3] for x in f),"normalized_rate":rate([x[3] for x in f]),
@@ -49,7 +49,7 @@ def main():
             ers=[];drs=[]
             for d in DATASETS:
                 g=groups[d]; idx=rng.integers(0,len(g),size=len(g)); sample=[g[int(j)] for j in idx]
-                ff=[flags(r,"A","C") for r in sample]; ers.append(rate([x[2] for x in ff]));drs.append(rate([x[4] for x in ff]))
+                ff=[flags(r,"B","C") for r in sample]; ers.append(rate([x[2] for x in ff]));drs.append(rate([x[4] for x in ff]))
             be[i]=rate(ers);bd[i]=rate(drs)
         results["models"][model]={"datasets":by,"macro_exact_rate":macro_exact,"macro_exact_ci95":ci(be),
                                   "macro_decision_rate":macro_dec,"macro_decision_ci95":ci(bd)}
