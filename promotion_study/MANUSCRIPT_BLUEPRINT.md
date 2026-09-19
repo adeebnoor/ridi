@@ -1,7 +1,7 @@
 # MANUSCRIPT BLUEPRINT — AJSE
 
 Working title (result-neutral):
-**Execution-path reproducibility of deterministic large language model inference**
+**Co-tenant composition sensitivity in deterministic large language model inference**
 
 Target length: approximately 5,000–6,000 words plus references.
 
