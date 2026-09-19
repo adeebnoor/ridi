@@ -76,6 +76,7 @@ def main():
     if not torch.cuda.is_available():raise RuntimeError("CUDA required")
     trc = False if a.model_key=="phi35" else True
     tok=AutoTokenizer.from_pretrained(mcfg["id"],revision=mcfg["revision"],trust_remote_code=trc)
+    tok.padding_side="left"
     if tok.pad_token_id is None:tok.pad_token=tok.eos_token
     model=AutoModelForCausalLM.from_pretrained(
       mcfg["id"],revision=mcfg["revision"],torch_dtype=torch.bfloat16,
@@ -85,32 +86,37 @@ def main():
          "accelerate":accelerate.__version__,"huggingface_hub":huggingface_hub.__version__,
          "cuda":torch.version.cuda,"gpu":[torch.cuda.get_device_name(i) for i in range(torch.cuda.device_count())],
          "dtype":str(next(model.parameters()).dtype),"model_id":mcfg["id"],"revision":mcfg["revision"],
-         "deterministic_algorithms":True,"tf32":False}
+         "deterministic_algorithms":True,"tf32":False,"padding_side":tok.padding_side,"execution_batch_size":8}
     print("ENV",json.dumps(env,sort_keys=True),flush=True)
 
     def chat_text(prompt):
         msgs=[{"role":"user","content":prompt}]
         try:return tok.apply_chat_template(msgs,tokenize=False,add_generation_prompt=True)
         except Exception:return prompt
-    recs=[];t0=time.time()
-    for i,r in enumerate(rows,1):
-        text=chat_text(r["prompt"])
-        enc=tok(text,return_tensors="pt",add_special_tokens=False)
+    recs=[];t0=time.time();batch_size=8
+    for start in range(0,len(rows),batch_size):
+        batch=rows[start:start+batch_size]
+        texts=[chat_text(r["prompt"]) for r in batch]
+        enc=tok(texts,return_tensors="pt",padding=True,add_special_tokens=False)
         enc={k:v.to(model.device) for k,v in enc.items()}
         with torch.inference_mode():
             gen=model.generate(**enc,do_sample=False,max_new_tokens=128,pad_token_id=tok.pad_token_id,use_cache=True)
-        tids=gen[0,enc["input_ids"].shape[1]:].tolist()
-        ans=tok.decode(tids,skip_special_tokens=True).strip()
-        labels=[str(x) for x in r["valid_labels"]]; choices={str(k):str(v) for k,v in r["choice_texts"].items()}
-        parsed={name:fn(ans,labels,choices) for name,fn in EVALS.items()}
-        corr={name:(v==r["gold"]) if v is not None else False for name,v in parsed.items()}
-        rec={"study":STUDY,"model_key":a.model_key,"model_id":mcfg["id"],"dataset":r["dataset"],
-             "item_id":r["item_id"],"bbh_task":r.get("bbh_task"),"gold":r["gold"],
-             "valid_labels":labels,"output":ans,"output_sha256":sha_bytes(ans.encode()),
-             "output_token_sha256":sha_bytes(json.dumps(tids,separators=(",",":")).encode()),
-             "parsed":parsed,"correct":corr,"output_tokens":len(tids)}
-        recs.append(rec)
-        if i%50==0:print("PROGRESS",a.model_key,i,len(rows),round(time.time()-t0,1),flush=True)
+        plen=enc["input_ids"].shape[1]
+        for bi,r in enumerate(batch):
+            tids=gen[bi,plen:].tolist()
+            ans=tok.decode(tids,skip_special_tokens=True).strip()
+            labels=[str(x) for x in r["valid_labels"]]; choices={str(k):str(v) for k,v in r["choice_texts"].items()}
+            parsed={name:fn(ans,labels,choices) for name,fn in EVALS.items()}
+            corr={name:(v==r["gold"]) if v is not None else False for name,v in parsed.items()}
+            rec={"study":STUDY,"model_key":a.model_key,"model_id":mcfg["id"],"dataset":r["dataset"],
+                 "item_id":r["item_id"],"bbh_task":r.get("bbh_task"),"gold":r["gold"],
+                 "valid_labels":labels,"output":ans,"output_sha256":sha_bytes(ans.encode()),
+                 "output_token_sha256":sha_bytes(json.dumps(tids,separators=(",",":")).encode()),
+                 "parsed":parsed,"correct":corr,"output_tokens":len(tids),
+                 "execution_batch_size":batch_size,"execution_batch_index":start//batch_size}
+            recs.append(rec)
+        done=min(start+batch_size,len(rows))
+        if done%200==0 or done==len(rows):print("PROGRESS",a.model_key,done,len(rows),round(time.time()-t0,1),flush=True)
 
     rawp=outdir/f"{a.model_key}_records.jsonl"
     with rawp.open("w",encoding="utf-8") as f:
