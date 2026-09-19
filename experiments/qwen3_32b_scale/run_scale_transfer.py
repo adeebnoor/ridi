@@ -109,7 +109,7 @@ def main():
   ds=by_id(c["datasets"],dname)
   corpus,queries,qrels,_=load_beir(root/ds["data_dir"])
   gold=load_gold(root/ds["gold_file"])
-  all_runs={rid:load_run(root,rp,"trec") for rid,rp in ds["runs"].items()}
+  all_runs={rid:load_run(root/rp,"trec") for rid,rp in ds["runs"].items()}
   panel=select_universal_panel(all_runs,queries,qrels,c["panel_ks"],c["pool_depth"],ds["panel_n"])
   assert len(panel)==EXPECTED_N[dname]
   pz=zipfile.ZipFile(io.BytesIO(primary_zip))
