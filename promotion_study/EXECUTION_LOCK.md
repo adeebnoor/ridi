@@ -51,3 +51,21 @@ Mistral-7B-Instruct-v0.3:
 - overall plan-hash manifest: `170e21681dfd21ac6d8a0842de093f36f8cdda8a6c2688f941d7dcb7cda8523f`
 
 The execution runner hard-fails if the reconstructed overall companion plan does not match the corresponding model-specific hash.
+
+
+## Primary execution hardware lock
+
+Primary endpoint generation is fixed to:
+- one **NVIDIA A100-SXM4-80GB** accelerator per job;
+- no tensor parallelism;
+- bfloat16 model parameters;
+- no weight or activation quantization;
+- PyTorch 2.11.0 + CUDA 12.8 wheels;
+- transformers 4.57.6;
+- accelerate 1.14.0;
+- huggingface_hub 0.36.2;
+- deterministic PyTorch algorithms enabled;
+- TF32 disabled;
+- CUBLAS_WORKSPACE_CONFIG=:4096:8.
+
+The provider driver version and full runtime environment are recorded at execution. If A100-SXM4-80GB cannot be obtained, hardware must not be silently substituted; any change requires a public pre-output amendment before model generation.
