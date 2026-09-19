@@ -17,6 +17,10 @@ MODELS={
  "qwen25_7b":("Qwen/Qwen2.5-7B-Instruct","a09a35458c702b33eeacc393d103063234e8bc28"),
  "mistral7b_v03":("mistralai/Mistral-7B-Instruct-v0.3","c170c708c41dac9275d15a8fff4eca08d52bab71"),
 }
+EXPECTED_PLAN_SHA={
+ "qwen25_7b":"ad0f3e21478385029811e8d18482c841ea1118139a0ca819a4b89e8f56ec0be1",
+ "mistral7b_v03":"170e21681dfd21ac6d8a0842de093f36f8cdda8a6c2688f941d7dcb7cda8523f",
+}
 LETTERS="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 def sha_bytes(b): return hashlib.sha256(b).hexdigest()
@@ -141,6 +145,8 @@ def main():
         prepared[key]=(ids,prompt_map,row_map,lengths,plans)
         plan_hashes[key]=ph
     plan_manifest_sha=sha_text(json.dumps(plan_hashes,sort_keys=True,separators=(",",":")))
+    if plan_manifest_sha!=EXPECTED_PLAN_SHA[a.model]:
+        raise RuntimeError(f"Companion-plan SHA mismatch {plan_manifest_sha} != {EXPECTED_PLAN_SHA[a.model]}")
     print("COMPANION_PLAN_SHA256",plan_manifest_sha,json.dumps(plan_hashes,sort_keys=True),flush=True)
 
     set_determinism()
