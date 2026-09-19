@@ -74,11 +74,12 @@ def main():
     torch.use_deterministic_algorithms(True)
     torch.backends.cuda.matmul.allow_tf32=False;torch.backends.cudnn.allow_tf32=False
     if not torch.cuda.is_available():raise RuntimeError("CUDA required")
-    tok=AutoTokenizer.from_pretrained(mcfg["id"],revision=mcfg["revision"],trust_remote_code=True)
+    trc = False if a.model_key=="phi35" else True
+    tok=AutoTokenizer.from_pretrained(mcfg["id"],revision=mcfg["revision"],trust_remote_code=trc)
     if tok.pad_token_id is None:tok.pad_token=tok.eos_token
     model=AutoModelForCausalLM.from_pretrained(
       mcfg["id"],revision=mcfg["revision"],torch_dtype=torch.bfloat16,
-      device_map="auto",trust_remote_code=True)
+      device_map="auto",trust_remote_code=trc)
     model.eval()
     env={"python":sys.version.split()[0],"torch":torch.__version__,"transformers":transformers.__version__,
          "accelerate":accelerate.__version__,"huggingface_hub":huggingface_hub.__version__,
