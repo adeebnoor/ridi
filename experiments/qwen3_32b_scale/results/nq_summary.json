@@ -1,0 +1,42 @@
+{
+  "canonical_change_rate": 0.588,
+  "canonical_changes": 147,
+  "control_zip_sha256": "4b5bc603fcbd5165766beabc05d17ec7e0cefa6e0d8c9c47fd65b06eca61c864",
+  "correct_to_wrong": 22,
+  "dataset": "nq",
+  "elapsed_seconds": 897.242933511734,
+  "enable_thinking": false,
+  "environment": {
+    "accelerate": "1.14.0",
+    "cublas_workspace_config": ":4096:8",
+    "cuda": "12.8",
+    "deterministic_algorithms": true,
+    "do_sample": false,
+    "gpu": [
+      "NVIDIA A100-SXM4-80GB"
+    ],
+    "huggingface_hub": "0.36.2",
+    "parameter_dtype": "torch.bfloat16",
+    "python": "3.12.14",
+    "tf32": false,
+    "torch": "2.11.0+cu128",
+    "transformers": "4.57.6"
+  },
+  "flips": 37,
+  "max_new_tokens": 128,
+  "model_id": "Qwen/Qwen3-32B",
+  "n": 250,
+  "primary_results_zip_sha256": "c19942d0eb4a0087195c46a45831a1cf864676b813485dcf4e5565a2a676f231",
+  "prompt_manifest_sha256": "78f32c89197c3f46fa405000a0d99664c975e9b52d0136c239407ac7a4b75330",
+  "qwen8_flips_same_queries": 49,
+  "qwen8_rate_same_queries": 0.196,
+  "rate": 0.148,
+  "raw_sha256": "86f02e057876f1350c24f078cb71d59ae499b3c7731411b4aa945d7eb5e0f697",
+  "revision": "9216db5781bf21249d130ec9da846c4624c16137",
+  "seed": 20260902,
+  "source_data_zip_sha256": "5b1e813b5e486f9c588c0a73a3d04a1402f4959d991a1c1631fa007f8559bc13",
+  "study": "RIDI-RAG-QWEN3-32B-SCALE-v1",
+  "wrong_to_correct": 15,
+  "hf_job_id": "6aae4c6651992417dfcc9199",
+  "result_zip_sha256": "a0965a8268247edb1e3c5c2795040456d930a00149827a73779c37fa497f4d7c"
+}
