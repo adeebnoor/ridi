@@ -17,7 +17,7 @@ MODELS={
  "qwen25_7b":("Qwen/Qwen2.5-7B-Instruct","a09a35458c702b33eeacc393d103063234e8bc28"),
  "mistral7b_v03":("mistralai/Mistral-7B-Instruct-v0.3","c170c708c41dac9275d15a8fff4eca08d52bab71"),
 }
-LETTERS="ABCDEFGHIJ"
+LETTERS="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 def sha_bytes(b): return hashlib.sha256(b).hexdigest()
 def sha_text(s): return sha_bytes(s.encode("utf-8"))
