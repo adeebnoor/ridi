@@ -1,7 +1,7 @@
 # MANUSCRIPT BLUEPRINT — JKSUCIS
 
 Working title (result-neutral):
-**Evaluator sensitivity in language-model benchmarking: A controlled study with fixed model outputs**
+**Evaluator-specification robustness in language-model benchmarking: A controlled fixed-output study**
 
 Target: ≤6,000 words, double-anonymized main manuscript.
 
@@ -34,7 +34,7 @@ Predeclared conclusion hierarchy retained even if reversal count is zero.
 ## 5. Results
 5.1 Output/evaluator resolution rates.
 5.2 Absolute score sensitivity.
-5.3 Pairwise model-ranking stability/reversals.
+5.3 Pairwise evaluator-specification difference intervals and robust ordering.\n5.4 Strict ranking reversals as the strongest sensitivity subtype.
 5.4 Which output forms create evaluator disagreement.
 5.5 Robustness across evaluators E3–E5.
 
