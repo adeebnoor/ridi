@@ -1,0 +1,29 @@
+name: Aggregate Qwen3-32B scale transfer
+on:
+  push:
+    branches: [main]
+    paths:
+      - "experiments/qwen3_32b_scale/results/AGGREGATE_TRIGGER"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  aggregate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy==2.5.3
+      - run: python experiments/qwen3_32b_scale/aggregate_scale_results.py
+      - name: Commit result
+        run: |
+          git config user.name "Prof. Adeeb Noor"
+          git config user.email "adeebnoor@users.noreply.github.com"
+          git add experiments/qwen3_32b_scale/results/QWEN3_32B_SCALE_AGGREGATE.json
+          git add experiments/qwen3_32b_scale/results/QWEN3_32B_SCALE_AGGREGATE.md
+          git commit -m "Archive locked Qwen3-32B scale-transfer aggregate"
+          git push origin HEAD:main
