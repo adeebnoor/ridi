@@ -1,0 +1,41 @@
+{
+  "bbh_tasks": [
+    "date_understanding",
+    "disambiguation_qa",
+    "geometric_shapes",
+    "logical_deduction_five_objects",
+    "movie_recommendation",
+    "ruin_names",
+    "salient_translation_error_detection",
+    "temporal_sequences"
+  ],
+  "created_pre_output": true,
+  "dataset_revisions": {
+    "arc_challenge": "210d026faf9955653af8916fad021475a3f00453",
+    "bbh": "982bb89fd79532a8ac676a61fc42eb1aeec63f99",
+    "commonsenseqa": "94630fe30dad47192a8546eb75f094926d47e155",
+    "openbookqa": "388097ea7776314e93a529163e0fea805b8a6454"
+  },
+  "panel_sha256": "6f95c4eafe0f781a4883af15dd43caec6c15f8a52810e8cc120477cb932b5be7",
+  "prompt_sha256_by_dataset": {
+    "arc_challenge": "4f57af7c21d5bca1306c8b94a2b2b81634676cc519dd6328a6671d7e4c15bdfe",
+    "bbh": "81ff9dfbd11be6c3981dcff78ddbf47e65d54e7c5f1dd4b6151daa05735b9dc6",
+    "commonsenseqa": "6f79aabe66e0db6683cc09cdadad8be1f09302577a4901ad326235484a685d98",
+    "openbookqa": "d9099c86ca7558cacecb109978f66439a03fe1cdba097ae0dfba64a26233e6eb"
+  },
+  "rows": 1000,
+  "seed": 20260919,
+  "splits": {
+    "arc_challenge": "test",
+    "bbh": "test",
+    "commonsenseqa": "validation",
+    "openbookqa": "test"
+  },
+  "study": "LLM-EVAL-RELIABILITY-JKSU-v1",
+  "targets": {
+    "arc_challenge": 250,
+    "bbh": 250,
+    "commonsenseqa": 250,
+    "openbookqa": 250
+  }
+}

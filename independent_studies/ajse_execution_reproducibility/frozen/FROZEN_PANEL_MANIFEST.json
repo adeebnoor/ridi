@@ -1,0 +1,27 @@
+{
+  "created_pre_output": true,
+  "dataset_revisions": {
+    "gsm8k": "740312add88f781978c0658806c59bc2815b9866",
+    "mmlu_pro": "b189ec765aa7ed75c8acfea42df31fdae71f97be"
+  },
+  "panel_sha256": "f6da38c2e2a2504b2f61c6a65087ae4b448fae0e269ae934f4c69f13f48f80e8",
+  "prompt_sha256_by_dataset": {
+    "gsm8k": "6ef233b4bceb7cfcf7772d19bff9ec3d80216111371588c332c733074a37faff",
+    "mmlu_pro": "04d0acfe2204aa4e5cf6e238f268896e27524afe77be774bfce0f256b637fd9c"
+  },
+  "prompt_template_component_sha256": {
+    "gsm8k": "1147c9e70500f56a625e1cb8cb859a343e0cb516a8eaa29a8056d7ad48d8456b",
+    "mmlu_pro": "88cda194482e6cf3021a051bcf4e827abb357ff8a57a44b0a233c9c727018ccc"
+  },
+  "rows": 304,
+  "seed": 20260919,
+  "study": "LLM-EXEC-REPRO-AJSE-v1",
+  "support_anchors": {
+    "gsm8k": 2,
+    "mmlu_pro": 2
+  },
+  "targets": {
+    "gsm8k": 150,
+    "mmlu_pro": 150
+  }
+}
