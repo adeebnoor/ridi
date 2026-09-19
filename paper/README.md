@@ -105,6 +105,24 @@ The linkage is descriptive. It does not estimate dollar revenue, attribute facto
 
 Before acquiring any pre-COVID hospital-level TPS values, official CMS programme/final-rule records were screened for consecutive FY2017–FY2021 pairs under a strict like-for-like rule requiring the same measure set, domain structure/weights and material performance-period/scoring definitions. **No pair qualified** under that strict methodology screen. A separate historical extension was then **publicly locked before historical hospital-level TPS acquisition** as `RIDI-CMS-HVBP-HISTORICAL-EXTENSION-v1` (protocol/code commit `5f151cbe3e2c2dfbe06fdb901289c32314472eb4`). The lock prespecified the official CMS archive endpoint, deterministic fiscal-year snapshot rule, `k={100,500,1000}`, `eta={0,0.0001,0.001}`, tie breaking, all-ties sensitivity and failure rules. Its first automated execution (GitHub Actions run `35339908821`) recovered FY2021 TPS but **no adjacent pre-pause TPS pair** under the locked source rule: FY2017 and FY2018 had no theme-level archive snapshot in the prespecified fiscal-year windows, and the selected FY2019/FY2020 archives contained no `hvbp_tps.csv`. The protocol forbade switching archive dates or substitute sources after execution, so no historical turnover estimate was generated. The execution record/results are archived at commit `2d69ba1aa063da229a10a6dc9c7d241cc7ee7a12` (artifact SHA-256 `26ddf7a0feb32d5fb3ccc871b3c298a7a97dc7d9405683591707a2106fe19072`). This is a timestamped public outcome-naive lock, **not** an OSF preregistration and not a retroactive registration of the original FY2024–FY2026 TPS/frontier analysis. CMS also did not calculate a TPS for FY2022 or FY2023 after measure suppressions/pauses, and Table 16B was not necessary in either year. The manuscript therefore treats the two analysed post-pause transitions as finite descriptive observations, not a long-run annual turnover rate.
 
+## Qwen3-32B scale transfer
+
+A separately public-locked post hoc scale-transfer repeated the frozen 800-query primary RAG contrast with Qwen3-32B revision `9216db5781bf21249d130ec9da846c4624c16137`, changing only model scale within the Qwen3 family. All registered query panels, BM25/k=10 contexts, reference/random document identities, prompt bytes, 128-token limit, thinking-disabled greedy decoding, seed and frozen scorer were retained.
+
+- Natural Questions: **37/250 (14.8%)**
+- HotpotQA: **25/250 (10.0%)**
+- FEVER: **13/150 (8.67%)**
+- SciFact: **24/150 (16.0%)**
+- Equal-dataset-weight macro: **12.37%** (100,000-draw stratified-bootstrap 95% interval **10.07–14.77%**)
+- Same-query Qwen3-8B macro: **17.27%**
+- Paired 32B−8B difference: **−4.90 percentage points** (95% interval **−7.77 to −2.03**)
+- Directional 32B changes: **50 correct→wrong / 49 wrong→correct**
+- Canonical-output divergence: **32.70%** (95% interval **29.83–35.63%**)
+
+The public pre-output protocol defined **≥5%** as support for scale transfer, **<2%** as falsification of the strong scale-transfer consequence and 2–<5% as inconclusive. The observed 12.37% therefore supports persistence at 32B. The lower magnitude than at 8B rejects any claim of scale invariance. This is a post hoc, publicly locked extension rather than an OSF preregistration, and it does not establish behavior for proprietary or arbitrary large models.
+
+Protocol lock: `266b9f1e6dcbe8f4dc3feb1bd279c18af2564954`. Locked aggregate: `63152b13610b2a0df7e4947912c8e15ab7dd0db5`.
+
 ## Prospective frontier-to-downstream control
 
 A separate public lock tested the frontier as an end-to-end intervention after a real retriever update. Before Qwen3-8B generation, 400 queries (100 each Natural Questions, HotpotQA, FEVER and SciFact) were frozen from a **common-retrievable** candidate universe: the intersection of BM25 and SPLADE++ top-1,000 candidates. The primary cell was `k=10, eta=0.001`.
