@@ -4,7 +4,7 @@ import re,unicodedata
 
 def _norm(s):
     s=unicodedata.normalize("NFKC",s).casefold()
-    s=re.sub(r"[\`*_#]+","",s)
+    s=re.sub(r"[`*_#]+","",s)
     s=re.sub(r"\s+"," ",s).strip()
     return s
 
@@ -49,9 +49,9 @@ def e3_last_valid(text,task,labels,option_texts):
 
 def e4_wrapper_tolerant(text,task,labels,option_texts):
     valid=_valid_set(task,labels);found=None
-    pat=r"(?im)^\s*(?:\*\*|__|\`)?\s*FINAL\s*(?:ANSWER)?\s*[:=\-]\s*(.+?)\s*(?:\*\*|__|\`)?\s*$"
+    pat=r"(?im)^\s*(?:\*\*|__|`)?\s*FINAL\s*(?:ANSWER)?\s*[:=\-]\s*(.+?)\s*(?:\*\*|__|`)?\s*$"
     for m in re.finditer(pat,text):
-        p=m.group(1).strip().strip("\`*_[](){}<> \t\r\n.!?")
+        p=m.group(1).strip().strip("`*_[](){}<> \t\r\n.!?")
         if task=="bool":
             mm=re.search(r"(?i)\b(yes|no)\b",p)
             if mm:found=mm.group(1).casefold()
