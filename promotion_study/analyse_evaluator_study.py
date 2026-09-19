@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse,itertools,json
 from pathlib import Path
 import numpy as np
+from robustness import classify_differences,score_width
 
 SEED=20260919
 DRAWS=100000
@@ -36,7 +37,7 @@ def main():
             accs=[evalstats[e]["accuracy"] for e in EVALS]
             cell[m][d]={
               "n":len(rr),"evaluators":evalstats,
-              "evaluator_score_width":max(accs)-min(accs),
+              "evaluator_score_width":score_width(accs),
               "E1_E2_disagreement":rate([r["decisions"]["E1"]!=r["decisions"]["E2"] for r in rr])
             }
 
@@ -52,9 +53,11 @@ def main():
                 a1=np.asarray([int(bymd[(m1,d)][i]["correct"][e]) for i in common],dtype=float)
                 a2=np.asarray([int(bymd[(m2,d)][i]["correct"][e]) for i in common],dtype=float)
                 arrays[e]=(a1,a2);observed_diffs[e]=float((a1-a2).mean())
-            vals=list(observed_diffs.values());lo=min(vals);hi=max(vals)
-            sensitive=(lo<=0<=hi);strict_reversal=(lo<0<hi)
-            robust_direction=("m1_over_m2" if lo>0 else ("m2_over_m1" if hi<0 else None))
+            cert=classify_differences(m1,m2,d,observed_diffs)
+            lo,hi=cert["difference_interval"]
+            sensitive=cert["evaluator_specification_sensitive"]
+            strict_reversal=cert["strict_ranking_reversal"]
+            robust_direction=cert["robust_direction"]
             boot={e:np.empty(DRAWS) for e in EVALS}
             b_sensitive=np.empty(DRAWS,dtype=float);b_reversal=np.empty(DRAWS,dtype=float)
             for start in range(0,DRAWS,1000):
@@ -66,13 +69,8 @@ def main():
                 b_sensitive[start:start+k]=(blo<=0)&(bhi>=0)
                 b_reversal[start:start+k]=(blo<0)&(bhi>0)
             pairwise.append({
-              "dataset":d,"model1":m1,"model2":m2,
-              "evaluator_differences":observed_diffs,
+              **cert,
               "evaluator_difference_ci95":{e:ci(boot[e]) for e in EVALS},
-              "difference_interval":[lo,hi],
-              "evaluator_specification_sensitive":sensitive,
-              "strict_ranking_reversal":strict_reversal,
-              "robust_direction":robust_direction,
               "bootstrap_sensitive_frequency":float(b_sensitive.mean()),
               "bootstrap_strict_reversal_frequency":float(b_reversal.mean()),
               "E1_vs_E2_special_case_reversal":sign(observed_diffs["E1"])*sign(observed_diffs["E2"])==-1
@@ -95,7 +93,7 @@ def main():
     reversal_n=sum(x["strict_ranking_reversal"] for x in pairwise)
     widths=[cell[m][d]["evaluator_score_width"] for m in models for d in DATASETS]
     out={
-      "study":"EVAL-RANK-JKSUCIS-v1",
+      "study":"EVAL-RANK-JKSUCIS-v1","certificate_version":"ESR-v1",
       "amendment":"evaluator-specification robustness across frozen E1-E5 set",
       "bootstrap":{"draws":DRAWS,"seed":SEED,"unit":"frozen item within benchmark"},
       "models":models,"cells":cell,"pairwise":pairwise,
