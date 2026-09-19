@@ -32,3 +32,14 @@ The 1,000-item panel was frozen before any model generation.
 - top-level frozen-manifest SHA-256 `e5312700b428fc11ce3edb5e6e2a5efe4f86e31335be705b954e4e769b1962a3`
 
 Reconstruction rule: derive the study-defined stable ID and canonical row SHA-256 for every row, sort by stable ID, then select 250 without replacement using NumPy `default_rng(20260919)`. The same RNG instance is advanced dataset-by-dataset in the protocol order CommonsenseQA, OpenBookQA, HellaSwag, BoolQ. The runner must reproduce every per-dataset hash above before loading a model.
+
+## Frozen generation path and evaluator code
+
+- generation batch size: **1** for every model/item;
+- one raw generation per model/item is reused by all five evaluators;
+- greedy decoding, max_new_tokens=96, seed=20260919;
+- evaluator implementation is frozen in `promotion_study/evaluators.py` before any endpoint generation;
+- evaluator unit tests must pass before execution;
+- unresolved evaluator outputs count as incorrect for benchmark accuracy and are also reported separately.
+
+The evaluation treatment never triggers regeneration, so evaluator comparisons operate on byte-identical raw model output.
