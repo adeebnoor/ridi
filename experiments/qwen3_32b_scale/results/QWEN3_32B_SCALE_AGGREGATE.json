@@ -1,0 +1,129 @@
+{
+  "bootstrap": {
+    "draws": 100000,
+    "seed": 20260919,
+    "stratification": "resample queries with replacement within each dataset; equal weight across four dataset rates"
+  },
+  "claim_boundary": "Scale robustness within one open-weight Qwen3 family at 32B. Does not establish behavior for proprietary models, all large models, all prompts, or all retrieval settings.",
+  "dataset": {
+    "fever": {
+      "both_flip": 6,
+      "canonical_change_rate": 0.1,
+      "canonical_changes": 15,
+      "correct_to_wrong": 9,
+      "n": 150,
+      "neither_flip": 124,
+      "paired_rate_difference_32_minus_8": -0.04,
+      "qwen32_flips": 13,
+      "qwen32_only_flip": 7,
+      "qwen32_rate": 0.08666666666666667,
+      "qwen8_flips": 19,
+      "qwen8_only_flip": 13,
+      "qwen8_rate": 0.12666666666666668,
+      "wrong_to_correct": 4
+    },
+    "hotpotqa": {
+      "both_flip": 8,
+      "canonical_change_rate": 0.44,
+      "canonical_changes": 110,
+      "correct_to_wrong": 12,
+      "n": 250,
+      "neither_flip": 206,
+      "paired_rate_difference_32_minus_8": -0.008,
+      "qwen32_flips": 25,
+      "qwen32_only_flip": 17,
+      "qwen32_rate": 0.1,
+      "qwen8_flips": 27,
+      "qwen8_only_flip": 19,
+      "qwen8_rate": 0.108,
+      "wrong_to_correct": 13
+    },
+    "nq": {
+      "both_flip": 22,
+      "canonical_change_rate": 0.588,
+      "canonical_changes": 147,
+      "correct_to_wrong": 22,
+      "n": 250,
+      "neither_flip": 186,
+      "paired_rate_difference_32_minus_8": -0.048,
+      "qwen32_flips": 37,
+      "qwen32_only_flip": 15,
+      "qwen32_rate": 0.148,
+      "qwen8_flips": 49,
+      "qwen8_only_flip": 27,
+      "qwen8_rate": 0.196,
+      "wrong_to_correct": 15
+    },
+    "scifact": {
+      "both_flip": 16,
+      "canonical_change_rate": 0.18,
+      "canonical_changes": 27,
+      "correct_to_wrong": 7,
+      "n": 150,
+      "neither_flip": 103,
+      "paired_rate_difference_32_minus_8": -0.1,
+      "qwen32_flips": 24,
+      "qwen32_only_flip": 8,
+      "qwen32_rate": 0.16,
+      "qwen8_flips": 39,
+      "qwen8_only_flip": 23,
+      "qwen8_rate": 0.26,
+      "wrong_to_correct": 17
+    }
+  },
+  "decision": "supports transfer",
+  "decision_boundaries": {
+    "falsify_macro_lt": 0.02,
+    "otherwise": "inconclusive",
+    "support_macro_gte": 0.05
+  },
+  "equal_dataset_weight_macro": {
+    "canonical_change_rate": 0.327,
+    "canonical_change_rate_ci95": [
+      0.29833333333333334,
+      0.3563333333333334
+    ],
+    "correct_to_wrong": 50,
+    "paired_difference_32_minus_8": -0.04899999999999999,
+    "paired_difference_ci95": [
+      -0.07766666666666669,
+      -0.02033333333333337
+    ],
+    "qwen32_ci95": [
+      0.10066666666666667,
+      0.14766666666666667
+    ],
+    "qwen32_flips_pooled": 99,
+    "qwen32_rate": 0.12366666666666667,
+    "qwen8_ci95_recomputed": [
+      0.14633333333333332,
+      0.2
+    ],
+    "qwen8_flips_pooled": 134,
+    "qwen8_rate_same_queries": 0.17266666666666666,
+    "wrong_to_correct": 49
+  },
+  "frozen_design": {
+    "datasets": {
+      "fever": 150,
+      "hotpotqa": 250,
+      "nq": 250,
+      "scifact": 150
+    },
+    "decoding": "greedy",
+    "intervention": "same registered random metric-zero identity substitution",
+    "k": 10,
+    "max_new_tokens": 128,
+    "n_queries": 800,
+    "retriever": "BM25",
+    "seed": 20260902,
+    "thinking": false
+  },
+  "model": {
+    "id": "Qwen/Qwen3-32B",
+    "revision": "9216db5781bf21249d130ec9da846c4624c16137"
+  },
+  "registration_status": "post hoc scale-transfer extension, publicly locked before successful Qwen3-32B generation; not OSF preregistered",
+  "status": "completed",
+  "study": "RIDI-RAG-QWEN3-32B-SCALE-v1"
+}
