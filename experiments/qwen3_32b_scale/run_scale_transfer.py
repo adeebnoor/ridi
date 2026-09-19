@@ -32,12 +32,15 @@ def sha_file(p:Path)->str:
   for x in iter(lambda:f.read(1<<20),b""):h.update(x)
  return h.hexdigest()
 
-def fire_bytes(slug:str)->bytes:
+def fire_bytes(slug:str, expected_name:str|None=None)->bytes:
  u=f"{FIRE_API}/{slug}"
  req=urllib.request.Request(u+"/files?maxResults=1000",headers={"User-Agent":"RIDI-Qwen32-scale/1.0"})
  listing=json.load(urllib.request.urlopen(req,timeout=60))
  files=listing.get("files",[])
- if len(files)!=1: raise RuntimeError(f"share {slug}: expected one file, got {[x.get('fileName') for x in files]}")
+ if expected_name is not None:
+  files=[x for x in files if x.get("fileName")==expected_name]
+ if len(files)!=1:
+  raise RuntimeError(f"share {slug}: expected one matching file {expected_name!r}, got {[x.get('fileName') for x in files]}")
  fid=files[0]["fileId"]
  req=urllib.request.Request(u+f"/files/{fid}/download",data=b"",method="POST",headers={"User-Agent":"RIDI-Qwen32-scale/1.0"})
  meta=json.load(urllib.request.urlopen(req,timeout=60))
@@ -56,9 +59,9 @@ def main():
  a=ap.parse_args(); dname=a.dataset
  a.out.mkdir(parents=True,exist_ok=True)
  print("SOURCE_TRANSFER_START",dname,flush=True)
- control=fire_bytes(a.control_share)
+ control=fire_bytes(a.control_share,"RIDI_RAG_NATURE_CONTROL_POSTREG_20260902.zip")
  data_zip=download_join(a.data_share)
- primary_zip=fire_bytes(a.primary_results_share)
+ primary_zip=fire_bytes(a.primary_results_share,"RIDI_RAG_RESULTS__PRIMARY_H1_H2.zip")
  assert sha_bytes(control)==CONTROL_SHA,(sha_bytes(control),CONTROL_SHA)
  assert sha_bytes(data_zip)==DATA_SHA[dname],(sha_bytes(data_zip),DATA_SHA[dname])
  assert sha_bytes(primary_zip)==PRIMARY_RESULTS_SHA,(sha_bytes(primary_zip),PRIMARY_RESULTS_SHA)
