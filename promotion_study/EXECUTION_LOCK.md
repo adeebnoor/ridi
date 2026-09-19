@@ -19,3 +19,16 @@ These revisions were resolved before any model generation for this study.
 The run must abort if any revision differs from this lock.
 One raw generation per model/item is shared by all evaluators.
 No Nature-main or AJSE empirical output may be imported.
+
+
+## Frozen sample manifest
+
+The 1,000-item panel was frozen before any model generation.
+
+- CommonsenseQA: population 1,221; selected 250; selected-manifest SHA-256 `1c03091e297f8b046bc00a9d9b038a51336df0ee9295fd33cb3b84ed2168cbc7`
+- OpenBookQA: population 500; selected 250; SHA-256 `362801e4353ac9a4cc911a5cca9f8bb9fff8a61bbf57fd4a5b400c04aaf1bb43`
+- HellaSwag: population 10,042; selected 250; SHA-256 `00ef02b156210ce9201508e7d77e28c97774f5d54388e32f11423673e554d816`
+- BoolQ: population 3,270; selected 250; SHA-256 `e08437f808e9a8fe9c9f8c5aca6cea30875c5560ba3500c2c5529183608b440c`
+- top-level frozen-manifest SHA-256 `e5312700b428fc11ce3edb5e6e2a5efe4f86e31335be705b954e4e769b1962a3`
+
+Reconstruction rule: derive the study-defined stable ID and canonical row SHA-256 for every row, sort by stable ID, then select 250 without replacement using NumPy `default_rng(20260919)`. The same RNG instance is advanced dataset-by-dataset in the protocol order CommonsenseQA, OpenBookQA, HellaSwag, BoolQ. The runner must reproduce every per-dataset hash above before loading a model.
