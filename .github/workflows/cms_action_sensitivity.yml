@@ -1,0 +1,43 @@
+name: CMS action-sufficiency sensitivity
+
+on:
+  push:
+    branches: [cms-sensitivity-v89]
+    paths:
+      - "experiments/cms_action_sensitivity/**"
+      - ".github/workflows/cms_action_sensitivity.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sensitivity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pandas openpyxl requests
+      - name: Run CMS sensitivity analysis
+        run: |
+          python experiments/cms_action_sensitivity/run_sensitivity.py
+      - name: Display report
+        if: always()
+        run: |
+          if [ -f out/cms_action_sensitivity/REPORT.md ]; then
+            cat out/cms_action_sensitivity/REPORT.md
+          fi
+      - name: Upload outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cms-action-sufficiency-sensitivity-v1
+          path: out/cms_action_sensitivity/
+          retention-days: 90
+          if-no-files-found: error
