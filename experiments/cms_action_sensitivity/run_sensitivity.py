@@ -65,24 +65,40 @@ def find_col(cols, predicates):
 def parse_tps(zip_bytes: bytes, fy: int):
     with zipfile.ZipFile(io.BytesIO(zip_bytes), "r") as z:
         names = z.namelist()
-        hits = [n for n in names if pathlib.PurePosixPath(n).name.lower() == "hvbp_tps.csv"]
-        if len(hits) != 1:
-            raise RuntimeError(f"FY{fy}: expected exactly one hvbp_tps.csv, found {hits[:10]}")
-        raw = z.read(hits[0])
-    df = pd.read_csv(io.BytesIO(raw), dtype=str, low_memory=False)
-    fy_col = find_col(df.columns, [lambda x: "fiscal" in x, lambda x: "year" in x])
-    id_col = find_col(df.columns, [lambda x: "facility" in x or "provider" in x, lambda x: "id" in x or "number" in x])
-    tps_col = find_col(df.columns, [lambda x: "total" in x, lambda x: "performance" in x, lambda x: "score" in x])
-    if not all([fy_col, id_col, tps_col]):
-        raise RuntimeError(f"FY{fy}: TPS columns not found: {list(df.columns)}")
-    out = pd.DataFrame({
-        "ccn": df[id_col].map(canon_ccn),
-        "fy": pd.to_numeric(df[fy_col], errors="coerce"),
-        "tps": pd.to_numeric(df[tps_col], errors="coerce"),
-    })
-    out = out[(out["fy"] == fy) & out["tps"].notna() & out["ccn"].ne("")]
-    out = out.drop_duplicates("ccn", keep="first").reset_index(drop=True)
-    return out, {"member": hits[0], "rows": int(len(out)), "sha256_csv": sha256(raw)}
+        preferred = [n for n in names if pathlib.PurePosixPath(n).name.lower() == "hvbp_tps.csv"]
+        candidates = preferred + [n for n in names if n.lower().endswith(".csv") and n not in preferred]
+        inspected = []
+        for member in candidates:
+            raw = z.read(member)
+            try:
+                df = pd.read_csv(io.BytesIO(raw), dtype=str, low_memory=False, nrows=None)
+            except Exception:
+                continue
+            fy_col = find_col(df.columns, [lambda x: "fiscal" in x, lambda x: "year" in x])
+            id_col = find_col(df.columns, [lambda x: "facility" in x or "provider" in x, lambda x: "id" in x or "number" in x])
+            tps_col = find_col(df.columns, [lambda x: "total" in x, lambda x: "performance" in x, lambda x: "score" in x])
+            if not all([fy_col, id_col, tps_col]):
+                if "hvb" in member.lower() or "value" in member.lower():
+                    inspected.append({"member": member, "columns": [str(c) for c in df.columns[:20]]})
+                continue
+            out = pd.DataFrame({
+                "ccn": df[id_col].map(canon_ccn),
+                "fy": pd.to_numeric(df[fy_col], errors="coerce"),
+                "tps": pd.to_numeric(df[tps_col], errors="coerce"),
+            })
+            out = out[(out["fy"] == fy) & out["tps"].notna() & out["ccn"].ne("")]
+            if len(out) >= 100:
+                out = out.drop_duplicates("ccn", keep="first").reset_index(drop=True)
+                return out, {
+                    "member": member,
+                    "rows": int(len(out)),
+                    "sha256_csv": sha256(raw),
+                    "discovery": "column-signature scan; filename not assumed"
+                }
+        raise RuntimeError(
+            f"FY{fy}: no CSV with Fiscal Year + Facility/Provider ID + Total Performance Score columns. "
+            f"Archive members containing H/VBP/value clues: {inspected[:8]}"
+        )
 
 
 def factor_candidates(cols):
