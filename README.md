@@ -104,18 +104,24 @@ For the EPSS v2→v3 production update:
 
 These sparse retrospective outcomes do not establish causal benefit. In a post hoc extension using the same pinned score inputs and KEV catalogue, the top-1,000 outcome count difference narrowed from **8→12 (+4)** at 365 days to **20→21 (+1)** at two years and **32→33 (+1)** at three years; full-universe AUROC and average precision remained lower for v3 at both longer windows. The 365-day window remains primary.
 
-### 3) Annual hospital scores can leave payment-factor movement unrecorded
+### 3) CMS is a rule-version boundary, not a hidden-reallocation headline
 
-For two US Hospital Value-Based Purchasing annual transitions, the exact identity–utility frontier at a locked **0.1%** rank-utility budget reduced the required replacement counts from **195 to 174** and **202 to 181**, corresponding to **10.77%** avoidable turnover (95% descriptive changed-slot bootstrap interval **6.67–15.38%**) and **10.40%** (**6.44–14.85%**). A separate payment-factor linkage was then prospectively registered at OSF 9guc5 before FY2024–FY2026 IPPS Table 16B outcome files were acquired.
+For two US Hospital Value-Based Purchasing annual score landscapes, the exact identity–utility frontier was evaluated as an **analytic score-selection stress test**, not as an implemented CMS top-k policy. At analytic k=500, FY2024→FY2025 changed 195 identities and FY2025→FY2026 changed 202; under a 0.1% updated rank-utility tolerance the exact frontier required 174 and 181 replacements, respectively.
 
-- Actual CMS VBP payment adjustment factors changed across fiscal years for **19 of 20** matched hospital transitions with exactly unchanged published Total Performance Score.
-- The pooled mean absolute factor change was **0.006525** among 84 frontier-displaceable transition identities versus **0.005505** among 4,642 stable comparison transitions.
-- The preregistered transition-stratified mean difference was **0.001020** (100,000-resample 95% interval **0.000077–0.002008**; seed 20260916).
-- Seven FY2026 TPS-only CCNs remained unmatched and were not imputed.
+A separate payment-factor linkage was prospectively registered at OSF 9guc5 before FY2024–FY2026 IPPS Table 16B outcome files were acquired. A later mechanistic audit corrected the interpretation of the cross-year linkage:
 
-These are descriptive factor differences. They are not converted to dollars and are not interpreted as causal effects, hospital or patient harm, policy error, or evidence that top-500 is a statutory CMS cutoff.
+- Within FY2024, 402 repeated published TPS levels covering 2,200 linked hospitals had **zero** within-year factor discordances.
+- Within FY2025, 432 repeated TPS levels covering 2,245 linked hospitals had **zero** within-year factor discordances.
+- Within FY2026, 453 repeated TPS levels covering 2,106 linked hospitals had **zero** within-year factor discordances.
+- Across fiscal years, the same numerical TPS commonly maps to a different factor because the exchange-function slope is recalculated annually and the FY2026 score divisor changed from 100 to 110.
+- Each annual TPS also reflects a new performance period.
 
-A separate historical TPS extension was publicly locked before FY2017–FY2021 hospital-level score acquisition (`RIDI-CMS-HVBP-HISTORICAL-EXTENSION-v1`, commit `5f151cbe3e2c2dfbe06fdb901289c32314472eb4`). Its first locked run (`35339908821`) recovered FY2021 TPS but no adjacent pre-pause pair under the prespecified official-archive rule; no alternate archive date or substitute source was used after that result. The execution record and outputs are archived at commit `2d69ba1aa063da229a10a6dc9c7d241cc7ee7a12`. This public lock is outcome-naive for the historical values, not an OSF preregistration and not a retroactive registration of the original FY2024–FY2026 TPS/frontier analysis. Before acquiring any older hospital-level TPS data, an official-rule screen of consecutive FY2017–FY2021 pairs found **no pair** with invariant measure set, domain structure/weights and material performance-period/scoring definitions; no pre-COVID panel was therefore pooled with the current panel. CMS also did not calculate a TPS for FY2022 or FY2023 after measure suppressions/pauses, and Table 16B was not necessary in either year; the manuscript treats this as a documented scoring-regime discontinuity.
+The manuscript therefore treats CMS as a **falsification/boundary case**: evaluation-to-action sufficiency must be judged relative to a fixed, versioned conversion rule. Cross-year factor movement is **not** evidence of hidden hospital reprioritisation.
+
+A separate historical TPS extension was publicly locked before FY2017–FY2021 hospital-level score acquisition (`RIDI-CMS-HVBP-HISTORICAL-EXTENSION-v1`). An official-rule screen found no adjacent pre-pause pair satisfying the strict comparability rule, and FY2022/FY2023 had no calculated TPS. Non-comparable years are therefore not pooled into a long-run annual turnover rate.
+
+The post hoc rule-version sensitivity is public under `experiments/cms_action_sensitivity/`; it complements rather than replaces the prospective Table 16B registration.
+
 
 ### 4) Avoidable turnover differs across domains
 
@@ -145,9 +151,9 @@ Exploratory drug-interaction and medication-context analyses are retained as bou
 
 ## Current manuscript direction
 
-**Working title:** *Public systems change what they prioritise without recording it*
+**Working title:** *Performance metrics can miss what updated systems act on*
 
-The current frontier-led working manuscript treats the RAG experiment as evidence that evaluation equality can leave selection identity unresolved, then makes the constructive contribution central: the **identity–utility frontier** provides an exact, auditable budget for selection turnover.
+The current manuscript is organised around **action sufficiency**: performance equivalence does not imply action equivalence. The preregistered RAG experiment is the controlled behavioural anchor, EPSS is the deployed operational example, the identity–utility frontier makes necessary versus discretionary selection change explicit, and CMS is retained as a rule-version boundary case.
 
 The working manuscript is **not peer reviewed, accepted or published**. Registered failures (RxNorm and Open Targets), parser limitations, sparse EPSS outcomes and exploratory clinical boundaries are retained in the research record.
 
