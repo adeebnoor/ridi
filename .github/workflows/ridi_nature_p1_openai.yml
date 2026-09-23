@@ -52,6 +52,40 @@ jobs:
           echo "EXP_DIR=$exp_dir" >> "$GITHUB_ENV"
           echo "experiment_dir=$exp_dir"
 
+      - name: Recover exact registered 800-query contexts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, io, json, os, pathlib, shutil, urllib.request, zipfile
+          base="https://api.firestorage.ai/dev/file"
+          share="kWqytsrfwEpe"
+          fid="01a0d059ff00774ebefcc097f1f715a2"
+          expected_asset="d0fd425973965c33e6a4e9bc53e4ec65382dbc6ca946aac48f70496a571a01ea"
+          req=urllib.request.Request(f"{base}/shares/{share}/files/{fid}/download", method="POST")
+          with urllib.request.urlopen(req, timeout=60) as r:
+              meta=json.loads(r.read().decode())
+          with urllib.request.urlopen(meta["downloadUrl"], timeout=300) as r:
+              data=r.read()
+          got=hashlib.sha256(data).hexdigest()
+          print("execution_asset_sha256=", got)
+          assert got == expected_asset, (got, expected_asset)
+          dst=pathlib.Path("/tmp/ridi-execution-assets")
+          dst.mkdir(parents=True, exist_ok=True)
+          with zipfile.ZipFile(io.BytesIO(data)) as z:
+              z.extractall(dst)
+          matches=list(dst.rglob("contexts_800.jsonl"))
+          assert len(matches) == 1, matches
+          src=matches[0]
+          expected_context="1485c0ad114673d297c580080d11086d3ace8827f9b586b15ad3928c7d0b21a1"
+          ctx_sha=hashlib.sha256(src.read_bytes()).hexdigest()
+          print("contexts_sha256=", ctx_sha, "bytes=", src.stat().st_size)
+          assert ctx_sha == expected_context, ctx_sha
+          target=pathlib.Path(os.environ["EXP_DIR"])/"data"/"contexts_800.jsonl"
+          target.parent.mkdir(parents=True, exist_ok=True)
+          shutil.copy2(src, target)
+          PY
+
       - name: Install frozen-analysis dependencies and OpenAI SDK
         run: |
           python -m pip install --upgrade pip
@@ -110,8 +144,10 @@ jobs:
               "experiment":"P1",
               "model":"gpt-5.6-sol",
               "registration":"OSF ms4w8",
+              "execution_branch":"execution-v95-4-20260924",
               "freeze_commit":"fb29c4cdbaed7598412081b14a4b9183c0f78177",
               "protocol_commit":"440f72f3d4879b9c5320e34f0fa6afaa731f5fb2",
+              "contexts_sha256":"1485c0ad114673d297c580080d11086d3ace8827f9b586b15ad3928c7d0b21a1",
               "python":sys.version,
               "platform":platform.platform(),
               "files":files
