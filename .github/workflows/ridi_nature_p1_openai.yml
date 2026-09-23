@@ -1,0 +1,132 @@
+name: RIDI Nature P1 OpenAI execution
+
+on:
+  push:
+    branches:
+      - execution-v95-4-20260924
+    paths:
+      - '.github/workflows/ridi_nature_p1_openai.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+env:
+  FREEZE_ZIP: preregistration/v95.4/RIDI_v95.4_GitHub_Code_Freeze_20260923.zip
+  EXPECTED_FREEZE_SHA256: 075e925ddca308a456b61e74fc3c3b5c85e3e1f597bacbc33ebcfb0b2f020e5e
+  MODEL_ID: gpt-5.6-sol
+  PYTHONHASHSEED: '0'
+
+jobs:
+  p1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: execution-v95-4-20260924
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Verify frozen preregistration artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          actual="$(sha256sum "$FREEZE_ZIP" | awk '{print $1}')"
+          echo "freeze_sha256=$actual"
+          test "$actual" = "$EXPECTED_FREEZE_SHA256"
+
+      - name: Recover frozen execution tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/ridi-freeze
+          mkdir -p /tmp/ridi-freeze
+          unzip -q "$FREEZE_ZIP" -d /tmp/ridi-freeze
+          p1="$(find /tmp/ridi-freeze -type f -path '*/08_New_Experiments/p1_frontier_model.py' -print -quit)"
+          test -n "$p1"
+          exp_dir="$(dirname "$p1")"
+          echo "EXP_DIR=$exp_dir" >> "$GITHUB_ENV"
+          echo "experiment_dir=$exp_dir"
+
+      - name: Install frozen-analysis dependencies and OpenAI SDK
+        run: |
+          python -m pip install --upgrade pip
+          pip install "numpy>=1.26" "scipy>=1.11" "openai>=1.40"
+
+      - name: Verify registered inputs and scorer hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$EXP_DIR"
+          python check_contexts.py data/contexts_800.jsonl --registered-panel --require-prompt
+          test "$(sha256sum frozen_registered/scoring.py | awk '{print $1}')" = "5b9f02f7a8bcd4df98f3bf28e66017e86e4cfa3e36d495acb6d1e2828488c7ee"
+          test "$(sha256sum frozen_registered/prompts.py | awk '{print $1}')" = "381cd2f539fc0216a07a3d72a955a6f5590d8779548b99371180f723b550ab9a"
+          test "$(sha256sum data/contexts_800.jsonl | awk '{print $1}')" = "1485c0ad114673d297c580080d11086d3ace8827f9b586b15ad3928c7d0b21a1"
+
+      - name: Verify OpenAI secret and model without study data
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$OPENAI_API_KEY"
+          python - <<'PY'
+          from openai import OpenAI
+          c = OpenAI()
+          r = c.chat.completions.create(
+              model="gpt-5.6-sol",
+              messages=[{"role":"user","content":"Return exactly: RIDI_OK"}],
+              max_completion_tokens=64,
+          )
+          txt=(r.choices[0].message.content or "").strip()
+          print("nonstudy_smoke_response=", txt)
+          assert "RIDI_OK" in txt
+          PY
+
+      - name: Run prospectively registered P1 in full
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$EXP_DIR"
+          mkdir -p results/p1_gpt56sol
+          python p1_frontier_model.py             --contexts data/contexts_800.jsonl             --out results/p1_gpt56sol             --backend openai             --model "$MODEL_ID"             --repeats 3             --workers 8             --frozen-scorer frozen_registered/scoring.py
+          python - <<'PY'
+          import hashlib, json, pathlib, platform, sys
+          root=pathlib.Path("results/p1_gpt56sol")
+          files={}
+          for p in sorted(root.rglob("*")):
+              if p.is_file():
+                  files[str(p.relative_to(root))]={
+                      "bytes":p.stat().st_size,
+                      "sha256":hashlib.sha256(p.read_bytes()).hexdigest()
+                  }
+          prov={
+              "experiment":"P1",
+              "model":"gpt-5.6-sol",
+              "registration":"OSF ms4w8",
+              "freeze_commit":"fb29c4cdbaed7598412081b14a4b9183c0f78177",
+              "protocol_commit":"440f72f3d4879b9c5320e34f0fa6afaa731f5fb2",
+              "python":sys.version,
+              "platform":platform.platform(),
+              "files":files
+          }
+          (root/"EXECUTION_PROVENANCE.json").write_text(json.dumps(prov,indent=2),encoding="utf-8")
+          print((root/"P1_summary.json").read_text())
+          PY
+
+      - name: Upload complete P1 artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: RIDI_Nature_P1_gpt-5.6-sol
+          path: |
+            ${{ env.EXP_DIR }}/results/p1_gpt56sol
+          retention-days: 90
+          compression-level: 6
+          if-no-files-found: warn
