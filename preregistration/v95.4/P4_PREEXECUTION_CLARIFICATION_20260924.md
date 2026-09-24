@@ -3,7 +3,7 @@
 ## Status
 
 This is a **post-registration, pre-execution clarification** to OSF registration `ms4w8`.
-The filed registration specified that P4 would use "two prespecified LLM judges from different model families" but inadvertently did not name the exact judge model identifiers or immutable revisions. No real-model P4 judge output and no P4 human annotation existed when this clarification was committed.
+The filed registration specified that P4 would use "two prespecified LLM judges from different model families" but inadvertently did not name the exact judge model identifiers or immutable revisions. No real-model P4 judge output and no P4 human annotation existed when this clarification was first committed.
 
 Because the exact IDs were omitted from the filed text, P4 will be reported as **prospectively amended before execution**, not as an untouched preregistered endpoint. No threshold, endpoint, sample, prompt, clean-subset rule, bootstrap rule, or human-audit sample size is changed.
 
@@ -15,11 +15,15 @@ Judge 1:
 - Family: Qwen3
 
 Judge 2:
-- Model: `mistralai/Mistral-Small-3.1-24B-Instruct-2503`
-- Immutable revision: `68faf511d618ef198fef186659617cfd2eb8e33a`
-- Family: Mistral3
+- Model: `allenai/OLMo-2-1124-13B-Instruct`
+- Immutable revision: `3a5c85baefbb1896a54d56fe2e76c0395627ddf4`
+- Family: OLMo2
 
-Rationale fixed before P4 output: two independently developed open-weight instruction-tuned model families, both large enough for semantic evidence judgement and runnable under the available frozen execution environment. Qwen3-32B was already frozen elsewhere in the registered extension as the P5 semantic-equivalence judge; Mistral provides the required family-diverse second judge.
+Rationale fixed before P4 study output: two independently developed open-weight instruction-tuned model families, both runnable through the same Transformers causal-language-model path. Qwen3-32B was already frozen elsewhere in the registered extension as the P5 semantic-equivalence judge. OLMo2 supplies the required family-diverse second judgement.
+
+### Pre-execution technical substitution record
+
+The first clarification named `mistralai/Mistral-Small-3.1-24B-Instruct-2503` (revision `68faf511d618ef198fef186659617cfd2eb8e33a`) as Judge 2. A **non-study smoke test** using a generic France/Paris prompt failed before any P4 passage was loaded or judged because the frozen Transformers execution path rejected `Mistral3Config` for `AutoModelForCausalLM`. No P4 outcome was observed. Before any P4 study output, Judge 2 was therefore replaced by the OLMo2 model above, which uses the same causal-language-model execution path. This substitution is a technical pre-execution amendment and will be disclosed.
 
 ## Frozen inference implementation
 
