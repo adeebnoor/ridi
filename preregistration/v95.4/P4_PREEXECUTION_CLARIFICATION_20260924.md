@@ -7,7 +7,7 @@ The filed registration specified that P4 would use "two prespecified LLM judges 
 
 Because the exact IDs were omitted from the filed text, P4 will be reported as **prospectively amended before execution**, not as an untouched preregistered endpoint. No threshold, endpoint, sample, prompt, clean-subset rule, bootstrap rule, or human-audit sample size is changed.
 
-## Frozen machine judges
+## Final frozen machine judges
 
 Judge 1:
 - Model: `Qwen/Qwen3-32B`
@@ -15,19 +15,26 @@ Judge 1:
 - Family: Qwen3
 
 Judge 2:
-- Model: `allenai/OLMo-2-1124-13B-Instruct`
-- Immutable revision: `3a5c85baefbb1896a54d56fe2e76c0395627ddf4`
-- Family: OLMo2
+- Model: `microsoft/phi-4`
+- Immutable revision: `2db69c1c3e91a05d2c64a3185acfbaf36f744e25`
+- Family: Phi3/Phi-4
+- License: MIT
 
-Rationale fixed before P4 study output: two independently developed open-weight instruction-tuned model families, both runnable through the same Transformers causal-language-model path. Qwen3-32B was already frozen elsewhere in the registered extension as the P5 semantic-equivalence judge. OLMo2 supplies the required family-diverse second judgement.
+Rationale fixed before P4 study output: two independently developed open-weight instruction-tuned model families, both runnable through the same Transformers causal-language-model path. Qwen3-32B was already frozen elsewhere in the registered extension as the P5 semantic-equivalence judge. Phi-4 provides a family-diverse second judgement model and passed the non-study semantic control described below.
 
-### Pre-execution technical substitution record
+## Pre-execution technical and capability-control record
 
-The first clarification named `mistralai/Mistral-Small-3.1-24B-Instruct-2503` (revision `68faf511d618ef198fef186659617cfd2eb8e33a`) as Judge 2. A **non-study smoke test** using a generic France/Paris prompt failed before any P4 passage was loaded or judged because the frozen Transformers execution path rejected `Mistral3Config` for `AutoModelForCausalLM`. No P4 outcome was observed. Before any P4 study output, Judge 2 was therefore replaced by the OLMo2 model above, which uses the same causal-language-model execution path. This substitution is a technical pre-execution amendment and will be disclosed.
+All checks below used generic, non-study prompts. No P4 passage, clean-subset status, or correctness-change outcome had been observed.
+
+1. The first clarification named `mistralai/Mistral-Small-3.1-24B-Instruct-2503` (revision `68faf511d618ef198fef186659617cfd2eb8e33a`) as Judge 2. Its non-study smoke test failed before inference because the frozen `AutoModelForCausalLM` execution path rejected `Mistral3Config`. No P4 item was processed.
+2. A technically compatible alternative, `allenai/OLMo-2-1124-13B-Instruct` (revision `3a5c85baefbb1896a54d56fe2e76c0395627ddf4`), returned `NO` to a generic positive control in which the passage explicitly stated that Paris is the capital of France. Because this raised a pre-study semantic-quality concern, OLMo2 was not used on P4 data.
+3. Before final locking, candidate judges were evaluated on a four-item generic control set using the exact P4 question/passage prompt form: two obvious informative passages and two clearly irrelevant passages. Qwen3-32B scored 4/4; Microsoft Phi-4 scored 4/4; NousResearch Hermes-3-Llama-3.1-8B also scored 4/4. Phi-4 was selected before any P4 study output because it is a larger independently developed family with a permissive MIT license and the same executable causal-LM path.
+
+This model choice is therefore a documented **pre-execution amendment based only on technical/capability controls, not study outcomes**.
 
 ## Frozen inference implementation
 
-- Exact P4 judgement prompt: unchanged from the v95.4 code freeze `08_New_Experiments/p4_semantic_audit.py`.
+- Exact P4 judgement prompt: unchanged from the v95.4 code freeze `08_New_Experiments/p4_semantic_audit.py` (SHA-256 `b512706885796c2100f285380bcb5018785b2a00022508059d37606ddf8d1e1f`).
 - Output vocabulary: exactly `YES` or `NO`; any other output is missing/unparsed.
 - Greedy decoding; sampling disabled.
 - `max_new_tokens=8`.
@@ -36,6 +43,7 @@ The first clarification named `mistralai/Mistral-Small-3.1-24B-Instruct-2503` (r
 - fixed generation batch size: 8 passages.
 - every one of the 14,586 exchanged query–passage items is judged by both models.
 - gold-string detection and the clean-query definition are unchanged from the frozen P4 code.
+- source contexts SHA-256: `1485c0ad114673d297c580080d11086d3ace8827f9b586b15ad3928c7d0b21a1`.
 
 The explicit batch size and revision arguments are implementation clarifications required to make the previously frozen P4 code executable with immutable local model versions. They do not change the scientific endpoint.
 
