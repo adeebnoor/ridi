@@ -35,8 +35,9 @@ The frozen implementation used a hard-coded batch of 256 judge prompts. With GPU
 
 The prompt strings and per-passage inputs are unchanged. Batch size will not be analyzed as a scientific factor.
 
-Operational script SHA-256:
-`1a004ec44252f5e75d8dae6a10d9bb6a7df3ae0f5e16c2bde0ad598c040bc294`.
+Operational execution script is locked in the same execution branch at Git commit
+`166dc2e38de19bf34c2d2b37190c9d67f8c28986` (`execution/p4_semantic_audit_operational_v1.py`).
+That commit is the authoritative pre-output implementation reference.
 
 ## Human annotation remains blocked
 
