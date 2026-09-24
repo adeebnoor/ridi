@@ -1,0 +1,25 @@
+{
+  "method": "exhaustive enumeration of all within-dataset overlaps consistent with persisted P2 main/floor marginals",
+  "bootstrap": {
+    "n": 20000,
+    "seed": 20260923,
+    "group_order": [
+      "scifact",
+      "fever",
+      "hotpotqa",
+      "nq"
+    ]
+  },
+  "n_admissible_pairings": 48,
+  "macro_main": 0.1726666666666667,
+  "macro_floor": 0.010333333333333333,
+  "macro_excess": 0.16233333333333333,
+  "minimum_lower95": 0.13433333333333336,
+  "maximum_lower95": 0.13666666666666666,
+  "minimum_upper95": 0.189,
+  "maximum_upper95": 0.191,
+  "all_pairings_support_h_p2": true,
+  "script_sha256": "fe6d2e0af2430148585260956f828974767b84be550e34e79010f7757425f5bf",
+  "local_json_sha256": "30b684765407e40f196a853a8b7f861286e7ab5fa23c3306015c1a068c8dbf80",
+  "note": "The full local JSON contains all 48 overlap rows; this GitHub summary records the decision-invariant bounds."
+}
