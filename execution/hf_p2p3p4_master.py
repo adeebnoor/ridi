@@ -1,5 +1,12 @@
 # /// script
-# dependencies = ["requests>=2.32"]
+# dependencies = [
+#   "requests>=2.32",
+#   "torch>=2.4",
+#   "transformers>=4.51",
+#   "accelerate>=0.33",
+#   "numpy>=1.26",
+#   "scipy>=1.11"
+# ]
 # ///
 import base64,hashlib,io,os,subprocess,sys,zipfile
 from pathlib import Path
@@ -12,7 +19,7 @@ tmp=Path("/tmp/ridi_master"); tmp.mkdir(parents=True,exist_ok=True)
 p2p3=tmp/"hf_p2p3_raw_rerun.py"
 r=requests.get(P2P3_URL,timeout=60); r.raise_for_status(); p2p3.write_bytes(r.content)
 print("P2P3_RUNNER_SHA256",hashlib.sha256(r.content).hexdigest(),flush=True)
-subprocess.run(["uv","run",str(p2p3)],check=True)
+subprocess.run([sys.executable,str(p2p3)],check=True)
 
 roots=list(Path("/tmp/ridi_p2p3_raw").rglob("p2_noise_floor.py"))
 assert len(roots)==1,roots
