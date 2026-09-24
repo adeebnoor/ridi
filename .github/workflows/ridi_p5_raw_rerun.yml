@@ -1,0 +1,249 @@
+name: RIDI P5 raw rerun
+
+on:
+  push:
+    branches: [p5-raw-rerun-20260924]
+    paths:
+      - '.github/workflows/ridi_p5_raw_rerun.yml'
+      - 'execution/p5_margin_diagnostic.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+env:
+  SHARE_ID: xlNHMCO68aqX
+  FILE_ID: 01a0d0775143710496ced7b0b686ca51
+  EXPECTED_ASSET_SHA256: 88938a10d211b89a372b1adfb6cda890ec4188dd5bbf96eefd58c990a887d4a5
+  EXPECTED_RANKINGS_SHA256: 43050f9a720130658ca54b199c90a06c10a2ac3e7a5648390db85a56275531b6
+  EXPECTED_PAIRS_SHA256: a643980275110e3585486eda51b66263622246ed046f8e45fe4b2ea5f44bf3eb
+  PYTHONHASHSEED: '0'
+
+jobs:
+  rerank:
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        config:
+          - bm25
+          - splade_pp
+          - contriever_msmarco
+          - e5_small
+          - e5_base
+          - e5_large
+          - bge_small
+          - bge_base
+          - bge_large
+          - gte_small
+          - gte_base
+          - gte_large
+          - ce_minilm_l6
+          - ce_minilm_l12
+          - ce_tinybert_l2
+          - bge_reranker_base
+          - bge_reranker_large
+          - mxbai_rerank_xsmall
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: p5-raw-rerun-20260924
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen runtime
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pyyaml "numpy>=1.26" "scipy>=1.11" "torch>=2.4" "transformers>=4.51" "sentence-transformers>=5.0"
+      - name: Recover and verify P5 frozen asset
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib, io, json, os, pathlib, requests, zipfile
+          base="https://api.firestorage.ai/dev/file"
+          share=os.environ["SHARE_ID"]; fid=os.environ["FILE_ID"]
+          m=requests.post(f"{base}/shares/{share}/files/{fid}/download",timeout=60); m.raise_for_status()
+          data=requests.get(m.json()["downloadUrl"],timeout=300).content
+          got=hashlib.sha256(data).hexdigest()
+          print("asset_sha256",got)
+          assert got==os.environ["EXPECTED_ASSET_SHA256"], (got,os.environ["EXPECTED_ASSET_SHA256"])
+          root=pathlib.Path("/tmp/ridi-p5")
+          root.mkdir(parents=True,exist_ok=True)
+          with zipfile.ZipFile(io.BytesIO(data)) as z: z.extractall(root)
+          hits=list(root.rglob("p5_natural_prevalence.py"))
+          assert len(hits)==1,hits
+          exp=hits[0].parent
+          with open(os.environ["GITHUB_ENV"],"a") as fh: fh.write(f"EXP_DIR={exp}\n")
+          print("exp_dir",exp)
+          PY
+      - name: Create one-config execution roster
+        shell: bash
+        run: |
+          cd "$EXP_DIR"
+          python - <<'PY'
+          import os,yaml
+          name=os.environ["MATRIX_CONFIG"]
+          full=yaml.safe_load(open("p5_roster_template.yaml",encoding="utf-8"))
+          selected=[c for c in full["configurations"] if c["name"]==name]
+          assert len(selected)==1,(name,selected)
+          yaml.safe_dump({"configurations":selected},open("subset.yaml","w",encoding="utf-8"),sort_keys=False)
+          print(selected[0])
+          PY
+        env:
+          MATRIX_CONFIG: ${{ matrix.config }}
+      - name: Frozen rerank for one configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$EXP_DIR"
+          rm -f work/rankings.jsonl work/roster_manifest.json
+          python p5_natural_prevalence.py rerank --work work --roster subset.yaml | tee "rerank_${{ matrix.config }}.log"
+          python - <<'PY'
+          import hashlib,json,os,pathlib
+          name=os.environ["MATRIX_CONFIG"]
+          p=pathlib.Path("work/rankings.jsonl")
+          rows=[json.loads(x) for x in p.read_text(encoding="utf-8").splitlines() if x.strip()]
+          assert len(rows)==1049,(name,len(rows))
+          assert {r["config"] for r in rows}=={name}
+          out=pathlib.Path(f"rankings_{name}.jsonl")
+          out.write_bytes(p.read_bytes())
+          print("rows",len(rows),"sha256",hashlib.sha256(out.read_bytes()).hexdigest())
+          PY
+        env:
+          MATRIX_CONFIG: ${{ matrix.config }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: p5-rank-${{ matrix.config }}
+          path: |
+            ${{ env.EXP_DIR }}/rankings_${{ matrix.config }}.jsonl
+            ${{ env.EXP_DIR }}/rerank_${{ matrix.config }}.log
+          retention-days: 30
+          compression-level: 6
+
+  aggregate:
+    needs: rerank
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: p5-raw-rerun-20260924
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen analysis runtime
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pyyaml "numpy>=1.26" "scipy>=1.11"
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: p5-rank-*
+          path: /tmp/p5-artifacts
+      - name: Recover frozen P5 asset again
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib,io,json,os,pathlib,requests,zipfile
+          base="https://api.firestorage.ai/dev/file"
+          m=requests.post(f"{base}/shares/{os.environ['SHARE_ID']}/files/{os.environ['FILE_ID']}/download",timeout=60); m.raise_for_status()
+          data=requests.get(m.json()["downloadUrl"],timeout=300).content
+          got=hashlib.sha256(data).hexdigest(); print("asset_sha256",got)
+          assert got==os.environ["EXPECTED_ASSET_SHA256"]
+          root=pathlib.Path("/tmp/ridi-p5-agg"); root.mkdir(parents=True,exist_ok=True)
+          with zipfile.ZipFile(io.BytesIO(data)) as z:z.extractall(root)
+          hits=list(root.rglob("p5_natural_prevalence.py")); assert len(hits)==1,hits
+          exp=hits[0].parent
+          with open(os.environ["GITHUB_ENV"],"a") as fh: fh.write(f"EXP_DIR={exp}\n")
+          PY
+      - name: Reassemble rankings in the frozen roster order
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$EXP_DIR"
+          rm -f work/rankings.jsonl work/pairs.json
+          python - <<'PY'
+          from pathlib import Path
+          order=["bm25","splade_pp","contriever_msmarco","e5_small","e5_base","e5_large","bge_small","bge_base","bge_large","gte_small","gte_base","gte_large","ce_minilm_l6","ce_minilm_l12","ce_tinybert_l2","bge_reranker_base","bge_reranker_large","mxbai_rerank_xsmall"]
+          dest=Path("work/rankings.jsonl")
+          with dest.open("wb") as w:
+              for name in order:
+                  hits=list(Path("/tmp/p5-artifacts").rglob(f"rankings_{name}.jsonl"))
+                  assert len(hits)==1,(name,hits)
+                  b=hits[0].read_bytes()
+                  w.write(b)
+                  if b and not b.endswith(b"\n"): w.write(b"\n")
+          print("base rows",sum(1 for _ in dest.open(encoding="utf-8")))
+          PY
+      - name: Add frozen RRF configurations with frozen code
+        shell: bash
+        run: |
+          cd "$EXP_DIR"
+          python - <<'PY'
+          import yaml
+          full=yaml.safe_load(open("p5_roster_template.yaml",encoding="utf-8"))
+          fused=[c for c in full["configurations"] if c["type"]=="rrf"]
+          yaml.safe_dump({"configurations":fused},open("rrf_only.yaml","w",encoding="utf-8"),sort_keys=False)
+          PY
+          python p5_natural_prevalence.py rerank --work work --roster rrf_only.yaml | tee rerank_rrf.log
+      - name: Verify rankings and qualify exactly as registered
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$EXP_DIR"
+          python - <<'PY'
+          import hashlib,os,pathlib
+          p=pathlib.Path("work/rankings.jsonl")
+          n=sum(1 for _ in p.open(encoding="utf-8"))
+          h=hashlib.sha256(p.read_bytes()).hexdigest()
+          print("RANKINGS_ROWS",n)
+          print("RANKINGS_SHA256",h)
+          assert n==20980,n
+          assert h==os.environ["EXPECTED_RANKINGS_SHA256"],(h,os.environ["EXPECTED_RANKINGS_SHA256"])
+          PY
+          python p5_natural_prevalence.py qualify --work work --margin 0.01 --alpha 0.05 | tee qualify.log
+          python - <<'PY'
+          import hashlib,json,os,pathlib
+          p=pathlib.Path("work/pairs.json")
+          h=hashlib.sha256(p.read_bytes()).hexdigest()
+          j=json.loads(p.read_text())
+          print("PAIRS_SHA256",h)
+          print("QUALIFIED",len(j["qualified"]),"ALL",len(j["all_pairs"]))
+          assert h==os.environ["EXPECTED_PAIRS_SHA256"],(h,os.environ["EXPECTED_PAIRS_SHA256"])
+          assert len(j["all_pairs"])==760
+          assert len(j["qualified"])==0
+          PY
+      - name: Run requested post hoc margin diagnostic
+        shell: bash
+        run: |
+          cd "$EXP_DIR"
+          python "$GITHUB_WORKSPACE/execution/p5_margin_diagnostic.py" work/pairs.json > work/p5_margin_diagnostic.json
+          cat work/p5_margin_diagnostic.json
+      - name: Build provenance and checksums
+        shell: bash
+        run: |
+          cd "$EXP_DIR"
+          python - <<'PY'
+          import hashlib,json,pathlib,os
+          files=["work/rankings.jsonl","work/pairs.json","work/p5_margin_diagnostic.json","work/pools.jsonl","work/selected_queries.jsonl","work/registered_qids.txt","p5_roster_template.yaml"]
+          out={}
+          for f in files:
+              p=pathlib.Path(f)
+              out[f]={"bytes":p.stat().st_size,"sha256":hashlib.sha256(p.read_bytes()).hexdigest()}
+          prov={"registration":"OSF ms4w8","protocol_commit":"440f72f3d4879b9c5320e34f0fa6afaa731f5fb2","code_freeze_commit":"fb29c4cdbaed7598412081b14a4b9183c0f78177","workflow_run":os.environ.get("GITHUB_RUN_ID"),"files":out}
+          pathlib.Path("work/P5_RAW_RERUN_PROVENANCE.json").write_text(json.dumps(prov,indent=2),encoding="utf-8")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: RIDI_P5_RAW_RERUN_20260924
+          path: |
+            ${{ env.EXP_DIR }}/work/rankings.jsonl
+            ${{ env.EXP_DIR }}/work/pairs.json
+            ${{ env.EXP_DIR }}/work/p5_margin_diagnostic.json
+            ${{ env.EXP_DIR }}/work/P5_RAW_RERUN_PROVENANCE.json
+            ${{ env.EXP_DIR }}/rerank_rrf.log
+            ${{ env.EXP_DIR }}/qualify.log
+          retention-days: 90
+          compression-level: 6
