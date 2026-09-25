@@ -77,12 +77,31 @@ h2{font:500 clamp(2rem,4vw,3.5rem)/1.08 var(--serif);letter-spacing:-.025em;marg
 footer{padding:38px 0 50px;color:var(--muted);font-size:.9rem}
 footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
 @media(max-width:900px){
-  .mast .wrap{align-items:flex-start;padding:18px 0;flex-direction:column}
+  body{overflow-x:hidden}
+  .wrap{width:min(100% - 32px,1160px)}
+  .mast .wrap{align-items:flex-start;padding:16px 0;flex-direction:column;gap:14px}
+  .identity{width:100%;flex-wrap:wrap;gap:6px 12px}
+  .identity span{font-size:.82rem}
+  nav{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px}
+  nav a{font-size:.82rem;white-space:normal}
+  h1{font-size:clamp(2.65rem,12vw,4.25rem);overflow-wrap:anywhere}
+  .deck{font-size:1.18rem}
+  .byline{gap:10px;flex-direction:column}
+  .statusline{display:grid;grid-template-columns:1fr 1fr;width:100%}
+  .status{min-width:0}
+  .actions{display:grid;grid-template-columns:1fr;gap:10px}
+  .action{max-width:100%;overflow-wrap:anywhere}
   .split,.method,.metrics .wrap,.resources{grid-template-columns:1fr}
-  .metric{border-right:0;border-bottom:1px solid var(--line);margin:0;padding-right:0}
+  .metric{border-right:0;border-bottom:1px solid var(--line);margin:0;padding:24px 0}
   .metric:last-child{border-bottom:0}
+  .findings{grid-template-columns:1fr}
   .boundaries li{grid-template-columns:1fr;gap:5px}
-  .hero{padding-top:52px}
+  .hero{padding:48px 0 44px}
+  section{padding:48px 0}
+}
+@media(max-width:430px){
+  .statusline{grid-template-columns:1fr}
+  nav{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
