@@ -1,6 +1,6 @@
-# RIDI — measure and budget selection change in ranking updates
+# RIDI — Equal evaluation scores do not certify equivalent AI behaviour
 
-> **Research + open-source audit toolkit.** RIDI measures how much a ranking update changes the selected items and computes the **exact minimum turnover compatible with a declared rank-utility budget**.
+> **Research project + open-source audit toolkit.** RIDI studies when aggregate evaluation fails to identify what an AI system actually acts on, measures selection and downstream decision divergence, and computes the **exact minimum turnover compatible with a declared rank-utility budget**.
 
 [![tests](https://github.com/adeebnoor/ridi/actions/workflows/tests.yml/badge.svg)](https://github.com/adeebnoor/ridi/actions/workflows/tests.yml)
 [![PyPI](https://img.shields.io/pypi/v/ridi-audit.svg)](https://pypi.org/project/ridi-audit/)
