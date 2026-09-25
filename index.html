@@ -4,24 +4,237 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>RIDI — Equal evaluation scores do not certify equivalent AI behaviour</title>
-<meta name="description" content="RIDI studies why equal evaluation scores need not certify equivalent AI behaviour, measures selection change, and computes the exact minimum turnover compatible with a declared utility budget.">
+<meta name="description" content="RIDI is a research project on evaluation equivalence, selection identity, downstream AI behaviour and the exact identity–utility frontier.">
 <style>
-:root{--ink:#10202a;--muted:#52636d;--line:#dce5e9;--blue:#135d8c;--blue2:#eaf4f9;--gold:#a56d12;--bg:#f7fafb}*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:#fff;line-height:1.55}a{color:var(--blue)}.wrap{width:min(1100px,calc(100% - 36px));margin:auto}.top{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:10}.nav{height:64px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{font-weight:800;letter-spacing:.08em;text-decoration:none;color:var(--ink)}.links{display:flex;gap:18px;flex-wrap:wrap}.links a{text-decoration:none;font-weight:650;font-size:.94rem}.hero{padding:84px 0 62px;background:linear-gradient(135deg,#f8fbfc 0%,#eef7fa 100%)}.eyebrow{font-size:.84rem;text-transform:uppercase;letter-spacing:.14em;font-weight:800;color:var(--blue)}h1{font-size:clamp(2.7rem,6vw,5.5rem);line-height:.97;max-width:900px;margin:14px 0 22px;letter-spacing:-.045em}.lede{font-size:clamp(1.15rem,2.2vw,1.52rem);max-width:820px;color:#31454f}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}.btn{display:inline-block;padding:11px 16px;border:1px solid var(--ink);border-radius:8px;text-decoration:none;font-weight:750;color:var(--ink);background:#fff}.btn.primary{background:var(--ink);color:#fff}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}.card{border:1px solid var(--line);border-radius:14px;padding:22px;background:#fff}.card b{display:block;font-size:1.55rem;margin-bottom:5px}.card p{margin:0;color:var(--muted)}section{padding:58px 0}.section-title{font-size:2rem;margin:0 0 12px}.sub{max-width:800px;color:var(--muted)}.frontier{display:grid;grid-template-columns:1.2fr .8fr;gap:26px;align-items:start}.formula{background:#0f202a;color:#f6fbfd;padding:24px;border-radius:14px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.96rem}.evidence{background:var(--bg)}table{width:100%;border-collapse:collapse;margin-top:22px;background:#fff}th,td{text-align:left;padding:13px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:.84rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}.note{padding:16px 18px;border-left:4px solid var(--gold);background:#fff8e9;margin-top:22px}.limits{display:grid;grid-template-columns:1fr 1fr;gap:18px}.footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem}@media(max-width:800px){.grid,.frontier,.limits{grid-template-columns:1fr}.links{gap:10px}.hero{padding-top:58px}}
+:root{
+  --ink:#18212b;
+  --muted:#5f6b75;
+  --line:#d9dde2;
+  --paper:#ffffff;
+  --wash:#f5f6f7;
+  --accent:#8c1d40;
+  --accent-dark:#68142f;
+  --serif: Georgia, 'Times New Roman', serif;
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 var(--sans)}
+a{color:var(--accent-dark);text-decoration-thickness:1px;text-underline-offset:3px}
+.wrap{width:min(1160px,calc(100% - 40px));margin:auto}
+.mast{border-bottom:1px solid var(--line);background:#fff}
+.mast .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:78px}
+.identity{display:flex;align-items:baseline;gap:14px;text-decoration:none;color:var(--ink)}
+.identity strong{font:700 1.05rem/1 var(--sans);letter-spacing:.11em}
+.identity span{font:.92rem/1.2 var(--serif);color:var(--muted)}
+nav{display:flex;gap:22px;flex-wrap:wrap}
+nav a{font-size:.9rem;font-weight:700;text-decoration:none;color:var(--ink)}
+nav a:hover{color:var(--accent)}
+.hero{padding:78px 0 62px;border-bottom:1px solid var(--line)}
+.kicker{font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;font-weight:800;color:var(--accent);margin-bottom:18px}
+h1{font:500 clamp(3rem,7vw,6.9rem)/.98 var(--serif);letter-spacing:-.045em;max-width:1120px;margin:0}
+.deck{font:400 clamp(1.25rem,2.2vw,1.65rem)/1.45 var(--serif);max-width:850px;color:#39434c;margin:28px 0 26px}
+.byline{display:flex;gap:24px;flex-wrap:wrap;color:var(--muted);font-size:.94rem}
+.byline b{color:var(--ink)}
+.statusline{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+.status{border-top:3px solid var(--accent);padding-top:8px;min-width:170px}
+.status b{display:block;font-size:.82rem;text-transform:uppercase;letter-spacing:.08em}
+.status span{display:block;color:var(--muted);font-size:.9rem;margin-top:2px}
+.actions{display:flex;gap:16px;flex-wrap:wrap;margin-top:34px}
+.action{display:inline-block;padding:10px 0;font-weight:800;text-decoration:none;border-bottom:2px solid var(--ink);color:var(--ink)}
+.action.primary{color:var(--accent-dark);border-color:var(--accent)}
+.metrics{border-bottom:1px solid var(--line)}
+.metrics .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.metric{padding:30px 26px 30px 0;border-right:1px solid var(--line);margin-right:26px}
+.metric:last-child{border-right:0;margin-right:0}
+.metric strong{display:block;font:500 2.45rem/1 var(--serif)}
+.metric span{display:block;margin-top:8px;color:var(--muted);font-size:.9rem}
+section{padding:66px 0;border-bottom:1px solid var(--line)}
+.split{display:grid;grid-template-columns:.8fr 1.6fr;gap:64px}
+.section-label{font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;font-weight:800;color:var(--accent)}
+h2{font:500 clamp(2rem,4vw,3.5rem)/1.08 var(--serif);letter-spacing:-.025em;margin:10px 0 20px}
+.lead{font:400 1.22rem/1.55 var(--serif);color:#39434c;max-width:820px}
+.prose{max-width:820px}
+.prose p{margin:0 0 18px}
+.findings{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.finding{padding:28px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.finding h3{font:600 1.25rem/1.3 var(--serif);margin:0 0 10px}
+.finding p{margin:0;color:var(--muted)}
+.finding strong{color:var(--ink)}
+.method{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.method article{border-top:3px solid var(--ink);padding-top:15px}
+.method h3{font:600 1.18rem/1.3 var(--serif);margin:0 0 8px}
+.method p{margin:0;color:var(--muted)}
+.code{background:#20262d;color:#f5f7f8;padding:28px 30px;font:15px/1.7 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow:auto;margin-top:24px}
+.boundaries{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.boundaries li{display:grid;grid-template-columns:190px 1fr;gap:28px;padding:17px 0;border-bottom:1px solid var(--line)}
+.boundaries b{font-size:.9rem}
+.resources{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.resource{border:1px solid var(--line);padding:22px;text-decoration:none;color:var(--ink)}
+.resource:hover{border-color:var(--accent)}
+.resource b{display:block;font:600 1.15rem var(--serif)}
+.resource span{display:block;color:var(--muted);font-size:.9rem;margin-top:6px}
+footer{padding:38px 0 50px;color:var(--muted);font-size:.9rem}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+@media(max-width:900px){
+  .mast .wrap{align-items:flex-start;padding:18px 0;flex-direction:column}
+  .split,.method,.metrics .wrap,.resources{grid-template-columns:1fr}
+  .metric{border-right:0;border-bottom:1px solid var(--line);margin:0;padding-right:0}
+  .metric:last-child{border-bottom:0}
+  .boundaries li{grid-template-columns:1fr;gap:5px}
+  .hero{padding-top:52px}
+}
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap nav"><a class="brand" href="./">RIDI</a><nav class="links"><a href="#frontier">Frontier</a><a href="#evidence">Evidence</a><a href="demo/">Demo</a><a href="paper/README.md">Paper</a><a href="https://github.com/adeebnoor/ridi">GitHub</a></nav></div></header>
+<header class="mast">
+  <div class="wrap">
+    <a class="identity" href="./"><strong>RIDI</strong><span>Research Project · King Abdulaziz University</span></a>
+    <nav aria-label="Primary">
+      <a href="#question">Research question</a>
+      <a href="#findings">Findings</a>
+      <a href="#method">Method</a>
+      <a href="#software">Software</a>
+      <a href="paper/README.md">Paper</a>
+    </nav>
+  </div>
+</header>
 
 <main>
-<section class="hero"><div class="wrap"><div class="eyebrow">Ranking updates · Selection identity · Auditability</div><h1>Measure what changed.<br>Budget what had to change.</h1><p class="lede">RIDI measures how much a ranking update changes the selected items, then computes the <b>exact minimum turnover</b> compatible with a declared rank-utility budget. The goal is not to freeze old decisions; it is to make update-induced churn explicit, measurable and auditable.</p><div class="actions"><a class="btn primary" href="demo/">Open the RAG demo →</a><a class="btn" href="paper/README.md">Read the evidence</a><a class="btn" href="https://pypi.org/project/ridi-audit/">Install ridi-audit</a></div><div class="grid"><div class="card"><b>17.27%</b><p>Primary RAG correctness-change rate under exact retrieval-audit equality across 800 preregistered queries.</p></div><div class="card"><b>9.33 pp</b><p>GPT-5.6 Sol repeat-adjusted correctness-change excess in the registered frontier-model transfer.</p></div><div class="card"><b>4.36 pp</b><p>P5b semantic-disagreement excess above the matched repeat floor among practitioner-equivalent retrievers.</p></div></div></div></section>
+<section class="hero">
+  <div class="wrap">
+    <div class="kicker">AI evaluation · decision identity · ranking updates</div>
+    <h1>Equal evaluation scores do not certify equivalent AI behaviour.</h1>
+    <p class="deck">RIDI asks what aggregate metrics leave unresolved: whether two system states act on the same evidence and identities, produce the same downstream decisions, and how much observed selection change was actually required.</p>
+    <div class="byline">
+      <span><b>Adeeb Noor</b></span>
+      <span>Department of Information Technology, King Abdulaziz University</span>
+      <span>ORCID 0000-0002-8251-1853</span>
+    </div>
+    <div class="statusline">
+      <div class="status"><b>Manuscript</b><span>Submission-ready · not peer reviewed</span></div>
+      <div class="status"><b>Software</b><span>ridi-audit 1.1.1 · MIT License</span></div>
+      <div class="status"><b>Updated</b><span>26 September 2026</span></div>
+    </div>
+    <div class="actions">
+      <a class="action primary" href="paper/README.md">Read the public evidence synopsis →</a>
+      <a class="action" href="docs/QUICKSTART.md">Run RIDI in 60 seconds →</a>
+      <a class="action" href="https://osf.io/txwdv/">View preregistration →</a>
+    </div>
+  </div>
+</section>
 
-<section id="frontier"><div class="wrap frontier"><div><div class="eyebrow">Constructive contribution</div><h2 class="section-title">The identity–utility frontier</h2><p class="sub">For a baseline top-k set and updated scores, RIDI evaluates the best updated-score utility attainable at every replacement count. The exact solution with <i>j</i> outsiders retains the highest-ranked incumbents and adds the highest-ranked outsiders; sorted prefix sums recover the full frontier in O(n log n) time.</p><p>The frontier answers a practical question: <b>given the scoring objective we have chosen, what is the smallest selection change that keeps us within an explicit utility-loss tolerance?</b></p><p>No retraining and no training data are required. The result is conditional on the declared objective and tolerance; it is not a claim that keeping old selections is always desirable.</p></div><div class="formula">baseline set A₀<br>updated scores s₁<br>capacity k<br><br>for every j = 0…k:<br>  retain top k-j incumbents<br>  add top j outsiders<br>  compute updated-rank utility<br><br>choose smallest j<br>with relative regret ≤ η</div></div></section>
+<div class="metrics">
+  <div class="wrap">
+    <div class="metric"><strong>17.27%</strong><span>benchmark-defined correctness changes under exact registered retrieval-audit equality</span></div>
+    <div class="metric"><strong>9.33 pp</strong><span>GPT-5.6 Sol repeat-adjusted excess in the registered frontier-model transfer</span></div>
+    <div class="metric"><strong>4.36 pp</strong><span>P5b semantic-disagreement excess above matched repeat variability</span></div>
+    <div class="metric"><strong>565 / 1,000</strong><span>priorities replaced in the EPSS v2→v3 production update</span></div>
+  </div>
+</div>
 
-<section class="evidence" id="evidence"><div class="wrap"><div class="eyebrow">Evidence chain</div><h2 class="section-title">Why selected identity deserves its own audit</h2><p class="sub">The supporting experiments separate evaluation equality, selected membership and downstream outcomes rather than treating them as interchangeable.</p><table><thead><tr><th>Setting</th><th>Result</th><th>What it establishes</th></tr></thead><tbody><tr><td><b>Preregistered RAG</b></td><td>17.27% benchmark-defined correctness changes with the complete assessed grade sequence and five retrieval metrics exactly unchanged.</td><td>Exact equality in this audit does not identify the evidence or certify behavioral equivalence.</td></tr><tr><td><b>Structural ambiguity</b></td><td>No primary query had uniquely identified passage membership; median compatible passage sets exceeded 10¹².</td><td>The omitted membership information is structural, not merely noisy estimation.</td></tr><tr><td><b>GPT-5.6 Sol transfer</b></td><td>10.70% equal-dataset correctness change versus a 1.37% repeat floor; 9.33-point excess (95% CI 7.13–11.57).</td><td>The effect transfers to the registered proprietary frontier-model test and remains well above execution noise.</td></tr><tr><td><b>P5 / P5b</b></td><td>P5 remained negative (0/760 cells at the strict inferential gate). A separately locked P5b qualified 103/760 cells; semantic disagreement was 8.12% versus a 3.76% repeat floor (4.36-point excess; 95% CI 3.27–5.58).</td><td>A practitioner-facing tie rule can still leave downstream semantic disagreement, without converting the negative P5 result into a positive one.</td></tr><tr><td><b>EPSS production update</b></td><td>565/1,000 priorities changed; adjacent same-version controls changed 0 and 7.</td><td>Production updates can redirect scarce attention far beyond ordinary daily drift.</td></tr><tr><td><b>Frontier applications</b></td><td>78.8% mean avoidable turnover in GraphSAGE versus 28.7% in 20 Newsgroups at the same 0.1% rank-utility budget.</td><td>How much churn is required depends on the score landscape and should be measured rather than assumed.</td></tr></tbody></table><div class="note"><b>Important:</b> RAG correctness changes were bidirectional (60 correct→incorrect, 74 incorrect→correct). EPSS outcomes are sparse and retrospective. Exploratory drug-interaction analyses are not clinical validation. RIDI does not turn identity stability into a safety, fairness or benefit claim.</div></div></section>
+<section id="question">
+  <div class="wrap split">
+    <div>
+      <div class="section-label">Research question</div>
+      <h2>What does an evaluation score fail to identify?</h2>
+    </div>
+    <div class="prose">
+      <p class="lead">Two systems can receive the same recorded evaluation while acting on different evidence, selecting different identities, or producing different downstream answers.</p>
+      <p>RIDI separates <b>evaluation equivalence</b> from <b>action equivalence</b>. It measures selected-set identity directly and, for ranking updates, computes the exact identity–utility frontier: the smallest replacement count compatible with a declared updated-score utility budget.</p>
+      <p>This is not a claim that change is harmful. It is a claim about what aggregate evaluation does—and does not—certify.</p>
+    </div>
+  </div>
+</section>
 
-<section><div class="wrap"><div class="eyebrow">Reproducibility</div><h2 class="section-title">What has — and has not — been independently checked</h2><div class="limits"><div class="card"><h3>Checked</h3><p>The sealed EPSS numerical workflow was reproduced by two external executors. Both also performed targeted blind regeneration of the illustrative SciFact case in distinct environments. Registered RAG code, inputs and analysis are frozen through the OSF record.</p></div><div class="card"><h3>Boundaries</h3><p>The targeted SciFact runs did not both reproduce a strict-scored correctness change because one pinned-model reference began with <code>Verdict:</code> and was rejected by the frozen parser. A post hoc 300-query parser sensitivity and a completed 512-token generation-length sensitivity are reported separately. The registered GPT-5.6 Sol transfer and the separately locked P5b practitioner-equivalence extension are also complete.</p></div></div><div class="note"><b>CODECHECK:</b> no formal certificate has been issued. Register issue #208 was closed with an invitation to return once a public preprint is available or the manuscript is under journal review.</div><div class="actions"><a class="btn primary" href="https://osf.io/txwdv/">OSF preregistration →</a><a class="btn" href="https://github.com/codecheckers/register/issues/208">CODECHECK record</a><a class="btn" href="docs/REPRODUCIBILITY.md">Reproducibility guide</a></div></div></section>
+<section id="findings">
+  <div class="wrap split">
+    <div>
+      <div class="section-label">Findings</div>
+      <h2>A layered evidence chain.</h2>
+      <p class="lead">Positive, negative and boundary results are reported separately rather than collapsed into one headline.</p>
+    </div>
+    <div class="findings">
+      <article class="finding"><h3>Exact retrieval-audit equality</h3><p>Across <strong>800 preregistered queries</strong>, the complete assessed relevance-grade sequence and five standard retrieval metrics were identical, yet benchmark-defined correctness changed in <strong>17.27%</strong> of queries.</p></article>
+      <article class="finding"><h3>Frontier-model transfer</h3><p>GPT-5.6 Sol produced <strong>10.70%</strong> equal-dataset correctness change versus a <strong>1.37%</strong> repeat floor: <strong>9.33 percentage points</strong> excess (95% CI 7.13–11.57).</p></article>
+      <article class="finding"><h3>P5 remained negative</h3><p>The registered natural-prevalence inferential gate qualified <strong>0/760</strong> cells. No P5 answer-generation stage was entered and no threshold was relaxed.</p></article>
+      <article class="finding"><h3>P5b practitioner-equivalence extension</h3><p>A separately locked rule qualified <strong>103/760</strong> cells. Held-out semantic disagreement was <strong>8.12%</strong> versus a <strong>3.76%</strong> repeat floor: <strong>4.36 points</strong> excess (95% CI 3.27–5.58).</p></article>
+      <article class="finding"><h3>Production update</h3><p>EPSS v2→v3 replaced <strong>565/1,000</strong> selected priorities. Adjacent same-version controls changed 0 and 7, showing that production turnover exceeded ordinary daily drift.</p></article>
+      <article class="finding"><h3>Exact control frontier</h3><p>RIDI computes the minimum replacements compatible with a declared utility loss. Avoidable turnover differs materially across domains rather than following a universal constant.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="method">
+  <div class="wrap">
+    <div class="section-label">Method</div>
+    <h2>Measure, separate, control.</h2>
+    <div class="method">
+      <article><h3>1. Measure identity</h3><p>Record overlap, changed slots and Jaccard distance between the finite selections a system actually acts on.</p></article>
+      <article><h3>2. Separate from performance</h3><p>Report conventional accuracy or retrieval measures alongside selected identities rather than assuming one determines the other.</p></article>
+      <article><h3>3. Control required change</h3><p>Use the exact identity–utility frontier to determine the minimum turnover compatible with an explicit updated-score utility tolerance.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="software">
+  <div class="wrap split">
+    <div>
+      <div class="section-label">Open-source implementation</div>
+      <h2>Use RIDI on your own selected lists or score tables.</h2>
+      <p class="lead">The public package is designed to make the core audit inspectable without reproducing the manuscript experiments.</p>
+    </div>
+    <div>
+      <div class="code">pip install ridi-audit
+
+from ridi_audit import compare_allocations
+
+before = ["doc-1", "doc-2", "doc-3", "doc-4"]
+after  = ["doc-1", "doc-2", "doc-9", "doc-4"]
+
+print(compare_allocations(before, after))</div>
+      <p style="color:var(--muted);font-size:.9rem">Clean-environment verification on 26 September 2026: <b>21/21 tests passed</b>; Quick Start, CLI compare/control, package build, Twine checks and a fresh PyPI install were smoke-tested successfully.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split">
+    <div>
+      <div class="section-label">Scientific boundaries</div>
+      <h2>What the project does not claim.</h2>
+    </div>
+    <div>
+      <ul class="boundaries">
+        <li><b>Not a harm metric</b><span>Selection or answer change is not automatically harm, unfairness or error.</span></li>
+        <li><b>P5 remains negative</b><span>P5b is a distinct post-P5, pre-generation extension and does not relabel the registered P5 result.</span></li>
+        <li><b>Finite-roster inference</b><span>P5b is conditional on the frozen 20-configuration roster and common BM25 candidate pool; it is not a prevalence estimate over all retrievers.</span></li>
+        <li><b>Sparse outcomes</b><span>EPSS delayed outcomes are retrospective and sparse; no causal benefit is claimed.</span></li>
+        <li><b>No CODECHECK certificate</b><span>External execution evidence is documented, but no formal CODECHECK certificate has been issued.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-label">Resources</div>
+    <h2>Evidence, code and reproducibility.</h2>
+    <div class="resources">
+      <a class="resource" href="paper/README.md"><b>Paper & evidence synopsis</b><span>Current manuscript framing, registered extensions, negative results and scientific boundaries.</span></a>
+      <a class="resource" href="docs/QUICKSTART.md"><b>60-second Quick Start</b><span>Install the public package and reproduce the basic allocation-identity audit.</span></a>
+      <a class="resource" href="https://osf.io/txwdv/"><b>RAG preregistration</b><span>Prospective registered design for the retrieval experiment and extension programme.</span></a>
+      <a class="resource" href="https://pypi.org/project/ridi-audit/"><b>PyPI: ridi-audit</b><span>Public Python package for selected-set comparison and the identity–utility frontier.</span></a>
+    </div>
+  </div>
+</section>
 </main>
 
-<footer class="footer"><div class="wrap"><b>Adeeb Noor</b> · King Abdulaziz University · ORCID 0000-0002-8251-1853<br>Current manuscript: <i>Equal evaluation scores do not certify equivalent AI behaviour</i>. Submission-ready; not peer reviewed, accepted or published.</div></footer>
+<footer>
+  <div class="wrap">
+    <span><b>RIDI Research Project</b> · Adeeb Noor · King Abdulaziz University</span>
+    <span>Current manuscript: <i>Equal evaluation scores do not certify equivalent AI behaviour</i></span>
+  </div>
+</footer>
 </body>
 </html>
