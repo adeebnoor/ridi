@@ -2,6 +2,17 @@
 
 All notable public changes are documented here.
 
+## Public manuscript/evidence sync — 2026-09-26
+
+- Updated the public manuscript title to **Equal evaluation scores do not certify equivalent AI behaviour**.
+- Added the completed registered GPT-5.6 Sol transfer (P1), including the repeat-adjusted excess and provider-setting provenance.
+- Preserved the registered P5 natural-prevalence gate as a negative result: **0/760** cells qualified and no P5 generation was entered.
+- Added the separately locked P5b practitioner-equivalence extension: **103/760** qualified cells; held-out semantic disagreement **8.12%** versus **3.76%** repeat floor; **4.36-point** excess (95% CI **3.27–5.58**); **36/103** cells with mean excess ≥5 points.
+- Recorded the public GitHub lock/push provenance for P5b and kept P5 and P5b explicitly distinct.
+- Updated the public figure architecture to the submission-ready four-main-figure / six-extended-data structure.
+- Re-smoke-tested the public implementation from a clean `main` archive: **21/21 tests passed**; Quick Start, CLI compare/control, build and Twine checks passed; `ridi-audit==1.1.1` also installed cleanly from PyPI and passed demo/Quick Start smoke tests.
+- No public API change; software version remains **1.1.1**.
+
 ## 1.1.1 — verification/documentation patch — 2026-09-04
 
 - Synchronized the public PyPI package metadata and long description with the current researcher-facing README.
