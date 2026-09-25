@@ -1,10 +1,10 @@
-# Performance metrics can miss what updated systems act on
+# Equal evaluation scores do not certify equivalent AI behaviour
 
 **Adeeb Noor**  
 Department of Information Technology, Faculty of Computing and Information Technology, King Abdulaziz University, Jeddah, Saudi Arabia  
 ORCID: 0000-0002-8251-1853
 
-> **Status — 18 September 2026:** public synopsis of the current frontier-led working manuscript. It is not peer reviewed, accepted or published. The public repository records the evidence and software; the manuscript remains subject to further robustness work and author finalization.
+> **Status — 26 September 2026:** public synopsis aligned to the submission-ready manuscript. It is not peer reviewed, accepted or published. The public repository records the evidence, software, registrations, negative results and separately locked extensions; the journal submission files themselves are not published here.
 
 ## Central contribution
 
@@ -42,6 +42,48 @@ A post hoc formatting analysis rescored all 300 FEVER/SciFact primary queries un
 - prefix-tolerant result: **53 changes** — 52 persisted, six resolved, one new change appeared (two-dataset mean **17.67%**)
 
 This classification-only sensitivity is **not** the four-dataset primary endpoint and is not human semantic adjudication. The registered result remains unchanged. A separate post hoc 512-token generation-length sensitivity reran the same frozen 800-query Qwen3-8B/BM25/k=10 reference-versus-random comparison and reproduced **all 134 registered correctness-change indicators with zero query-level discordance**; the equal-dataset-weight macro remained **17.27%**.
+
+## Registered extension results: P1, P4, P5 and P5b
+
+The prospectively registered extension programme retained the frozen 800-query panel for P1–P4 and used previously unused qrel-bearing queries for P5. P5b was added only after the negative P5 gate, with its rule locked publicly before any P5b answer generation.
+
+### P1 — GPT-5.6 Sol frontier/API transfer
+
+GPT-5.6 Sol completed **4,800 generations** (800 queries × two conditions × three repeats) with no execution errors.
+
+- registered equal-dataset correctness change: **10.70%**
+- matched reference repeat floor: **1.37%**
+- repeat-adjusted excess: **9.33 percentage points**
+- 95% stratified-bootstrap interval: **7.13–11.57 points**
+
+The raw generation artifact records `temperature_unsupported=true` for all 4,800 rows: the frozen OpenAI backend retried without a temperature argument when the provider rejected the temperature/max_tokens combination, retained seed 20260902 and used the reasoning-model completion-token fallback. No system fingerprint was returned.
+
+### P4 — semantic audit
+
+The frozen machine-judge audit excluded exchanged passages judged informative. Under the registered clean-query rule, **86 queries** remained; equal-dataset macro correctness change was **16.72%** (95% CI **3.54–29.38**). The separate human-annotation component has not begun and remains conditional on the King Abdulaziz University institutional determination.
+
+### P5 — negative inferential-equivalence gate
+
+P5 kept its original strict qualification rule: both nDCG@10 and Recall@10 had to satisfy the registered 0.01 inferential-equivalence criterion with Holm correction on the qualification split. **0/760** pair-by-dataset cells qualified. The confirmatory P5 generation stage was therefore not entered, no threshold was relaxed, and P5 remains unsupported.
+
+### P5b — separately locked practitioner-equivalence extension
+
+P5b was locked at commit `afac4815d95da87df682d036a511225e7be9c566` after the negative P5 result and before any P5b generation. GitHub's public PushEvent records the commit on `main` at **2026-09-25 07:48:49 UTC**, while the P5b generation provenance begins at **15:06:33.908 UTC**.
+
+The qualification rule used only the frozen qualification split and required **|Δ mean nDCG@10| < 0.01**. No TOST, Recall@10 gate, P value or multiplicity correction was used. **103/760** cells qualified.
+
+On the frozen held-out estimation queries:
+
+- semantic disagreement: **8.119%**
+- matched repeat floor: **3.758%**
+- repeat-adjusted excess: **4.361 percentage points**
+- descriptive two-way query-by-pair bootstrap 95% CI for mean excess: **3.269–5.579 points**
+- cells with mean excess ≥5 points: **36/103 = 34.95%**
+- fixed-roster query-resampling 95% CI for that share: **24.27–49.54%**
+
+Dataset mean cell excesses were **6.69 points** for Natural Questions, **4.82** for HotpotQA, **2.78** for FEVER and **2.34** for SciFact.
+
+P5b is conditional on the fixed 20-configuration roster and common BM25 top-100 candidate pools. It does not estimate prevalence over all retrievers and does not relabel or replace the negative P5 result.
 
 ## Illustrative SciFact case
 
@@ -160,13 +202,15 @@ Registered RxNorm and Open Targets failures remain visible as boundaries of the 
 ## Current figure architecture
 
 - **Main Fig. 1:** exact retrieval-evaluation equality and answer changes.
-- **Main Fig. 2:** EPSS production update and frontier/outcome trade-off.
-- **Main Fig. 3:** identity–utility frontier across applications.
+- **Main Fig. 2:** aggregate accuracy can remain nearly unchanged while individual answers change.
+- **Main Fig. 3:** EPSS production-score update and changed priorities.
+- **Main Fig. 4:** exact necessary-change frontier under declared utility tolerances.
 - **Extended Data Fig. 1:** passage-set ambiguity, capacity and order controls.
-- **Extended Data Fig. 2:** sufficient stability certificate.
-- **Extended Data Fig. 3:** four EPSS version transitions.
-- **Extended Data Fig. 4:** registered failures (RxNorm / Open Targets).
-- **Extended Data Fig. 5:** exploratory drug-interaction catalogue replay.
+- **Extended Data Fig. 2:** selection change across four EPSS version transitions.
+- **Extended Data Fig. 3:** rank agreement versus selection stability and the score-gap certificate.
+- **Extended Data Fig. 4:** registered natural-update failures (RxNorm / Open Targets).
+- **Extended Data Fig. 5:** avoidable selection change across domains.
+- **Extended Data Fig. 6:** registered execution-floor and replacement-draw extensions.
 
 ## Reproducibility
 
@@ -180,7 +224,7 @@ Registered RxNorm and Open Targets failures remain visible as boundaries of the 
 
 ## Scientific boundaries
 
-RIDI measures and controls selected membership under a declared objective. It does not by itself establish correctness, fairness, harm, benefit, clinical utility or model superiority. Correctness changes in the RAG study are bidirectional. Benchmark qrels are incomplete, so zero-grade passages are called **metric-zero**, not semantically irrelevant. The registered RAG generators are open-weight 7–8B models under a fixed 128-token regime; the completed 512-token rerun is post hoc and does not replace that registered regime. A larger-model scale sensitivity and independent aggregate 800-query execution remain pending and are not claimed. EPSS outcome evidence is sparse and retrospective. A sufficiently identity-aware audit can remove the membership ambiguity by recording selected identities directly.
+RIDI measures and controls selected membership under a declared objective. It does not by itself establish correctness, fairness, harm, benefit, clinical utility or model superiority. Correctness changes in the RAG study are bidirectional. Benchmark qrels are incomplete, so zero-grade passages are called **metric-zero**, not semantically irrelevant. The original registered RAG generators are open-weight 7–8B models under a fixed 128-token regime; the completed 512-token rerun is post hoc and does not replace that registered regime. A prospectively registered GPT-5.6 Sol transfer is now complete and reported separately with its repeat floor and provider-setting limitations. The Qwen3-32B scale transfer remains a separately public-locked post hoc extension, not part of the original registration. EPSS outcome evidence is sparse and retrospective. A sufficiently identity-aware audit can remove the membership ambiguity by recording selected identities directly.
 
 ## Use or test the method
 
