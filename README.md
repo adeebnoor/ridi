@@ -6,7 +6,7 @@
 [![PyPI](https://img.shields.io/pypi/v/ridi-audit.svg)](https://pypi.org/project/ridi-audit/)
 ![python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-3776ab)
 ![license](https://img.shields.io/badge/license-MIT-2ea44f)
-![status](https://img.shields.io/badge/manuscript-working%20version-6f42c1)
+![status](https://img.shields.io/badge/manuscript-submission--ready-2563eb)
 
 <p align="center">
   <a href="./"><b>Project page</b></a> ·
@@ -92,7 +92,18 @@ This experiment does **not** claim to discover that context matters. Prior work 
 
 A post hoc formatting sensitivity rescored all 300 FEVER/SciFact primary queries under two declared prefix-tolerant rules. Both rules agreed: **53 classification correctness changes** (two-dataset mean **17.67%**) versus **58** (**19.33%**) under the registered strict parser. The registered four-dataset endpoint remains unchanged. A separate post hoc generation-length rerun increased the cap from 128 to 512 new tokens on the same 800 frozen primary queries: **all 134 registered correctness changes persisted, no new change appeared, and the equal-dataset-weight macro remained 17.27%**.
 
-### 2) A production update changed scarce priorities
+### 2) Registered robustness and practitioner-equivalence extensions
+
+The prospectively registered extension programme tested execution noise, replacement-draw variability, semantic filtering and frontier-model transfer. A separate P5b extension was then locked after the negative P5 gate but before any P5b answer generation.
+
+- **GPT-5.6 Sol transfer (P1):** registered equal-dataset correctness change **10.70%** versus a **1.37%** repeat floor, leaving **9.33 percentage points** repeat-adjusted excess (95% CI **7.13–11.57**).
+- **Semantic audit (P4):** after excluding exchanged passages judged informative by both frozen machine judges, **86 clean queries** remained; equal-dataset macro correctness change was **16.72%** (95% CI **3.54–29.38**). The separate human-annotation component remains pending institutional determination.
+- **Registered natural-prevalence gate (P5):** **0/760** configuration-pair-by-dataset cells passed the strict joint nDCG@10 + Recall@10 inferential-equivalence criterion; the P5 answer-generation stage was therefore not entered and P5 remains negative.
+- **Practitioner-equivalence extension (P5b):** commit `afac4815d95da87df682d036a511225e7be9c566` was publicly pushed before generation. Under the pre-generation rule `|Δ mean nDCG@10| < 0.01`, **103/760** cells qualified. On held-out queries, semantic disagreement was **8.12%** versus a **3.76%** matched repeat floor, an excess of **4.36 percentage points** (two-way bootstrap 95% CI **3.27–5.58**). **36/103 (35.0%)** cells had mean excess ≥5 points; the fixed-roster query-resampling 95% CI for that share was **24.3–49.5%**.
+
+P5b is conditional on the frozen 20-configuration roster and common BM25 top-100 candidate pools. It does **not** convert the negative P5 result into a positive one and does not estimate prevalence over all retrieval systems.
+
+### 3) A production update changed scarce priorities
 
 For the EPSS v2→v3 production update:
 
@@ -104,7 +115,7 @@ For the EPSS v2→v3 production update:
 
 These sparse retrospective outcomes do not establish causal benefit. In a post hoc extension using the same pinned score inputs and KEV catalogue, the top-1,000 outcome count difference narrowed from **8→12 (+4)** at 365 days to **20→21 (+1)** at two years and **32→33 (+1)** at three years; full-universe AUROC and average precision remained lower for v3 at both longer windows. The 365-day window remains primary.
 
-### 3) CMS is a rule-version boundary, not a hidden-reallocation headline
+### 4) CMS is a rule-version boundary, not a hidden-reallocation headline
 
 For two US Hospital Value-Based Purchasing annual score landscapes, the exact identity–utility frontier was evaluated as an **analytic score-selection stress test**, not as an implemented CMS top-k policy. At analytic k=500, FY2024→FY2025 changed 195 identities and FY2025→FY2026 changed 202; under a 0.1% updated rank-utility tolerance the exact frontier required 174 and 181 replacements, respectively.
 
@@ -123,7 +134,7 @@ A separate historical TPS extension was publicly locked before FY2017–FY2021 h
 The post hoc rule-version sensitivity is public under `experiments/cms_action_sensitivity/`; it complements rather than replaces the prospective Table 16B registration.
 
 
-### 4) Avoidable turnover differs across domains
+### 5) Avoidable turnover differs across domains
 
 At a locked **0.1%** rank-utility budget:
 
@@ -149,13 +160,13 @@ Exploratory drug-interaction and medication-context analyses are retained as bou
 
 ---
 
-## Current manuscript direction
+## Current manuscript
 
-**Working title:** *Performance metrics can miss what updated systems act on*
+**Current title:** *Equal evaluation scores do not certify equivalent AI behaviour*
 
-The current manuscript is organised around **action sufficiency**: performance equivalence does not imply action equivalence. The preregistered RAG experiment is the controlled behavioural anchor, EPSS is the deployed operational example, the identity–utility frontier makes necessary versus discretionary selection change explicit, and CMS is retained as a rule-version boundary case.
+The submission-ready manuscript is organised around a single distinction: **evaluation equivalence does not certify action or behavioural equivalence**. The preregistered RAG experiment is the controlled anchor; the GPT-5.6 Sol transfer and semantic audit test major alternative explanations; P5 remains a transparent negative inferential-equivalence result; P5b estimates downstream semantic disagreement under a separately locked practitioner-facing tie rule; EPSS supplies the production update; and the identity–utility frontier separates necessary from discretionary selection change. CMS is retained as a rule-version boundary case.
 
-The working manuscript is **not peer reviewed, accepted or published**. Registered failures (RxNorm and Open Targets), parser limitations, sparse EPSS outcomes and exploratory clinical boundaries are retained in the research record.
+The manuscript is **not peer reviewed, accepted or published**. Registered failures (including P5, RxNorm and Open Targets), parser limitations, sparse EPSS outcomes and exploratory clinical boundaries remain visible in the public record.
 
 ---
 
@@ -165,6 +176,8 @@ The working manuscript is **not peer reviewed, accepted or published**. Register
 pip install ridi-audit
 ridi-audit demo
 ```
+
+**Public implementation check — 26 September 2026:** a clean checkout of `main` passed **21/21 tests**; the Quick Start, CLI `compare`/`control`, package build and Twine validation passed; and `ridi-audit==1.1.1` was reinstalled from PyPI in a second clean environment and smoke-tested successfully.
 
 Resources:
 
