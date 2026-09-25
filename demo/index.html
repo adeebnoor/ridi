@@ -1,1 +1,81 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Interactive RIDI selection-identity replay and RAG evidence example."><title>RIDI Demo · Adeeb Noor</title><style>:root{--ink:#111827;--muted:#64748b;--line:#e2e8f0;--blue:#2563eb;--green:#15803d;--red:#b42318;--dark:#0f172a}*{box-sizing:border-box}body{margin:0;font:16px/1.55 Inter,Arial,sans-serif;color:var(--ink);background:#f8fafc}.w{width:min(1100px,calc(100% - 28px));margin:auto}header{height:66px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}header a{text-decoration:none;color:var(--ink);font-weight:900}.hero{padding:58px 0 24px}.tag{font-size:12px;font-weight:900;color:var(--blue);letter-spacing:.04em}.hero h1{font-size:clamp(42px,7vw,76px);line-height:.98;letter-spacing:-.055em;margin:14px 0;max-width:980px}.hero p{font-size:20px;color:#334155;max-width:850px}.panel{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 22px 60px rgba(15,23,42,.08);margin:20px 0 48px}.head{padding:22px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:20px}.head h2{margin:0}.run{border:0;background:var(--dark);color:#fff;border-radius:12px;padding:12px 18px;font-weight:900;cursor:pointer}.claim{padding:18px 24px;border-bottom:1px solid var(--line)}.same{margin:20px 24px 0;padding:14px;border-radius:12px;text-align:center;background:#eff6ff;color:#1d4ed8;font-weight:900}.contexts,.decisions{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:20px 24px}.card,.decision{border:1px solid var(--line);border-radius:16px;padding:18px;background:#fff}.card h3{margin:0 0 8px}.slots{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.slot{padding:8px 4px;border:1px solid var(--line);border-radius:8px;text-align:center;font:11px monospace;background:#f8fafc}.pos{background:#ecfdf3;border-color:#bbf7d0;color:var(--green);font-weight:900}.chg{background:#fffbeb;border-color:#fde68a}.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:0 24px}.metric{border:1px solid var(--line);border-radius:10px;padding:10px;text-align:center}.metric small{display:block;color:var(--muted)}.decision{text-align:center;background:#f8fafc}.decision strong{display:block;font-size:30px}.blur strong{filter:blur(8px);opacity:.25}.support strong{color:var(--green)}.refute strong{color:var(--red)}.status{padding:0 24px 24px;color:var(--muted)}footer{padding:26px 0 40px;color:var(--muted);font-size:12px}@media(max-width:760px){.contexts,.decisions,.metrics{grid-template-columns:1fr}.head{flex-direction:column}.slots{grid-template-columns:repeat(2,1fr)}}</style></head><body><div class="w"><header><a href="../">ADEEB NOOR</a><nav><a href="../">Home</a> · <a href="../paper/">Evidence</a> · <a href="https://github.com/adeebnoor/ridi">GitHub</a></nav></header><section class="hero"><div class="tag">RIDI · SELECTION IDENTITY · PREREGISTERED RAG</div><h1>Same retrieval evaluation. Different evidence. Different answer.</h1><p>In the preregistered experiment, <strong>answer correctness changed in 17.27% of primary comparisons</strong> (equal-weight mean across four datasets) while the full assessed relevance-by-rank pattern and five retrieval metrics were held fixed.</p></section><section class="panel"><div class="head"><div><h2>Replay one registered example</h2><p>Same relevant passage. Same rank. Same relevance pattern. Same five metrics.</p></div><button class="run" id="run">Run demo</button></div><div class="claim"><strong>Claim 275</strong><br>Combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors is effective at treating KRAS mutant tumors.</div><div class="same">RETRIEVAL EVALUATION: IDENTICAL</div><div class="contexts"><div class="card"><h3>Context A · reference</h3><div class="slots"><span class="slot pos">1<br>4961038</span><span class="slot">2<br>85665741</span><span class="slot">3<br>4920376</span><span class="slot">4<br>3078550</span><span class="slot">5<br>1285713</span><span class="slot">6<br>28651643</span><span class="slot">7<br>2272614</span><span class="slot">8<br>11200685</span><span class="slot">9<br>22980205</span><span class="slot">10<br>24190159</span></div></div><div class="card"><h3>Context B · random zero-grade replacement</h3><div class="slots"><span class="slot pos">1<br>4961038</span><span class="slot chg">2<br>9767444</span><span class="slot chg">3<br>9505402</span><span class="slot chg">4<br>21931005</span><span class="slot chg">5<br>33387953</span><span class="slot chg">6<br>29321530</span><span class="slot chg">7<br>15322518</span><span class="slot chg">8<br>27428509</span><span class="slot chg">9<br>41650417</span><span class="slot chg">10<br>9021186</span></div></div></div><div class="metrics"><div class="metric"><small>precision@10</small><b>0.1000</b></div><div class="metric"><small>recall@10</small><b>0.3333</b></div><div class="metric"><small>nDCG@10</small><b>0.4693</b></div><div class="metric"><small>MRR@10</small><b>1.0000</b></div><div class="metric"><small>MAP@10</small><b>0.3333</b></div></div><div class="decisions"><div class="decision support blur" id="a"><small>Context A verdict</small><strong>SUPPORTS</strong></div><div class="decision refute blur" id="b"><small>Context B verdict</small><strong>REFUTES</strong></div></div><div class="status" id="status">Press <strong>Run demo</strong> to reveal the decisions.</div><div class="status"><strong>RIDI is the audit toolkit.</strong> Selection identity is the object being measured; the identity–utility frontier computes the minimum turnover compatible with an explicit utility budget. <a href="../research.html">See the broader research program →</a></div></section><footer>RIDI · Selection identity auditing · Adeeb Noor · King Abdulaziz University.</footer></div><script>document.getElementById('run').onclick=function(){document.getElementById('a').classList.remove('blur');document.getElementById('b').classList.remove('blur');document.getElementById('status').innerHTML='<strong>Same retrieval evaluation. Different selected evidence. Different model output.</strong>';this.textContent='Replay complete';this.disabled=true}</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RIDI Demo — Equal evaluation scores do not certify equivalent AI behaviour</title>
+<meta name="description" content="Interactive RIDI replay of a preregistered SciFact case under exact retrieval-audit equality.">
+<style>
+:root{--ink:#18212b;--muted:#5f6b75;--line:#d9dde2;--accent:#8c1d40;--green:#1f6b45;--red:#9f2d28;--wash:#f6f7f8;--serif:Georgia,'Times New Roman',serif;--sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font:16px/1.65 var(--sans)}
+a{color:#68142f;text-underline-offset:3px}
+.wrap{width:min(1080px,calc(100% - 40px));margin:auto}
+header{border-bottom:1px solid var(--line)}
+header .wrap{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.brand{text-decoration:none;color:var(--ink);font-weight:800;letter-spacing:.1em}
+nav{display:flex;gap:20px;flex-wrap:wrap}
+nav a{font-size:.88rem;font-weight:700;text-decoration:none;color:var(--ink)}
+.hero{padding:64px 0 38px;border-bottom:1px solid var(--line)}
+.kicker{font-size:.78rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--accent)}
+h1{font:500 clamp(2.8rem,6vw,5.7rem)/1 var(--serif);letter-spacing:-.04em;margin:14px 0 20px;max-width:980px}
+.deck{font:1.25rem/1.5 var(--serif);color:#3d4750;max-width:850px}
+.context{margin-top:22px;color:var(--muted);font-size:.9rem}
+.demo{padding:54px 0}
+.demo-head{display:flex;justify-content:space-between;gap:26px;align-items:end;border-bottom:3px solid var(--ink);padding-bottom:16px}
+.demo-head h2{font:500 2.25rem/1.1 var(--serif);margin:0}
+.demo-head p{margin:6px 0 0;color:var(--muted)}
+.run{border:1px solid var(--ink);background:var(--ink);color:#fff;padding:11px 16px;font-weight:800;cursor:pointer}
+.claim{padding:22px 0;border-bottom:1px solid var(--line)}
+.same{padding:14px 0;border-bottom:1px solid var(--line);font-weight:800;color:var(--accent);letter-spacing:.04em}
+.contexts,.decisions{display:grid;grid-template-columns:1fr 1fr;gap:0;border-left:1px solid var(--line);border-top:1px solid var(--line);margin-top:24px}
+.card,.decision{padding:22px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.card h3{font:600 1.15rem var(--serif);margin:0 0 14px}
+.slots{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.slot{padding:8px 4px;border-top:2px solid var(--line);text-align:center;font:11px/1.3 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.pos{border-color:var(--green);font-weight:800;color:var(--green)}
+.chg{border-color:#bd8b21}
+.metrics{display:grid;grid-template-columns:repeat(5,1fr);border-left:1px solid var(--line);margin-top:18px}
+.metric{padding:14px;border-right:1px solid var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center}
+.metric small{display:block;color:var(--muted)}
+.decision{text-align:center;background:var(--wash)}
+.decision strong{display:block;font:600 2rem var(--serif)}
+.blur strong{filter:blur(8px);opacity:.2}
+.support strong{color:var(--green)}
+.refute strong{color:var(--red)}
+.status{padding:18px 0;border-bottom:1px solid var(--line);color:var(--muted)}
+.note{margin-top:36px;border-top:3px solid var(--accent);padding-top:14px;color:var(--muted)}
+footer{border-top:1px solid var(--line);padding:34px 0 44px;color:var(--muted);font-size:.9rem}
+@media(max-width:760px){
+ body{overflow-x:hidden}.wrap{width:min(100% - 32px,1080px)}
+ header .wrap{padding:16px 0;align-items:flex-start;flex-direction:column}
+ nav{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:8px 18px}
+ h1{font-size:clamp(2.65rem,12vw,4rem);overflow-wrap:anywhere}
+ .demo-head{align-items:flex-start;flex-direction:column}
+ .contexts,.decisions,.metrics{grid-template-columns:1fr}
+ .slots{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="brand" href="../">RIDI</a><nav><a href="../">Project home</a><a href="../paper/README.md">Paper & evidence</a><a href="../research.html">Research</a><a href="https://github.com/adeebnoor/ridi">GitHub</a></nav></div></header>
+<main>
+<section class="hero"><div class="wrap"><div class="kicker">Interactive evidence replay · preregistered RAG</div><h1>Same retrieval evaluation. Different selected evidence. Different answer.</h1><p class="deck">A single registered SciFact case illustrates the core identification problem behind the current manuscript, <i>Equal evaluation scores do not certify equivalent AI behaviour</i>.</p><p class="context">This replay is an illustrative case, not the full 800-query endpoint and not the later GPT-5.6/P5b extensions.</p></div></section>
+<section class="demo"><div class="wrap">
+<div class="demo-head"><div><h2>Replay the registered example</h2><p>Same positive passage. Same rank. Same relevance pattern. Same five retrieval metrics.</p></div><button class="run" id="run">Run demo</button></div>
+<div class="claim"><strong>Claim 275</strong><br>Combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors is effective at treating KRAS mutant tumors.</div>
+<div class="same">RETRIEVAL EVALUATION: IDENTICAL</div>
+<div class="contexts">
+<div class="card"><h3>Context A · reference</h3><div class="slots"><span class="slot pos">1<br>4961038</span><span class="slot">2<br>85665741</span><span class="slot">3<br>4920376</span><span class="slot">4<br>3078550</span><span class="slot">5<br>1285713</span><span class="slot">6<br>28651643</span><span class="slot">7<br>2272614</span><span class="slot">8<br>11200685</span><span class="slot">9<br>22980205</span><span class="slot">10<br>24190159</span></div></div>
+<div class="card"><h3>Context B · random zero-grade replacement</h3><div class="slots"><span class="slot pos">1<br>4961038</span><span class="slot chg">2<br>9767444</span><span class="slot chg">3<br>9505402</span><span class="slot chg">4<br>21931005</span><span class="slot chg">5<br>33387953</span><span class="slot chg">6<br>29321530</span><span class="slot chg">7<br>15322518</span><span class="slot chg">8<br>27428509</span><span class="slot chg">9<br>41650417</span><span class="slot chg">10<br>9021186</span></div></div>
+</div>
+<div class="metrics"><div class="metric"><small>precision@10</small><b>0.1000</b></div><div class="metric"><small>recall@10</small><b>0.3333</b></div><div class="metric"><small>nDCG@10</small><b>0.4693</b></div><div class="metric"><small>MRR@10</small><b>1.0000</b></div><div class="metric"><small>MAP@10</small><b>0.3333</b></div></div>
+<div class="decisions"><div class="decision support blur" id="a"><small>Context A verdict</small><strong>SUPPORTS</strong></div><div class="decision refute blur" id="b"><small>Context B verdict</small><strong>REFUTES</strong></div></div>
+<div class="status" id="status">Press <strong>Run demo</strong> to reveal the decisions.</div>
+<div class="note"><strong>Interpretation boundary.</strong> The original result is bidirectional at the aggregate level and is not a net-harm claim. The current project also reports a registered GPT-5.6 Sol transfer, a negative P5 inferential-equivalence gate and the separately locked P5b practitioner-equivalence extension. <a href="../paper/README.md">Read the full public evidence synopsis →</a></div>
+</div></section>
+</main>
+<footer><div class="wrap">RIDI Research Project · Adeeb Noor · King Abdulaziz University</div></footer>
+<script>document.getElementById('run').onclick=function(){document.getElementById('a').classList.remove('blur');document.getElementById('b').classList.remove('blur');document.getElementById('status').innerHTML='<strong>Same retrieval evaluation. Different selected evidence. Different model output.</strong>';this.textContent='Replay complete';this.disabled=true}</script>
+</body>
+</html>
