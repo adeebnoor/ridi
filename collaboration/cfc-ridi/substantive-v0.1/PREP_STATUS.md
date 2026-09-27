@@ -1,6 +1,6 @@
 # CFC ↔ RIDI substantive preparation status
 
-**Status:** READY FOR BILATERAL ELIGIBILITY-CRITERIA REVIEW  
+**Status:** READY FOR BILATERAL ELIGIBILITY-CRITERIA REVIEW — POST-MIRROR DRY RUN COMPLETE  
 **Date:** 2026-09-28  
 **Branch:** `prep/cfc-ridi-substantive-infra-v0.1`
 
@@ -53,6 +53,15 @@ The CI confirms:
 - No substantive CFC or RIDI run has been executed.
 - No result has been written into the paper skeleton.
 
+## Chronology-clean dry-run completion
+
+The Krzysztof-side frozen-annex mirror was published at commit `61368b2041e161a8475ea5318d93dfae1f2edbd9`.
+
+The exact same pinned excluded mechanical dry run was then rerun as GitHub Actions run `36353521373`, attempt 2. Result: **PASS**.
+
+Post-mirror repeat record:
+https://github.com/adeebnoor/ridi/blob/dryrun/cfc-ridi-one-support-v0.1/research/cfc-ridi/dryrun-v0.1/POST_MIRROR_REPEAT_RECORD.md
+
 ## Next protocol-safe step
 
-After the Krzysztof-side annex mirror and the chronology-clean repeat of the excluded mechanical dry run, jointly review/freeze the eligibility criteria, construct the eligible pool under those frozen criteria, hash/freeze that exact pool, and only then enter seed commit–reveal.
+Jointly review/freeze the eligibility criteria, construct the eligible pool under those frozen criteria, hash/freeze that exact pool, and only then enter seed commit–reveal.
