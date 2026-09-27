@@ -52,7 +52,7 @@ The mapper accepts only the following neutral fields. Fields absent from the sou
 No model output may be copied into an evidence record.
 
 ### M1.2 Evidence identity
-`evidence_id` and immutable source-record references identify records only. Distinct identifiers do **not** imply independent evidence.
+`evidence_id` and immutable source-record references identify **CFC evidence records** only. They are distinct from RIDI selected identity, which denotes membership/identity in the downstream selected set. A RIDI selected identity may point to the same underlying item, but that mapping does not establish CFC authority, support, provenance, scope, freshness, dependency, or independence. Distinct identifiers do **not** imply independent evidence.
 
 ### M1.3 Evidence polarity
 CFC `POSITIVE` / `NEGATIVE` evidence polarity may be populated only from an externally supported `semantic_support_record` that explicitly addresses the nominated claim.
@@ -106,10 +106,17 @@ For the **first substantive shared experiment**, the case-agnostic experimental 
 
 for every eligible arm.
 
-This is an experimental closure requirement, not a claim that one evidence item is universally sufficient in real-world decisions. Any future change requires a new protocol/annex version before case selection.
+This is an experimental closure requirement, not a claim that one evidence item is universally sufficient in real-world decisions, and this first run **does not test the requirement for two independent supports**.
+
+The source field `support_requirement` is retained as an observational/authority field. If an eligible candidate has an explicit, authoritative original decision requirement greater than one independent support, that candidate is **ineligible for the first experiment**; the original requirement must not be silently weakened to one. If such a requirement is discovered only after selection, execution stops and the protocol enters a versioned reset rather than overriding the source requirement.
+
+The one-support policy does not relax provenance, authority, freshness, scope, conflict, dependency, or any other frozen CFC condition. Any future change to the experimental support count requires a new protocol/annex version before case selection.
 
 ### M1.10 Retrieval evaluation fields
 RIDI evaluation fields are observation-only for CFC. Exact equality of relevance-grade vectors or retrieval metrics may define the RIDI pair, but it does not certify CFC evidence authority, support, provenance, scope, freshness, dependency, or independence.
+
+### M1.11 Dry-run acceptance check
+The excluded mechanical dry run must confirm that the existing frozen CFC path can execute the `required_independent_supports = 1` configuration. Synthetic/fixture authority may be used only inside that excluded dry run and must be clearly labeled. Passing the dry run does not authorize synthetic authority in the substantive run.
 
 ## 4. Mechanical instantiation
 
