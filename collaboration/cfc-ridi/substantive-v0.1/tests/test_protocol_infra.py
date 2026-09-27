@@ -134,6 +134,48 @@ class ProtocolInfraTests(unittest.TestCase):
             self.assertEqual([r["case_id"] for r in rows], ["CASE_A", "CASE_B"])
             self.assertEqual(len(sha), 64)
 
+    def test_registry_rejects_extra_field(self):
+        row = base_row("CASE_A")
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "candidate_registry.tsv"
+            header = "\t".join(chk.REGISTRY_COLUMNS)
+            canonical = "\t".join(row[c] for c in chk.REGISTRY_COLUMNS)
+            p.write_bytes((header + "\n" + canonical + "\tEXTRA\n").encode())
+            with self.assertRaisesRegex(ValueError, "noncanonical TSV shape"):
+                chk.parse_registry(p)
+
+    def test_registry_rejects_missing_field(self):
+        row = base_row("CASE_A")
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "candidate_registry.tsv"
+            header = "\t".join(chk.REGISTRY_COLUMNS)
+            values = [row[c] for c in chk.REGISTRY_COLUMNS][:-1]
+            p.write_bytes((header + "\n" + "\t".join(values) + "\n").encode())
+            with self.assertRaisesRegex(ValueError, "noncanonical TSV shape"):
+                chk.parse_registry(p)
+
+    def test_registry_rejects_embedded_delimiter(self):
+        row = base_row("CASE_A")
+        row["eligibility_rationale"] = "eligible\tbut malformed"
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "candidate_registry.tsv"
+            header = "\t".join(chk.REGISTRY_COLUMNS)
+            raw = "\t".join(row[c] for c in chk.REGISTRY_COLUMNS)
+            p.write_bytes((header + "\n" + raw + "\n").encode())
+            with self.assertRaisesRegex(ValueError, "noncanonical TSV shape"):
+                chk.parse_registry(p)
+
+    def test_registry_row_sha_uses_exact_source_line_bytes(self):
+        row = base_row("CASE_A")
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "candidate_registry.tsv"
+            header = "\t".join(chk.REGISTRY_COLUMNS)
+            raw = "\t".join(row[c] for c in chk.REGISTRY_COLUMNS)
+            exact_line = (raw + "\n").encode()
+            p.write_bytes((header + "\n").encode() + exact_line)
+            rows, _ = chk.parse_registry(p)
+            self.assertEqual(chk.registry_row_sha(rows[0]), chk.sha256(exact_line))
+
     def test_selection_is_reproducible(self):
         ids = ["CASE_A", "CASE_B", "CASE_C"]
         c = "4" * 64
