@@ -17,6 +17,19 @@ ASCII_ID = re.compile(r"^[\x21-\x7E]+$")
 SEED = re.compile(r"^[0-9a-f]{64}$")
 HEX64 = re.compile(r"^[0-9a-f]{64}$")
 
+POOL_COLUMNS = [
+    "case_id",
+    "source_a_sha256",
+    "source_b_sha256",
+    "source_ref_a",
+    "source_ref_b",
+    "evaluation_definition_id",
+    "offline_endpoint_present",
+    "original_support_requirement",
+    "prior_public_exposure",
+    "eligibility_rationale",
+]
+
 
 def sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
@@ -32,18 +45,56 @@ def read_exact_pool(path: Path) -> bytes:
     return data
 
 
-def parse_pool(path: Path) -> tuple[list[str], str]:
-    data = read_exact_pool(path)
-    rows = list(csv.DictReader(data.decode("utf-8").splitlines(), delimiter="\t"))
-    ids = [r.get("case_id", "") for r in rows]
-    if not ids:
+def validate_pool_rows(rows: list[dict[str, str]]) -> list[str]:
+    if not rows:
         raise ValueError("eligible pool contains no candidates")
-    if any(not x or not ASCII_ID.fullmatch(x) for x in ids):
-        raise ValueError("every case_id must be non-empty printable ASCII")
+
+    ids: list[str] = []
+    for n, row in enumerate(rows, start=2):
+        if list(row.keys()) != POOL_COLUMNS:
+            raise ValueError("pool columns do not match the frozen schema/order")
+        cid = row["case_id"]
+        if not cid or not ASCII_ID.fullmatch(cid):
+            raise ValueError(f"line {n}: case_id must be printable ASCII")
+        ids.append(cid)
+
+        for key in ("source_a_sha256", "source_b_sha256"):
+            if not HEX64.fullmatch(row[key]):
+                raise ValueError(f"line {n}: {key} must be 64 lowercase hex characters")
+
+        for key in ("source_ref_a", "source_ref_b", "evaluation_definition_id", "eligibility_rationale"):
+            if not row[key].strip():
+                raise ValueError(f"line {n}: {key} must be non-empty")
+
+        if row["offline_endpoint_present"] != "TRUE":
+            raise ValueError(f"line {n}: offline_endpoint_present must be TRUE")
+
+        support = row["original_support_requirement"]
+        if support not in {"1", "NONE_SPECIFIED"}:
+            raise ValueError(
+                f"line {n}: first experiment permits only original support requirement 1 "
+                "or NONE_SPECIFIED"
+            )
+
+        if row["prior_public_exposure"] not in {"TRUE", "FALSE", "UNKNOWN"}:
+            raise ValueError(
+                f"line {n}: prior_public_exposure must be TRUE, FALSE or UNKNOWN"
+            )
+
     if len(ids) != len(set(ids)):
         raise ValueError("duplicate case_id")
     if ids != sorted(ids):
         raise ValueError("eligible_pool.tsv must be sorted lexicographically by case_id")
+    return ids
+
+
+def parse_pool(path: Path) -> tuple[list[str], str]:
+    data = read_exact_pool(path)
+    reader = csv.DictReader(data.decode("utf-8").splitlines(), delimiter="\t")
+    if reader.fieldnames != POOL_COLUMNS:
+        raise ValueError("pool header does not match required columns/order")
+    rows = list(reader)
+    ids = validate_pool_rows(rows)
     return ids, sha256_bytes(data)
 
 
