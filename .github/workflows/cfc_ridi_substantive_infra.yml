@@ -33,7 +33,8 @@ jobs:
           print("selection_seed_created=false")
           PY
 
-      - name: Smoke-test selection CLI without substantive data
+      - name: Smoke-test protocol CLIs without substantive data
         run: |
           python collaboration/cfc-ridi/substantive-v0.1/tools/protocol_selection.py --help
+          python collaboration/cfc-ridi/substantive-v0.1/tools/make_raw_bundle.py --help
           python collaboration/cfc-ridi/substantive-v0.1/tools/verify_raw_bundle.py --help
