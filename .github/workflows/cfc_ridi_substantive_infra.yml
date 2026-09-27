@@ -21,20 +21,23 @@ jobs:
         run: |
           python -m unittest discover -s collaboration/cfc-ridi/substantive-v0.1/tests -p 'test_*.py' -v
 
-      - name: Confirm candidate template is empty
+      - name: Confirm templates contain no candidates
         run: |
           python - <<'PY'
           from pathlib import Path
-          p=Path("collaboration/cfc-ridi/substantive-v0.1/eligible_pool_TEMPLATE.tsv")
-          lines=p.read_text(encoding="utf-8").splitlines()
-          assert len(lines)==1, "template unexpectedly contains candidate rows"
-          print("candidate_rows=0")
+          for name in ("candidate_registry_TEMPLATE.tsv", "eligible_pool_TEMPLATE.tsv"):
+              p=Path("collaboration/cfc-ridi/substantive-v0.1")/name
+              lines=p.read_text(encoding="utf-8").splitlines()
+              assert len(lines)==1, f"{name} unexpectedly contains candidate rows"
+          print("candidate_registry_rows=0")
+          print("eligible_pool_rows=0")
           print("substantive_case_selected=false")
           print("selection_seed_created=false")
           PY
 
       - name: Smoke-test protocol CLIs without substantive data
         run: |
+          python collaboration/cfc-ridi/substantive-v0.1/tools/eligibility_check.py --help
           python collaboration/cfc-ridi/substantive-v0.1/tools/protocol_selection.py --help
           python collaboration/cfc-ridi/substantive-v0.1/tools/make_raw_bundle.py --help
           python collaboration/cfc-ridi/substantive-v0.1/tools/verify_raw_bundle.py --help
