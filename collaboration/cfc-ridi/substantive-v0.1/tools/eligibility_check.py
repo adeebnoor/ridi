@@ -8,7 +8,6 @@ or rank candidates by scientific interest.
 from __future__ import annotations
 
 import argparse
-import csv
 import hashlib
 from pathlib import Path
 
@@ -106,6 +105,11 @@ def pair_fingerprint(row: dict[str, str]) -> str:
 
 
 def registry_row_sha(row: dict[str, str]) -> str:
+    # Parsed registry rows carry the SHA-256 of their exact source-line bytes.
+    # Direct in-memory unit-test rows fall back to the canonical declared-column form.
+    exact_source_sha = row.get("__registry_row_sha256")
+    if exact_source_sha:
+        return exact_source_sha
     exact = "\t".join(row[c] for c in REGISTRY_COLUMNS) + "\n"
     return sha256(exact.encode("utf-8"))
 
@@ -181,12 +185,36 @@ def base_reasons(row: dict[str, str]) -> list[str]:
 
 def parse_registry(path: Path) -> tuple[list[dict[str, str]], str]:
     data = read_lf_utf8(path)
-    reader = csv.DictReader(data.decode("utf-8").splitlines(), delimiter="\t")
-    if reader.fieldnames != REGISTRY_COLUMNS:
+    text = data.decode("utf-8")
+
+    # Parse the TSV as a canonical byte-oriented format, not as permissive CSV.
+    # This deliberately rejects quoted/embedded delimiters, extra fields, missing
+    # fields, blank rows and multiline fields so the audited row bytes are exact.
+    lines = text[:-1].split("\n")  # final LF already required by read_lf_utf8()
+    expected_header = "\t".join(REGISTRY_COLUMNS)
+    if not lines or lines[0] != expected_header:
         raise ValueError("candidate registry header/schema mismatch")
-    rows = list(reader)
+
+    rows: list[dict[str, str]] = []
+    expected_fields = len(REGISTRY_COLUMNS)
+    for line_no, raw_line in enumerate(lines[1:], start=2):
+        if raw_line == "":
+            raise ValueError(f"line {line_no}: blank registry row is noncanonical")
+
+        fields = raw_line.split("\t")
+        if len(fields) != expected_fields:
+            raise ValueError(
+                f"line {line_no}: noncanonical TSV shape; expected "
+                f"{expected_fields} fields, got {len(fields)}"
+            )
+
+        row = dict(zip(REGISTRY_COLUMNS, fields, strict=True))
+        row["__registry_row_sha256"] = sha256((raw_line + "\n").encode("utf-8"))
+        rows.append(row)
+
     if not rows:
         raise ValueError("candidate registry contains no registrations")
+
     ids = [r["case_id"] for r in rows]
     if ids != sorted(ids):
         raise ValueError("candidate registry must be sorted lexicographically by case_id")
