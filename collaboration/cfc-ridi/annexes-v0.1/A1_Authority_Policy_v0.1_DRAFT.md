@@ -44,18 +44,23 @@ It does **not**, by itself, establish that a passage is positive/negative eviden
 ### A1.3 Model verdict is never authority
 The model verdict/action can define the candidate claim to be checked. It cannot establish support, truth, provenance, scope, freshness, dependency, or independence.
 
-### A1.4 Author self-assertion after selection is prohibited
-Neither participant may create a new authority fact after learning the selected case.
+### A1.4 Frozen-rule application is permitted; new discretionary authority is prohibited
+After case selection, a pre-frozen authority rule may be mechanically applied to an **already existing** source record or authority record that was permitted by A1/I1. This is ordinary instantiation, not a new authority assertion.
 
-If an authority rule was not frozen before selection, the missing fact remains unavailable for that protocol version.
+What is prohibited is creating, soliciting, editing, or introducing a new discretionary authority assertion after learning the selected case in order to make a mapping pass. If an authority rule was not frozen before selection, or the required supporting record did not already exist within the permitted evidence boundary, the missing fact remains unavailable for that protocol version.
 
 ### A1.5 Independence is conservative
 If known lineage/dependency information conflicts with an independence claim, the dependency information governs and the independence claim is rejected.
 
 ### A1.6 One-support policy
-Because M1 v0.1 fixes `required_independent_supports = 1`, the first substantive experiment does not require a multi-record independence certificate for closure.
+Because M1 v0.1 fixes `required_independent_supports = 1`, the first substantive experiment does not require a multi-record independence certificate for closure and **does not test the requirement for two independent supports**.
 
-However, any additional evidence records and known shared dependencies remain visible and may still affect CFC state according to the frozen controller.
+A source case with an explicit authoritative requirement greater than one is ineligible for this first experiment; that requirement must not be weakened to fit the experimental policy.
+
+The one-support policy does not relax provenance, authority, freshness, scope, conflict, dependency, or any other frozen CFC condition. Any additional evidence records and known shared dependencies remain visible and may still affect CFC state according to the frozen controller.
+
+### A1.7 Dry-run authority boundary
+The excluded mechanical dry run must demonstrate that the frozen CFC execution path accepts the one-support configuration. Synthetic authorities or fixture verifiers may be used only for that dry run, must be labeled as synthetic, and must not be copied, promoted, or reused as authority in the substantive run.
 
 ## 4. Missing authority handling
 
