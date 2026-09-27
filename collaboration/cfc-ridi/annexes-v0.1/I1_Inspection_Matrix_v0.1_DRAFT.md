@@ -5,8 +5,8 @@
 
 ## 1. Principles
 
-- CFC and RIDI inspect different surfaces.
-- Neither participant sees the other side's substantive raw output or interpretation before both raw-bundle hashes are committed.
+- CFC and RIDI inspect different surfaces, but the experiment is **not fully blinded**. Both sides may inspect the recorded A/B verdicts/actions because those values are needed by both frameworks; this overlap can make the RIDI primary equivalence result inferable before bundle exchange.
+- The protection is therefore **independent execution with output sequestration and mandatory hash commitments**, not complete outcome blinding. Neither participant sees the other side's substantive raw output, computed result bundle, or interpretation before both raw-bundle hashes are committed.
 - Ground-truth correctness is withheld from primary decision logic unless explicitly needed for an entry condition; for v0.1 it is secondary only.
 - HAWM and Information Passport are excluded from the first active path.
 
@@ -20,7 +20,7 @@ Legend: `YES` = permitted; `NO` = prohibited; `POST` = available only after both
 | Eligible pool IDs + eligibility rationale after pool freeze | YES | YES | Before seed reveal |
 | Pool source hashes | YES | YES | Before selection |
 | Selected case ID after commit–reveal | YES | YES | Same record |
-| Raw A/B selected identities | YES | YES | CFC uses identity only as record identity, not independence |
+| Raw A/B selected identities | YES | YES | **RIDI selected identity** is downstream membership/identity. If referenced by CFC, it may identify the corresponding source item only; it is not itself CFC evidence authority or independence. |
 | Raw A/B evidence content / immutable references | YES | YES | Required for mapping review |
 | Retrieval rank positions | YES | NO | RIDI surface only |
 | Relevance-grade vector | YES | NO | RIDI equality premise; not CFC authority |
@@ -57,9 +57,12 @@ Before raw-bundle commitment, may not inspect:
 - ground-truth correctness;
 - Adeeb's interpretation.
 
-The CFC side may see the recorded A/B verdict/action because it is the candidate claim under review, but not the RIDI comparison result derived from those values.
+The CFC side may see the recorded A/B verdict/action because it is the candidate claim under review. Because the RIDI primary endpoint is equivalence of those recorded values under the frozen comparison function, Krzysztof may be able to infer the RIDI result from permitted inputs. This is an acknowledged information overlap, not a protocol violation. The CFC side must nevertheless not receive Adeeb's computed RIDI output bundle, diagnostics, or interpretation before commitment.
 
-### I1.3 Both sides
+### I1.3 Identity distinction
+**RIDI selected identity** and **CFC evidence-record identity** are different protocol concepts. Mapping one to the other may establish which underlying item is being referenced, but cannot create evidence authority, provenance, semantic support, scope, freshness, dependency status, or independence.
+
+### I1.4 Both sides
 Before both commitments:
 - no discussion of expected asymmetry;
 - no replacement of the selected case;
