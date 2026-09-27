@@ -11,7 +11,27 @@
 | `ELIGIBILITY_CRITERIA_DRAFT.md` | 9,268 | `b766a0452af82343fe7ee33dbe8dfb7ccb0a1d557f6d0ccaf14676eefb827e8a` | `9392e8b4241bc5bf308c380607675d3a8641b214` |
 | `candidate_registry_TEMPLATE.tsv` | 414 | `12992e3c8591d41dc2dc38de0ebe46e8c491d3a39e242d6021286e1815b5fd29` | `a27549f3b182b42be6e2cf828785cf0784b84450` |
 | `eligible_pool_TEMPLATE.tsv` | 269 | `128a74efb1921e6c57a6cc02145b6e8facf1ff40c9dde36fd62b950cdc7d4f26` | `7db73a5d0534cda97bda1210816e4704f84c4222` |
-| `tools/eligibility_check.py` | 10,130 | `c5e7cc59ed1c80b932917469d06b0149835a46c020576422052d703f3227ab44` | `da0375692130e8ffa9819ef0ef6eada39b304033` |
+| `tools/eligibility_check.py` | 11,388 | `96ca16e12e3f2fecb5a06998eb28476e250b2a0965f2b26713da298391958904` | `d3df8cb5bc1fa9e024e98b9d728e2c03077351cd` |
+
+## Narrow checker correction after independent review
+
+The previously proposed checker hash `c5e7cc59...` is superseded and must **not** be frozen.
+
+The current checker now parses candidate-registry TSV rows as a canonical byte-oriented format rather than permissive CSV. It rejects:
+- extra fields;
+- missing fields;
+- embedded tab delimiters;
+- blank rows;
+- multiline/noncanonical row shapes.
+
+For accepted canonical input, `registry_row_sha256` is computed from the exact original UTF-8 row bytes including its terminating LF, not from reconstructed declared fields.
+
+Negative regression tests cover extra fields, missing fields and embedded delimiters, plus a direct assertion that the audit row hash equals the SHA-256 of the original source-line bytes.
+
+Latest checker-correction CI:
+https://github.com/adeebnoor/ridi/actions/runs/36356315694
+
+Result: **PASS**
 
 ## Clarifications incorporated
 
@@ -38,7 +58,7 @@ No manual override is permitted by the proposed criteria.
 
 Latest infrastructure CI incorporating these clarifications:
 
-https://github.com/adeebnoor/ridi/actions/runs/36355313677
+https://github.com/adeebnoor/ridi/actions/runs/36356315694
 
 Result: **PASS**
 
