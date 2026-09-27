@@ -1,0 +1,39 @@
+name: CFC-RIDI substantive infrastructure checks
+
+on:
+  push:
+    branches:
+      - prep/cfc-ridi-substantive-infra-v0.1
+    paths:
+      - collaboration/cfc-ridi/substantive-v0.1/**
+      - .github/workflows/cfc_ridi_substantive_infra.yml
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run protocol infrastructure tests
+        run: |
+          python -m pytest -q collaboration/cfc-ridi/substantive-v0.1/tests/test_protocol_infra.py
+
+      - name: Confirm candidate template is empty
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path("collaboration/cfc-ridi/substantive-v0.1/eligible_pool_TEMPLATE.tsv")
+          lines=p.read_text(encoding="utf-8").splitlines()
+          assert len(lines)==1, "template unexpectedly contains candidate rows"
+          print("candidate_rows=0")
+          print("substantive_case_selected=false")
+          print("selection_seed_created=false")
+          PY
+
+      - name: Smoke-test selection CLI without substantive data
+        run: |
+          python collaboration/cfc-ridi/substantive-v0.1/tools/protocol_selection.py --help
+          python collaboration/cfc-ridi/substantive-v0.1/tools/verify_raw_bundle.py --help
