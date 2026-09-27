@@ -1,0 +1,92 @@
+name: CFC-RIDI excluded mechanical dry run v0.1
+
+on:
+  push:
+    branches:
+      - dryrun/cfc-ridi-one-support-v0.1
+    paths:
+      - .github/workflows/cfc_ridi_mechanical_dryrun.yml
+
+permissions:
+  contents: read
+
+jobs:
+  mechanical-dry-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout RIDI dry-run branch
+        uses: actions/checkout@v4
+
+      - name: Checkout pinned CFC repository
+        uses: actions/checkout@v4
+        with:
+          repository: iller1/cfc-ai-evaluation
+          ref: 8baf013c96a3954df9679ddeefcd689c49b8b132
+          path: cfc
+
+      - name: Record execution identities
+        run: |
+          set -euo pipefail
+          echo "CFC_COMMIT=$(git -C cfc rev-parse HEAD)"
+          test "$(git -C cfc rev-parse HEAD)" = "8baf013c96a3954df9679ddeefcd689c49b8b132"
+          WHEEL="cfc/demonstrator/cfc_anchor-0.2.90rc1-py3-none-any.whl"
+          echo "WHEEL_SHA256=$(sha256sum "$WHEEL" | awk '{print $1}')"
+          test "$(sha256sum "$WHEEL" | awk '{print $1}')" = "b3b1f11e060289afa4e7da61072f2c31be7f0da1786be90682ec307d4e1f5303"
+          python --version
+
+      - name: Extract frozen CFC runtime
+        working-directory: cfc/demonstrator
+        run: |
+          python - <<'PY'
+          import server
+          server.ensure_runtime()
+          print("EXPECTED_ENGINE=" + server.EXPECTED_ENGINE)
+          assert server.EXPECTED_ENGINE == "77a7547c02ce4aac3d3abc759bbd266f4251de9149da2308454527c7f2dea5c0"
+          PY
+
+      - name: Run excluded one-support mechanical case
+        working-directory: cfc/demonstrator
+        run: |
+          cat > /tmp/cfc_ridi_dryrun_input.json <<'JSON'
+          {
+            "conclusion": "POSITIVE",
+            "required_independent_supports": 1,
+            "provenance_shape": "DISTINCT",
+            "independence_authority": "NONE",
+            "scope": "EXPECTED",
+            "evidence": [
+              {"polarity": "POSITIVE", "validity": "CURRENT"}
+            ]
+          }
+          JSON
+
+          PYTHONPATH="$PWD/runtime/site" python custom_case_runner.py             < /tmp/cfc_ridi_dryrun_input.json             > /tmp/cfc_ridi_dryrun_result.json
+
+          cat /tmp/cfc_ridi_dryrun_result.json
+
+      - name: Validate dry-run acceptance criteria
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          p = Path("/tmp/cfc_ridi_dryrun_result.json")
+          r = json.loads(p.read_text())
+
+          assert r["custom_input"]["required_independent_supports"] == 1
+          assert r["custom_input"]["independence_authority"] == "NONE"
+          assert r["custom_input"]["scope"] == "EXPECTED"
+          assert r["engine_sha256"] == "77a7547c02ce4aac3d3abc759bbd266f4251de9149da2308454527c7f2dea5c0"
+          assert r["control_closure"] is True
+          assert (r.get("claim_states") or [{}])[0].get("status") == "VERIFIED"
+
+          print("DRY_RUN_STATUS=PASS")
+          print("ONE_SUPPORT_PATH_EXECUTED=true")
+          print("SYNTHETIC_FIXTURE_SCOPE=EXCLUDED_DRY_RUN_ONLY")
+          print("SUBSTANTIVE_CASE_SELECTED=false")
+          print("SUBSTANTIVE_RUN_EXECUTED=false")
+          PY
+
+      - name: Run published custom-case regression
+        working-directory: cfc/demonstrator
+        run: python verify_custom.py
