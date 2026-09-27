@@ -2,8 +2,8 @@
 """CFC-RIDI v0.1 pool and commit-reveal utilities.
 
 Preparatory tool only. This file does not create seeds, freeze a pool, or select
-a substantive case unless the user explicitly supplies a frozen pool and both
-already-revealed seeds.
+a substantive case unless the user explicitly supplies a frozen eligible pool
+and both already-revealed seeds.
 """
 from __future__ import annotations
 
@@ -19,16 +19,24 @@ HEX64 = re.compile(r"^[0-9a-f]{64}$")
 
 POOL_COLUMNS = [
     "case_id",
+    "pair_fingerprint",
     "source_a_sha256",
-    "source_b_sha256",
+    "offline_endpoint_a_sha256",
     "source_ref_a",
+    "source_b_sha256",
+    "offline_endpoint_b_sha256",
     "source_ref_b",
     "evaluation_definition_id",
-    "offline_endpoint_present",
-    "original_support_requirement",
+    "evaluation_definition_sha256",
+    "original_support_requirement_status",
     "prior_public_exposure",
     "eligibility_rationale",
 ]
+
+ELIGIBLE_SUPPORT_STATUS = {
+    "AUTHORITATIVE_1",
+    "NO_AUTHORITATIVE_REQUIREMENT_SPECIFIED",
+}
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -45,36 +53,58 @@ def read_exact_pool(path: Path) -> bytes:
     return data
 
 
+def arm_binding(source_sha: str, endpoint_sha: str) -> str:
+    return sha256_bytes(
+        f"CFC-RIDI-ARM-v0.1|{source_sha}|{endpoint_sha}".encode("utf-8")
+    )
+
+
+def expected_pair_fingerprint(row: dict[str, str]) -> str:
+    a = arm_binding(row["source_a_sha256"], row["offline_endpoint_a_sha256"])
+    b = arm_binding(row["source_b_sha256"], row["offline_endpoint_b_sha256"])
+    lo, hi = sorted((a, b))
+    return sha256_bytes(f"CFC-RIDI-PAIR-v0.1|{lo}|{hi}".encode("utf-8"))
+
+
 def validate_pool_rows(rows: list[dict[str, str]]) -> list[str]:
     if not rows:
         raise ValueError("eligible pool contains no candidates")
 
     ids: list[str] = []
+    fps: list[str] = []
     for n, row in enumerate(rows, start=2):
-        if list(row.keys()) != POOL_COLUMNS:
-            raise ValueError("pool columns do not match the frozen schema/order")
         cid = row["case_id"]
         if not cid or not ASCII_ID.fullmatch(cid):
-            raise ValueError(f"line {n}: case_id must be printable ASCII")
+            raise ValueError(f"line {n}: case_id must be non-empty printable ASCII")
         ids.append(cid)
 
-        for key in ("source_a_sha256", "source_b_sha256"):
-            if not HEX64.fullmatch(row[key]):
-                raise ValueError(f"line {n}: {key} must be 64 lowercase hex characters")
+        for field in (
+            "pair_fingerprint",
+            "source_a_sha256",
+            "offline_endpoint_a_sha256",
+            "source_b_sha256",
+            "offline_endpoint_b_sha256",
+            "evaluation_definition_sha256",
+        ):
+            if not HEX64.fullmatch(row[field]):
+                raise ValueError(f"line {n}: {field} must be 64 lowercase hex characters")
 
-        for key in ("source_ref_a", "source_ref_b", "evaluation_definition_id", "eligibility_rationale"):
-            if not row[key].strip():
-                raise ValueError(f"line {n}: {key} must be non-empty")
+        expected = expected_pair_fingerprint(row)
+        if row["pair_fingerprint"] != expected:
+            raise ValueError(f"line {n}: pair_fingerprint mismatch")
+        fps.append(row["pair_fingerprint"])
 
-        if row["offline_endpoint_present"] != "TRUE":
-            raise ValueError(f"line {n}: offline_endpoint_present must be TRUE")
+        for field in (
+            "source_ref_a",
+            "source_ref_b",
+            "evaluation_definition_id",
+            "eligibility_rationale",
+        ):
+            if not row[field].strip():
+                raise ValueError(f"line {n}: {field} must be non-empty")
 
-        support = row["original_support_requirement"]
-        if support not in {"1", "NONE_SPECIFIED"}:
-            raise ValueError(
-                f"line {n}: first experiment permits only original support requirement 1 "
-                "or NONE_SPECIFIED"
-            )
+        if row["original_support_requirement_status"] not in ELIGIBLE_SUPPORT_STATUS:
+            raise ValueError(f"line {n}: ineligible original support requirement status")
 
         if row["prior_public_exposure"] not in {"TRUE", "FALSE", "UNKNOWN"}:
             raise ValueError(
@@ -83,6 +113,8 @@ def validate_pool_rows(rows: list[dict[str, str]]) -> list[str]:
 
     if len(ids) != len(set(ids)):
         raise ValueError("duplicate case_id")
+    if len(fps) != len(set(fps)):
+        raise ValueError("duplicate pair_fingerprint")
     if ids != sorted(ids):
         raise ValueError("eligible_pool.tsv must be sorted lexicographically by case_id")
     return ids
