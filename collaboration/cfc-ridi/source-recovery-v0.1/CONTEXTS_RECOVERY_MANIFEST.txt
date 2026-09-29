@@ -1,0 +1,8 @@
+source_share=https://firestorage.ai/en/f/OjZ4x0tKnOrV
+source_file_id=01a0d33b991472e4ba11a81ae1646a5c
+source_archive_bytes=77073111
+source_archive_sha256=509af2d85d0c305bb729b055a78e5c43670b871969d70b5cd66c64ae63cc4081
+archive_member=RIDI_Nature_POSTREG_EXECUTION_READY_20260924/p2_p3/data/contexts_800.jsonl
+contexts_bytes=25266491
+contexts_sha256=1485c0ad114673d297c580080d11086d3ace8827f9b586b15ad3928c7d0b21a1
+verification=PASS
