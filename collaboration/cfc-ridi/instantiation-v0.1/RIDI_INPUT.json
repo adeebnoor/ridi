@@ -1,0 +1,214 @@
+{
+  "arm_A": {
+    "condition": "reference",
+    "endpoint_record": {
+      "arm": "A",
+      "canonical": "cozonac",
+      "case_id": "RAG-nq-test1035",
+      "condition": "reference",
+      "dataset": "nq",
+      "draw": 0,
+      "model": "Qwen/Qwen3-8B",
+      "qid": "test1035",
+      "raw": "Cozonac [1]",
+      "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "source_generations_sha256": "e7d1c8c06eece5482f632d628f933741ebbfc379ae01a99a293abdd9debf929c",
+      "source_result_archive": "RIDI_RAG_RESULTS__PRIMARY_H1_H2.zip"
+    },
+    "endpoint_sha256": "e03c1c6433cd197f780537a90d1541744b314cf8eb196ca426f7dc4a41779c67",
+    "source_record": {
+      "arm": "A",
+      "case_id": "RAG-nq-test1035",
+      "condition": "reference",
+      "dataset": "nq",
+      "draw": 0,
+      "passages": [
+        {
+          "docid": "doc36338",
+          "grade": 1
+        },
+        {
+          "docid": "doc2570226",
+          "grade": 0
+        },
+        {
+          "docid": "doc359864",
+          "grade": 0
+        },
+        {
+          "docid": "doc2570225",
+          "grade": 0
+        },
+        {
+          "docid": "doc814572",
+          "grade": 0
+        },
+        {
+          "docid": "doc2376015",
+          "grade": 0
+        },
+        {
+          "docid": "doc759449",
+          "grade": 0
+        },
+        {
+          "docid": "doc359900",
+          "grade": 0
+        },
+        {
+          "docid": "doc758008",
+          "grade": 0
+        },
+        {
+          "docid": "doc416014",
+          "grade": 0
+        }
+      ],
+      "prompt_sha256": "5549517f3b2eb0da05e81565b2ec392074b56d5c3a30c65c393033211c1618f8",
+      "qid": "test1035",
+      "question": "sweet leavened bread prepared for easter in romania",
+      "registered_prompt_template_sha256": "33ba5e64e87c14ae6646764099f40ffde5229842eaa4765e7fb0f410eb456745",
+      "registered_scorer_sha256": "5b9f02f7a8bcd4df98f3bf28e66017e86e4cfa3e36d495acb6d1e2828488c7ee",
+      "relevance_grade_vector": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "source_contexts_800_sha256": "1485c0ad114673d297c580080d11086d3ace8827f9b586b15ad3928c7d0b21a1",
+      "source_qid": "test1035",
+      "source_registration": "txwdv",
+      "task": "qa"
+    },
+    "source_sha256": "60e19ea94ff13ded74e6ca19d6063909d374951f86218a9e3e68833b46126734"
+  },
+  "arm_B": {
+    "condition": "random",
+    "endpoint_record": {
+      "arm": "B",
+      "canonical": "cozonac",
+      "case_id": "RAG-nq-test1035",
+      "condition": "random",
+      "dataset": "nq",
+      "draw": 0,
+      "model": "Qwen/Qwen3-8B",
+      "qid": "test1035",
+      "raw": "Cozonac [1]",
+      "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "source_generations_sha256": "e7d1c8c06eece5482f632d628f933741ebbfc379ae01a99a293abdd9debf929c",
+      "source_result_archive": "RIDI_RAG_RESULTS__PRIMARY_H1_H2.zip"
+    },
+    "endpoint_sha256": "e66408834f040464bb8146e4ed814a26f15bb871519db4194c7a764b4e8580c5",
+    "source_record": {
+      "arm": "B",
+      "case_id": "RAG-nq-test1035",
+      "condition": "random",
+      "dataset": "nq",
+      "draw": 0,
+      "passages": [
+        {
+          "docid": "doc36338",
+          "grade": 1
+        },
+        {
+          "docid": "doc222656",
+          "grade": 0
+        },
+        {
+          "docid": "doc2436280",
+          "grade": 0
+        },
+        {
+          "docid": "doc866631",
+          "grade": 0
+        },
+        {
+          "docid": "doc359888",
+          "grade": 0
+        },
+        {
+          "docid": "doc359889",
+          "grade": 0
+        },
+        {
+          "docid": "doc1489396",
+          "grade": 0
+        },
+        {
+          "docid": "doc1480238",
+          "grade": 0
+        },
+        {
+          "docid": "doc1811760",
+          "grade": 0
+        },
+        {
+          "docid": "doc2038583",
+          "grade": 0
+        }
+      ],
+      "prompt_sha256": "5e97ef77fc2bd916a101264a421ac27822772b4026f125c81275d0346c4f388d",
+      "qid": "test1035",
+      "question": "sweet leavened bread prepared for easter in romania",
+      "registered_prompt_template_sha256": "33ba5e64e87c14ae6646764099f40ffde5229842eaa4765e7fb0f410eb456745",
+      "registered_scorer_sha256": "5b9f02f7a8bcd4df98f3bf28e66017e86e4cfa3e36d495acb6d1e2828488c7ee",
+      "relevance_grade_vector": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "source_contexts_800_sha256": "1485c0ad114673d297c580080d11086d3ace8827f9b586b15ad3928c7d0b21a1",
+      "source_qid": "test1035",
+      "source_registration": "txwdv",
+      "task": "qa"
+    },
+    "source_sha256": "018f1de8876594e57a383b69a1fcd605e811cf062695cc2ab947c737a697e308"
+  },
+  "case_id": "RAG-nq-test1035",
+  "combined_selection_sha256": "b7b4ee510bbd2f3063141ebcb36290a3f08cee74df43ab780e6423673e23c223",
+  "evaluation_definition": {
+    "comparison_function": "exact equality of the preregistered task-specific canonical output strings",
+    "fail_rule": "FAIL iff canonical_A != canonical_B",
+    "id": "RIDI-RAG-NATURE-v2-PROSPECTIVE/C2/QWEN3-BM25-K10-RANDOM",
+    "missing_rule": "NOT_EVALUABLE if a required input/output is absent",
+    "model_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "pass_rule": "PASS iff canonical_A == canonical_B",
+    "primary_endpoint": "recorded canonical downstream answer equivalence",
+    "primary_model": "Qwen/Qwen3-8B",
+    "registered_scorer_sha256": "5b9f02f7a8bcd4df98f3bf28e66017e86e4cfa3e36d495acb6d1e2828488c7ee",
+    "sha256": "0f7babda273f68e2095343f2fb33f2dca3c8720f95ed87ca3a0f47d1b337b063"
+  },
+  "frozen_i1_sha256": "2f3a86e6e9e4b32633813bc2bd82dd2e04f55d7a643ca32780a78b997c01ae4b",
+  "frozen_pool_sha256": "ebb7e660199687650a5c03888839401cc6f88f5b3fe6a55a77649bb855a43ade",
+  "frozen_protocol_sha256": "d6bc94e90be4ac01bd8ee60f32aa3045dd827f4f3e9e64a68b82191615138571",
+  "neutral_handoff": {
+    "cfc_handoff_record_commit": "bd298684758da04570ab451277fcebb544fb5ae0",
+    "cfc_zip_publication_commit": "6930975339820dc8344a55ae1cb46f6121791804",
+    "manifest_sha256": "dd570c50f2746512f90fcb407fbc403cdc17f2afae677c2e1ab740e9f65cf3a7",
+    "zip_bytes": 5271,
+    "zip_git_blob": "ed40be0fb1fb237ae16320bf23842565f248de0f",
+    "zip_sha256": "f6845736496c51d5407ddfe46481a07a8d7ee43eb4735e3c23aee934607b3b56"
+  },
+  "schema": "CFC-RIDI-RIDI-INPUT-v0.1",
+  "selection_record_commit": "4592e0b5de1cd34a6db8f7219512dd1d535f11a7",
+  "withheld_before_raw_bundle_commitment": {
+    "cfc_authority_manifests": true,
+    "cfc_interpretation": true,
+    "cfc_mapped_inputs": true,
+    "cfc_outputs": true,
+    "ground_truth_correctness": true
+  }
+}
