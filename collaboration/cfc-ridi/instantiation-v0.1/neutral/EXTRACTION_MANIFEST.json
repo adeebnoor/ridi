@@ -1,0 +1,37 @@
+{
+  "case_id": "RAG-nq-test1035",
+  "files": [
+    {
+      "arm": "A",
+      "bytes": 994,
+      "file": "source_A.jsonl",
+      "kind": "source",
+      "line_number": 855,
+      "sha256": "60e19ea94ff13ded74e6ca19d6063909d374951f86218a9e3e68833b46126734"
+    },
+    {
+      "arm": "B",
+      "bytes": 993,
+      "file": "source_B.jsonl",
+      "kind": "source",
+      "line_number": 856,
+      "sha256": "018f1de8876594e57a383b69a1fcd605e811cf062695cc2ab947c737a697e308"
+    },
+    {
+      "arm": "A",
+      "bytes": 382,
+      "file": "endpoint_A.jsonl",
+      "kind": "endpoint",
+      "line_number": 855,
+      "sha256": "e03c1c6433cd197f780537a90d1541744b314cf8eb196ca426f7dc4a41779c67"
+    },
+    {
+      "arm": "B",
+      "bytes": 379,
+      "file": "endpoint_B.jsonl",
+      "kind": "endpoint",
+      "line_number": 856,
+      "sha256": "e66408834f040464bb8146e4ed814a26f15bb871519db4194c7a764b4e8580c5"
+    }
+  ]
+}
