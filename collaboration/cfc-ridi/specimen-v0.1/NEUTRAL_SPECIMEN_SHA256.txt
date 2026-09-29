@@ -1,0 +1,8 @@
+CFC-RIDI selected neutral specimen v0.1
+case_id=RAG-nq-test1035
+transport_sha256=2b96ee5319cb93bce9b752fb4c6c3353c0e0463d8cd11e79f0dd682423093b00
+
+60e19ea94ff13ded74e6ca19d6063909d374951f86218a9e3e68833b46126734  neutral/selected_source_A.jsonl  bytes=994
+e03c1c6433cd197f780537a90d1541744b314cf8eb196ca426f7dc4a41779c67  neutral/selected_endpoint_A.jsonl  bytes=382
+018f1de8876594e57a383b69a1fcd605e811cf062695cc2ab947c737a697e308  neutral/selected_source_B.jsonl  bytes=993
+e66408834f040464bb8146e4ed814a26f15bb871519db4194c7a764b4e8580c5  neutral/selected_endpoint_B.jsonl  bytes=379
