@@ -1,0 +1,86 @@
+name: CFC-RIDI recover exact contexts_800
+
+on:
+  push:
+    branches:
+      - recover/cfc-ridi-contexts-v0.1
+    paths:
+      - ".github/workflows/cfc_ridi_recover_contexts.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: recover/cfc-ridi-contexts-v0.1
+
+      - name: Download active frozen execution archive and verify exact contexts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, io, json, pathlib, shutil, urllib.request, zipfile
+
+          base = "https://api.firestorage.ai/dev/file"
+          share = "OjZ4x0tKnOrV"
+          fid = "01a0d33b991472e4ba11a81ae1646a5c"
+          expected_context = "1485c0ad114673d297c580080d11086d3ace8827f9b586b15ad3928c7d0b21a1"
+          expected_size = 25266491
+
+          req = urllib.request.Request(f"{base}/shares/{share}/files/{fid}/download", method="POST")
+          with urllib.request.urlopen(req, timeout=60) as r:
+              meta = json.loads(r.read().decode("utf-8"))
+          with urllib.request.urlopen(meta["downloadUrl"], timeout=600) as r:
+              archive = r.read()
+
+          archive_sha = hashlib.sha256(archive).hexdigest()
+          print("archive_bytes=", len(archive))
+          print("archive_sha256=", archive_sha)
+
+          with zipfile.ZipFile(io.BytesIO(archive)) as z:
+              names = [n for n in z.namelist() if pathlib.PurePosixPath(n).name == "contexts_800.jsonl"]
+              if len(names) != 1:
+                  raise SystemExit(f"expected exactly one contexts_800.jsonl, found {names}")
+              data = z.read(names[0])
+
+          got = hashlib.sha256(data).hexdigest()
+          print("contexts_member=", names[0])
+          print("contexts_bytes=", len(data))
+          print("contexts_sha256=", got)
+          if len(data) != expected_size:
+              raise SystemExit(f"size mismatch: {len(data)} != {expected_size}")
+          if got != expected_context:
+              raise SystemExit(f"sha256 mismatch: {got} != {expected_context}")
+
+          out = pathlib.Path("collaboration/cfc-ridi/source-recovery-v0.1")
+          out.mkdir(parents=True, exist_ok=True)
+          (out / "contexts_800.jsonl").write_bytes(data)
+
+          manifest = (
+              "source_share=https://firestorage.ai/en/f/OjZ4x0tKnOrV\n"
+              "source_file_id=01a0d33b991472e4ba11a81ae1646a5c\n"
+              f"source_archive_bytes={len(archive)}\n"
+              f"source_archive_sha256={archive_sha}\n"
+              f"archive_member={names[0]}\n"
+              f"contexts_bytes={len(data)}\n"
+              f"contexts_sha256={got}\n"
+              "verification=PASS\n"
+          )
+          (out / "CONTEXTS_RECOVERY_MANIFEST.txt").write_text(manifest, encoding="utf-8", newline="\n")
+          PY
+
+      - name: Commit exact verified source bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add collaboration/cfc-ridi/source-recovery-v0.1/contexts_800.jsonl \
+                  collaboration/cfc-ridi/source-recovery-v0.1/CONTEXTS_RECOVERY_MANIFEST.txt
+          git diff --cached --quiet && exit 0
+          git commit -m "Recover exact frozen contexts_800 source bytes"
+          git push origin HEAD:recover/cfc-ridi-contexts-v0.1
