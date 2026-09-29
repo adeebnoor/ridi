@@ -1,0 +1,90 @@
+name: CFC-RIDI extract selected specimen
+
+on:
+  push:
+    branches:
+      - freeze/cfc-ridi-selected-specimen-v0.1
+    paths:
+      - .github/workflows/cfc_ridi_extract_selected_specimen.yml
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: freeze/cfc-ridi-selected-specimen-v0.1
+          fetch-depth: 0
+
+      - name: Fetch exact frozen transport and extract selected records
+        shell: python
+        run: |
+          import hashlib, io, json, pathlib, urllib.request, zipfile
+
+          SHARE = "zdtjoL6fvp6w"
+          FILE_ID = "01a0ecb20d827784bf8462d62a8f0cfd"
+          ZIP_SHA = "2b96ee5319cb93bce9b752fb4c6c3353c0e0463d8cd11e79f0dd682423093b00"
+
+          expected = {
+              "selected_source_A.jsonl": ("source_specimens_1600.jsonl", "60e19ea94ff13ded74e6ca19d6063909d374951f86218a9e3e68833b46126734"),
+              "selected_endpoint_A.jsonl": ("offline_endpoints_1600.jsonl", "e03c1c6433cd197f780537a90d1541744b314cf8eb196ca426f7dc4a41779c67"),
+              "selected_source_B.jsonl": ("source_specimens_1600.jsonl", "018f1de8876594e57a383b69a1fcd605e811cf062695cc2ab947c737a697e308"),
+              "selected_endpoint_B.jsonl": ("offline_endpoints_1600.jsonl", "e66408834f040464bb8146e4ed814a26f15bb871519db4194c7a764b4e8580c5"),
+          }
+
+          endpoint = f"https://api.firestorage.ai/dev/file/shares/{SHARE}/files/{FILE_ID}/download"
+          req = urllib.request.Request(endpoint, method="POST")
+          with urllib.request.urlopen(req, timeout=30) as r:
+              meta = json.load(r)
+          with urllib.request.urlopen(meta["downloadUrl"], timeout=60) as r:
+              zbytes = r.read()
+
+          zhash = hashlib.sha256(zbytes).hexdigest()
+          if zhash != ZIP_SHA:
+              raise SystemExit(f"transport hash mismatch: {zhash}")
+
+          outdir = pathlib.Path("collaboration/cfc-ridi/specimen-v0.1/neutral")
+          outdir.mkdir(parents=True, exist_ok=True)
+          manifest = [
+              "CFC-RIDI selected neutral specimen v0.1",
+              "case_id=RAG-nq-test1035",
+              f"transport_sha256={zhash}",
+              "",
+          ]
+
+          with zipfile.ZipFile(io.BytesIO(zbytes)) as z:
+              members = {n: z.read(n) for n in z.namelist()}
+              found = {}
+              for outname, (member, target_hash) in expected.items():
+                  data = members[member]
+                  for line in data.splitlines(keepends=True):
+                      if hashlib.sha256(line).hexdigest() == target_hash:
+                          if not line.endswith(b"\n") or b"\r" in line:
+                              raise SystemExit(f"{outname}: expected LF-only terminated exact line")
+                          found[outname] = line
+                          break
+                  if outname not in found:
+                      raise SystemExit(f"{outname}: exact line hash not found in {member}")
+
+              for outname, line in found.items():
+                  p = outdir / outname
+                  p.write_bytes(line)
+                  h = hashlib.sha256(line).hexdigest()
+                  manifest.append(f"{h}  neutral/{outname}  bytes={len(line)}")
+
+          (pathlib.Path("collaboration/cfc-ridi/specimen-v0.1") / "NEUTRAL_SPECIMEN_SHA256.txt").write_text(
+              "\n".join(manifest) + "\n", encoding="utf-8", newline="\n"
+          )
+
+      - name: Commit exact selected neutral records
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add collaboration/cfc-ridi/specimen-v0.1/neutral collaboration/cfc-ridi/specimen-v0.1/NEUTRAL_SPECIMEN_SHA256.txt
+          git diff --cached --check
+          git commit -m "Freeze exact selected neutral CFC-RIDI specimen bytes"
+          git push origin HEAD:freeze/cfc-ridi-selected-specimen-v0.1
