@@ -1,0 +1,1 @@
+{"arm":"B","canonical":"cozonac","case_id":"RAG-nq-test1035","condition":"random","dataset":"nq","draw":0,"model":"Qwen/Qwen3-8B","qid":"test1035","raw":"Cozonac [1]","revision":"b968826d9c46dd6066d109eabc6255188de91218","source_generations_sha256":"e7d1c8c06eece5482f632d628f933741ebbfc379ae01a99a293abdd9debf929c","source_result_archive":"RIDI_RAG_RESULTS__PRIMARY_H1_H2.zip"}
