@@ -1,0 +1,3 @@
+# CFC-RIDI registry run v0.1
+
+Status: TRANSFER IN PROGRESS — NOT A POOL FREEZE.
