@@ -1,4 +1,4 @@
-# CFC ↔ RIDI v0.2 — bilateral reset proposal DRAFT R4
+# CFC ↔ RIDI v0.2 — bilateral reset proposal DRAFT R5
 
 **Status:** PRE-SEND DRAFT R5 FOR BILATERAL REVIEW — NOT APPROVED / NOT FROZEN / NO IMPLEMENTATION AUTHORIZATION / NO ELIGIBILITY RUN / NO SEED / NO SELECTION / NO EXECUTION  
 **Parent:** v0.1 pre-execution NO-GO closure remains immutable  
@@ -50,7 +50,7 @@ V3 is substantive and occurs only after selected-case pre-execution PASS.
 
 To avoid adapter tuning or evaluation contamination:
 
-1. `RAG-nq-test1035` is permanently excluded from the v0.2 substantive pool.
+1. Any case whose identity or substantive records were exposed during v0.1 development, selection, recovery, mapping assessment or protocol debugging is permanently marked **CALIBRATION/EXCLUDED** for v0.2 substantive selection under this case-agnostic prior-exposure rule. The historical v0.1 selected case `RAG-nq-test1035` falls under this rule; it is not excluded by a special case-ID exception.
 2. Every case used in:
    - adapter development;
    - adapter validation;
@@ -142,13 +142,24 @@ Before feasibility execution, identify an exact pre-existing authority universe:
 - content-addressed/immutably referenced;
 - versioned/snapshotted;
 - independently inspectable by the party/role permitted under the proposed inspection boundary;
-- exact manifest/hash recorded.
+- exact manifest/hash recorded;
+- governed by an explicit authority-record cutoff timestamp.
 
 No authority record may be created to make a calibration case pass.
 
+**Continuity rule:** the F4 authority universe is the candidate substantive authority universe for v0.2. Phase A2 may only re-express the same frozen universe in the final protocol package. Any addition, removal, replacement, reclassification, applicability-rule change or binding-rule change after F5 requires a versioned Phase F reset and repetition of F3–F6 before substantive eligibility.
+
 ### F5 — Two real nonfixture feasibility cases
 
-Both use the same neutral schema class intended for substantive v0.2 and are permanently excluded by Section 3.
+Before either feasibility case is executed, freeze:
+- the deterministic case-selection rule for each required authority-state class;
+- the candidate source frame from which calibration cases may be drawn;
+- selected calibration case IDs and exact source hashes produced by that rule;
+- the reason each case qualifies as COMPLETE_AUTHORITY or MISSING_AUTHORITY under the F4 universe.
+
+The selection rule may use only pre-execution source/authority-state information and must not use CFC closure outputs, RIDI PASS/FAIL, endpoint equality/difference, correctness, expected asymmetry or publication convenience.
+
+Both cases use the same neutral schema class intended for substantive v0.2 and are permanently excluded by Section 3.
 
 **F5-A complete-authority**
 - required source records exist;
@@ -201,6 +212,8 @@ This prevents another post-selection source-recovery HOLD.
 ### A2 — Substantive authority universe
 
 Before eligibility, freeze the exact universe the adapter may consult.
+
+A2 must be byte/identity-equivalent in membership and authority semantics to the F4 universe that passed feasibility. If any member, authority class, applicability rule, binding rule or cutoff changes, Phase F is invalidated and must be repeated before proceeding.
 
 For each permitted authority record freeze:
 - immutable ID/version;
@@ -374,13 +387,16 @@ No case is selected first and tested for representability afterward.
 
 ### E5 — freeze application
 
-Freeze:
-1. eligibility specification;
-2. exact checker bytes/hash;
-3. complete candidate registry;
-4. exact source/authority references used by classifications;
-5. audit output;
-6. exact eligible pool bytes/hash.
+Before running the checker, freeze the complete substantive candidate source frame and its deterministic derivation rule so that exclusions cannot be hidden by omission.
+
+Then freeze:
+1. candidate source-frame manifest/hash;
+2. eligibility specification;
+3. exact checker bytes/hash;
+4. complete candidate registry;
+5. exact source/authority references used by classifications;
+6. audit output including all rejected candidates and reason codes;
+7. exact eligible pool bytes/hash.
 
 Independent reproduction is required before seeds.
 
