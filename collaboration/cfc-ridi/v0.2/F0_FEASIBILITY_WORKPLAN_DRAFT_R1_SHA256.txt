@@ -1,0 +1,6 @@
+22681ece0456bb92f8296ea1b699ece9480a581ea7ab5c7b563ca261901f917e  F0_FEASIBILITY_WORKPLAN_DRAFT_R1.md
+bytes=16703
+git_blob=a3b14166230eec9e66716918ddbf324ed19c67df
+line_endings=LF
+lf_count=392
+terminal_lf=TRUE
