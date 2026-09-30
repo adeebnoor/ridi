@@ -66,8 +66,9 @@ The controller baseline itself remains read-only. The feasibility adapter, if de
 | **F2 candidate nonfixture adapter** | CFC side | RIDI reviews exact source/artifact and independently reruns public tests where permitted | Exact adapter bytes/hash accepted; no controller modification/private bypass; not yet substantive approval |
 | **F3 representation-only adversarial test suite** | Joint acceptance criteria; CFC implements runnable suite | RIDI independently reruns/reviews results where permitted | All predeclared tests pass on exact F2 adapter; failures retained; criteria unchanged |
 | **F4 feasibility authority-universe manifest** | CFC side identifies authority records/classes required by adapter | RIDI verifies manifest identities/provenance metadata to the extent permitted by the agreed inspection boundary | Same manifest/hash accepted; cutoff fixed; no authority record created to make a case pass |
-| **F5 calibration candidate source frame** | RIDI side provides/identifies neutral source frame | CFC verifies schema compatibility and authority-state classificability | Exact source-frame manifest/hash accepted |
-| **F5 deterministic calibration-case selector** | Joint rule drafted in F0/Phase F; implementation may be RIDI-side | CFC independently reproduces selection | Same COMPLETE_AUTHORITY and MISSING_AUTHORITY case IDs/hashes reproduced from frozen rule |
+| **F5 calibration candidate source frame** | RIDI side provides/identifies neutral source frame | CFC verifies schema compatibility | Exact source-frame manifest/hash accepted |
+| **F5 authority-state qualification manifest** | CFC side classifies candidate calibration records under F4 rules, without controller outcomes | RIDI verifies manifest identity/hash, rule identifiers and permitted provenance metadata; CFC retains content-level verification responsibility where I1 restricts disclosure | Both accept the exact classification manifest identity; no party claims verification beyond its permitted evidence |
+| **F5 deterministic calibration-case selector** | Joint frozen rule; implementation may be RIDI-side | CFC independently reproduces selection over the exact frozen qualification manifest | Same COMPLETE_AUTHORITY and MISSING_AUTHORITY case IDs/hashes reproduced from the same manifest/rule |
 | **F5-A complete-authority execution bundle** | CFC side executes candidate path | RIDI verifies allowed identities/logs/tests; content access follows agreed inspection boundary | Source/authority/adapter/controller checks pass; exact artifacts/hashes recorded |
 | **F5-B missing-authority execution bundle** | CFC side executes candidate path | RIDI verifies allowed identities/logs/tests; content access follows agreed inspection boundary | Predeclared missing-authority behavior reproduced exactly; no synthetic repair |
 | **F6 feasibility decision record** | Each side records independent conclusion | Cross-review | Same factual status accepted: PASS or named NO-GO; disagreement remains explicit and blocks progression |
@@ -213,9 +214,15 @@ Action:
 - failure artifacts remain retained;
 - acceptance criteria are unchanged.
 
-A purely mechanical implementation defect may be corrected only as a **new adapter version** under the same accepted F1 interface and same criteria, followed by complete F3 rerun.
+A purely mechanical implementation defect may be corrected only as a **new adapter version** under the same accepted F1 interface and same criteria.
 
-If correction requires changing the interface, controller, authority rule or acceptance criterion, Phase F resets to the relevant earlier gate.
+After any adapter-code change:
+- the prior adapter version remains retained;
+- prior F3/F5 results for that adapter version are not transferable;
+- complete F3 must be rerun;
+- if either F5 case had already executed, **both F5-A and F5-B must be rerun from the frozen calibration inputs under the new adapter version** before F6.
+
+If correction requires changing the interface, controller, authority-universe membership/semantics, authority rule or acceptance criterion, Phase F resets to the relevant earlier gate.
 
 ### 5.5 Complete-authority calibration path fails
 
@@ -298,7 +305,10 @@ Before either F5 case is executed, freeze:
 - deterministic selection rule for the required authority-state class;
 - selected case IDs;
 - exact source hashes;
-- authority-state qualification reason under F4.
+- authority-state qualification reason under F4;
+- exact F5 authority-state qualification manifest/hash.
+
+Where authority content is restricted by the inspection boundary, deterministic selection operates on the frozen qualification manifest, not on undisclosed authority contents. RIDI may reproduce the selector output from that manifest while **not** claiming independent content-level verification of private CFC authority records.
 
 The selector must not use:
 - CFC closure/claim state;
@@ -359,6 +369,7 @@ If F0 is signed, Phase F must produce or explicitly NO-GO on:
 - F3 adversarial test suite + exact results;
 - F4 authority-universe manifest + cutoff;
 - calibration source-frame manifest;
+- F5 authority-state qualification manifest;
 - deterministic F5 selector + output;
 - F5-A exact execution artifacts/logs/hashes;
 - F5-B exact execution artifacts/logs/hashes;
