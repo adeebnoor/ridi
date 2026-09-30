@@ -19,16 +19,18 @@ Test whether the draft still permits the main v0.1 failure mode:
 | Private/monkeypatched bypass used to make CFC run | F2 explicit interface/monkeypatch restriction | PASS |
 | Source bytes missing after selection | Phase A1 durable source-universe freeze before eligibility | PASS |
 | Temporary transport expires mid-experiment | A1 durable-route requirement | PASS |
-| Authority records searched/found after selection | A2 exact substantive authority-universe freeze | PASS |
+| Authority records searched/found after selection | F4 cutoff + F4→A2 continuity rule; any membership/semantic change resets Phase F | PASS |
 | Authority applicability decided after selection | A3 frozen acceptance/binding/conflict/missing rules | PASS |
 | Validity/freshness changes because date moves | A4 temporal/as-of freeze | PASS |
 | Claim/scope rewritten after selected case is known | A5 claim/decision-context contract | PASS |
 | Original support requirement silently weakened | A6 support-requirement contract | PASS |
-| Adapter tuned to v0.1 selected case | Section 3 exposure firewall | PASS |
+| Adapter tuned to v0.1 selected case | Section 3 case-agnostic exposure firewall; no case-ID special exception | PASS |
 | Calibration cases leak into substantive pool | Section 3 permanent CALIBRATION/EXCLUDED rule | PASS |
+| Feasibility/calibration cases handpicked after outcome inspection | F5 deterministic authority-state-based case-selection rule + frozen IDs/hashes before execution | PASS |
 | Missing-authority representability discovered after selection | F5-B + E3/E4 before seeds | PASS |
 | Eligibility peeks at CFC/RIDI outcomes | E1/E2 mapping-only eligibility | PASS |
 | Eligibility checker calls CFC closure | E2 explicitly prohibited | PASS |
+| Candidate omissions hidden before eligibility audit | E5 complete candidate source-frame manifest frozen before checker; rejected cases/reasons retained | PASS |
 | Pool built before executable path proven | F/A/D/P occur before E | PASS |
 | Bundle/commit/exchange machinery fails only after substantive run | D3 excluded plumbing rehearsal | PASS |
 | Selected-case gate becomes first discovery | Section 10 requires exact eligibility-classification reproduction | PASS |
@@ -57,6 +59,19 @@ Public CFC records show:
 - CFC-next 0.3.0a2 is a separately frozen baseline, but its freeze evidence alone does not establish a nonfixture RIDI-specific adapter.
 
 R5 therefore does not nominate either implementation automatically.
+
+## Final post-hardening check
+
+Additional changes verified after the first audit:
+
+- document title now correctly identifies **DRAFT R5**;
+- v0.1 exposure exclusion is expressed as a **case-agnostic contamination rule**, with `RAG-nq-test1035` merely an instance of that rule;
+- F4 authority-universe cutoff is explicit;
+- F4 authority membership/semantics cannot change on the way to A2 without resetting Phase F;
+- F5 calibration cases must be selected by a frozen deterministic authority-state rule before execution;
+- E5 freezes the candidate source frame before checker execution and retains rejected candidates/reason codes.
+
+No remaining issue found that would justify another draft revision **before bilateral review**.
 
 ## Send recommendation
 
