@@ -387,13 +387,13 @@ No case is selected first and tested for representability afterward.
 
 ### E5 — freeze application
 
-Before running the checker, freeze the complete substantive candidate source frame and its deterministic derivation rule so that exclusions cannot be hidden by omission.
+Before running the checker, freeze the **complete candidate universe/source frame** and its deterministic derivation rule so that exclusions cannot be hidden by omission. Calibration/exposure-excluded cases remain present in this universe with explicit exclusion flags; they are not silently removed upstream.
 
 Then freeze:
 1. candidate source-frame manifest/hash;
 2. eligibility specification;
 3. exact checker bytes/hash;
-4. complete candidate registry;
+4. complete candidate registry containing every source-frame candidate, including CALIBRATION/EXCLUDED and other rejected cases;
 5. exact source/authority references used by classifications;
 6. audit output including all rejected candidates and reason codes;
 7. exact eligible pool bytes/hash.
