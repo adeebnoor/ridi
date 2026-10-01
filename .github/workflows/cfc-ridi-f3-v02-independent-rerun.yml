@@ -1,0 +1,150 @@
+name: CFC-RIDI F3 v0.2 independent RIDI rerun
+
+on:
+  push:
+    branches:
+      - review/cfc-ridi-v0.2-f3-v02-independent-rerun
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rerun-f3-v02:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout RIDI branch
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch exact frozen CFC F3 v0.2 rerun
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --quiet https://github.com/iller1/cfc-ai-evaluation.git /tmp/cfc
+          cd /tmp/cfc
+          git checkout --quiet c14dc6030f80f036757214627b011385e31768f7
+          test "$(git rev-parse HEAD)" = "c14dc6030f80f036757214627b011385e31768f7"
+          test "$(git ls-remote origin refs/heads/freeze/cfc-ridi-v0.2-f3-r1-pass-v02 | awk '{print $1}')" = "c14dc6030f80f036757214627b011385e31768f7"
+          test "$(git ls-remote origin refs/heads/freeze/cfc-ridi-v0.2-f2-adapter-v0.2 | awk '{print $1}')" = "930d7b0119159eaedbaf947691d9510b4c61d81c"
+          echo RIDI_F3_V02_FREEZE_REFS_PASS
+
+      - name: Verify exact F3 rerun suite identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/cfc
+
+          test "$(wc -c < collaboration/cfc-ridi/v0.2/f3_suite/fixtures.py)" -eq 19991
+          echo "b0349b70ac6ef4ea35e19589e05da5e71a45e885a0dd980fa16b8226d1420d4f  collaboration/cfc-ridi/v0.2/f3_suite/fixtures.py" | sha256sum -c -
+          test "$(git hash-object collaboration/cfc-ridi/v0.2/f3_suite/fixtures.py)" = "f23ae05b6ce166d1f12104fe12d14c4a902fca14"
+
+          test "$(wc -c < collaboration/cfc-ridi/v0.2/f3_suite/probe_f3.py)" -eq 4688
+          echo "777355fafd140d498c96d7abe86d7697f9c639640c7a7e22793c709b62b2bed7  collaboration/cfc-ridi/v0.2/f3_suite/probe_f3.py" | sha256sum -c -
+          test "$(git hash-object collaboration/cfc-ridi/v0.2/f3_suite/probe_f3.py)" = "1b1e4bd26b9a6444ec676b7d788bc0431f9fc4e4"
+
+          test "$(wc -c < collaboration/cfc-ridi/v0.2/f3_suite/run_f3.py)" -eq 22606
+          echo "3ac4cf728fabe0f8c846321327c9ddd5794883efba741c4ff7f4138e7a2952fe  collaboration/cfc-ridi/v0.2/f3_suite/run_f3.py" | sha256sum -c -
+          test "$(git hash-object collaboration/cfc-ridi/v0.2/f3_suite/run_f3.py)" = "7f1fbac49f0572f3a58badddc9e7cb0ed0b9f880"
+
+          test "$(wc -c < .github/workflows/cfc-ridi-f3-suite-r1.yml)" -eq 2775
+          echo "719f2bd3c59a85e0c14e7d7833e685d5ede69c4dbfda1427ed1c9bda896771b4  .github/workflows/cfc-ridi-f3-suite-r1.yml" | sha256sum -c -
+          test "$(git hash-object .github/workflows/cfc-ridi-f3-suite-r1.yml)" = "7f306d549a547c14c45f6a44664d22618230df15"
+
+          grep -Fq 'CRITERIA_SHA256 = "f9640dbaec55a2b381a159825fe27a9e87502b75b20bbfbcf4382ca44cd887a2"' collaboration/cfc-ridi/v0.2/f3_suite/run_f3.py
+
+          echo RIDI_F3_V02_SUITE_IDENTITY_PASS
+
+      - name: Verify exact frozen F2 v0.2 identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/cfc
+          D=collaboration/cfc-ridi/v0.2/f2_adapter_v0.2
+
+          test "$(wc -c < $D/adapter.py)" -eq 30630
+          echo "15b7d01787237b2e5f0d1ca106c4e84aaf1976a2512179c79c458fe3d80e634b  $D/adapter.py" | sha256sum -c -
+          test "$(git hash-object $D/adapter.py)" = "373598e8774622cc91d43b811eb636a231bd906c"
+
+          test "$(wc -c < $D/test_adapter.py)" -eq 8853
+          echo "3798cfb0b9c79311cb74b4bd5be71c2805ff225d316a57f2fb55c2d8462fd732  $D/test_adapter.py" | sha256sum -c -
+          test "$(git hash-object $D/test_adapter.py)" = "81d948ef8cc19ad471eeb05121fa64f7a885e6aa"
+
+          test "$(wc -c < $D/README.md)" -eq 3891
+          echo "0c441a05b75c62b827c69c0d40a83d7ede02b66d40b757156e3ddcec4d070ba7  $D/README.md" | sha256sum -c -
+          test "$(git hash-object $D/README.md)" = "55df7702ed90f6134762136171e5557cdde692a2"
+
+          test "$(wc -c < $D/ADAPTER_MANIFEST.json)" -eq 2125
+          echo "6e56866ac5d6ee7eddc82a06d8c172cb886d38d98f2e7fa1fa76d3afa03aa264  $D/ADAPTER_MANIFEST.json" | sha256sum -c -
+          test "$(git hash-object $D/ADAPTER_MANIFEST.json)" = "2bb1efff7b5da612c77a86afae8f0f90c5dac402"
+
+          echo "b3b1f11e060289afa4e7da61072f2c31be7f0da1786be90682ec307d4e1f5303  demonstrator/cfc_anchor-0.2.90rc1-py3-none-any.whl" | sha256sum -c -
+
+          echo RIDI_F3_V02_F2_BASELINE_IDENTITY_PASS
+
+      - name: Install exact frozen Anchor wheel
+        run: python -m pip install --quiet --no-deps /tmp/cfc/demonstrator/cfc_anchor-0.2.90rc1-py3-none-any.whl
+
+      - name: Reproduce F2 v0.2 baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/cfc
+          python collaboration/cfc-ridi/v0.2/f2_adapter_v0.2/test_adapter.py | tee /tmp/f2-v02-baseline.txt
+          grep -Fx "PASS 10/10" /tmp/f2-v02-baseline.txt
+          echo RIDI_F3_V02_F2_BASELINE_PASS
+
+      - name: Independently rerun complete F3 T01-T15
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/cfc
+          python collaboration/cfc-ridi/v0.2/f3_suite/run_f3.py             --output collaboration/cfc-ridi/v0.2/f3_suite/F3_RESULTS_RIDI_V02.json             | tee /tmp/f3-v02-rerun.txt
+
+      - name: Verify exact reproduced F3 PASS
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/cfc
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+
+          p = Path("collaboration/cfc-ridi/v0.2/f3_suite/F3_RESULTS_RIDI_V02.json")
+          raw = p.read_bytes()
+          data = json.loads(raw.decode("utf-8"))
+
+          assert data["tests_total"] == 15, data
+          assert data["tests_passed"] == 15, data
+          assert data["tests_failed"] == 0, data
+          assert data["overall_status"] == "F3_REPRESENTATION_ONLY_ADVERSARIAL_SUITE_PASS", data
+
+          ids = [x["test_id"] for x in data["results"]]
+          assert ids == [f"F3-T{i:02d}" for i in range(1, 16)], ids
+          assert all(x["status"] == "PASS" for x in data["results"]), data["results"]
+
+          t05 = next(x for x in data["results"] if x["test_id"] == "F3-T05")
+          detail = json.dumps(t05["detail"], sort_keys=True, default=str)
+          assert "EXPLICIT_REJECTION" in detail, detail
+          assert "BindingError" in detail, detail
+
+          digest = hashlib.sha256(raw).hexdigest()
+          assert len(raw) == 69494, len(raw)
+          assert digest == "13dfe40f255e0398b971e90b3ea10cae164205ae5b345d7980c77b50a7b80e7b", digest
+
+          print("RIDI_F3_V02_REPRODUCED_15_15_PASS")
+          print("RIDI_F3_V02_T05_EXPLICIT_BINDING_REJECTION_PASS")
+          print("RIDI_F3_V02_RESULT_BYTES", len(raw))
+          print("RIDI_F3_V02_RESULT_SHA256", digest)
+          PY
+
+      - name: Upload independent RIDI result
+        uses: actions/upload-artifact@v4
+        with:
+          name: ridi-f3-v02-independent-result
+          path: /tmp/cfc/collaboration/cfc-ridi/v0.2/f3_suite/F3_RESULTS_RIDI_V02.json
+          if-no-files-found: error
