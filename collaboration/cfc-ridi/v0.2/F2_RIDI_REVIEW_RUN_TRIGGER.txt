@@ -1,0 +1,3 @@
+candidate_commit=4167783eb48e1a1677107cb1359ad9b2f890017f
+review_workflow_commit=8fd8987502eec344e8e0e95e76988fb093997fcd
+purpose=trigger independent RIDI F2 verification workflow after positive Anchor probe was added
