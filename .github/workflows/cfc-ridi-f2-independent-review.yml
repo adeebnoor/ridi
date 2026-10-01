@@ -166,3 +166,40 @@ jobs:
           python test_adapter.py | tee /tmp/f2-test-output.txt
           grep -Fx "PASS 8/8" /tmp/f2-test-output.txt
           echo RIDI_F2_PUBLIC_TEST_RERUN_PASS
+
+      - name: Positive probe against exact public Anchor wheel
+        shell: bash
+        run: |
+          set -euo pipefail
+          RELEASE_URL=https://github.com/iller1/cfc-ai-evaluation/releases/download/cfc-demonstrator-v1.0-rc1/CFC_DEMONSTRATOR_v1.0-rc1.zip
+          mkdir -p /tmp/cfc-release
+          curl -fsSL "$RELEASE_URL" -o /tmp/cfc-release.zip
+          echo "ba52b52fac78b7a1753fdd5a79d43f0d63b6604daac3701bbe44b96cd5fcb394  /tmp/cfc-release.zip" | sha256sum -c -
+          unzip -q /tmp/cfc-release.zip -d /tmp/cfc-release
+
+          EXPECTED=b3b1f11e060289afa4e7da61072f2c31be7f0da1786be90682ec307d4e1f5303
+          WHEEL=""
+          while IFS= read -r f; do
+            if [ "$(sha256sum "$f" | awk '{print $1}')" = "$EXPECTED" ]; then
+              WHEEL="$f"
+              break
+            fi
+          done < <(find /tmp/cfc-release -type f -name '*.whl' -print)
+          test -n "$WHEEL"
+          echo "RIDI_F2_ANCHOR_WHEEL_IDENTITY_PASS $WHEEL"
+
+          python -m venv /tmp/f2-venv
+          /tmp/f2-venv/bin/python -m pip install --quiet --no-deps "$WHEEL"
+          PYTHONPATH=/tmp/f2-review /tmp/f2-venv/bin/python - "$WHEEL" <<'PY'
+          import json
+          import sys
+          import adapter
+
+          out = adapter.public_interface_probe(sys.argv[1])
+          assert out["anchor_wheel_artifact_verified"]["sha256"] == adapter.ANCHOR_WHEEL_SHA256
+          assert out["private_engine_accessed"] is False
+          assert set(out["public_symbols_present"]) == set(adapter._F1_PUBLIC_IMPORTS)
+          assert set(out["controller_methods_present"]) == set(adapter._F1_CONTROLLER_METHODS)
+          print("RIDI_F2_POSITIVE_PUBLIC_INTERFACE_PROBE_PASS")
+          print(json.dumps(out, sort_keys=True))
+          PY
