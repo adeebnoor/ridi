@@ -1,0 +1,168 @@
+name: CFC-RIDI F2 independent review
+
+on:
+  push:
+    branches:
+      - review/cfc-ridi-v0.2-f2-independent-review
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-f2-candidate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout RIDI review branch
+        uses: actions/checkout@v4
+
+      - name: Fetch exact CFC candidate bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          CFC_COMMIT=4167783eb48e1a1677107cb1359ad9b2f890017f
+          BASE=https://raw.githubusercontent.com/iller1/cfc-ai-evaluation/${CFC_COMMIT}/collaboration/cfc-ridi/v0.2/f2_adapter
+          mkdir -p /tmp/f2-review
+          curl -fsSL "${BASE}/adapter.py" -o /tmp/f2-review/adapter.py
+          curl -fsSL "${BASE}/test_adapter.py" -o /tmp/f2-review/test_adapter.py
+          curl -fsSL "${BASE}/README.md" -o /tmp/f2-review/README.md
+          curl -fsSL "${BASE}/ADAPTER_MANIFEST.json" -o /tmp/f2-review/ADAPTER_MANIFEST.json
+
+      - name: Verify exact byte identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/f2-review
+
+          test "$(wc -c < adapter.py)" -eq 28972
+          test "$(wc -c < test_adapter.py)" -eq 6586
+          test "$(wc -c < README.md)" -eq 3479
+          test "$(wc -c < ADAPTER_MANIFEST.json)" -eq 1348
+
+          echo "4b975fda6242c9a7e33d0d692705ef6fe82683dbf2bddefc0345c2e5504b480a  adapter.py" | sha256sum -c -
+          echo "4f70526185dbb69e4073c0baf89a6f924e8e1e220ba0317c339708bf5b152f34  test_adapter.py" | sha256sum -c -
+          echo "3bf666564b2c1a7f85526a3e223e7385e30a61c73e8d5f67ca0b17d954d7638a  README.md" | sha256sum -c -
+          echo "32b8c36ebb434fa620cdae970ed12bbb389a1ae62d20be6005e78b7c0db89591  ADAPTER_MANIFEST.json" | sha256sum -c -
+
+          test "$(git hash-object adapter.py)" = "85bd07b602d3555a306a5200457704fcfa0bffe3"
+          test "$(git hash-object test_adapter.py)" = "04af56414b7aa370d67f31a12e2e0fa3a1be9845"
+          test "$(git hash-object README.md)" = "2d3e763ebf83b9be5edc21bf9a4cb4a9d2efa606"
+          test "$(git hash-object ADAPTER_MANIFEST.json)" = "b34b948c15c453b7d35ecfaf8429af0616150987"
+
+          echo RIDI_F2_EXACT_IDENTITY_PASS
+
+      - name: Independent static boundary audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+
+          path = Path("/tmp/f2-review/adapter.py")
+          source = path.read_text(encoding="utf-8")
+          tree = ast.parse(source)
+
+          expected_imports = {
+              "Controller",
+              "HostTrustPolicy",
+              "HostTrustRegistration",
+              "IdentityAuthorityAttestation",
+              "IdentityAuthorityVerdict",
+              "SourceSemanticsAuthorityAttestation",
+              "SourceSemanticsAuthorityVerdict",
+              "ProvenanceAuthorityAttestation",
+              "ProvenanceAuthorityVerdict",
+              "EvidenceAuthorityAttestation",
+              "EvidenceAuthorityVerdict",
+              "EpistemicRoleAuthorityAttestation",
+              "EpistemicRoleAuthorityVerdict",
+              "RetrievalAuthorityAttestation",
+              "RetrievalAuthorityVerdict",
+              "FailureDomainTopologyAttestation",
+              "FailureDomainTopologyVerdict",
+              "SupportSetIndependenceAuthorityAttestation",
+              "SupportSetIndependenceAuthorityVerdict",
+          }
+          expected_methods = {
+              "draft_identity",
+              "install_verified_identity",
+              "draft_failure_domain_topology",
+              "install_verified_failure_domain_topology",
+              "draft_source_semantics",
+              "install_verified_source_semantics",
+              "draft_evidence_record",
+              "verify_evidence_provenance",
+              "verify_evidence_authority",
+              "draft_epistemic_role",
+              "install_verified_epistemic_role",
+              "evidence_with_epistemic_role",
+              "evidence_record_mapping",
+              "draft_snapshot",
+              "install_verified_snapshot",
+              "draft_support_set_independence",
+              "install_verified_support_set_independence",
+              "identity_commitment",
+              "failure_domain_topology_commitment",
+              "source_semantics_commitment",
+              "provenance_commitment",
+              "evidence_authority_commitment",
+              "snapshot_commitment",
+              "support_set_independence_commitment",
+              "evaluate_snapshot",
+          }
+
+          assigned = {}
+          for node in tree.body:
+              if isinstance(node, ast.Assign) and len(node.targets) == 1 and isinstance(node.targets[0], ast.Name):
+                  name = node.targets[0].id
+                  try:
+                      assigned[name] = ast.literal_eval(node.value)
+                  except Exception:
+                      pass
+
+          assert set(assigned["_F1_PUBLIC_IMPORTS"]) == expected_imports
+          assert set(assigned["_F1_CONTROLLER_METHODS"]) == expected_methods
+
+          forbidden = [
+              "cfc_anchor._",
+              "importlib.import_module",
+              "sys.modules",
+              "__dict__",
+              "monkeypatch",
+          ]
+          for token in forbidden:
+              assert token not in source, token
+
+          controller_calls = set()
+          for node in ast.walk(tree):
+              if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute):
+                  if isinstance(node.func.value, ast.Name) and node.func.value.id == "c":
+                      controller_calls.add(node.func.attr)
+          assert controller_calls <= expected_methods, sorted(controller_calls - expected_methods)
+
+          private_controller_access = []
+          for node in ast.walk(tree):
+              if isinstance(node, ast.Attribute) and isinstance(node.value, ast.Name) and node.value.id == "c":
+                  if node.attr.startswith("_"):
+                      private_controller_access.append(node.attr)
+          assert not private_controller_access, private_controller_access
+
+          assert 'candidate_conclusion=ep["canonical"]' in source
+          assert '"substantive_execution_authorized": False' in source
+          assert 'authority_state": "NOT_ASSERTED_BY_NEUTRAL_SCHEMA"' in source
+          assert "prepared.candidate_conclusion" in source
+
+          print("RIDI_F2_STATIC_BOUNDARY_AUDIT_PASS")
+          print("controller_calls=", ",".join(sorted(controller_calls)))
+          PY
+
+      - name: Compile and rerun CFC public representation tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/f2-review
+          python -m py_compile adapter.py test_adapter.py
+          python test_adapter.py | tee /tmp/f2-test-output.txt
+          grep -Fx "PASS 8/8" /tmp/f2-test-output.txt
+          echo RIDI_F2_PUBLIC_TEST_RERUN_PASS
