@@ -89,14 +89,16 @@ The amended manifest now includes exactly:
 - `snapshot_commitment(...)`
 - `support_set_independence_commitment(...)`
 
-Direct comparison against the frozen Demonstrator custom lifecycle shows:
+Direct comparison against the frozen **custom Demonstrator lifecycle used as the F1 public-boundary reference** shows:
 
-- every `cfc_anchor.Controller` method called by that lifecycle is present in the amended manifest;
-- no Controller method listed in the amended manifest is extra relative to that demonstrated lifecycle;
-- every package-level `cfc_anchor` class imported by the lifecycle is present in the amended manifest;
-- no package-level class in the manifest is extra relative to that lifecycle;
-- the demonstrated lifecycle contains no `cfc_anchor._engine` import;
-- the demonstrated lifecycle contains no adapter-side monkeypatch/private-module access.
+- every `cfc_anchor.Controller` method called by that custom lifecycle is present in the amended manifest;
+- no Controller method listed in the amended manifest is extra relative to that custom lifecycle;
+- every package-level `cfc_anchor` class imported by that custom lifecycle is present in the amended manifest;
+- no package-level class in the manifest is extra relative to that custom lifecycle;
+- the custom lifecycle contains no `cfc_anchor._engine` import;
+- the custom lifecycle contains no adapter-side monkeypatch/private-module access.
+
+This is **not** a claim that the F1 manifest exposes every public method/class exercised by all frozen Demonstrator cases. The accepted F1 manifest is a deliberately bounded maximum surface for the proposed Phase F path. If the later neutral schema requires any public method/class outside this manifest, F1 must be explicitly amended and bilaterally re-accepted before F2 uses that surface.
 
 Therefore:
 
@@ -147,4 +149,12 @@ Until that exact bilateral countersign is recorded:
 
 **NO F2 ADAPTER DEVELOPMENT.**
 
-**F1 exact-hash acceptance before F2.**
+### Next gate after bilateral F1 countersign
+
+The F1 countersign is **necessary but not sufficient** to begin F2.
+
+Under the signed F0 responsibility matrix, the next artifact is the **Neutral schema class for Phase F**, produced by RIDI and independently reviewed by CFC. Both parties must approve the exact neutral-schema artifact/hash before adapter implementation proceeds.
+
+If that schema requires controller-facing methods/classes outside the accepted F1 manifest, the interface must be versioned, amended and bilaterally re-accepted before F2.
+
+**F1 exact-hash acceptance → neutral-schema exact-hash acceptance → F2.**
