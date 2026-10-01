@@ -1,0 +1,314 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cfc-ridi:phase-f:neutral-arm:v0.2-r1",
+  "title": "CFC-RIDI Phase F Neutral Arm Schema v0.2 R1",
+  "description": "One-arm, outcome-blind adapter input class for CFC-RIDI v0.2 Phase F. This schema carries source/query/passages and one recorded downstream endpoint, but carries no authority, correctness, RIDI result, counterpart-arm data, or retrieval-grade information.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "case_id",
+    "arm",
+    "dataset",
+    "task",
+    "draw",
+    "query",
+    "source_binding",
+    "retrieved_items",
+    "recorded_endpoint",
+    "neutrality"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "CFC-RIDI-NEUTRAL-ARM-v0.2-R1"
+    },
+    "case_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[\\x21-\\x7E]+$",
+      "description": "Stable case identifier for bookkeeping only. It must not drive semantic mapping, authority, or closure behavior."
+    },
+    "arm": {
+      "type": "string",
+      "enum": [
+        "A",
+        "B"
+      ],
+      "description": "Arm identifier for bookkeeping only. The adapter receives exactly one arm instance at a time."
+    },
+    "dataset": {
+      "type": "string",
+      "enum": [
+        "nq",
+        "hotpotqa",
+        "fever",
+        "scifact"
+      ]
+    },
+    "task": {
+      "type": "string",
+      "enum": [
+        "qa",
+        "verdict"
+      ]
+    },
+    "draw": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "query": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "qid",
+        "source_qid",
+        "text",
+        "text_sha256"
+      ],
+      "properties": {
+        "qid": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_qid": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Exact registered question/claim text. This is query context, not evidence authority."
+        },
+        "text_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "source_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "registered_context_line_sha256",
+        "source_contexts_corpus_sha256",
+        "source_registration",
+        "prompt_sha256"
+      ],
+      "properties": {
+        "registered_context_line_sha256": {
+          "$ref": "#/$defs/sha256",
+          "description": "SHA-256 of the exact LF-terminated registered source/context JSONL line from the frozen source corpus."
+        },
+        "source_contexts_corpus_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "source_registration": {
+          "type": "string",
+          "minLength": 1
+        },
+        "prompt_sha256": {
+          "$ref": "#/$defs/sha256",
+          "description": "Hash binding to the exact registered prompt. Prompt text itself is withheld from the adapter view."
+        }
+      }
+    },
+    "retrieved_items": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ordinal",
+          "item_id",
+          "text",
+          "text_sha256"
+        ],
+        "properties": {
+          "ordinal": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10
+          },
+          "item_id": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Exact registered passage/document identifier. Identifier distinctness does not establish evidence independence."
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Exact registered passage text. Presence in this schema does not establish semantic support, authority, provenance, independence, scope, freshness, or correctness."
+          },
+          "text_sha256": {
+            "$ref": "#/$defs/sha256"
+          }
+        }
+      },
+      "description": "Ordered registered source passages. Retrieval grades are intentionally absent from the adapter view."
+    },
+    "recorded_endpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "endpoint_record_sha256",
+        "raw_output",
+        "canonical_output",
+        "model",
+        "model_revision",
+        "source_generations_sha256"
+      ],
+      "properties": {
+        "endpoint_record_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "raw_output": {
+          "type": "string",
+          "minLength": 1
+        },
+        "canonical_output": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The only endpoint field eligible to enter CFC as the candidate claim/conclusion value. It is not evidence, authority, or correctness."
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model_revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_generations_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "source_result_archive": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "neutrality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "adapter_unit",
+        "candidate_claim_source",
+        "endpoint_is_candidate_claim_only",
+        "authority_asserted_by_schema",
+        "semantic_support_asserted_by_schema",
+        "ground_truth_withheld",
+        "retrieval_grade_withheld",
+        "prompt_text_withheld",
+        "perturbation_condition_withheld",
+        "counterpart_arm_withheld",
+        "ridi_result_withheld",
+        "correctness_withheld"
+      ],
+      "properties": {
+        "adapter_unit": {
+          "const": "ONE_ARM_ONLY"
+        },
+        "candidate_claim_source": {
+          "const": "recorded_endpoint.canonical_output"
+        },
+        "endpoint_is_candidate_claim_only": {
+          "const": true
+        },
+        "authority_asserted_by_schema": {
+          "const": false
+        },
+        "semantic_support_asserted_by_schema": {
+          "const": false
+        },
+        "ground_truth_withheld": {
+          "const": true
+        },
+        "retrieval_grade_withheld": {
+          "const": true
+        },
+        "prompt_text_withheld": {
+          "const": true
+        },
+        "perturbation_condition_withheld": {
+          "const": true
+        },
+        "counterpart_arm_withheld": {
+          "const": true
+        },
+        "ridi_result_withheld": {
+          "const": true
+        },
+        "correctness_withheld": {
+          "const": true
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "x_cfc_ridi_rules": {
+    "source_basis": {
+      "registered_source_corpus_sha256": "1485c0ad114673d297c580080d11086d3ace8827f9b586b15ad3928c7d0b21a1",
+      "registered_source_rows": 1600,
+      "registered_cases": 800,
+      "datasets": {
+        "nq": 250,
+        "hotpotqa": 250,
+        "fever": 150,
+        "scifact": 150
+      },
+      "arms_per_case": 2,
+      "passages_per_arm": 10
+    },
+    "adapter_visibility": [
+      "Exactly one arm instance may be provided to the F2 adapter per mapping operation.",
+      "The counterpart arm must not be supplied through another field, side channel, cached pair object, or precomputed comparison feature.",
+      "The adapter must not compute or receive RIDI PASS/FAIL, endpoint equality/difference, correctness, gold labels, expected asymmetry, publication-interest labels, or passage retrieval grades."
+    ],
+    "candidate_claim_rule": [
+      "recorded_endpoint.canonical_output may enter CFC only as the candidate claim/conclusion value.",
+      "recorded_endpoint.raw_output is audit/provenance material and must not be promoted to authority.",
+      "Neither endpoint field may be used as evidence, semantic support, provenance authority, identity authority, independence authority, or correctness."
+    ],
+    "source_content_rule": [
+      "query.text and retrieved_items[].text are exact source content only.",
+      "item_id, text hashes, source hashes, case_id, arm, dataset, task, and model identifiers do not establish authority, semantic support, provenance, independence, scope, freshness, identity, or applicability.",
+      "Distinct item IDs must not be interpreted as independence."
+    ],
+    "authority_boundary": [
+      "This schema contains no positive authority record.",
+      "Any positive authority used in Phase F must come from the separately frozen F4 authority universe and satisfy its frozen applicability/binding rules.",
+      "Missing authority must remain missing; the adapter must not infer or synthesize it from neutral-schema fields."
+    ],
+    "withheld_source_fields": [
+      "gold",
+      "passages[].grade",
+      "relevance_grade_vector",
+      "prompt text",
+      "condition/reference-vs-random label",
+      "counterpart arm",
+      "computed RIDI result",
+      "ground-truth correctness",
+      "expected asymmetry"
+    ],
+    "semantic_context_rule": [
+      "This schema does not supply authoritative entity/event/version identity, decision as-of semantics, evidence polarity, epistemic role, provenance lineage, failure-domain topology, support-set independence, or scope applicability.",
+      "If the accepted F1 public interface and later F4 authority universe cannot faithfully supply required state without invention, Phase F must stop under the signed failure semantics."
+    ],
+    "interface_change_rule": [
+      "If F2 requires any controller-facing class or method outside the bilaterally accepted F1 interface manifest, F1 must be versioned, amended, and bilaterally re-accepted before use.",
+      "If F2 requires a neutral-schema field not present here, this schema must be versioned and bilaterally re-accepted before use."
+    ],
+    "ordering_rule": [
+      "Neutral-schema acceptance does not approve any adapter implementation.",
+      "F2 adapter development may begin only after bilateral exact-hash acceptance of this neutral-schema artifact."
+    ]
+  }
+}
