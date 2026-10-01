@@ -1,0 +1,239 @@
+name: CFC-RIDI F2 v0.2 independent RIDI review
+
+on:
+  push:
+    branches:
+      - review/cfc-ridi-v0.2-f2-adapter-v0.2-independent
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  review-f2-v02:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout RIDI review branch
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch exact CFC candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --quiet https://github.com/iller1/cfc-ai-evaluation.git /tmp/cfc
+          cd /tmp/cfc
+          git checkout --quiet 930d7b0119159eaedbaf947691d9510b4c61d81c
+          test "$(git rev-parse HEAD)" = "930d7b0119159eaedbaf947691d9510b4c61d81c"
+          echo RIDI_F2_V02_COMMIT_PASS
+
+      - name: Verify exact component identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/cfc
+          D=collaboration/cfc-ridi/v0.2/f2_adapter_v0.2
+
+          test "$(wc -c < $D/adapter.py)" -eq 30630
+          echo "15b7d01787237b2e5f0d1ca106c4e84aaf1976a2512179c79c458fe3d80e634b  $D/adapter.py" | sha256sum -c -
+          test "$(git hash-object $D/adapter.py)" = "373598e8774622cc91d43b811eb636a231bd906c"
+
+          test "$(wc -c < $D/test_adapter.py)" -eq 8853
+          echo "3798cfb0b9c79311cb74b4bd5be71c2805ff225d316a57f2fb55c2d8462fd732  $D/test_adapter.py" | sha256sum -c -
+          test "$(git hash-object $D/test_adapter.py)" = "81d948ef8cc19ad471eeb05121fa64f7a885e6aa"
+
+          test "$(wc -c < $D/README.md)" -eq 3891
+          echo "0c441a05b75c62b827c69c0d40a83d7ede02b66d40b757156e3ddcec4d070ba7  $D/README.md" | sha256sum -c -
+          test "$(git hash-object $D/README.md)" = "55df7702ed90f6134762136171e5557cdde692a2"
+
+          test "$(wc -c < $D/probe_public_api.py)" -eq 730
+          echo "cf330aabe63cb5b1722bdbffc0ec92980e4d312cbcdf771c69c7fff6b4a2622a  $D/probe_public_api.py" | sha256sum -c -
+          test "$(git hash-object $D/probe_public_api.py)" = "4125a52565edc69a026ddd646cdd32880e68a137"
+
+          test "$(wc -c < $D/ADAPTER_MANIFEST.json)" -eq 2125
+          echo "6e56866ac5d6ee7eddc82a06d8c172cb886d38d98f2e7fa1fa76d3afa03aa264  $D/ADAPTER_MANIFEST.json" | sha256sum -c -
+          test "$(git hash-object $D/ADAPTER_MANIFEST.json)" = "2bb1efff7b5da612c77a86afae8f0f90c5dac402"
+
+          echo RIDI_F2_V02_IDENTITY_PASS
+
+      - name: Verify frozen Anchor wheel
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/cfc
+          echo "b3b1f11e060289afa4e7da61072f2c31be7f0da1786be90682ec307d4e1f5303  demonstrator/cfc_anchor-0.2.90rc1-py3-none-any.whl" | sha256sum -c -
+          echo RIDI_F2_V02_ANCHOR_IDENTITY_PASS
+
+      - name: Install exact Anchor wheel
+        run: python -m pip install --quiet --no-deps /tmp/cfc/demonstrator/cfc_anchor-0.2.90rc1-py3-none-any.whl
+
+      - name: Rerun published representation tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/cfc/collaboration/cfc-ridi/v0.2/f2_adapter_v0.2
+          python -m py_compile adapter.py test_adapter.py probe_public_api.py
+          python test_adapter.py | tee /tmp/f2-v02-tests.txt
+          grep -Fx "PASS 10/10" /tmp/f2-v02-tests.txt
+          echo RIDI_F2_V02_TESTS_PASS
+
+      - name: Run public interface probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/cfc
+          python collaboration/cfc-ridi/v0.2/f2_adapter_v0.2/probe_public_api.py | tee /tmp/f2-v02-probe.txt
+          grep -Fx "PUBLIC_INTERFACE_PROBE_PASS" /tmp/f2-v02-probe.txt
+          echo RIDI_F2_V02_PUBLIC_INTERFACE_PASS
+
+      - name: Independent binding-field adversarial audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/cfc
+          python - <<'PY'
+          import copy, importlib.util, json, sys
+          from pathlib import Path
+
+          d = Path("collaboration/cfc-ridi/v0.2/f2_adapter_v0.2")
+          spec = importlib.util.spec_from_file_location("candidate", d / "adapter.py")
+          mod = importlib.util.module_from_spec(spec)
+          sys.modules["candidate"] = mod
+          spec.loader.exec_module(mod)
+
+          tspec = importlib.util.spec_from_file_location("candidate_tests", d / "test_adapter.py")
+          tests = importlib.util.module_from_spec(tspec)
+          sys.modules["candidate_tests"] = tests
+          tspec.loader.exec_module(tests)
+
+          payload = tests.arm()
+          prepared = mod.prepare_neutral_arm(payload)
+          resolved = tests.minimal_resolved(prepared)
+          mod._validate_resolved_state(prepared, resolved)
+
+          base = mod.neutral_arm_binding(prepared)
+          expected_keys = {
+              "binding_version",
+              "neutral_schema_sha256",
+              "case_id",
+              "arm",
+              "dataset",
+              "task",
+              "draw",
+              "question_sha256",
+              "registered_context_line_sha256",
+              "endpoint_record_sha256",
+              "candidate_conclusion_sha256",
+              "passage_bindings_sha256",
+          }
+          assert set(base) == expected_keys, base.keys()
+
+          mutations = {
+              "binding_version": "CFC-RIDI-NEUTRAL-ARM-BINDING-vX",
+              "neutral_schema_sha256": "0" * 64,
+              "case_id": "FOREIGN-CASE",
+              "arm": "B" if base["arm"] == "A" else "A",
+              "dataset": "fever" if base["dataset"] != "fever" else "nq",
+              "task": "verdict" if base["task"] != "verdict" else "qa",
+              "draw": base["draw"] + 1,
+              "question_sha256": "1" * 64,
+              "registered_context_line_sha256": "2" * 64,
+              "endpoint_record_sha256": "3" * 64 if base["endpoint_record_sha256"] != "3"*64 else "4"*64,
+              "candidate_conclusion_sha256": "4" * 64,
+              "passage_bindings_sha256": "5" * 64,
+          }
+
+          rejected = {}
+          for key, value in mutations.items():
+              r = copy.deepcopy(resolved)
+              r["neutral_arm_binding"] = dict(base)
+              r["neutral_arm_binding"][key] = value
+              try:
+                  mod._validate_resolved_state(prepared, r)
+              except mod.BindingError:
+                  rejected[key] = True
+              else:
+                  rejected[key] = False
+
+          assert all(rejected.values()), rejected
+
+          foreign = copy.deepcopy(payload)
+          foreign["case_id"] = "FOREIGN-CASE"
+          foreign["arm"] = "B"
+          foreign_prepared = mod.prepare_neutral_arm(foreign)
+          r = copy.deepcopy(resolved)
+          r["neutral_arm_binding"] = mod.neutral_arm_binding(foreign_prepared)
+          try:
+              mod._validate_resolved_state(prepared, r)
+          except mod.BindingError:
+              pass
+          else:
+              raise AssertionError("foreign case/arm binding was not rejected")
+
+          print("RIDI_F2_V02_ALL_BINDING_FIELDS_REJECT_MISMATCH_PASS")
+          print(json.dumps(rejected, sort_keys=True))
+          PY
+
+      - name: Independent F1/static boundary audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/cfc
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+
+          p = Path("collaboration/cfc-ridi/v0.2/f2_adapter_v0.2/adapter.py")
+          source = p.read_text(encoding="utf-8")
+          tree = ast.parse(source)
+
+          forbidden = [
+              "cfc_anchor._",
+              "monkeypatch",
+              "__dict__",
+              "importlib.import_module",
+          ]
+          for token in forbidden:
+              assert token not in source, token
+
+          controller_private = []
+          controller_calls = set()
+          for node in ast.walk(tree):
+              if isinstance(node, ast.Attribute) and isinstance(node.value, ast.Name) and node.value.id == "c":
+                  if node.attr.startswith("_"):
+                      controller_private.append(node.attr)
+              if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute):
+                  if isinstance(node.func.value, ast.Name) and node.func.value.id == "c":
+                      controller_calls.add(node.func.attr)
+
+          assert not controller_private, controller_private
+
+          ns = {}
+          exec(compile(source, str(p), "exec"), ns)
+          allowed = set(ns["_F1_CONTROLLER_METHODS"])
+          assert controller_calls <= allowed, sorted(controller_calls - allowed)
+
+          # Ensure binding validation precedes public API loading / Controller construction.
+          fn = next(
+              n for n in tree.body
+              if isinstance(n, ast.FunctionDef) and n.name == "execute_with_resolved_state"
+          )
+          calls = []
+          for node in ast.walk(fn):
+              if isinstance(node, ast.Call):
+                  if isinstance(node.func, ast.Name):
+                      calls.append((node.lineno, node.func.id))
+                  elif isinstance(node.func, ast.Attribute):
+                      calls.append((node.lineno, node.func.attr))
+          by_name = {}
+          for ln, name in calls:
+              by_name.setdefault(name, ln)
+          assert by_name["_validate_resolved_state"] < by_name["_load_anchor_public_api"], by_name
+          assert by_name["_validate_resolved_state"] < by_name["Controller"], by_name
+
+          print("RIDI_F2_V02_STATIC_BOUNDARY_PASS")
+          PY
