@@ -14,7 +14,7 @@
     "draw",
     "query",
     "source_binding",
-    "retrieved_items",
+    "passages",
     "recorded_endpoint",
     "neutrality"
   ],
@@ -62,8 +62,8 @@
       "required": [
         "qid",
         "source_qid",
-        "text",
-        "text_sha256"
+        "question",
+        "question_sha256"
       ],
       "properties": {
         "qid": {
@@ -74,12 +74,12 @@
           "type": "string",
           "minLength": 1
         },
-        "text": {
+        "question": {
           "type": "string",
           "minLength": 1,
           "description": "Exact registered question/claim text. This is query context, not evidence authority."
         },
-        "text_sha256": {
+        "question_sha256": {
           "$ref": "#/$defs/sha256"
         }
       }
@@ -111,62 +111,26 @@
         }
       }
     },
-    "retrieved_items": {
-      "type": "array",
-      "minItems": 10,
-      "maxItems": 10,
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "ordinal",
-          "item_id",
-          "text",
-          "text_sha256"
-        ],
-        "properties": {
-          "ordinal": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 10
-          },
-          "item_id": {
-            "type": "string",
-            "minLength": 1,
-            "description": "Exact registered passage/document identifier. Identifier distinctness does not establish evidence independence."
-          },
-          "text": {
-            "type": "string",
-            "minLength": 1,
-            "description": "Exact registered passage text. Presence in this schema does not establish semantic support, authority, provenance, independence, scope, freshness, or correctness."
-          },
-          "text_sha256": {
-            "$ref": "#/$defs/sha256"
-          }
-        }
-      },
-      "description": "Ordered registered source passages. Retrieval grades are intentionally absent from the adapter view."
-    },
     "recorded_endpoint": {
       "type": "object",
       "additionalProperties": false,
       "required": [
         "endpoint_record_sha256",
-        "raw_output",
-        "canonical_output",
+        "raw",
+        "canonical",
         "model",
-        "model_revision",
+        "revision",
         "source_generations_sha256"
       ],
       "properties": {
         "endpoint_record_sha256": {
           "$ref": "#/$defs/sha256"
         },
-        "raw_output": {
+        "raw": {
           "type": "string",
           "minLength": 1
         },
-        "canonical_output": {
+        "canonical": {
           "type": "string",
           "minLength": 1,
           "description": "The only endpoint field eligible to enter CFC as the candidate claim/conclusion value. It is not evidence, authority, or correctness."
@@ -175,7 +139,7 @@
           "type": "string",
           "minLength": 1
         },
-        "model_revision": {
+        "revision": {
           "type": "string",
           "minLength": 1
         },
@@ -212,7 +176,7 @@
           "const": "ONE_ARM_ONLY"
         },
         "candidate_claim_source": {
-          "const": "recorded_endpoint.canonical_output"
+          "const": "recorded_endpoint.canonical"
         },
         "endpoint_is_candidate_claim_only": {
           "const": true
@@ -245,6 +209,42 @@
           "const": true
         }
       }
+    },
+    "passages": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ordinal",
+          "docid",
+          "text",
+          "text_sha256"
+        ],
+        "properties": {
+          "ordinal": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10
+          },
+          "docid": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Exact registered passage/document identifier. Identifier distinctness does not establish evidence independence."
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Exact registered passage text. Presence in this schema does not establish semantic support, authority, provenance, independence, scope, freshness, or correctness."
+          },
+          "text_sha256": {
+            "$ref": "#/$defs/sha256"
+          }
+        }
+      },
+      "description": "Ordered registered source passages. The original passage grade field is intentionally absent from the adapter view."
     }
   },
   "$defs": {
@@ -273,13 +273,13 @@
       "The adapter must not compute or receive RIDI PASS/FAIL, endpoint equality/difference, correctness, gold labels, expected asymmetry, publication-interest labels, or passage retrieval grades."
     ],
     "candidate_claim_rule": [
-      "recorded_endpoint.canonical_output may enter CFC only as the candidate claim/conclusion value.",
-      "recorded_endpoint.raw_output is audit/provenance material and must not be promoted to authority.",
+      "recorded_endpoint.canonical may enter CFC only as the candidate claim/conclusion value.",
+      "recorded_endpoint.raw is audit/provenance material and must not be promoted to authority.",
       "Neither endpoint field may be used as evidence, semantic support, provenance authority, identity authority, independence authority, or correctness."
     ],
     "source_content_rule": [
-      "query.text and retrieved_items[].text are exact source content only.",
-      "item_id, text hashes, source hashes, case_id, arm, dataset, task, and model identifiers do not establish authority, semantic support, provenance, independence, scope, freshness, identity, or applicability.",
+      "query.question and passages[].text are exact source content only.",
+      "docid, text hashes, source hashes, case_id, arm, dataset, task, and model identifiers do not establish authority, semantic support, provenance, independence, scope, freshness, identity, or applicability.",
       "Distinct item IDs must not be interpreted as independence."
     ],
     "authority_boundary": [
