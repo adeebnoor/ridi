@@ -1,0 +1,242 @@
+name: CFC-RIDI F4 R1 independent RIDI verification
+
+on:
+  push:
+    branches:
+      - review/cfc-ridi-v0.2-f4-authority-universe-r1
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-f4:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout RIDI review branch
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Clone exact repositories
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --quiet https://github.com/iller1/cfc-ai-evaluation.git /tmp/cfc
+          git clone --quiet https://github.com/adeebnoor/ridi.git /tmp/ridi
+
+      - name: Verify exact F4 candidate identity and semantics
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/cfc
+          git checkout --quiet f9b69e3627f8ecff5bfccdb5706c400eb1d08ff8
+          P=collaboration/cfc-ridi/v0.2/F4_AUTHORITY_UNIVERSE_CANDIDATE_R1.json
+
+          test "$(wc -c < "$P")" -eq 8477
+          echo "65ecfac8b0a59c62d727291499b26519a8b8fdc800a983218ded3ce5fdadf2ec  $P" | sha256sum -c -
+          test "$(git hash-object "$P")" = "21756730d6b7a8660c00486403066a61c7f9b660"
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          p = Path("collaboration/cfc-ridi/v0.2/F4_AUTHORITY_UNIVERSE_CANDIDATE_R1.json")
+          d = json.loads(p.read_text())
+
+          assert d["cutoff"]["timestamp_utc"] == "2026-10-01T20:31:34Z"
+          assert d["cutoff"]["basis_commit"] == "e796224f7574df88a1a403834e6a369343f35698"
+          assert d["frozen_inputs"]["f2_adapter_commit"] == "930d7b0119159eaedbaf947691d9510b4c61d81c"
+          assert d["frozen_inputs"]["f2_adapter_sha256"] == "15b7d01787237b2e5f0d1ca106c4e84aaf1976a2512179c79c458fe3d80e634b"
+          assert d["frozen_inputs"]["f3_criteria_sha256"] == "f9640dbaec55a2b381a159825fe27a9e87502b75b20bbfbcf4382ca44cd887a2"
+          assert d["frozen_inputs"]["f3_bilateral_closure_commit"] == "e796224f7574df88a1a403834e6a369343f35698"
+
+          required = {
+              "IDENTITY",
+              "FAILURE_DOMAIN_TOPOLOGY",
+              "SOURCE_SEMANTICS",
+              "PROVENANCE",
+              "EVIDENCE_AUTHORITY",
+              "EPISTEMIC_ROLE",
+              "RETRIEVAL",
+              "SUPPORT_SET_INDEPENDENCE",
+              "HOST_TRUST",
+          }
+          observed = {x["boundary"] for x in d["required_authority_classes"]}
+          assert observed == required, (observed, required)
+
+          assert d["substantive_authority_members"] == []
+          assert d["candidate_conclusion"]["f4_membership_count"] == 0
+          assert d["candidate_conclusion"]["complete_authority_case_available"] == "NOT_DEMONSTRATED"
+
+          exclusions = "\n".join(d["membership_rule"]["automatic_exclusions"])
+          for token in [
+              "DeveloperFixtureSession",
+              "SYNTHETIC_CUSTOM_FIXTURE",
+              "LOCAL_*",
+              "source content or passage text",
+              "model output",
+              "example attestation code",
+              "post-cutoff authority material",
+          ]:
+              assert token in exclusions, token
+
+          print("RIDI_F4_R1_CANDIDATE_IDENTITY_PASS")
+          print("RIDI_F4_R1_REQUIRED_CLASSES_PASS")
+          print("RIDI_F4_R1_EXCLUSIONS_PASS")
+          print("RIDI_F4_R1_DECLARED_ZERO_MEMBER_PASS")
+          PY
+
+      - name: Verify cutoff from RIDI bilateral F3 closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/ridi
+          git checkout --quiet e796224f7574df88a1a403834e6a369343f35698
+          python - <<'PY'
+          import subprocess
+          from datetime import datetime, timezone
+
+          raw = subprocess.check_output(
+              ["git", "show", "-s", "--format=%cI", "e796224f7574df88a1a403834e6a369343f35698"],
+              text=True,
+          ).strip()
+          ts = datetime.fromisoformat(raw).astimezone(timezone.utc)
+          assert ts.isoformat().replace("+00:00", "Z") == "2026-10-01T20:31:34Z", raw
+          print("RIDI_F4_R1_CUTOFF_PASS", ts.isoformat())
+          PY
+
+      - name: Freeze public pre-cutoff snapshots
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/cfc
+          git checkout --quiet main
+          PRE="$(git rev-list -1 --before='2026-10-01T20:31:34Z' origin/main)"
+          test "$PRE" = "0f4575885b13f1f35e96dcc59e331a8d43a49a6c"
+          git checkout --quiet "$PRE"
+          echo "RIDI_F4_CFC_PRECUTOFF_SNAPSHOT=$PRE"
+
+          cd /tmp/ridi
+          git checkout --quiet e796224f7574df88a1a403834e6a369343f35698
+          echo "RIDI_F4_RIDI_CUTOFF_SNAPSHOT=e796224f7574df88a1a403834e6a369343f35698"
+
+      - name: Independently scan public snapshots for substantive authority records
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          roots = {
+              "CFC": Path("/tmp/cfc"),
+              "RIDI": Path("/tmp/ridi"),
+          }
+
+          strong_sets = [
+              {"attestation_id", "authority_id", "verifier"},
+              {"authority_class", "authority_id", "verifier"},
+          ]
+          constructor_terms = {
+              "IdentityAuthorityAttestation",
+              "FailureDomainTopologyAttestation",
+              "SourceSemanticsAuthorityAttestation",
+              "ProvenanceAuthorityAttestation",
+              "EvidenceAuthorityAttestation",
+              "EpistemicRoleAuthorityAttestation",
+              "RetrievalAuthorityAttestation",
+              "SupportSetIndependenceAuthorityAttestation",
+              "HostTrustRegistration",
+          }
+
+          # Structured data records are the strongest public candidates for substantive
+          # authority membership. Code/docs are not promoted into authority records.
+          structured_exts = {".json", ".jsonl", ".yaml", ".yml"}
+          hits = []
+
+          for label, root in roots.items():
+              for p in root.rglob("*"):
+                  if not p.is_file() or ".git" in p.parts:
+                      continue
+                  if p.suffix.lower() not in structured_exts:
+                      continue
+                  try:
+                      if p.stat().st_size > 30_000_000:
+                          continue
+                      text = p.read_text(encoding="utf-8", errors="ignore")
+                  except Exception:
+                      continue
+
+                  low = text.lower()
+                  field_hits = {x for x in {
+                      "attestation_id", "authority_id", "authority_class",
+                      "verifier", "valid_from", "valid_to"
+                  } if x in low}
+                  ctor_hits = sorted(x for x in constructor_terms if x in text)
+
+                  strong = any(s <= field_hits for s in strong_sets) or bool(ctor_hits)
+                  if strong:
+                      rel = str(p.relative_to(root))
+                      hits.append({
+                          "repo": label,
+                          "path": rel,
+                          "fields": sorted(field_hits),
+                          "constructors": ctor_hits,
+                      })
+
+          print("RIDI_F4_PUBLIC_STRUCTURED_RECORD_CANDIDATES", json.dumps(hits, sort_keys=True))
+
+          # The candidate's zero-member result is not contradicted by any public
+          # structured pre-cutoff record-like artifact.
+          assert hits == [], hits
+          print("RIDI_F4_PUBLIC_ZERO_MEMBER_SCAN_PASS")
+          PY
+
+      - name: Verify known public provenance does not qualify as F4 case authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/cfc
+          test -f docs/BENCHMARK_V2_B09_PROVENANCE.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          d = json.loads(Path("docs/BENCHMARK_V2_B09_PROVENANCE.json").read_text())
+          # This is benchmark-run provenance/semantic review metadata, not a
+          # CFC-RIDI per-case authority attestation/trust record.
+          forbidden = {"attestation_id", "authority_id", "authority_class", "verifier"}
+          keys = set()
+
+          def walk(x):
+              if isinstance(x, dict):
+                  keys.update(x.keys())
+                  for v in x.values():
+                      walk(v)
+              elif isinstance(x, list):
+                  for v in x:
+                      walk(v)
+          walk(d)
+
+          assert not (forbidden & keys), forbidden & keys
+          print("RIDI_F4_BENCHMARK_PROVENANCE_NOT_AUTHORITY_PASS")
+          PY
+
+      - name: Record inspection-boundary conclusion
+        shell: bash
+        run: |
+          cat <<'EOF'
+          RIDI_F4_INSPECTION_BOUNDARY_RESULT:
+          - Exact F4 candidate identity verified.
+          - Cutoff independently reproduced from RIDI F3 bilateral closure commit.
+          - Required authority classes and exclusions verified against the candidate.
+          - Public CFC snapshot immediately preceding cutoff scanned: no qualifying structured substantive authority record located.
+          - RIDI cutoff snapshot scanned: no qualifying structured substantive authority record located.
+          - CFC-private/library content remains CFC content-level responsibility under signed F0; RIDI does not convert inaccessible content into independently verified content.
+          - No specific pre-cutoff private authority record identity/hash has been nominated for F4 membership.
+          EOF
+          echo RIDI_F4_R1_BOUNDED_ZERO_MEMBER_VERIFICATION_PASS
