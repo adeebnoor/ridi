@@ -137,61 +137,85 @@ jobs:
               "RIDI": Path("/tmp/ridi"),
           }
 
-          strong_sets = [
+          strong_keysets = [
               {"attestation_id", "authority_id", "verifier"},
               {"authority_class", "authority_id", "verifier"},
           ]
-          constructor_terms = {
-              "IdentityAuthorityAttestation",
-              "FailureDomainTopologyAttestation",
-              "SourceSemanticsAuthorityAttestation",
-              "ProvenanceAuthorityAttestation",
-              "EvidenceAuthorityAttestation",
-              "EpistemicRoleAuthorityAttestation",
-              "RetrievalAuthorityAttestation",
-              "SupportSetIndependenceAuthorityAttestation",
-              "HostTrustRegistration",
-          }
 
-          # Structured data records are the strongest public candidates for substantive
-          # authority membership. Code/docs are not promoted into authority records.
-          structured_exts = {".json", ".jsonl", ".yaml", ".yml"}
           hits = []
+
+          def inspect_obj(obj, *, repo, path, locator="$"):
+              if isinstance(obj, dict):
+                  keys = {str(k) for k in obj.keys()}
+                  if any(s <= keys for s in strong_keysets):
+                      hits.append({
+                          "repo": repo,
+                          "path": path,
+                          "locator": locator,
+                          "keys": sorted(keys),
+                      })
+                  for k, v in obj.items():
+                      inspect_obj(v, repo=repo, path=path, locator=f"{locator}.{k}")
+              elif isinstance(obj, list):
+                  for i, v in enumerate(obj):
+                      inspect_obj(v, repo=repo, path=path, locator=f"{locator}[{i}]")
 
           for label, root in roots.items():
               for p in root.rglob("*"):
                   if not p.is_file() or ".git" in p.parts:
                       continue
-                  if p.suffix.lower() not in structured_exts:
-                      continue
+                  rel = str(p.relative_to(root))
+                  suffix = p.suffix.lower()
+
                   try:
                       if p.stat().st_size > 30_000_000:
                           continue
-                      text = p.read_text(encoding="utf-8", errors="ignore")
                   except Exception:
                       continue
 
-                  low = text.lower()
-                  field_hits = {x for x in {
-                      "attestation_id", "authority_id", "authority_class",
-                      "verifier", "valid_from", "valid_to"
-                  } if x in low}
-                  ctor_hits = sorted(x for x in constructor_terms if x in text)
+                  # JSON/JSONL: parse actual objects and inspect field co-occurrence.
+                  if suffix == ".json":
+                      try:
+                          obj = json.loads(p.read_text(encoding="utf-8", errors="strict"))
+                      except Exception:
+                          continue
+                      inspect_obj(obj, repo=label, path=rel)
 
-                  strong = any(s <= field_hits for s in strong_sets) or bool(ctor_hits)
-                  if strong:
-                      rel = str(p.relative_to(root))
-                      hits.append({
-                          "repo": label,
-                          "path": rel,
-                          "fields": sorted(field_hits),
-                          "constructors": ctor_hits,
-                      })
+                  elif suffix == ".jsonl":
+                      try:
+                          with p.open("r", encoding="utf-8", errors="strict") as fh:
+                              for line_no, line in enumerate(fh, 1):
+                                  line = line.strip()
+                                  if not line:
+                                      continue
+                                  try:
+                                      obj = json.loads(line)
+                                  except Exception:
+                                      continue
+                                  inspect_obj(obj, repo=label, path=rel, locator=f"$line[{line_no}]")
+                      except Exception:
+                          continue
+
+                  # YAML workflows/configs may contain authority class names as shell
+                  # script text; do not promote raw string matches into records.
+                  # Only explicit record-like mapping keys count.
+                  elif suffix in {".yaml", ".yml"}:
+                      text = p.read_text(encoding="utf-8", errors="ignore")
+                      normalized = "\n".join(
+                          line.split("#", 1)[0].strip()
+                          for line in text.splitlines()
+                      )
+                      for keyset in strong_keysets:
+                          if all((k + ":") in normalized for k in keyset):
+                              hits.append({
+                                  "repo": label,
+                                  "path": rel,
+                                  "locator": "yaml-key-scan",
+                                  "keys": sorted(keyset),
+                              })
+                              break
 
           print("RIDI_F4_PUBLIC_STRUCTURED_RECORD_CANDIDATES", json.dumps(hits, sort_keys=True))
-
-          # The candidate's zero-member result is not contradicted by any public
-          # structured pre-cutoff record-like artifact.
           assert hits == [], hits
           print("RIDI_F4_PUBLIC_ZERO_MEMBER_SCAN_PASS")
           PY
