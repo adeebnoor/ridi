@@ -41,7 +41,8 @@ jobs:
           test -s projects/ridi/index.html
           test -s publications/index.html
           grep -q "Identical audits can yield different AI decisions" paper/index.html
-          grep -q "Identical audits can yield different AI decisions" paper/README.md
+          grep -q "Equal evaluation scores do not certify equivalent AI behaviour" paper/README.md
+          grep -q "Equal evaluation scores do not certify equivalent AI behaviour" index.html
 
       - name: Configure Pages if repository Pages is enabled
         id: pages_config
