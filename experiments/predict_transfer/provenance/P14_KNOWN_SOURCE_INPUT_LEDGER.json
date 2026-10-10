@@ -1,0 +1,365 @@
+{
+  "current_P14_answer_calls": 0,
+  "current_author_package": {
+    "actual_device_bytes_hash_matches_current_package_manifest": true,
+    "bytes": 2954110,
+    "manuscript_path": "D:\\03_Research_Publications\\Nature_RIDI\\Submission_Package_v13.3_2026-10-04\\Noor_Nature_Main_Manuscript_v13.3.docx",
+    "modified_by_this_work": false,
+    "sha256": "254cb253a556777a5c9a4e9ce577893de1fb847a6df5601891225b24e41c74d8",
+    "version": "v13.3"
+  },
+  "filter_record_count": 10177,
+  "filter_sha256": "bc2aecee5a27fc33b75e5caf5c000764ee1c88598533075ace19884a8c613df8",
+  "final_four_source_frame_audit_or_cohort_sampling_performed_by_this_ledger": false,
+  "global_hash_only_records": 9128,
+  "global_question_hash_count": 7280,
+  "input_files": [
+    {
+      "bytes": 23546630,
+      "path": "p14_finish_20261006/exposure_device_followup/P14_KAGGLE_EXTENDED_INPUT_FILTER_10177_RECORDS_7280_HASHES.json",
+      "sha256": "bc2aecee5a27fc33b75e5caf5c000764ee1c88598533075ace19884a8c613df8"
+    },
+    {
+      "bytes": 36084849,
+      "path": "p14_finish_20261006/exposure_device_followup/KAGGLE_EXACT_ORIGINAL_INPUT_ROSTER_12094_SOURCE_ROWS.jsonl",
+      "sha256": "9702593e453222fa62a05c3579ef56707af053c065d46af2fbee09de8d746355"
+    },
+    {
+      "bytes": 986,
+      "path": "p14_finish_20261006/exposure_device_followup/KAGGLE_INPUT_FILTER_INDEPENDENT_BYTE_VERIFICATION.json",
+      "sha256": "51675e41fa30caa49da5551dccd44e6a409fdb732e1890635066d33563a154d8"
+    },
+    {
+      "bytes": 15016,
+      "path": "p14_finish_20261006/exposure_device_followup/KAGGLE_INPUT_HISTORY_EXTENSION_PROOF.json",
+      "sha256": "c3fcded5c2e94eff82baa41100023260c1b2187d3da5c0f9eb70cfdb9a4e9469"
+    },
+    {
+      "bytes": 80014,
+      "path": "p14_finish_20261006/exposure_device_followup/KAGGLE_27_SOURCE_INPUT_BOUNDS_CLASSIFICATION.json",
+      "sha256": "0d6127932506a6867adda9486539cb100107e35e5da53bfca539e4a0016e09d1"
+    },
+    {
+      "bytes": 1149,
+      "path": "p14_finish_20261006/exposure_device/P4_BOUND_INPUT_SUPERSET_COVERAGE_PROOF.json",
+      "sha256": "cc2f99a586b6e0869da5d800796e280959fa21a891e03953455aeba6bda8abe7"
+    },
+    {
+      "bytes": 4286,
+      "path": "p14_finish_20261006/exposure_device/P14_DEVICE_EXPOSURE_AUDIT_SUMMARY.json",
+      "sha256": "05b47b407bb484b5e77203d890e2d3e134421371b4e5cb597e057060ebc198a0"
+    },
+    {
+      "bytes": 10904,
+      "path": "p14_continue_20261006/exposure_review/P14_BOUNDED_EXPOSURE_INPUT_AUDIT.json",
+      "sha256": "078db5154387325616c53441839bcc9e7dad497456ab022b8c0e3699fd21087c"
+    },
+    {
+      "bytes": 375030,
+      "path": "p14_continue_20261006/exposure_review/VERIFIED_INPUT_ROSTER_1849.jsonl",
+      "sha256": "071f1789e985d20abefc874e07f02cf2bc91a3068ae759e9edfb6b31aa9e0017"
+    },
+    {
+      "bytes": 856,
+      "path": "p14_finish_20261006/exposure_device_followup/P11_EXACT_ARCHIVED_SOURCE_BOUNDS_VERIFICATION.json",
+      "sha256": "92e4b960d6f1f93bfbee4c81fd8224e8d09597b46c7931554367178102921eac"
+    },
+    {
+      "bytes": 2475,
+      "path": "p14_finish_20261006/exposure_device_followup/P14_UNRESOLVED_INPUT_HISTORY_INVENTORY.json",
+      "sha256": "bd887e5791cf2bc5ea740dec6350c54728e2f08bd627ebb7c2d3313edb775d9b"
+    }
+  ],
+  "known_P5_P13_P13R_input_policy": "All1849recovered original800+P51049 question/qid records are preserved in the10177filter; known original800 execution qids remain source scoped, never mislabelled as current BEIR native IDs. Registered P13/P13R original inputs are preserved independently; their answering outputs and partial analyses are not imported. Root must bind the exact registered input source ledger in the final manifest.",
+  "legacy_scoped_P5_native_id_count": 1049,
+  "native_id_policy": "Only1049explicit minimalP5source native IDs share the frozen target source namespace; all remaining9128records are hash only. Native equality additionally requires explicit source family/revision/split matching; no numeric index or other-source ID crosses those boundaries.",
+  "normalization": "NFKC,Unicode casefold,whitespace split/join,UTF8SHA256",
+  "original_Kaggle_input_panels": [
+    {
+      "bytes": 222875,
+      "columns": [
+        "dataset",
+        "dataset_index",
+        "query_id",
+        "gold",
+        "n_choices",
+        "labels",
+        "prompt",
+        "prompt_sha256"
+      ],
+      "file": "p14_finish_20261006/exposure_device_followup/kaggle_original_input_panels/b2-study1-label-repair-20260928/study1_label_repair_frozen_panel.csv",
+      "kernel": "adeebnoor/b2-study1-label-repair-20260928",
+      "rows": 600,
+      "sha256": "f62e21227dcdfa256f407be53d2679058e829069321975da1eab5adcf4d6cec5",
+      "source_sha256": "f46177065737fe47d79b305f50be6ee9c7c085e2f4622c300eccc0ccfb08260f"
+    },
+    {
+      "bytes": 842408,
+      "columns": [
+        "dataset",
+        "dataset_index",
+        "query_id",
+        "prompt",
+        "gold",
+        "n_choices",
+        "prompt_sha256"
+      ],
+      "file": "p14_finish_20261006/exposure_device_followup/kaggle_original_input_panels/paper-a-batch-composition-confirmatory/paperA_confirmatory_frozen_panel.csv",
+      "kernel": "adeebnoor/paper-a-batch-composition-confirmatory",
+      "rows": 1488,
+      "sha256": "7b08619262c34734fe4af621942d5d80fc3baa9a4897ee302f1f776a22f77da9",
+      "source_sha256": "2db46a4eb1b4976e70ca3ce685ae0c8b34ae94a088fecff17a70018254578496"
+    },
+    {
+      "bytes": 90760,
+      "columns": [
+        "dataset",
+        "dataset_index",
+        "query_id",
+        "prompt",
+        "gold",
+        "labels_json",
+        "prompt_sha256"
+      ],
+      "file": "p14_finish_20261006/exposure_device_followup/kaggle_original_input_panels/paper-a-confidence-posfix/paperA_confidence_posfix_panel.csv",
+      "kernel": "adeebnoor/paper-a-confidence-posfix",
+      "rows": 240,
+      "sha256": "1a2a848a2b08fb7b723a0a31ba694620f15ec6e5f755431efd6c9a70c1667923",
+      "source_sha256": "52fbef4d84401dbb3da5727204344741418f173cb71d94cbb00c643f19eb1a62"
+    },
+    {
+      "bytes": 90760,
+      "columns": [
+        "dataset",
+        "dataset_index",
+        "query_id",
+        "prompt",
+        "gold",
+        "labels_json",
+        "prompt_sha256"
+      ],
+      "file": "p14_finish_20261006/exposure_device_followup/kaggle_original_input_panels/paper-a-confidence-reproducibility-screen/paperA_confidence_screen_panel.csv",
+      "kernel": "adeebnoor/paper-a-confidence-reproducibility-screen",
+      "rows": 240,
+      "sha256": "1a2a848a2b08fb7b723a0a31ba694620f15ec6e5f755431efd6c9a70c1667923",
+      "source_sha256": "f11dc03ef13ff5aabb4db77b0e9edaff003b2b5de7530ccfb971f51b3bbf22e9"
+    },
+    {
+      "bytes": 140861,
+      "columns": [
+        "query_id",
+        "dataset_index",
+        "prompt",
+        "gold",
+        "prompt_sha256"
+      ],
+      "file": "p14_finish_20261006/exposure_device_followup/kaggle_original_input_panels/paper-a-execution-margin-audit/paperA_margin_frozen_panel.csv",
+      "kernel": "adeebnoor/paper-a-execution-margin-audit",
+      "rows": 299,
+      "sha256": "9d9d7e8e51508c7a1dc58b1c7a8b7a0bf06d2058839c63796c5874ad659886dc",
+      "source_sha256": "e8d1d730b00dc39d792d93292597fba7c1363251f81b13daec35670c98f714f9"
+    },
+    {
+      "bytes": 30190,
+      "columns": [
+        "query_id",
+        "dataset_index",
+        "prompt",
+        "gold",
+        "prompt_sha256"
+      ],
+      "file": "p14_finish_20261006/exposure_device_followup/kaggle_original_input_panels/paper-a-execution-provenance-pilot/paperA_pilot_frozen_panel.csv",
+      "kernel": "adeebnoor/paper-a-execution-provenance-pilot",
+      "rows": 64,
+      "sha256": "59e059a5fd67918dc6d87ec3d9eea09151132568a56c22406166c253ccdec4e5",
+      "source_sha256": "0b14492b4e3c44654b6910e6c6ae9eb108479bbf888209f7583efcd634114b72"
+    },
+    {
+      "bytes": 222875,
+      "columns": [
+        "dataset",
+        "dataset_index",
+        "query_id",
+        "gold",
+        "n_choices",
+        "labels",
+        "prompt",
+        "prompt_sha256"
+      ],
+      "file": "p14_finish_20261006/exposure_device_followup/kaggle_original_input_panels/paper-a-main-execution-provenance/paperA_main_frozen_panel.csv",
+      "kernel": "adeebnoor/paper-a-main-execution-provenance",
+      "rows": 600,
+      "sha256": "75511173a751f30b814e1e6213768a3182b803152c13fc85440ae22f146d9774",
+      "source_sha256": "2ac486834823a2a17d70532bfa44363617dbf8b9f23ddcc1b7eec1e6f666044d"
+    },
+    {
+      "bytes": 139067,
+      "columns": [
+        "dataset_index",
+        "query_id",
+        "gold",
+        "prompt",
+        "prompt_sha256"
+      ],
+      "file": "p14_finish_20261006/exposure_device_followup/kaggle_original_input_panels/paper-a-margin-redesign-pilot/paperA_margin_pilot_frozen_panel.csv",
+      "kernel": "adeebnoor/paper-a-margin-redesign-pilot",
+      "rows": 299,
+      "sha256": "8b02ffb0382b7d27efb5dce149ce3837ad3730efe0de3b33dc1d359f4346f57f",
+      "source_sha256": "2accde7561a0305be43136f4e4bac1668d20864940ffc4e443603551b6839908"
+    },
+    {
+      "bytes": 55398,
+      "columns": [
+        "dataset_index",
+        "question",
+        "reference_answer",
+        "prompt"
+      ],
+      "file": "p14_finish_20261006/exposure_device_followup/kaggle_original_input_panels/paper-a-p100-control/generation_panel.csv",
+      "kernel": "adeebnoor/paper-a-p100-control",
+      "rows": 64,
+      "sha256": "cba072641883aab3ea037a8b26fabf4e22d89ecaae1bb22f0e3754632846577f",
+      "source_sha256": "99379b39fc9f8e25ede7368d4d9736e72fee1785f178db4c5117b930c4a61597"
+    },
+    {
+      "bytes": 1275512,
+      "columns": [
+        "dataset",
+        "dataset_index",
+        "query_id",
+        "prompt",
+        "gold",
+        "n_choices",
+        "prompt_sha256",
+        "panel",
+        "split"
+      ],
+      "file": "p14_finish_20261006/exposure_device_followup/kaggle_original_input_panels/paper-a-revision-granite/revision_panel.csv",
+      "kernel": "adeebnoor/paper-a-revision-granite",
+      "rows": 2256,
+      "sha256": "e285694c6e383d186f5f0bdb6aa67bfa7098dba6c49b250d86b0bcf5406089bb",
+      "source_sha256": "02c6c64db5395e54eb2666ceb2807b500d6846beabba8ff80461fafab81d6408"
+    },
+    {
+      "bytes": 1275512,
+      "columns": [
+        "dataset",
+        "dataset_index",
+        "query_id",
+        "prompt",
+        "gold",
+        "n_choices",
+        "prompt_sha256",
+        "panel",
+        "split"
+      ],
+      "file": "p14_finish_20261006/exposure_device_followup/kaggle_original_input_panels/paper-a-revision-smol/revision_panel.csv",
+      "kernel": "adeebnoor/paper-a-revision-smol",
+      "rows": 2256,
+      "sha256": "e285694c6e383d186f5f0bdb6aa67bfa7098dba6c49b250d86b0bcf5406089bb",
+      "source_sha256": "67254302fa61e5e9d2d727c3f646f5aa844aec94c81736de80e636e3eb9809d9"
+    },
+    {
+      "bytes": 842408,
+      "columns": [
+        "dataset",
+        "dataset_index",
+        "query_id",
+        "prompt",
+        "gold",
+        "n_choices",
+        "prompt_sha256"
+      ],
+      "file": "p14_finish_20261006/exposure_device_followup/kaggle_original_input_panels/paper-a-shape-fixed-position-control/shape_fixed_frozen_panel.csv",
+      "kernel": "adeebnoor/paper-a-shape-fixed-position-control",
+      "rows": 1488,
+      "sha256": "7b08619262c34734fe4af621942d5d80fc3baa9a4897ee302f1f776a22f77da9",
+      "source_sha256": "51cbc858f9f032764a38435b0cca189feca1fe367f4523087ccf7d228ef5380c"
+    },
+    {
+      "bytes": 842408,
+      "columns": [
+        "dataset",
+        "dataset_index",
+        "query_id",
+        "prompt",
+        "gold",
+        "n_choices",
+        "prompt_sha256"
+      ],
+      "file": "p14_finish_20261006/exposure_device_followup/kaggle_original_input_panels/paper-a-shape-matched-companion-control/shape_matched_frozen_panel.csv",
+      "kernel": "adeebnoor/paper-a-shape-matched-companion-control",
+      "rows": 1488,
+      "sha256": "7b08619262c34734fe4af621942d5d80fc3baa9a4897ee302f1f776a22f77da9",
+      "source_sha256": "f2e570c3a09b8289d5888a67e4c4add7e11df006364e4ad309f2bc6ae49edc5c"
+    },
+    {
+      "bytes": 55398,
+      "columns": [
+        "dataset_index",
+        "question",
+        "reference_answer",
+        "prompt"
+      ],
+      "file": "p14_finish_20261006/exposure_device_followup/kaggle_original_input_panels/paper-a-short-generation/generation_panel.csv",
+      "kernel": "adeebnoor/paper-a-short-generation",
+      "rows": 64,
+      "sha256": "cba072641883aab3ea037a8b26fabf4e22d89ecaae1bb22f0e3754632846577f",
+      "source_sha256": "99379b39fc9f8e25ede7368d4d9736e72fee1785f178db4c5117b930c4a61597"
+    },
+    {
+      "bytes": 138308,
+      "columns": [
+        "task",
+        "dataset_index",
+        "input",
+        "target",
+        "prompt",
+        "prompt_sha256"
+      ],
+      "file": "p14_finish_20261006/exposure_device_followup/kaggle_original_input_panels/paper-b-bbh-ranking-identifiability-stage-1/paperB_bbh_stage1_frozen_panel.csv",
+      "kernel": "adeebnoor/paper-b-bbh-ranking-identifiability-stage-1",
+      "rows": 240,
+      "sha256": "45c73529aec5d4c9d090786abe1ac007b8a9ba54c622dd4fa18ace12a97f7588",
+      "source_sha256": "4c86cf57aef3ad437b02dde0d572a992456a5d0280dc3f57e5575ec65a9b1432"
+    },
+    {
+      "bytes": 380442,
+      "columns": [
+        "task",
+        "dataset_index",
+        "input",
+        "target",
+        "prompt",
+        "prompt_sha256"
+      ],
+      "file": "p14_finish_20261006/exposure_device_followup/kaggle_original_input_panels/paper-b-bbh-ranking-identifiability-stage-2/paperB_bbh_stage2_frozen_panel.csv",
+      "kernel": "adeebnoor/paper-b-bbh-ranking-identifiability-stage-2",
+      "rows": 360,
+      "sha256": "7d73d17cbf90d9c38246720cfdae26e88895e9f0ff2a8b61d5947c63c6957ff4",
+      "source_sha256": "7a8b6040ed9c45c81b6bc6c1ea8aa569fa95779af9a546544a62c0fe3ddb9211"
+    },
+    {
+      "bytes": 45651,
+      "columns": [
+        "dataset_index",
+        "question",
+        "prompt",
+        "prompt_sha256",
+        "gold_raw",
+        "gold_norm"
+      ],
+      "file": "p14_finish_20261006/exposure_device_followup/kaggle_original_input_panels/paper-b-ranking-identifiability-pilot/paperB_pilot_frozen_panel.csv",
+      "kernel": "adeebnoor/paper-b-ranking-identifiability-pilot",
+      "rows": 48,
+      "sha256": "83f38b2cc7ff0f2bc65dd4b41e2d5a1cfca6c597514a6e35e9fa4477f78ddfba",
+      "source_sha256": "84186575ccf6593af8a8ee6463109049f9d69f4cb9222c96a3c5fbedb583736b"
+    }
+  ],
+  "project_exposure_closure": false,
+  "roster_source_membership_rows": 12094,
+  "schema_version": "P14_KNOWN_SOURCE_INPUT_LEDGER_1",
+  "scientific_analysis_calls": 0,
+  "status": "VERIFIED_AVAILABLE_INPUT_SUPERSETS_ONLY",
+  "unresolved_history_inventory_sha256": "bd887e5791cf2bc5ea740dec6350c54728e2f08bd627ebb7c2d3313edb775d9b"
+}

@@ -1,0 +1,5 @@
+SOURCE_ZIPS_VERIFIED nq
+REGISTERED_ARTIFACTS_VERIFIED nq 54
+PROMPT_MANIFEST_VERIFIED nq B
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+PREFLIGHT_COMPLETE {"dataset": "nq", "draw": "B", "generation_performed": false, "model_key": "qwen3-8b", "n": 250, "prompt_manifest_sha256": "4136b752292816212a3d56ee5758f0c6dc1e7eed03aa2589239345c258c8ab51", "source_sha256": {"control": "4b5bc603fcbd5165766beabc05d17ec7e0cefa6e0d8c9c47fd65b06eca61c864", "data": "5b1e813b5e486f9c588c0a73a3d04a1402f4959d991a1c1631fa007f8559bc13"}, "study": "RIDI-PREDICT-v1"}

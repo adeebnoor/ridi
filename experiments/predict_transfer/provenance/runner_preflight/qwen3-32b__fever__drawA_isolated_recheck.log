@@ -1,0 +1,5 @@
+SOURCE_ZIPS_VERIFIED fever
+REGISTERED_ARTIFACTS_VERIFIED fever 54
+PROMPT_MANIFEST_VERIFIED fever A
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+PREFLIGHT_COMPLETE {"dataset": "fever", "draw": "A", "generation_performed": false, "model_key": "qwen3-32b", "n": 300, "prompt_manifest_sha256": "80693d571ec113db8195d73cc638a548e56e3b32c40340b646dc895e64189a7f", "source_sha256": {"control": "4b5bc603fcbd5165766beabc05d17ec7e0cefa6e0d8c9c47fd65b06eca61c864", "data": "b2cc0868918569047ba7b44f193e26a759a4e268d964cf8f20141c7d15eecd63"}, "study": "RIDI-PREDICT-v1"}

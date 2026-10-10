@@ -1,0 +1,101 @@
+{
+  "counts": {
+    "fever": {
+      "context_checked": 6117,
+      "context_failures_by_model": {
+        "olmo2-32b": 0,
+        "qwen3-1.7b": 0,
+        "qwen3-32b": 0,
+        "qwen3-4b": 0,
+        "qwen3-8b": 0
+      },
+      "excluded_context_length": 0,
+      "excluded_duplicate": 78,
+      "excluded_frozen_panel": 150,
+      "excluded_known_source": 311,
+      "excluded_registered_ineligible": 0,
+      "fresh_eligible": 6117,
+      "included": true,
+      "registered_eligible": 6656,
+      "selected_identical_draw_contexts": 0,
+      "selected_n": 300,
+      "target_n": 300,
+      "total_queries": 6656
+    },
+    "hotpotqa": {
+      "context_checked": 6855,
+      "context_failures_by_model": {
+        "olmo2-32b": 0,
+        "qwen3-1.7b": 0,
+        "qwen3-32b": 0,
+        "qwen3-4b": 0,
+        "qwen3-8b": 0
+      },
+      "excluded_context_length": 0,
+      "excluded_duplicate": 0,
+      "excluded_frozen_panel": 250,
+      "excluded_known_source": 300,
+      "excluded_registered_ineligible": 0,
+      "fresh_eligible": 6855,
+      "included": true,
+      "registered_eligible": 7405,
+      "selected_identical_draw_contexts": 0,
+      "selected_n": 250,
+      "target_n": 250,
+      "total_queries": 7405
+    },
+    "nq": {
+      "context_checked": 1705,
+      "context_failures_by_model": {
+        "olmo2-32b": 0,
+        "qwen3-1.7b": 0,
+        "qwen3-32b": 0,
+        "qwen3-4b": 0,
+        "qwen3-8b": 0
+      },
+      "excluded_context_length": 0,
+      "excluded_duplicate": 0,
+      "excluded_frozen_panel": 250,
+      "excluded_known_source": 300,
+      "excluded_registered_ineligible": 0,
+      "fresh_eligible": 1705,
+      "included": true,
+      "registered_eligible": 2255,
+      "selected_identical_draw_contexts": 0,
+      "selected_n": 250,
+      "target_n": 250,
+      "total_queries": 2255
+    },
+    "scifact": {
+      "context_checked": 0,
+      "context_failures_by_model": {
+        "olmo2-32b": 0,
+        "qwen3-1.7b": 0,
+        "qwen3-32b": 0,
+        "qwen3-4b": 0,
+        "qwen3-8b": 0
+      },
+      "excluded_context_length": 0,
+      "excluded_duplicate": 0,
+      "excluded_frozen_panel": 150,
+      "excluded_known_source": 149,
+      "excluded_registered_ineligible": 0,
+      "fresh_eligible": 0,
+      "included": false,
+      "registered_eligible": 299,
+      "selected_identical_draw_contexts": 0,
+      "selected_n": 0,
+      "target_n": 150,
+      "total_queries": 299
+    }
+  },
+  "generation_performed": false,
+  "included_datasets": [
+    "nq",
+    "hotpotqa",
+    "fever"
+  ],
+  "planned_generation_jobs": 24,
+  "study": "RIDI-PREDICT-v1",
+  "total_selected": 800
+}

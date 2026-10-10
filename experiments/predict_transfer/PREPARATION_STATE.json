@@ -1,0 +1,12 @@
+{
+  "study": "RIDI-PREDICT-v1",
+  "updated_at_utc": "2026-10-10T18:20:16.709336+00:00",
+  "stage": "registration_package_ready_browser_access_blocked",
+  "osf_registration_filed": false,
+  "scientific_lock_created": false,
+  "public_lock_published": false,
+  "scientific_attempts_started": 0,
+  "actual_analysis_invocations": 0,
+  "runner_preflight_units_verified": 24,
+  "gpu_generation_tested": false
+}

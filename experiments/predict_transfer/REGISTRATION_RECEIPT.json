@@ -1,0 +1,16 @@
+{
+  "study": "RIDI-PREDICT-v1",
+  "verified_public_registration": true,
+  "registration_url": "https://osf.io/xrzp5/",
+  "registered_at_utc": "2026-10-10T18:56:09.996751Z",
+  "verified_at_utc": "2026-10-10T19:00:36.933075+00:00",
+  "registration_api_url": "https://api.osf.io/v2/registrations/xrzp5/",
+  "registration_api_sha256": "de619855dafd7173bf702edbb752cd31b8d614aab5f5a66554e1f7ed3b4362fe",
+  "registration_package_sha256": "1b9c7de56870749f3434970b1dae6ab8cd8883138198efc980a75f83f374e9cb",
+  "preregistration_md_sha256": "a32d80d92ccd4506073bdda1ece8424d3fe886fe8f5dda140d29d7a3c0b56fb0",
+  "download_url": "https://osf.io/download/6aca8a51d036ab2b7b6799b2",
+  "verified_package_files": 63,
+  "source_project_url": "https://osf.io/p2mjv/",
+  "written_responses_reviewed": true,
+  "rendering_note": "OSF form field 344-44 stripped the angle-bracket dataset placeholder from the identifier. The verified registered Markdown and runner retain the dataset-prefixed identifier exactly; no scientific setting changed. A plain-text clarification will accompany lock publication."
+}

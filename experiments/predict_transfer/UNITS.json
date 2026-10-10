@@ -1,0 +1,149 @@
+{
+  "study": "RIDI-PREDICT-v1",
+  "units": [
+    {
+      "model_key": "qwen3-1.7b",
+      "dataset": "nq",
+      "draw": "A",
+      "min_gpus_80gb": 1
+    },
+    {
+      "model_key": "qwen3-1.7b",
+      "dataset": "nq",
+      "draw": "B",
+      "min_gpus_80gb": 1
+    },
+    {
+      "model_key": "qwen3-1.7b",
+      "dataset": "hotpotqa",
+      "draw": "A",
+      "min_gpus_80gb": 1
+    },
+    {
+      "model_key": "qwen3-1.7b",
+      "dataset": "hotpotqa",
+      "draw": "B",
+      "min_gpus_80gb": 1
+    },
+    {
+      "model_key": "qwen3-1.7b",
+      "dataset": "fever",
+      "draw": "A",
+      "min_gpus_80gb": 1
+    },
+    {
+      "model_key": "qwen3-1.7b",
+      "dataset": "fever",
+      "draw": "B",
+      "min_gpus_80gb": 1
+    },
+    {
+      "model_key": "qwen3-4b",
+      "dataset": "nq",
+      "draw": "A",
+      "min_gpus_80gb": 1
+    },
+    {
+      "model_key": "qwen3-4b",
+      "dataset": "nq",
+      "draw": "B",
+      "min_gpus_80gb": 1
+    },
+    {
+      "model_key": "qwen3-4b",
+      "dataset": "hotpotqa",
+      "draw": "A",
+      "min_gpus_80gb": 1
+    },
+    {
+      "model_key": "qwen3-4b",
+      "dataset": "hotpotqa",
+      "draw": "B",
+      "min_gpus_80gb": 1
+    },
+    {
+      "model_key": "qwen3-4b",
+      "dataset": "fever",
+      "draw": "A",
+      "min_gpus_80gb": 1
+    },
+    {
+      "model_key": "qwen3-4b",
+      "dataset": "fever",
+      "draw": "B",
+      "min_gpus_80gb": 1
+    },
+    {
+      "model_key": "qwen3-8b",
+      "dataset": "nq",
+      "draw": "A",
+      "min_gpus_80gb": 1
+    },
+    {
+      "model_key": "qwen3-8b",
+      "dataset": "nq",
+      "draw": "B",
+      "min_gpus_80gb": 1
+    },
+    {
+      "model_key": "qwen3-8b",
+      "dataset": "hotpotqa",
+      "draw": "A",
+      "min_gpus_80gb": 1
+    },
+    {
+      "model_key": "qwen3-8b",
+      "dataset": "hotpotqa",
+      "draw": "B",
+      "min_gpus_80gb": 1
+    },
+    {
+      "model_key": "qwen3-8b",
+      "dataset": "fever",
+      "draw": "A",
+      "min_gpus_80gb": 1
+    },
+    {
+      "model_key": "qwen3-8b",
+      "dataset": "fever",
+      "draw": "B",
+      "min_gpus_80gb": 1
+    },
+    {
+      "model_key": "qwen3-32b",
+      "dataset": "nq",
+      "draw": "A",
+      "min_gpus_80gb": 2
+    },
+    {
+      "model_key": "qwen3-32b",
+      "dataset": "hotpotqa",
+      "draw": "A",
+      "min_gpus_80gb": 2
+    },
+    {
+      "model_key": "qwen3-32b",
+      "dataset": "fever",
+      "draw": "A",
+      "min_gpus_80gb": 2
+    },
+    {
+      "model_key": "olmo2-32b",
+      "dataset": "nq",
+      "draw": "A",
+      "min_gpus_80gb": 2
+    },
+    {
+      "model_key": "olmo2-32b",
+      "dataset": "hotpotqa",
+      "draw": "A",
+      "min_gpus_80gb": 2
+    },
+    {
+      "model_key": "olmo2-32b",
+      "dataset": "fever",
+      "draw": "A",
+      "min_gpus_80gb": 2
+    }
+  ]
+}
