@@ -1,5 +1,0 @@
-SOURCE_ZIPS_VERIFIED hotpotqa
-REGISTERED_ARTIFACTS_VERIFIED hotpotqa 54
-PROMPT_MANIFEST_VERIFIED hotpotqa B
-None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
-PREFLIGHT_COMPLETE {"dataset": "hotpotqa", "draw": "B", "generation_performed": false, "model_key": "qwen3-1.7b", "n": 250, "prompt_manifest_sha256": "b9857ee12397a760565444d6a4ed8e28f37a3a5d7cf438a48cc59adf81cae3a4", "source_sha256": {"control": "4b5bc603fcbd5165766beabc05d17ec7e0cefa6e0d8c9c47fd65b06eca61c864", "data": "783f1f41db0f22e9ca59ce8ddb9520d06105dd7a817746d8032295cd57025bfb"}, "study": "RIDI-PREDICT-v1"}
