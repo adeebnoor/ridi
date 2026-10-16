@@ -1,9 +1,0 @@
-{
-  "study": "RIDI-RAG-QWEN3-SCALE-CURVE-v1",
-  "source_preflight_datasets_passed": 4,
-  "synthetic_runner_tests_passed": 9,
-  "synthetic_analysis_tests_passed": 9,
-  "synthetic_full_bootstrap_draws": 100000,
-  "scientific_generation_performed": false,
-  "gpu_execution_validated": false
-}

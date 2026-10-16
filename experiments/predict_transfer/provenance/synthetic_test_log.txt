@@ -1,7 +1,0 @@
-PASS 1: question-level fragility -> F_B transfers (H1, H2, H3 supported) 0.802 4.15
-PASS 2: second run refused
-PASS 3: content-only fragility -> same-draw F_A high 0.775 but independent F_B not supported: inconclusive 0.517
-PASS 4: missing target -> not executed / not evaluable
-PASS 5: tampered records blocks the analysis
-PASS 6: integer flags are rejected (boolean type required)
-PASS 7: SciFact excluded at preflight (3 benchmarks, FEVER n=300) -> analysis runs

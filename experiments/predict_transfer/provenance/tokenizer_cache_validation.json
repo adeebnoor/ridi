@@ -1,7 +1,0 @@
-{
-  "dataset": "nq",
-  "questions": 1705,
-  "cached_and_uncached_context_audits_byte_identical": true,
-  "sha256": "3497ed2565c25d395a55619f32dbb45c058cc8535ebd754430b6f663879b105e",
-  "scientific_answers_generated": 0
-}
