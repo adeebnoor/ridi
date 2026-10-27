@@ -166,7 +166,7 @@ Exploratory drug-interaction and medication-context analyses are retained as bou
 
 The submission-ready manuscript is organised around a single distinction: **evaluation equivalence does not certify action or behavioural equivalence**. The preregistered RAG experiment is the controlled anchor; the GPT-5.6 Sol transfer and semantic audit test major alternative explanations; P5 remains a transparent negative inferential-equivalence result; P5b estimates downstream semantic disagreement under a separately locked practitioner-facing tie rule; EPSS supplies the production update; and the identity–utility frontier separates necessary from discretionary selection change. CMS is retained as a rule-version boundary case.
 
-The manuscript is **not peer reviewed, accepted or published**. Registered failures (including P5, RxNorm and Open Targets), parser limitations, sparse EPSS outcomes and exploratory clinical boundaries remain visible in the public record.
+The manuscript is **not yet peer reviewed, accepted or published**. Registered failures (including P5, RxNorm and Open Targets), parser limitations, sparse EPSS outcomes and exploratory clinical boundaries remain visible in the public record.
 
 ---
 

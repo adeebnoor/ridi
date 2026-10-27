@@ -4,7 +4,7 @@
 Department of Information Technology, Faculty of Computing and Information Technology, King Abdulaziz University, Jeddah, Saudi Arabia  
 ORCID: 0000-0002-8251-1853
 
-> **Status — 26 September 2026:** public synopsis aligned to the submission-ready manuscript. It is not peer reviewed, accepted or published. The public repository records the evidence, software, registrations, negative results and separately locked extensions; the journal submission files themselves are not published here.
+> **Status — 26 September 2026:** public synopsis aligned to the submission-ready manuscript. It is not yet peer reviewed, accepted or published. The public repository records the evidence, software, registrations, negative results and separately locked extensions; the journal submission files themselves are not published here.
 
 ## Central contribution
 
