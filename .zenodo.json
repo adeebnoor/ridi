@@ -1,6 +1,6 @@
 {
   "title": "RIDI: selection-change auditing and the identity-utility frontier",
-  "description": "Software, protocols and reproducibility materials for measuring how much a ranking update changes selected membership and computing the exact minimum turnover compatible with a declared rank-utility budget. Companion research includes a preregistered retrieval-evaluation experiment, a production EPSS case study and cross-domain frontier applications. The working manuscript is not peer reviewed, accepted or published.",
+  "description": "Software, protocols and reproducibility materials for measuring how much a ranking update changes selected membership and computing the exact minimum turnover compatible with a declared rank-utility budget. Companion research includes a preregistered retrieval-evaluation experiment, a production EPSS case study and cross-domain frontier applications. The working manuscript is not yet peer reviewed, accepted or published.",
   "creators": [
     {
       "name": "Noor, Adeeb",
