@@ -1,0 +1,3 @@
+# Keep the review-only script with its tests in source distributions.
+# This does not add it to the installed API or alter registered scoring.
+recursive-include review_tools *.py *.md
