@@ -1,3 +1,13 @@
+> **Paper code and data (manuscript "Identical relevance grades cannot certify retrieval-augmented AI answers", November 2026).**
+> The data, frozen analysis scripts and checks for this manuscript are in the Source Data that accompany the submission;
+> [`reproducibility/README.md`](reproducibility/README.md) says what is there and how to run it.
+> Registrations: OSF https://osf.io/794p5/ (RIDI-CONFIRM) and https://osf.io/anbjd/ (RIDI-CONFIRM-C, DOI 10.17605/OSF.IO/ANBJD).
+> The open-source tool RIDI Check is a separate repository: https://github.com/adeebnoor/ridi-check
+> (archived snapshot: https://doi.org/10.5281/zenodo.24193755).
+> **Results are mixed and reported as such:** in the preregistered replication in three commercial models the criterion
+> (H1c in at least two of three) was not met; the effect was supported in one model only.
+> Everything below this line describes earlier work in this repository and is kept for the record.
+
 # RIDI — Equal evaluation scores do not certify equivalent AI behaviour
 
 > **Research project + open-source audit toolkit.** RIDI studies when aggregate evaluation fails to identify what an AI system actually acts on, measures selection and downstream decision divergence, and computes the **exact minimum turnover compatible with a declared rank-utility budget**.
