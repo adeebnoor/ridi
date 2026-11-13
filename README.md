@@ -1,4 +1,4 @@
-> **Paper code and data (manuscript "Identical relevance grades cannot certify retrieval-augmented AI answers", November 2026).**
+> **Paper code and data (manuscript "Identical relevance grades cannot certify retrieval-augmented AI answers", November 2026; not yet peer reviewed).**
 > The data, frozen analysis scripts and checks for this manuscript are in the Source Data that accompany the submission;
 > [`reproducibility/README.md`](reproducibility/README.md) says what is there and how to run it.
 > Registrations: OSF https://osf.io/794p5/ (RIDI-CONFIRM) and https://osf.io/anbjd/ (RIDI-CONFIRM-C, DOI 10.17605/OSF.IO/ANBJD).
@@ -6,6 +6,9 @@
 > (archived snapshot: https://doi.org/10.5281/zenodo.24193755).
 > **Results are mixed and reported as such:** in the preregistered replication in three commercial models the criterion
 > (H1c in at least two of three) was not met; the effect was supported in one model only.
+> A check made after the outcomes found 174 questions without a reference answer scored incorrect in every arm; excluding them,
+> as the registration specifies, leaves the decision unchanged (Gemini 3.8 Flash 4.12 points, 95% interval 2.92 to 5.37;
+> GPT-5.4 mini 1.02, −0.41 to 2.44; Claude Sonnet 5.5 0.86, −0.23 to 1.99). The manuscript reports both analyses.
 > Everything below this line describes earlier work in this repository and is kept for the record.
 
 # RIDI — Equal evaluation scores do not certify equivalent AI behaviour
