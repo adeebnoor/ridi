@@ -1,0 +1,69 @@
+{
+ "global_cap_usd": 200.0,
+ "smoke_cap_usd": 1.5,
+ "frozen_sha256": {
+  "H3_D_1500_PROMPTS_PRE_GENERATION.jsonl": "e5962184bb97ae4557304b65d03ee5277bc2315e61fcde3a2d9db9c5ba786a74",
+  "W_3000_PROMPTS_PRE_GENERATION.jsonl": "c981f2847d41b2c46bbef198e538f56e5f445611d01602f2ad2a0893018d5186"
+ },
+ "models": {
+  "gpt-5.4-mini": {
+   "vendor": "openai",
+   "model_id": "gpt-5.4-mini-2026-03-17",
+   "temperature": 0,
+   "reasoning_effort": "none",
+   "max_output_tokens": 128,
+   "worst_case_output_tokens": 128,
+   "model_cap_usd": 30.0,
+   "price_per_mtok": {
+    "input": 0.75,
+    "cached_input": 0.075,
+    "output": 4.5
+   },
+   "price_source": "https://developers.openai.com/api/docs/pricing (read 2026-11-10)"
+  },
+  "claude-sonnet-5.5": {
+   "vendor": "anthropic",
+   "model_id": "claude-sonnet-5-5",
+   "temperature": null,
+   "max_output_tokens": 128,
+   "worst_case_output_tokens": 128,
+   "model_cap_usd": 75.0,
+   "price_per_mtok": {
+    "input": 2.0,
+    "cached_input": 0.1,
+    "output": 10.0
+   },
+   "price_source": "https://platform.claude.com/docs/en/about-claude/pricing (read 2026-11-10)",
+   "thinking": {
+    "type": "between_tools"
+   }
+  },
+  "gemini-3.8-flash": {
+   "vendor": "openrouter",
+   "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+   "model_id": "google/gemini-3.8-flash",
+   "temperature": 0,
+   "reasoning": {
+    "effort": "minimal"
+   },
+   "reasoning_note": "lowest setting accepted; effort 'none'/enabled:false is rejected by the endpoint (HTTP 400: reasoning is mandatory); 'minimal', 'low' and 'low'+exclude gave identical non-empty answers in the access check",
+   "provider_prefs": {
+    "only": [
+     "google-ai-studio"
+    ],
+    "allow_fallbacks": false,
+    "data_collection": "deny"
+   },
+   "max_output_tokens": 640,
+   "worst_case_output_tokens": 640,
+   "model_cap_usd": 18.0,
+   "price_per_mtok": {
+    "input": 0.75,
+    "cached_input": 0.075,
+    "output": 3.75
+   },
+   "price_source": "https://openrouter.ai/api/v1/models/google/gemini-3.8-flash/endpoints (Google AI Studio standard-tier endpoint, read 2026-11-12; model-level list price 0.825/4.125 applies only to the google-vertex/us endpoint, which is excluded by the provider pin)",
+   "max_output_tokens_note": "reasoning + answer budget. 128 gave 2/30 finish_reason=length (reasoning 118-122 tokens, answer cut) in the 30-item technical check of 2026-11-12; 256, 384 and 640 gave 30/30 stop; observed reasoning maximum 346, so 640 is pinned for margin. GPT and Claude stay at 128 (no reasoning tokens, all natural stops)."
+  }
+ }
+}
