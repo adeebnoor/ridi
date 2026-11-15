@@ -1,0 +1,224 @@
+{
+  "classification_sha256": "b16a70c344191df5222cd7f7ff7af38a5d18907881f4b8a3a8343da79ecc0d4a",
+  "summary": {
+    "qwen3-0.6b": {
+      "n": 800,
+      "ref": 9,
+      "exchange": 12,
+      "stopped": 5,
+      "started": 8,
+      "changes": 32,
+      "regressions": 18,
+      "improvements": 14,
+      "reg_into_marker": 0,
+      "containment": 13,
+      "other": 19
+    },
+    "qwen3-1.7b": {
+      "n": 800,
+      "ref": 33,
+      "exchange": 39,
+      "stopped": 15,
+      "started": 21,
+      "changes": 64,
+      "regressions": 30,
+      "improvements": 34,
+      "reg_into_marker": 3,
+      "other": 50,
+      "containment": 9,
+      "abstention": 5
+    },
+    "qwen3-14b": {
+      "n": 800,
+      "ref": 133,
+      "exchange": 176,
+      "stopped": 34,
+      "started": 77,
+      "changes": 111,
+      "regressions": 63,
+      "improvements": 48,
+      "reg_into_marker": 22,
+      "abstention": 30,
+      "other": 57,
+      "containment": 24
+    },
+    "qwen3-32b": {
+      "n": 800,
+      "ref": 138,
+      "exchange": 185,
+      "stopped": 38,
+      "started": 85,
+      "changes": 99,
+      "regressions": 50,
+      "improvements": 49,
+      "reg_into_marker": 27,
+      "abstention": 39,
+      "other": 30,
+      "containment": 30
+    },
+    "qwen3-4b": {
+      "n": 800,
+      "ref": 74,
+      "exchange": 108,
+      "stopped": 23,
+      "started": 57,
+      "changes": 105,
+      "regressions": 51,
+      "improvements": 54,
+      "reg_into_marker": 7,
+      "abstention": 11,
+      "other": 68,
+      "containment": 26
+    },
+    "qwen3-8b": {
+      "n": 800,
+      "ref": 130,
+      "exchange": 175,
+      "stopped": 35,
+      "started": 80,
+      "changes": 134,
+      "regressions": 60,
+      "improvements": 74,
+      "reg_into_marker": 27,
+      "other": 82,
+      "abstention": 39,
+      "containment": 13
+    }
+  },
+  "flags_source": "transition_classes_4800_v27_1.csv",
+  "content_strata": {
+    "all_added_no_no": {
+      "n": 296,
+      "changes": 51,
+      "regressions": 17,
+      "gains": 34,
+      "pooled_pct": 17.22972972972973,
+      "macro_pct": 16.750428549166276,
+      "ci95_pct": [
+        11.977949197444287,
+        22.267025089605735
+      ],
+      "by_benchmark": {
+        "fever": {
+          "n": 18,
+          "changes": 2,
+          "regressions": 0,
+          "gains": 2,
+          "percent": 11.11111111111111
+        },
+        "hotpotqa": {
+          "n": 124,
+          "changes": 15,
+          "regressions": 2,
+          "gains": 13,
+          "percent": 12.096774193548388
+        },
+        "nq": {
+          "n": 62,
+          "changes": 13,
+          "regressions": 9,
+          "gains": 4,
+          "percent": 20.967741935483872
+        },
+        "scifact": {
+          "n": 92,
+          "changes": 21,
+          "regressions": 6,
+          "gains": 15,
+          "percent": 22.82608695652174
+        }
+      },
+      "bootstrap_draws": 20000,
+      "seed": 2026102904
+    },
+    "some_added_either_yes": {
+      "n": 504,
+      "changes": 83,
+      "regressions": 43,
+      "gains": 40,
+      "pooled_pct": 16.46825396825397,
+      "macro_pct": 18.146504082857714,
+      "ci95_pct": [
+        14.431272126727924,
+        22.014420221500192
+      ],
+      "by_benchmark": {
+        "fever": {
+          "n": 132,
+          "changes": 17,
+          "regressions": 11,
+          "gains": 6,
+          "percent": 12.878787878787879
+        },
+        "hotpotqa": {
+          "n": 126,
+          "changes": 12,
+          "regressions": 5,
+          "gains": 7,
+          "percent": 9.523809523809524
+        },
+        "nq": {
+          "n": 188,
+          "changes": 36,
+          "regressions": 19,
+          "gains": 17,
+          "percent": 19.148936170212767
+        },
+        "scifact": {
+          "n": 58,
+          "changes": 18,
+          "regressions": 8,
+          "gains": 10,
+          "percent": 31.03448275862069
+        }
+      },
+      "bootstrap_draws": 20000,
+      "seed": 2026102905
+    },
+    "credited_present": {
+      "n": 591,
+      "changes": 77,
+      "regressions": 30,
+      "gains": 47,
+      "pooled_pct": 13.028764805414554,
+      "macro_pct": 13.449639283742677,
+      "ci95_pct": [
+        10.675198582639837,
+        16.337940972067976
+      ],
+      "by_benchmark": {
+        "fever": {
+          "n": 121,
+          "changes": 12,
+          "regressions": 5,
+          "gains": 7,
+          "percent": 9.917355371900827
+        },
+        "hotpotqa": {
+          "n": 227,
+          "changes": 25,
+          "regressions": 6,
+          "gains": 19,
+          "percent": 11.013215859030836
+        },
+        "nq": {
+          "n": 119,
+          "changes": 18,
+          "regressions": 8,
+          "gains": 10,
+          "percent": 15.126050420168067
+        },
+        "scifact": {
+          "n": 124,
+          "changes": 22,
+          "regressions": 11,
+          "gains": 11,
+          "percent": 17.741935483870968
+        }
+      },
+      "bootstrap_draws": 20000,
+      "seed": 2026102902
+    }
+  },
+  "strata_sha256": "e174b7c213bda3f145024c94e3b06c149742ee8e079eb595e12e209d307bb4ab"
+}

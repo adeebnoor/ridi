@@ -1,0 +1,57 @@
+{
+  "status": "FROZEN_PRE_GENERATION",
+  "utc": "2026-11-08T23:18:08.220384+00:00",
+  "dataset_count": 3,
+  "cohort": 1500,
+  "dense_model": "facebook/contriever-msmarco",
+  "revision": "abe8c1493371369031bcb1e02acb754cf4e162fa",
+  "by_dataset": {
+    "nq": {
+      "E1_D": 153,
+      "E2_D": 46,
+      "E3_D": 46
+    },
+    "hotpotqa": {
+      "E1_D": 206,
+      "E2_D": 189,
+      "E3_D": 166
+    },
+    "fever": {
+      "E1_D": 231,
+      "E2_D": 215,
+      "E3_D": 214
+    }
+  },
+  "full_corpus_evidence": {
+    "nq": {
+      "full_corpus_docs": 2681468,
+      "receipt_sha256": "a51900ff3dd5af87f5ebfe303ae344bd5721e84968ee3ea4c0fc16051d09865a",
+      "rank_sha256": "f41c3afc8fdb778f577597144a752c4e5391688fa2bae3738ee149e822b026be",
+      "n_questions": 500
+    },
+    "hotpotqa": {
+      "full_corpus_docs": 5233329,
+      "receipt_sha256": "7e8397a7082dab028dbbf9b7829ee106e1b214068a3acc9d10e70ef5d94f5f7f",
+      "rank_sha256": "09cf6b5db8b3ace642913577bbca58c1dc2f7e395415b335c275ede1600715e0",
+      "n_questions": 500
+    },
+    "fever": {
+      "full_corpus_docs": 5416568,
+      "receipt_sha256": "524944fc2773d1a4d18fa721f073016afaf940adb91b72e19a46173fac682e05",
+      "rank_sha256": "19e79912a93dc3e40e8162d2d2fa5beef8ca8c2c2e21e05fa019ec63d7748d86",
+      "n_questions": 500
+    }
+  },
+  "prompt_template_sha256": "381cd2f539fc0216a07a3d72a955a6f5590d8779548b99371180f723b550ab9a",
+  "gold_sha256": "f899b9727dd6612fca12bc6f0b6d42bb4ef15e3807815714a973cb5585e89203",
+  "output_sha256": {
+    "nq__H3_1500_contriever_full_rankings.jsonl": "f41c3afc8fdb778f577597144a752c4e5391688fa2bae3738ee149e822b026be",
+    "hotpotqa__H3_1500_contriever_full_rankings.jsonl": "09cf6b5db8b3ace642913577bbca58c1dc2f7e395415b335c275ede1600715e0",
+    "fever__H3_1500_contriever_full_rankings.jsonl": "19e79912a93dc3e40e8162d2d2fa5beef8ca8c2c2e21e05fa019ec63d7748d86",
+    "H3_D_FLAGS_PRE_GENERATION.csv": "0de69a7212981c387eee58d6846ec1b3f4df68210ee976c0a9cf80b0f41aed2a",
+    "H3_D_1500_PROMPTS_PRE_GENERATION.jsonl": "e5962184bb97ae4557304b65d03ee5277bc2315e61fcde3a2d9db9c5ba786a74"
+  },
+  "human_review": "NOT_RUN",
+  "H3_GENERATION": "NOT_RUN",
+  "note": "E1: identical per-rank released grade vector; not action equivalence"
+}

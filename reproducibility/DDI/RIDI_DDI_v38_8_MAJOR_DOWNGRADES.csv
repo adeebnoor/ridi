@@ -1,0 +1,9 @@
+drug_a,drug_b,reference_class,B0,R0,B1
+Cimetidine,Rilpivirine,Major,Major,Major,Moderate
+Ranolazine,Simvastatin,Major,Major,Major,Moderate
+Famotidine,Rilpivirine,Major,Major,Major,Moderate
+Fluvoxamine,Alosetron,Major,Major,Major,Minor
+Fenfluramine,Trazodone,Major,Major,Major,Moderate
+Nizatidine,Rilpivirine,Major,Major,Major,Moderate
+Lansoprazole,Tacrolimus,Major,Major,Major,Moderate
+Clarithromycin,Colchicine,Major,Major,Major,Moderate

@@ -1,0 +1,7 @@
+Model,Registration,Endpoint,Status,Update count,Repeat count,Denominator,Difference (pp),Interval (pp),Exact two-sided McNemar P,Outcome
+Qwen3-8B,https://osf.io/epk7v/,Major pairs labelled Major at B0: Moderate or Minor label at B1 versus R0,Registered primary,8,0,91,8.79,95%: 3.30 to 15.38,0.0078125,Positive at pair level; the repeat was deterministic; post hoc drug-sharing check inconclusive (sign-flip P = 0.25)
+Qwen3-8B,https://osf.io/epk7v/,Accuracy over all pairs at B1 versus B0 (114 and 113 of 173),Prespecified,114,113,173,0.58,90%: -4.05 to 5.20,,Equivalence within 2 pp not established
+GPT-5.4 mini,https://osf.io/t9wvh/,Major pairs labelled Major at B0: Moderate or Minor label at B1 versus R0,Registered primary (after the Qwen3-8B result was known),5,4,76,1.32,95%: -5.26 to 7.89,1.0,Criterion not met
+GPT-5.4 mini,https://osf.io/t9wvh/,Accuracy over all pairs at B1 versus B0 (127 and 123 of 173; 10 regressions and 14 improvements),Secondary in the frozen manifest,127,123,173,2.31,90%: -2.31 to 6.94,,Equivalence within 2 pp not established
+GPT-5.4 mini,https://osf.io/t9wvh/,Correctness differing from B0 at B1 versus at R0,Post hoc (not in the frozen manifest),24,12,173,6.94,95%: 2.31 to 12.14,0.0118179 (nominal),Descriptive
+GPT-5.4 mini,https://osf.io/t9wvh/,Labels differing from B0 at B1 versus at R0,Post hoc (not in the frozen manifest),25,12,173,7.51,95%: 2.31 to 12.72,0.0071974 (nominal),Descriptive

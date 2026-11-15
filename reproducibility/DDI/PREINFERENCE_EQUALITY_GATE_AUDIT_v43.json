@@ -1,0 +1,26 @@
+{
+  "purpose": "Pre-inference lexical selection gate, distinct from clinical safety assessment",
+  "date_verified_utc": "2026-11-10",
+  "script": "code/pre_inference_bm25_gate_300.py",
+  "script_sha256": "d4f4b8fe95465cb163130c3a7c5a61c09d3424714a63be94e6e2d55470fbe6e2",
+  "original_full_guard_csv_sha256": "1254c2bc6a6ec07ddf845e199b21a893dd46948a885ad3da72c1d42b75bde8e3",
+  "source_evidence_corpus_jsonl_sha256": "06f3cc995c5eab205f41d3beed7d92785d15209813e6a3c30c985bb7c85017fb",
+  "source_pair_coverage_jsonl_sha256": "13738a17ae18ad14749e7218e5042b850b59d7092e1020c62e7be86b492379b4",
+  "scanned_pairs_after_source_filter": 861,
+  "both_drug_names_in_both_contexts": 861,
+  "pairs_with_equal_proxy": 685,
+  "with_warning_proxy_both_contexts": 230,
+  "strictly_qualified_pairs": 173,
+  "selection_qualifying_counts": {
+    "Major": 103,
+    "Moderate": 68,
+    "Minor": 2
+  },
+  "equal_score_violations_among_qualified": 0,
+  "score": "S = sum_{i=1}^k I_i/log2(i+1) divided by sum_{j=1}^m 1/log2(j+1), m = sum I_i, S=0 for m=0, i=1-indexed",
+  "equality_tol": "abs(S_B0 - S_B1) < 1e-12",
+  "other_eligibility": "co-mention in both contexts, different ordered content hash, warning-proximity witness in each",
+  "record_source": "Direct independent readback of author-owned original source file on workstation via remote terminal; not new model generation",
+  "underlying_full_guard_redistributed": false,
+  "case_level_input_restricted": true
+}

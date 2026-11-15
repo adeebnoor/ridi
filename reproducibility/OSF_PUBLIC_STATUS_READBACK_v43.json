@@ -1,0 +1,27 @@
+{
+  "checked_utc_date": "2026-11-10",
+  "method": "OSF public unauthenticated API GET from author workstation; verified HTTP 200 and attributes.public=true",
+  "registrations": [
+    {
+      "id": "epk7v",
+      "url": "https://osf.io/epk7v/",
+      "public": true,
+      "registered_utc": "2026-11-09T22:15:49.475111Z",
+      "title": "RIDI-DDI: Prospective test of drug-interaction warning downgrades under retrieval-proxy equivalence"
+    },
+    {
+      "id": "t9wvh",
+      "url": "https://osf.io/t9wvh/",
+      "public": true,
+      "registered_utc": "2026-11-10T05:40:54.578586Z",
+      "title": "RIDI-DDInter commercial closed-model replication: prospectively frozen prompts and downstream warning severity"
+    }
+  ],
+  "associated_project_for_mistral_runtime_note": {
+    "id": "bjuwe",
+    "public": true,
+    "osf_storage_readback": "https://api.osf.io/v2/nodes/bjuwe/files/osfstorage/",
+    "public_note_found_at_checked_time": false
+  },
+  "caution": "OSF registrations are immutable; the later Mistral runtime disclosure belongs in the associated project bjuwe; no upload success has been established."
+}

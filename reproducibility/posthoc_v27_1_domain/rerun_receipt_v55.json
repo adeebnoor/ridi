@@ -1,0 +1,40 @@
+{
+ "date": "2026-11-13",
+ "what": "Re-execution of the post hoc domain-separated RIDI-24 bootstrap from the frozen score table",
+ "command": "python reproduce_domain_bootstrap.py (run in this folder)",
+ "runtime_seconds": 49,
+ "inputs": {
+  "RIDI24_scores_registered.csv": "5531ef7da9328b71f6a046770ec19154eff0adc9f2c8ba02352ad87894ac98a3"
+ },
+ "code": {
+  "reproduce_domain_bootstrap.py": "7d42d6b1a6ddfc5a044a8f7c39ca8afc2b78efce1cf37f4069b33dc0f57ff5b6",
+  "analyze_v27_1.py (original, section 4)": "693b2c5838bd3836f4f0f1db696b73aedaeafd3c1af31c2b44e38f9ca79ed0e8"
+ },
+ "code_equivalence": "Lines 139-177 of analyze_v27_1.py (section 4) are identical to the body of reproduce_domain_bootstrap.py apart from the CSV-loading line (line 127 of the original) and the output file name",
+ "regenerated_output_equals_saved": true,
+ "saved_output": "ridi24_domain_separated_v27_1.json",
+ "saved_output_sha256": "25357038b152c8f9c5e26e5aba2e7c5774c0a86ba7a7b081a214dd6911fc9562",
+ "unrounded_DF_minus_D_points": {
+  "medical": {
+   "point": 2.018439470926552,
+   "ci95": [
+    -0.2539712295704465,
+    4.228224969041609
+   ]
+  },
+  "finance": {
+   "point": 0.28440794882915554,
+   "ci95": [
+    -0.9845750912334058,
+    1.5018499669311212
+   ]
+  }
+ },
+ "rounding_note": "Finance lower bound -0.98458 rounds to -0.98 at two decimals; the value -0.985 in the saved JSON is a three-decimal rounding of the same number",
+ "bootstrap": {
+  "draws": 20000,
+  "seed": 2026102901,
+  "scheme": "12 update pairs with replacement within domain, then one shared 1,500-question draw; registered 300-case budget and tie rule"
+ },
+ "status": "post hoc, descriptive; no model output generated"
+}

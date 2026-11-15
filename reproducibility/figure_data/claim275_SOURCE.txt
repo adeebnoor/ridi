@@ -1,0 +1,22 @@
+RIDI — Original SciFact claim 275 (Example 1)
+Verified: 2026-11-07, source-only lookup; NO new experimental generation.
+
+Dataset: SciFact (BEIR)
+Query ID: 275
+Exact claim:
+Combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors is effective at treating KRAS mutant tumors.
+
+Benchmark reference verdict: SUPPORTS.
+Credited document IDs (released qrels): 4961038; 14241418; 14819804.
+Source query/corpus revision: BeIR/scifact, b3b5335604bf5ee3c4447671af975ea25143d4f5.
+
+Independent source confirmations:
+(1) C:\Users\USER\Downloads\RIDI_ECOLOGICAL_650_EXTENSION_20261031\FROZEN_ORIGINAL_800_SOURCE_MANIFEST.jsonl (line index 782, 0-based).
+(2) C:\Users\USER\Downloads\RIDI_Nature_v30.0_20261030.zip :: 5_source_data/Supplementary_Data_7_v28/natural_results/primary_150_all_configurations_generation_inputs.jsonl (qid=275 in four original arms; each gold SUPPORTS).
+
+Raw source search:
+C:\Users\USER\Downloads\RIDI_CONFIRMATORY_WORK_20261102\claim275_find_case_raw_20261107.txt
+Script:
+C:\Users\USER\Downloads\RIDI_CONFIRMATORY_WORK_20261102\find_case.py
+
+Important: benchmark SUPPORTS is a source label, NOT an independent scientific judgment about clinical treatment efficacy. This case is provided solely for accurate example labeling.

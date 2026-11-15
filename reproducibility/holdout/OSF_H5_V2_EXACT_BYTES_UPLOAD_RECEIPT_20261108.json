@@ -1,0 +1,12 @@
+{
+  "verified_utc": "2026-11-07T22:26:57.585346+00:00",
+  "filename": "OSF_NOTE_SUBMISSION_BEFORE_H5_v2_20261108.md",
+  "sha256": "d369edaf3fee60840964bc6e91be10154a68403c812f7feafcd08a3599580ccb",
+  "expected_sha256": "d369edaf3fee60840964bc6e91be10154a68403c812f7feafcd08a3599580ccb",
+  "bytes": 3933,
+  "byte_identical": true,
+  "public_html": "https://osf.io/bjuwe/files/osfstorage/6aefa5ae16a185f21f2d33d3",
+  "public_download": "https://osf.io/download/6aefa5ae16a185f21f2d33d3/",
+  "osf_file_id": "6aefa5ae16a185f21f2d33d3",
+  "original_v1_unchanged": true
+}

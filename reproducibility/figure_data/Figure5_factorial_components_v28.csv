@@ -1,0 +1,16 @@
+term,mean_coefficient,contribution,coefficient_ci95_lower,coefficient_ci95_upper,contribution_ci95_lower,contribution_ci95_upper
+context,-0.013125,0.040859375,-0.040625,0.014375,0.028984375,0.05375
+backend,0.000625,0.000546875,-0.0025,0.00375,7.8125e-05,0.0013281249999999999
+context × backend,-0.001875,0.000546875,-0.005625,0.000625,7.8125e-05,0.0013281249999999999
+batch_size,-0.000625,0.000234375,-0.003125,0.00125,0.0,0.000546875
+context × batch_size,0.001875,0.000234375,0.0,0.004375,0.0,0.000546875
+backend × batch_size,0.000625,0.000546875,-0.0025,0.0043749999999999995,7.8125e-05,0.001328125
+context × backend × batch_size,0.000625,0.000546875,-0.0025,0.00375,7.8125e-05,0.001328125
+repeat,0.0,0.0,0.0,0.0,0.0,0.0
+context × repeat,0.0,0.0,0.0,0.0,0.0,0.0
+backend × repeat,0.0,0.0,0.0,0.0,0.0,0.0
+context × backend × repeat,0.0,0.0,0.0,0.0,0.0,0.0
+batch_size × repeat,0.0,0.0,0.0,0.0,0.0,0.0
+context × batch_size × repeat,0.0,0.0,0.0,0.0,0.0,0.0
+backend × batch_size × repeat,0.0,0.0,0.0,0.0,0.0,0.0
+context × backend × batch_size × repeat,0.0,0.0,0.0,0.0,0.0,0.0

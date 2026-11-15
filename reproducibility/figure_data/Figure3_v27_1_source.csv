@@ -1,0 +1,9 @@
+target,fragility,n,regressions,improvements
+Qwen3-32B,0,608,16,23
+Qwen3-32B,1,150,21,9
+Qwen3-32B,2,34,10,2
+Qwen3-32B,3,8,3,1
+OLMo-2-32B,0,608,30,27
+OLMo-2-32B,1,150,22,14
+OLMo-2-32B,2,34,12,5
+OLMo-2-32B,3,8,4,2

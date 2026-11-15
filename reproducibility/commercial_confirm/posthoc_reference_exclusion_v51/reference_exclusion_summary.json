@@ -1,0 +1,244 @@
+{
+ "note": "Post-outcome correction; not a registered analysis. Decisions refer to the frozen rule (Holm, one-sided alpha 0.025, margin 2 points).",
+ "audit": {
+  "questions_in_open_weight_score_table": 1326,
+  "questions_in_commercial_score_table": 1500,
+  "questions_only_in_commercial_table": 174,
+  "their_datasets": {
+   "nq": 174
+  },
+  "their_score_cells": 5220,
+  "their_score_cells_scored_correct": 0,
+  "of_which_E1_win": 149,
+  "of_which_E3_win": 20,
+  "of_which_E1_dense": 50,
+  "as_run_report_sha256_reproduced": true
+ },
+ "table": [
+  {
+   "hypothesis": "H1c",
+   "model": "gpt-5.4-mini",
+   "n": 1115,
+   "changed": 56,
+   "control": 45,
+   "change_rate_pct": 5.19,
+   "control_rate_pct": 4.17,
+   "excess_pp": 1.02,
+   "ci95_pp": [
+    -0.41,
+    2.44
+   ],
+   "p_one_sided_vs_2pp": 0.9143,
+   "holm_supported": false,
+   "as_run_n": 1264,
+   "as_run_excess_pp": 0.98,
+   "as_run_ci95_pp": [
+    -0.24,
+    2.21
+   ],
+   "as_run_holm_supported": false
+  },
+  {
+   "hypothesis": "H1c",
+   "model": "claude-sonnet-5.5",
+   "n": 1115,
+   "changed": 39,
+   "control": 30,
+   "change_rate_pct": 3.69,
+   "control_rate_pct": 2.83,
+   "excess_pp": 0.86,
+   "ci95_pp": [
+    -0.23,
+    1.99
+   ],
+   "p_one_sided_vs_2pp": 0.97595,
+   "holm_supported": false,
+   "as_run_n": 1264,
+   "as_run_excess_pp": 0.74,
+   "as_run_ci95_pp": [
+    -0.23,
+    1.74
+   ],
+   "as_run_holm_supported": false
+  },
+  {
+   "hypothesis": "H1c",
+   "model": "gemini-3.8-flash",
+   "n": 1113,
+   "changed": 42,
+   "control": 0,
+   "change_rate_pct": 4.12,
+   "control_rate_pct": 0.0,
+   "excess_pp": 4.12,
+   "ci95_pp": [
+    2.92,
+    5.37
+   ],
+   "p_one_sided_vs_2pp": 5e-05,
+   "holm_supported": true,
+   "as_run_n": 1262,
+   "as_run_excess_pp": 3.47,
+   "as_run_ci95_pp": [
+    2.47,
+    4.52
+   ],
+   "as_run_holm_supported": true
+  },
+  {
+   "hypothesis": "H2c",
+   "model": "gpt-5.4-mini",
+   "n": 177,
+   "changed": 6,
+   "control": 4,
+   "change_rate_pct": 3.45,
+   "control_rate_pct": 2.37,
+   "excess_pp": 1.08,
+   "ci95_pp": [
+    -1.78,
+    3.95
+   ],
+   "p_one_sided_vs_2pp": 0.7499,
+   "holm_supported": null,
+   "as_run_n": 197,
+   "as_run_excess_pp": 0.9,
+   "as_run_ci95_pp": [
+    -1.41,
+    3.37
+   ],
+   "as_run_holm_supported": null
+  },
+  {
+   "hypothesis": "H2c",
+   "model": "claude-sonnet-5.5",
+   "n": 177,
+   "changed": 10,
+   "control": 7,
+   "change_rate_pct": 5.8,
+   "control_rate_pct": 4.24,
+   "excess_pp": 1.56,
+   "ci95_pp": [
+    -1.69,
+    4.92
+   ],
+   "p_one_sided_vs_2pp": 0.61035,
+   "holm_supported": null,
+   "as_run_n": 197,
+   "as_run_excess_pp": 1.56,
+   "as_run_ci95_pp": [
+    -1.48,
+    4.65
+   ],
+   "as_run_holm_supported": null
+  },
+  {
+   "hypothesis": "H2c",
+   "model": "gemini-3.8-flash",
+   "n": 177,
+   "changed": 5,
+   "control": 0,
+   "change_rate_pct": 2.8,
+   "control_rate_pct": 0.0,
+   "excess_pp": 2.8,
+   "ci95_pp": [
+    0.65,
+    5.44
+   ],
+   "p_one_sided_vs_2pp": 0.2793,
+   "holm_supported": null,
+   "as_run_n": 197,
+   "as_run_excess_pp": 2.43,
+   "as_run_ci95_pp": [
+    0.5,
+    4.83
+   ],
+   "as_run_holm_supported": null
+  },
+  {
+   "hypothesis": "H3c",
+   "model": "gpt-5.4-mini",
+   "n": 540,
+   "changed": 31,
+   "control": 19,
+   "change_rate_pct": 6.35,
+   "control_rate_pct": 3.92,
+   "excess_pp": 2.43,
+   "ci95_pp": [
+    -0.24,
+    5.13
+   ],
+   "p_one_sided_vs_2pp": 0.38125,
+   "holm_supported": null,
+   "as_run_n": 590,
+   "as_run_excess_pp": 2.11,
+   "as_run_ci95_pp": [
+    0.08,
+    4.18
+   ],
+   "as_run_holm_supported": null
+  },
+  {
+   "hypothesis": "H3c",
+   "model": "claude-sonnet-5.5",
+   "n": 540,
+   "changed": 37,
+   "control": 11,
+   "change_rate_pct": 7.95,
+   "control_rate_pct": 2.37,
+   "excess_pp": 5.58,
+   "ci95_pp": [
+    3.1,
+    8.22
+   ],
+   "p_one_sided_vs_2pp": 0.0019,
+   "holm_supported": null,
+   "as_run_n": 590,
+   "as_run_excess_pp": 4.62,
+   "as_run_ci95_pp": [
+    2.62,
+    6.74
+   ],
+   "as_run_holm_supported": null
+  },
+  {
+   "hypothesis": "H3c",
+   "model": "gemini-3.8-flash",
+   "n": 540,
+   "changed": 35,
+   "control": 0,
+   "change_rate_pct": 7.43,
+   "control_rate_pct": 0.0,
+   "excess_pp": 7.43,
+   "ci95_pp": [
+    5.04,
+    10.05
+   ],
+   "p_one_sided_vs_2pp": 0.0,
+   "holm_supported": null,
+   "as_run_n": 590,
+   "as_run_excess_pp": 6.16,
+   "as_run_ci95_pp": [
+    4.22,
+    8.22
+   ],
+   "as_run_holm_supported": null
+  }
+ ],
+ "H4c": {
+  "changed_in_at_least_one_model": 118,
+  "in_all_three": 1,
+  "only": {
+   "claude-sonnet-5.5": 29,
+   "gemini-3.8-flash": 25,
+   "gpt-5.4-mini": 46
+  },
+  "E1_win_questions_with_reference": 1115,
+  "rate_pct": 10.58,
+  "exact95_pct": [
+   8.84,
+   12.54
+  ],
+  "as_run_denominator": 1264
+ },
+ "report_sha256": "b61bf56b3801d33e59dc3c66c8227aab7192bf89ef0c240febae17026fbb4534",
+ "kept_scores_sha256": "47cdd4749006142fe71032122ab7952b8e732e8040dc7071eb4710615379a8e0"
+}

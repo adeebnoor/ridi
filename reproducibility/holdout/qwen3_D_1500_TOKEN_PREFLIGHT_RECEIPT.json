@@ -1,0 +1,16 @@
+{
+  "status": "PASS_TOKEN_LENGTHS_NO_GENERATION",
+  "utc": "2026-11-08T23:18:25.314416+00:00",
+  "model": "Qwen/Qwen3-8B",
+  "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+  "transformers_version": "4.57.6",
+  "tokens_cells": 1500,
+  "max_tokens": 9807,
+  "p95_tokens": 3012,
+  "max_model_len": 32768,
+  "overflow_count": 0,
+  "overflows": [],
+  "prior_token_replay_count": 7,
+  "source_sha256": "e5962184bb97ae4557304b65d03ee5277bc2315e61fcde3a2d9db9c5ba786a74",
+  "token_manifest_sha256": "8423422a5300bd70af72d88e3c688d83f6dfbce87379ccafb71b133f3442570f"
+}

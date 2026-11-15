@@ -1,0 +1,53 @@
+{
+  "study": "RIDI–DDInter v38 preregistered model-output experiment",
+  "osf": "https://osf.io/epk7v/",
+  "osf_registration_utc": "2026-11-09T22:15:49.475111",
+  "sample_size": 173,
+  "major_gold_cases": 103,
+  "major_baseline_correct_n": 91,
+  "B1_major_downgrades": 8,
+  "R0_major_downgrades": 0,
+  "paired_excess_pp": 8.791208791208792,
+  "exact_two_sided_mcnemar_p": 0.0078125,
+  "paired_bootstrap_95_CI_probability": [
+    0.03296703296703297,
+    0.15384615384615385
+  ],
+  "all_tasks_completed": 519,
+  "task_failures": 0,
+  "accuracy": {
+    "B0": [
+      113,
+      173
+    ],
+    "R0": [
+      113,
+      173
+    ],
+    "B1": [
+      114,
+      173
+    ]
+  },
+  "accuracy_equivalence_margin_pp": 2,
+  "accuracy_90CI_difference": [
+    -0.04046242774566474,
+    0.05202312138728324
+  ],
+  "accuracy_equivalence_established": false,
+  "drug_share_connected_components": 9,
+  "largest_connected_component_pairs": 69,
+  "component_bootstrap_95CI_difference": [
+    0,
+    0.19444444444444445
+  ],
+  "exploratory_component_signflip_p": 0.25,
+  "raw_sha256": "d28e9a98fb7c757c0813dd4d6343b3789bd54c407cdc384b71070f0dcec073a7",
+  "frozen_input_zip_sha256": "65a9c07888d5d6d56a9f065ed9ad7f5baf0c17ba6061873091ba4b3ebc086e3c",
+  "frozen_generator_sha256": "95530b527fbbcef2c1027781dd9edb4498cb0d9bba755f3bebbc4e27958de1ec",
+  "owner_only_raw_bundle_sha256": "c4de74b448475bffbb586ef3782b581a0384157d6d28b2836c0fc6df4383943a",
+  "dataset_version": "DDInter 1.0 ATC-A archived export served on DDInter2 website",
+  "clinical_harm_shown": false,
+  "human_relevance_equivalence_shown": false,
+  "caution": "Item-level preregistered gate positive; shared-drug cluster-robust sensitivity inconclusive."
+}

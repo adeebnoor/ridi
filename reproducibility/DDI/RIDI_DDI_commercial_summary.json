@@ -1,0 +1,120 @@
+{
+ "registration": "https://osf.io/t9wvh/",
+ "model_reported_by_api": [
+  "gpt-5.4-mini-2026-03-17"
+ ],
+ "calls": 519,
+ "completed": 519,
+ "cases": 173,
+ "first_call_started_utc": "2026-11-10T05:43:44.694454+00:00",
+ "last_call_ended_utc": "2026-11-10T05:45:00.845696+00:00",
+ "labels_returned": {
+  "Moderate": 230,
+  "Major": 268,
+  "Minor": 19,
+  "InsufficientEvidence": 2
+ },
+ "identical_prompt_B0_R0": 173,
+ "different_context_B0_B1": 173,
+ "input_tokens": 3282275,
+ "cached_input_tokens": 531072,
+ "raw_outputs_sha256": "5474e44ff2efe598bc6a26f8b26561142599be850c9715de51e6c062d7692c54",
+ "reference_classes": {
+  "Moderate": 68,
+  "Major": 103,
+  "Minor": 2
+ },
+ "registered_primary": {
+  "update": 5,
+  "repeat": 4,
+  "n": 76,
+  "update_only": 4,
+  "repeat_only": 3,
+  "both": 1,
+  "neither": 68,
+  "difference_pp": 1.3158,
+  "exact_mcnemar_two_sided_p": 1.0,
+  "bootstrap_95_interval_pp": [
+   -5.26,
+   7.89
+  ],
+  "endpoint": "Major pairs labelled Major at B0: Moderate or Minor label at B1 versus at R0",
+  "criterion": "all 519 records; n >= 50; excess > 0; exact P < 0.05; 95% interval above zero",
+  "criterion_met": false
+ },
+ "registered_secondary_accuracy": {
+  "B0": [
+   123,
+   173
+  ],
+  "R0": [
+   123,
+   173
+  ],
+  "B1": [
+   127,
+   173
+  ]
+ },
+ "registered_secondary_accuracy_change": {
+  "gains": 14,
+  "losses": 10,
+  "difference_pp": 2.3121,
+  "bootstrap_90_interval_pp": [
+   -2.31,
+   6.94
+  ],
+  "equivalent_within_2pp": false
+ },
+ "post_hoc_label_change_vs_B0": {
+  "update": 25,
+  "repeat": 12,
+  "n": 173,
+  "update_only": 17,
+  "repeat_only": 4,
+  "both": 8,
+  "neither": 144,
+  "difference_pp": 7.5145,
+  "exact_mcnemar_two_sided_p": 0.007197380065917969,
+  "bootstrap_95_interval_pp": [
+   2.31,
+   12.72
+  ],
+  "status": "post hoc: not listed in the frozen pre-outcome manifest"
+ },
+ "post_hoc_correctness_change_vs_B0": {
+  "update": 24,
+  "repeat": 12,
+  "n": 173,
+  "update_only": 16,
+  "repeat_only": 4,
+  "both": 8,
+  "neither": 145,
+  "difference_pp": 6.9364,
+  "exact_mcnemar_two_sided_p": 0.01181793212890625,
+  "bootstrap_95_interval_pp": [
+   2.31,
+   12.14
+  ],
+  "status": "post hoc: not listed in the frozen pre-outcome manifest"
+ },
+ "label_transitions_B0_to_B1": {
+  "Major -> Moderate": 12,
+  "Moderate -> Major": 8,
+  "Minor -> Moderate": 3,
+  "InsufficientEvidence -> Moderate": 1,
+  "Major -> InsufficientEvidence": 1
+ },
+ "label_transitions_B0_to_R0": {
+  "Major -> Moderate": 6,
+  "Moderate -> Major": 3,
+  "Minor -> Moderate": 2,
+  "InsufficientEvidence -> Moderate": 1
+ },
+ "qwen3_eight_downgraded_pairs_in_commercial_model": {
+  "found": 8,
+  "labelled_major_at_B0": 4,
+  "downgraded_at_B1": 1,
+  "downgraded_at_R0": 1
+ }
+}

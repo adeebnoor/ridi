@@ -1,0 +1,11 @@
+panel,condition,percent,study
+b,Exchange,17.2666666667,primary
+b,Batching replay,1.2333333333,registered scale replay
+c,"All questions
+n = 800",17.26666666666667,primary
+c,"Credited evidence present
+n = 591",13.449639283742677,post hoc evidence-presence stratum
+d,Qwen3-8B,17.2666666667,registered model transfer
+d,Qwen3-32B,12.3666666667,registered model transfer
+d,Mistral-7B,13.6333333333,registered model transfer
+d,OLMo-2-7B,13.6333333333,registered model transfer

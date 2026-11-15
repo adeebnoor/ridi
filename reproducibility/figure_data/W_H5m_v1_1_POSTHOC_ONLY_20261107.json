@@ -1,0 +1,141 @@
+{
+ "version": "1.1",
+ "seed": 20261108,
+ "draws": 20000,
+ "contrast": [
+  "bm25_whole",
+  "bm25_window"
+ ],
+ "gate": "E1_win",
+ "controls": [
+  "whole_rep_b1",
+  "whole_rep_b16"
+ ],
+ "models": {
+  "qwen3": {
+   "n": 1115,
+   "excluded": {
+    "score": 149
+   },
+   "diagnostics": {
+    "fever_verdict_SUPPORTS": 322,
+    "fever_verdict_REFUTES": 362,
+    "fever_verdict_NEI": 31,
+    "fever_verdict_MIXED": 7,
+    "parser_scorer_disagree": 1
+   },
+   "transitions": 37,
+   "classes": {
+    "abstention": 13,
+    "reversal": 8,
+    "other": 10,
+    "lexical_distinct": 6
+   },
+   "H5mV_primary_verdict_reversal": {
+    "n": 361,
+    "positives": 8,
+    "control_positives": 2,
+    "rate_pooled": 0.0221606648199446,
+    "control_rate_pooled": 0.00554016620498615,
+    "rate_exact95": [
+     0.00961,
+     0.0432
+    ],
+    "rate_eqw": 0.0221606648199446,
+    "control_rate_eqw": 0.00554016620498615,
+    "excess_eqw": 0.01662049861495845,
+    "excess_eqw_bootstrap95_descriptive": [
+     0.0,
+     0.0332409972299169
+    ],
+    "discordant_change_only": 8,
+    "discordant_control_only": 2,
+    "mcnemar_exact_one_sided_p": 0.0546875
+   },
+   "H5mQ_secondary_lexical_distinct": {
+    "n": 754,
+    "positives": 6,
+    "control_positives": 1,
+    "rate_pooled": 0.007957559681697613,
+    "control_rate_pooled": 0.001326259946949602,
+    "rate_exact95": [
+     0.00293,
+     0.01724
+    ],
+    "rate_eqw": 0.009169913095594846,
+    "control_rate_eqw": 0.0010638297872340426,
+    "excess_eqw": 0.008106083308360804,
+    "excess_eqw_bootstrap95_descriptive": [
+     0.0010638297872340426,
+     0.016579262810908
+    ],
+    "discordant_change_only": 6,
+    "discordant_control_only": 1,
+    "mcnemar_exact_one_sided_p": 0.0625
+   },
+   "H5mV_supported_holm": false
+  },
+  "mistral": {
+   "n": 1115,
+   "excluded": {
+    "score": 149
+   },
+   "diagnostics": {
+    "fever_verdict_SUPPORTS": 335,
+    "fever_verdict_REFUTES": 373,
+    "fever_verdict_MIXED": 9,
+    "fever_verdict_NEI": 5
+   },
+   "transitions": 77,
+   "classes": {
+    "reversal": 20,
+    "other": 37,
+    "abstention": 10,
+    "lexical_distinct": 10
+   },
+   "H5mV_primary_verdict_reversal": {
+    "n": 361,
+    "positives": 20,
+    "control_positives": 1,
+    "rate_pooled": 0.055401662049861494,
+    "control_rate_pooled": 0.002770083102493075,
+    "rate_exact95": [
+     0.03417,
+     0.08427
+    ],
+    "rate_eqw": 0.055401662049861494,
+    "control_rate_eqw": 0.002770083102493075,
+    "excess_eqw": 0.05263157894736842,
+    "excess_eqw_bootstrap95_descriptive": [
+     0.030470914127423823,
+     0.07756232686980609
+    ],
+    "discordant_change_only": 19,
+    "discordant_control_only": 0,
+    "mcnemar_exact_one_sided_p": 1.9073486328125e-06
+   },
+   "H5mQ_secondary_lexical_distinct": {
+    "n": 754,
+    "positives": 10,
+    "control_positives": 1,
+    "rate_pooled": 0.013262599469496022,
+    "control_rate_pooled": 0.001326259946949602,
+    "rate_exact95": [
+     0.00638,
+     0.02425
+    ],
+    "rate_eqw": 0.015515433023673957,
+    "control_rate_eqw": 0.0017605633802816902,
+    "excess_eqw": 0.013754869643392268,
+    "excess_eqw_bootstrap95_descriptive": [
+     0.003888222954749775,
+     0.024685346119268804
+    ],
+    "discordant_change_only": 10,
+    "discordant_control_only": 1,
+    "mcnemar_exact_one_sided_p": 0.005859375
+   },
+   "H5mV_supported_holm": true
+  }
+ }
+}

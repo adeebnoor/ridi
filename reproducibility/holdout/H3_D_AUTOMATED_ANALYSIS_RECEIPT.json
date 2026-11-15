@@ -1,0 +1,230 @@
+{
+  "status": "REAL_AUTOMATED_H3_D_ANALYSIS_DONE",
+  "utc": "2026-11-09T08:42:34.902354+00:00",
+  "h3_results": {
+    "qwen3": {
+      "model": "Qwen/Qwen3-8B",
+      "outputs": 1500,
+      "sha256": "79fbd07fcf288a8cc0f9a4b931deb24abed085d0f7342fb441ec61fdaa918e94",
+      "reference_available": 1326
+    },
+    "mistral": {
+      "model": "mistralai/Mistral-7B-Instruct-v0.3",
+      "outputs": 1500,
+      "sha256": "f35267d3db8c3cba9ee194ad3836711d5455c0af53835c537ef2ae4b14b2ed9a",
+      "reference_available": 1326
+    }
+  },
+  "n_real_generations": 3000,
+  "n_new_scored_cells": 5304,
+  "registered_code_sha256": "09fe6ee38e535205bc117aa6e212e7d31158cc3686cee776f38c2d7b24d11b3c",
+  "frozen_scorer_sha256": "5b9f02f7a8bcd4df98f3bf28e66017e86e4cfa3e36d495acb6d1e2828488c7ee",
+  "d_prompt_lock_sha256": "4148e1ca04cc0eb036ba97a5a824dc187175c569d367a763e1ab1ac320d90b13",
+  "flags_sha256": "9b8c8d9f7eae36712a98e7ba919610ed5ca68e00c8ce9e0906eeb7ea5cbd33f0",
+  "scores_sha256": "5905baddaefa974916f116c4f4f99e7ef5892ada6df805c2323138fb0337070d",
+  "analysis_sha256": "d3244baaa9d8c0b94edf54855eedf75c0cd91d44827c5273033cbb9302aec028",
+  "H4_complete_case_historical": {
+    "n": 1115,
+    "either_model_changes": 108,
+    "exact95": [
+      0.0801337048445611,
+      0.11574902522637442
+    ]
+  },
+  "human_H5": "NOT_RUN_PENDING_APPROVAL",
+  "H3_per_dataset": {
+    "qwen3": {
+      "all": {
+        "n": 540,
+        "excluded_missing_arm": 50,
+        "changes": 41,
+        "control_changes": 3,
+        "change_rate_eqw": 0.08134045027248911,
+        "control_rate_eqw": 0.004679247397693999,
+        "change_rate_pooled": 0.07592592592592592,
+        "change_exact95": [
+          0.055,
+          0.1016
+        ],
+        "control_exact95": [
+          0.0011,
+          0.0161
+        ],
+        "excess_eqw": 0.07666120287479511,
+        "excess_95ci": [
+          0.05129659984028916,
+          0.10364392888664735
+        ],
+        "p_one_sided_excess_le_margin": 0.0
+      },
+      "fever": {
+        "n": 231,
+        "excluded_missing_arm": 0,
+        "changes": 16,
+        "control_changes": 1,
+        "change_rate_eqw": 0.06926406926406926,
+        "control_rate_eqw": 0.004329004329004329,
+        "change_rate_pooled": 0.06926406926406926,
+        "change_exact95": [
+          0.0401,
+          0.11
+        ],
+        "control_exact95": [
+          0.0001,
+          0.0239
+        ],
+        "excess_eqw": 0.06493506493506493,
+        "excess_95ci": [
+          0.03463203463203463,
+          0.09956709956709957
+        ],
+        "p_one_sided_excess_le_margin": 0.002
+      },
+      "hotpotqa": {
+        "n": 206,
+        "excluded_missing_arm": 0,
+        "changes": 14,
+        "control_changes": 2,
+        "change_rate_eqw": 0.06796116504854369,
+        "control_rate_eqw": 0.009708737864077669,
+        "change_rate_pooled": 0.06796116504854369,
+        "change_exact95": [
+          0.0377,
+          0.1114
+        ],
+        "control_exact95": [
+          0.0012,
+          0.0346
+        ],
+        "excess_eqw": 0.05825242718446602,
+        "excess_95ci": [
+          0.024271844660194174,
+          0.0970873786407767
+        ],
+        "p_one_sided_excess_le_margin": 0.02345
+      },
+      "nq": {
+        "n": 103,
+        "excluded_missing_arm": 0,
+        "changes": 11,
+        "control_changes": 0,
+        "change_rate_eqw": 0.10679611650485436,
+        "control_rate_eqw": 0.0,
+        "change_rate_pooled": 0.10679611650485436,
+        "change_exact95": [
+          0.0545,
+          0.1831
+        ],
+        "control_exact95": [
+          0.0,
+          0.0352
+        ],
+        "excess_eqw": 0.10679611650485436,
+        "excess_95ci": [
+          0.04854368932038835,
+          0.1650485436893204
+        ],
+        "p_one_sided_excess_le_margin": 0.00045
+      }
+    },
+    "mistral": {
+      "all": {
+        "n": 540,
+        "excluded_missing_arm": 50,
+        "changes": 67,
+        "control_changes": 2,
+        "change_rate_eqw": 0.1354810238305384,
+        "control_rate_eqw": 0.0032362459546925564,
+        "change_rate_pooled": 0.12407407407407407,
+        "change_exact95": [
+          0.0975,
+          0.1549
+        ],
+        "control_exact95": [
+          0.0004,
+          0.0133
+        ],
+        "excess_eqw": 0.13224477787584585,
+        "excess_95ci": [
+          0.10058280446629962,
+          0.16574202496532592
+        ],
+        "p_one_sided_excess_le_margin": 0.0
+      },
+      "fever": {
+        "n": 231,
+        "excluded_missing_arm": 0,
+        "changes": 21,
+        "control_changes": 0,
+        "change_rate_eqw": 0.09090909090909091,
+        "control_rate_eqw": 0.0,
+        "change_rate_pooled": 0.09090909090909091,
+        "change_exact95": [
+          0.0572,
+          0.1356
+        ],
+        "control_exact95": [
+          0.0,
+          0.0158
+        ],
+        "excess_eqw": 0.09090909090909091,
+        "excess_95ci": [
+          0.05627705627705628,
+          0.12987012987012986
+        ],
+        "p_one_sided_excess_le_margin": 0.0
+      },
+      "hotpotqa": {
+        "n": 206,
+        "excluded_missing_arm": 0,
+        "changes": 27,
+        "control_changes": 2,
+        "change_rate_eqw": 0.13106796116504854,
+        "control_rate_eqw": 0.009708737864077669,
+        "change_rate_pooled": 0.13106796116504854,
+        "change_exact95": [
+          0.0882,
+          0.1849
+        ],
+        "control_exact95": [
+          0.0012,
+          0.0346
+        ],
+        "excess_eqw": 0.12135922330097088,
+        "excess_95ci": [
+          0.07281553398058252,
+          0.16990291262135923
+        ],
+        "p_one_sided_excess_le_margin": 0.0
+      },
+      "nq": {
+        "n": 103,
+        "excluded_missing_arm": 0,
+        "changes": 19,
+        "control_changes": 0,
+        "change_rate_eqw": 0.18446601941747573,
+        "control_rate_eqw": 0.0,
+        "change_rate_pooled": 0.18446601941747573,
+        "change_exact95": [
+          0.1149,
+          0.273
+        ],
+        "control_exact95": [
+          0.0,
+          0.0352
+        ],
+        "excess_eqw": 0.18446601941747573,
+        "excess_95ci": [
+          0.11650485436893204,
+          0.2621359223300971
+        ],
+        "p_one_sided_excess_le_margin": 0.0
+      }
+    }
+  },
+  "notes": [
+    "Computational automated correctness only, not blind human case judgments",
+    "Original preregistered analysis code unchanged",
+    "No paper submission implied"
+  ]
+}

@@ -1,0 +1,957 @@
+dataset,query_id,reference_correct,exchange_correct,reference_answer,exchange_answer,reference_canonical,exchange_canonical,retrieval_metrics_identical
+nq,test1,1,1,23 [3],23 [3],23,23,True
+nq,test10,1,1,"June 15, 2018 [6]","June 15, 2018[14]",june 15 2018,june 15 2018,True
+nq,test1003,0,0,INSUFFICIENT.,Rudi Macaggi [8],insufficient,rudi macaggi,True
+nq,test1004,0,0,INSUFFICIENT.,INSUFFICIENT,insufficient,insufficient,True
+nq,test1005,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+nq,test1006,0,0,"November 1, 1946[6]",INSUFFICIENT,november 1 1946,insufficient,True
+nq,test1009,1,0,Nicole Gale Anderson [1],INSUFFICIENT,nicole gale anderson,insufficient,True
+nq,test101,0,0,42 [6],30 [1],42,30,True
+nq,test1011,1,1,Kirstjen Nielsen [7],Kirstjen Nielsen [7],kirstjen nielsen,kirstjen nielsen,True
+nq,test1012,1,1,Ozzie Smith [2],Ozzie Smith [2],ozzie smith,ozzie smith,True
+nq,test1013,1,1,Don Majkowski [1],Don Majkowski [1],don majkowski,don majkowski,True
+nq,test1014,1,1,Maginot Line [1],Maginot Line [5],maginot line,maginot line,True
+nq,test1016,1,1,Rodney Crowell [1],Rodney Crowell [1],rodney crowell,rodney crowell,True
+nq,test1017,1,0,the nasal septum [6],INSUFFICIENT.,nasal septum,insufficient,True
+nq,test1018,0,0,"On September 24, 2012, Hulu Plus signed a multi-year deal with WWE to stream all of the company’s TV shows and some of its web series which includes Raw. [9]","September 24, 2012 [9]",on september 24 2012 hulu plus signed multi year deal with wwe to stream all of company s tv shows and some of its web series which includes raw,september 24 2012,True
+nq,test1019,0,1,Abidali Neemuchwala [4],Abid Ali Neemuchwala [2],abidali neemuchwala,abid ali neemuchwala,True
+nq,test1020,0,0,ADP [3],ADP [1],adp,adp,True
+nq,test1021,1,0,needle-like [1],INSUFFICIENT.,needle like,insufficient,True
+nq,test1022,0,0,Nicole Bradford [5],INSUFFICIENT.,nicole bradford,insufficient,True
+nq,test1023,0,0,ice giant [8],giant planet [6],ice giant,giant planet,True
+nq,test1025,0,0,"2.5 million km3 or 600,000 cu mi [1]","The Gulf of Mexico contains a volume of roughly 2,500 quadrillion liters (660 quadrillion US gallons). [1]",2 5 million km3 or 600 000 cu mi,gulf of mexico contains volume of roughly 2 500 quadrillion liters 660 quadrillion us gallons,True
+nq,test1026,1,1,Vasoepididymostomy [1],Vasoepididymostomy [1],vasoepididymostomy,vasoepididymostomy,True
+nq,test1027,0,0,Jacques-Yves Cousteau and Émile Gagnan [5].,Émile Gagnan and Jacques Cousteau [4],jacques yves cousteau and émile gagnan,émile gagnan and jacques cousteau,True
+nq,test1029,0,0,"The name ""Huey"" helicopter came from its designation of HU-1, which came to be pronounced as ""Huey"". [1]","The nickname ""Huey"" for the Bell UH-1 Iroquois came from its designation of HU-1, which was pronounced as ""Huey"". [1]",name huey helicopter came from its designation of hu 1 which came to be pronounced as huey,nickname huey for bell uh 1 iroquois came from its designation of hu 1 which was pronounced as huey,True
+nq,test103,1,1,Spain [9],Spain [9],spain,spain,True
+nq,test1031,0,0,Kirsten Vangsness [1],Kirsten Vangsness [1],kirsten vangsness,kirsten vangsness,True
+nq,test1032,0,0,"October 1, 2013 [8]",INSUFFICIENT.,october 1 2013,insufficient,True
+nq,test1035,1,1,Cozonac [1],Cozonac [1],cozonac,cozonac,True
+nq,test104,0,0,A Fever You Can't Sweat Out [1],"March 25, 2008 [3]",fever you can t sweat out,march 25 2008,True
+nq,test1041,1,1,Haliaeetus [1],Haliaeetus [1],haliaeetus,haliaeetus,True
+nq,test1042,1,1,William Wyler [2],William Wyler [2],william wyler,william wyler,True
+nq,test1044,0,0,INSUFFICIENT,INSUFFICIENT,insufficient,insufficient,True
+nq,test1046,1,1,7 [1],7 [1],7,7,True
+nq,test1048,1,0,pia mater [3],dura mater [6],pia mater,dura mater,True
+nq,test1049,1,1,Warren Hastings [1],Warren Hastings [1],warren hastings,warren hastings,True
+nq,test105,0,0,Milo [2],INSUFFICIENT.,milo,insufficient,True
+nq,test1050,1,1,the inner core and growing bud [1],the center core [2],inner core and growing bud,center core,True
+nq,test1054,1,1,Paul Cummins [6],Paul Cummins [6],paul cummins,paul cummins,True
+nq,test1056,1,0,Long Island [8],Quebec [2],long island,quebec,True
+nq,test1057,0,0,INSUFFICIENT.,INSUFFICIENT,insufficient,insufficient,True
+nq,test1058,0,1,Burnham [1],Arthur Chung [3],burnham,arthur chung,True
+nq,test1059,0,0,New Zealand [1],Brazil [2],new zealand,brazil,True
+nq,test106,1,1,Ashrita Furman [9],Ashrita Furman [9],ashrita furman,ashrita furman,True
+nq,test1061,1,1,Bohrium [3],Bohrium [3],bohrium,bohrium,True
+nq,test1062,0,0,"Boomer finds out she is a Cylon in the finale of the second season when Gina detonates a nuclear weapon, signaling the location of the human settlement to the Cylons [3].","In the episode ""Seadog"", she is the adopted child of deaf parents, though she does not find out she is adopted until season nine when she learns that she has a biological brother (with whom she reconnects in season ten). [1]",boomer finds out she is cylon in finale of second season when gina detonates nuclear weapon signaling location of human settlement to cylons,in episode seadog she is adopted child of deaf parents though she does not find out she is adopted until season nine when she learns that she has biological brother with whom she reconnects in season ten,True
+nq,test1063,1,1,B. Traven [1],B. Traven [1],b traven,b traven,True
+nq,test1064,0,1,"Darth Vader's Star Destroyer was labeled ""Darth Vader's Star Destroyer"" [1].",Devastator [3],darth vader s star destroyer was labeled darth vader s star destroyer,devastator,True
+nq,test1065,0,0,queen [10],female lion is called a lioness. [8],queen,female lion is called lioness,True
+nq,test1068,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+nq,test1069,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+nq,test107,1,1,Clare Torry [5],Clare Torry [5],clare torry,clare torry,True
+nq,test1071,0,0,Dividends are reported under financing activities [1].,Dividends go under financing activities [1].,dividends are reported under financing activities,dividends go under financing activities,True
+nq,test1072,1,0,Antimeridian [1],The 180 degree line of longitude is called the antimeridian [1].,antimeridian,180 degree line of longitude is called antimeridian,True
+nq,test1073,0,0,INSUFFICIENT,Tim Dunigan[1],insufficient,tim dunigan,True
+nq,test1075,0,0,21 May 2011 [9],"May 18, 1980 [5]",21 may 2011,may 18 1980,True
+nq,test1076,0,0,"When you are considered under the poverty line, you are living on less than $1.90 per day per head of purchasing power parity [10].","The poverty line is determined by income levels, with specific percentages of the population and families below it, as seen in various locations. For example, in Crested Butte, 11.4% of the population were below the poverty line [1]. However, the exact criteria can vary by region and are often based on median incomes and family structures. The answer is not explicitly defined in a single passage. INSUFFICIENT.",when you are considered under poverty line you are living on less than 1 90 per day per head of purchasing power parity,poverty line is determined by income levels with specific percentages of population and families below it as seen in various locations for example in crested butte 11 4 of population were below poverty line however exact criteria can vary by region and are often based on median incomes and family structures answer is not explicitly defined in single passage insufficient,True
+nq,test1077,0,0,Beyoncé [10],Beyoncé,beyoncé,beyoncé,True
+nq,test1079,0,0,1914-1918[1],1914â€“1918 [1],1914 1918,1914â 1918,True
+nq,test108,0,1,Yale and New York University [3],New York University [3],yale and new york university,new york university,True
+nq,test1081,1,1,New England Patriots [2],New England Patriots [2],new england patriots,new england patriots,True
+nq,test1082,1,1,John McConnell [1],"John McConnell[1]  
+[1]",john mcconnell,john mcconnell,True
+nq,test1083,0,0,The length and direction of a straight line between two locations or positions is called displacement [4].,"The length and direction of a straight line between two locations or positions is determined by the coordinates of the two points and the metric of the space, which can be established once a coordinate system is chosen [2].",length and direction of straight line between two locations or positions is called displacement,length and direction of straight line between two locations or positions is determined by coordinates of two points and metric of space which can be established once coordinate system is chosen,True
+nq,test1084,0,0,James Lafferty [3],James Lafferty [7],james lafferty,james lafferty,True
+nq,test1085,0,0,Owen Asztalos and Wyatt and Dylan Walters [3],INSUFFICIENT.,owen asztalos and wyatt and dylan walters,insufficient,True
+nq,test1086,1,0,Camping World Stadium [5],"Camping World Stadium in Orlando, Florida[5]",camping world stadium,camping world stadium in orlando florida,True
+nq,test1087,1,1,Christopher Lloyd [3],Christopher Lloyd [2],christopher lloyd,christopher lloyd,True
+nq,test1089,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+nq,test1090,0,1,Charles Cros[3],Thomas Edison [2],charles cros,thomas edison,True
+nq,test1093,0,1,INSUFFICIENT.,"April 7, 2016 [9]",insufficient,april 7 2016,True
+nq,test1094,1,1,21 June 2007 [4],21 June 2007 [4],21 june 2007,21 june 2007,True
+nq,test1095,1,0,Tyrion Lannister [8],INSUFFICIENT.,tyrion lannister,insufficient,True
+nq,test1096,0,0,Jamie Dornan [2],Charlie Hunnam [6],jamie dornan,charlie hunnam,True
+nq,test1097,1,0,Liam Cunningham [5],Nikolaj Coster-Waldau [6],liam cunningham,nikolaj coster waldau,True
+nq,test1098,1,1,Mickey Mantle [1],Mickey Mantle [1],mickey mantle,mickey mantle,True
+nq,test1099,0,1,Trolls [1],In Time,trolls,in time,True
+nq,test11,0,1,INSUFFICIENT.,Elvis Presley [1],insufficient,elvis presley,True
+nq,test110,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+nq,test1100,0,1,INSUFFICIENT.,Ernest Hemingway [5],insufficient,ernest hemingway,True
+nq,test1101,0,0,"The idea of a unicorn comes from various cultural and historical sources, including religious art, classical Jewish interpretations, and the depiction of narwhal tusks as unicorn horns. [3][5][8]","The idea of a unicorn came from prehistoric bones found at Unicorn Cave in Germany's Harz Mountains, which were reconstructed by Otto Von Guericke as a unicorn in 1663 [3].",idea of unicorn comes from various cultural and historical sources including religious art classical jewish interpretations and depiction of narwhal tusks as unicorn horns,idea of unicorn came from prehistoric bones found at unicorn cave in germany s harz mountains which were reconstructed by otto von guericke as unicorn in 1663,True
+nq,test1102,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+nq,test1103,1,1,538[4],538 [1],538,538,True
+nq,test1104,0,0,"Fungi are decomposers and play a critical role in nutrient cycling, especially as saprotrophs and symbionts, degrading organic matter to inorganic molecules which can then re-enter anabolic metabolic pathways in plants or other organisms [6]. They are also part of the detrital web, where they break down plant and animal matter, and their products can be consumed by detritivores and then by carnivores [2]. Additionally, fungi create a nutritional niche for other organisms by enriching nutritionally extremely scarce food - the dead wood, allowing xylophages to develop and contribute to wood decomposition and nutrient cycling","Fungi are decomposers in the food web, breaking down dead plant and animal material into simple nutrients [4].",fungi are decomposers and play critical role in nutrient cycling especially as saprotrophs and symbionts degrading organic matter to inorganic molecules which can then re enter anabolic metabolic pathways in plants or other organisms they are also part of detrital web where they break down plant and animal matter and their products can be consumed by detritivores and then by carnivores additionally fungi create nutritional niche for other organisms by enriching nutritionally extremely scarce food dead wood allowing xylophages to develop and contribute to wood decomposition and nutrient cycling,fungi are decomposers in food web breaking down dead plant and animal material into simple nutrients,True
+nq,test1105,0,0,Robert Adamson [9],Robert Adamson [9],robert adamson,robert adamson,True
+nq,test1106,1,0,1976 [2],INSUFFICIENT,1976,insufficient,True
+nq,test1108,0,0,INSUFFICIENT.,INSUFFICIENT,insufficient,insufficient,True
+nq,test1109,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+nq,test1112,0,0,a mixture of phencyclidine and cocaine [2],A mixture of phencyclidine and cocaine [2].,mixture of phencyclidine and cocaine,mixture of phencyclidine and cocaine,True
+nq,test1113,0,0,"Originating among German Lutherans, the ""Easter Hare"" originally played the role of a judge, evaluating whether children were good or disobedient in behavior at the start of the season of Eastertide [1]. The idea of an egg-giving hare went to the U.S. in the 18th century. Protestant German immigrants in the Pennsylvania Dutch area told their children about the ""Osterhase"" (sometimes spelled ""Oschter Haws"")[2]. [1][2]","The legend of the Easter Bunny originated among German Lutherans, where the ""Easter Hare"" played the role of a judge evaluating children's behavior [1].",originating among german lutherans easter hare originally played role of judge evaluating whether children were good or disobedient in behavior at start of season of eastertide idea of egg giving hare went to u s in 18th century protestant german immigrants in pennsylvania dutch area told their children about osterhase sometimes spelled oschter haws,legend of easter bunny originated among german lutherans where easter hare played role of judge evaluating children s behavior,True
+nq,test1114,0,0,"The first episode of Star Trek: Discovery aired in a ""preview broadcast"" on CBS in the United States on September 24 [8].","September 24, 2017 [3]",first episode of star trek discovery aired in preview broadcast on cbs in united states on september 24,september 24 2017,True
+nq,test1115,0,0,God of War III was released in December 2009. [1],"God of War III
+[10]",god of war iii was released in december 2009,god of war iii,True
+nq,test1117,0,0,"1977 [1], 1986 [1], 1987 [1], 1989 [1], 1997 [1], 1998 [1], 2013 [1], 2015 [1]",Super Bowl XXXIII [4],1977 1986 1987 1989 1997 1998 2013 2015,super bowl xxxiii,True
+nq,test1118,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+nq,test112,0,0,1972 [8],1983 [1],1972,1983,True
+nq,test1122,0,0,7 July to 14 July [3],The Running of the Bulls in Spain is held from 6–14 July [3].,7 july to 14 july,running of bulls in spain is held from 6 14 july,True
+nq,test1124,0,0,INSUFFICIENT,INSUFFICIENT,insufficient,insufficient,True
+nq,test1126,1,0,St. Augustine [6],Fort Caroline [2],st augustine,fort caroline,True
+nq,test1127,0,0,Shirley Jones [5],Shirley Jones [5],shirley jones,shirley jones,True
+nq,test1129,1,1,Vijaya Mulay [2],Vijaya Mulay [2],vijaya mulay,vijaya mulay,True
+nq,test113,0,1,Charles Lyell [3][4][5][8][9],James Hutton [3],charles lyell,james hutton,True
+nq,test1130,0,0,"Greenland is geographically part of North America, but politically associated with Europe as it is part of the Kingdom of Denmark [1].","Greenland is an autonomous constituent country within the Kingdom of Denmark, located between the Arctic and Atlantic Oceans, and is physiographically part of North America. [7]",greenland is geographically part of north america but politically associated with europe as it is part of kingdom of denmark,greenland is autonomous constituent country within kingdom of denmark located between arctic and atlantic oceans and is physiographically part of north america,True
+nq,test1133,0,0,10 and over [2],INSUFFICIENT.,10 and over,insufficient,True
+nq,test1135,1,1,1930s [1],1930s [1],1930s,1930s,True
+nq,test1136,1,0,Charlotte of Mecklenburg-Strelitz [2],INSUFFICIENT,charlotte of mecklenburg strelitz,insufficient,True
+nq,test1137,0,0,INSUFFICIENT,INSUFFICIENT.,insufficient,insufficient,True
+nq,test1138,0,0,small intestine [4],small intestine [1],small intestine,small intestine,True
+nq,test1141,0,0,"1994 [1], [3]",1994 [7],1994,1994,True
+nq,test1144,0,0,2000 [5],1996 [2],2000,1996,True
+nq,test1145,0,0,left [1],"The U.S. Army wears the shoulder sleeve insignia (SSI) on the left upper arm, just below the uniform's shoulder seam on all but the ACU. On the Army Combat Uniform the SSI is attached to a velcro backing and is then centered on rectangle of velcro on the arm. [1]",left,u s army wears shoulder sleeve insignia ssi on left upper arm just below uniform s shoulder seam on all but acu on army combat uniform ssi is attached to velcro backing and is then centered on rectangle of velcro on arm,True
+nq,test1149,1,0,Plant hormones [3],auxin [1],plant hormones,auxin,True
+nq,test1150,0,0,"The Supreme Court of the Philippines has judicial and administrative functions. The judicial functions include reviewing laws and executive actions, and the administrative functions include supervising the Philippine judiciary and its employees, as well as members of the Philippine bar. [1][7]","The Supreme Court of the Philippines has the power to exercise judicial review, declare legislation unconstitutional, and perform judicial functions such as adjudication and settling actual controversies involving rights. It also has the power to issue writs like habeas data. [1][9][8]",supreme court of philippines has judicial and administrative functions judicial functions include reviewing laws and executive actions and administrative functions include supervising philippine judiciary and its employees as well as members of philippine bar,supreme court of philippines has power to exercise judicial review declare legislation unconstitutional and perform judicial functions such as adjudication and settling actual controversies involving rights it also has power to issue writs like habeas data,True
+nq,test1156,1,0,Glenn Close [4],INSUFFICIENT.,glenn close,insufficient,True
+nq,test1157,0,0,"chitin, sclerotin [2]","Meringue, Silk [3][7]",chitin sclerotin,meringue silk,True
+nq,test116,0,0,Satnam Singh Bhamara [10],Emmanuel Mudiay [10],satnam singh bhamara,emmanuel mudiay,True
+nq,test1160,0,0,"Jon Snow is introduced as the illegitimate son of Ned Stark, the honorable lord of Winterfell, an ancient fortress in the North of the fictional continent of Westeros [2].","Jon Snow is a character in Game of Thrones, portrayed as the bastard son of Eddard ""Ned"" Stark and a mysterious mother, and is a key figure in the series. [4]",jon snow is introduced as illegitimate son of ned stark honorable lord of winterfell ancient fortress in north of fictional continent of westeros,jon snow is character in game of thrones portrayed as bastard son of eddard ned stark and mysterious mother and is key figure in series,True
+nq,test1162,0,0,children's puzzle books [3],Children's puzzle books [3],children s puzzle books,children s puzzle books,True
+nq,test1163,0,0,front [3],The left anterior descending artery is located in the heart. [5],front,left anterior descending artery is located in heart,True
+nq,test1165,1,1,right ventricle [4],right ventricle [7],right ventricle,right ventricle,True
+nq,test1166,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+nq,test1167,0,1,Lionel Messi [1],Real Madrid [10],lionel messi,real madrid,True
+nq,test1168,0,0,Georgia Bulldogs and Auburn Tigers [1],Georgia Bulldogs and Auburn Tigers [1],georgia bulldogs and auburn tigers,georgia bulldogs and auburn tigers,True
+nq,test1169,0,0,increase accessibility to the park and make the Mall of America a destination location [1],The purpose of the Mall of America is to serve as a shopping mall. [8],increase accessibility to park and make mall of america destination location,purpose of mall of america is to serve as shopping mall,True
+nq,test1170,0,0,2007 [5],INSUFFICIENT.,2007,insufficient,True
+nq,test1171,0,0,"April 29, 2009 [1]",INSUFFICIENT.,april 29 2009,insufficient,True
+nq,test1172,1,1,The Ramones [3],the Ramones [3],ramones,ramones,True
+nq,test1173,0,0,the Middle Kingdom [4],China in Chinese is called Zhongguo which means [10].,middle kingdom,china in chinese is called zhongguo which means,True
+nq,test1174,0,0,via walkie-talkie and earpiece [2],The Cash Cab guy receives questions via a walkie-talkie and earpiece from the support van. [2],via walkie talkie and earpiece,cash cab guy receives questions via walkie talkie and earpiece from support van,True
+nq,test1175,0,1,"By the end of 1350, the Black Death subsided, but it never really died out in England [2].",December 1349 [6],by end of 1350 black death subsided but it never really died out in england,december 1349,True
+nq,test1178,0,0,1901 [4],INSUFFICIENT.,1901,insufficient,True
+nq,test1180,1,0,"Welch, West Virginia [1]",INSUFFICIENT.,welch west virginia,insufficient,True
+nq,test1181,1,0,Brazil[2][7],INSUFFICIENT.,brazil,insufficient,True
+nq,test1182,1,0,2022 [1],INSUFFICIENT.,2022,insufficient,True
+nq,test1183,0,0,"tight junctions can be found in vertebrate epithelia [5], and in different types of epithelia [8]. They are also present in the intestinal epithelium [9]. [5][8][9]","blood–brain barrier [1], axon hillock [2], neuroeffector junction [4], tight junction [7], stem-cell niche [10]",tight junctions can be found in vertebrate epithelia and in different types of epithelia they are also present in intestinal epithelium,blood brain barrier axon hillock neuroeffector junction tight junction stem cell niche,True
+nq,test1185,1,1,The Osmonds [1],The Osmonds [1],osmonds,osmonds,True
+nq,test1187,0,0,7 [1],7 [2],7,7,True
+nq,test1189,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+nq,test1191,0,0,INSUFFICIENT.,INSUFFICIENT,insufficient,insufficient,True
+nq,test1192,0,0,Lewis Hamilton [9],INSUFFICIENT.,lewis hamilton,insufficient,True
+nq,test1195,1,1,"February 27, 2007[1]","February 27, 2007[1]",february 27 2007,february 27 2007,True
+nq,test1196,0,0,Hannibal[3],Hanno the Rhodian [10],hannibal,hanno rhodian,True
+nq,test1197,1,1,Asia [1],Asia [1],asia,asia,True
+nq,test1198,0,0,Ernest Rutherford[3],Ernest Rutherford[3],ernest rutherford,ernest rutherford,True
+nq,test1199,0,0,"October 7, 2009 [7]",INSUFFICIENT,october 7 2009,insufficient,True
+nq,test12,0,0,Christopher Lloyd [5],INSUFFICIENT.,christopher lloyd,insufficient,True
+nq,test120,1,1,2013 [8],2013 [8],2013,2013,True
+nq,test1200,1,1,Ummah [1],Ummah [7],ummah,ummah,True
+nq,test1203,0,0,The River Thames starts at Thames Head in Gloucestershire and flows into the North Sea via the Thames Estuary [6]. The currently accepted end of the Thames is the Yantlet Line [9].,The River Thames starts at Thames Head in Gloucestershire and flows into the North Sea via the Thames Estuary [6].,river thames starts at thames head in gloucestershire and flows into north sea via thames estuary currently accepted end of thames is yantlet line,river thames starts at thames head in gloucestershire and flows into north sea via thames estuary,True
+nq,test1204,0,0,Part 5 of JoJo's Bizarre Adventure takes place in Italy. [4],INSUFFICIENT.,part 5 of jojo s bizarre adventure takes place in italy,insufficient,True
+nq,test1205,0,0,Mollusc [2],Cnidaria [6],mollusc,cnidaria,True
+nq,test1206,0,0,INSUFFICIENT,INSUFFICIENT.,insufficient,insufficient,True
+nq,test1207,1,1,-ase [1],-ase [1],ase,ase,True
+nq,test1208,0,0,1972[3],1974[25],1972,1974,True
+nq,test1209,0,0,Melvil Dewey in the United States[2].,"The Dewey Decimal Classification was influenced by the Cutter Expansive Classification, the Dewey Decimal System, and the Putnam Classification System. [6]",melvil dewey in united states,dewey decimal classification was influenced by cutter expansive classification dewey decimal system and putnam classification system,True
+nq,test121,0,0,"The Great Wall of China is approximately 21,196 kilometers (13,171 miles) long. [9]",INSUFFICIENT.,great wall of china is approximately 21 196 kilometers 13 171 miles long,insufficient,True
+nq,test1210,1,1,Miller Lite [1],Miller Lite [1],miller lite,miller lite,True
+nq,test1211,1,1,Mariah Carey [10],Mariah Carey[10],mariah carey,mariah carey,True
+nq,test1212,0,0,INSUFFICIENT,INSUFFICIENT.,insufficient,insufficient,True
+nq,test1213,0,0,1991 [1],1991 [1],1991,1991,True
+nq,test1214,1,1,2016 [1],2016 [8],2016,2016,True
+nq,test1215,0,0,4 [1],4 [1],4,4,True
+nq,test1216,1,1,1974 [7],1974[4],1974,1974,True
+nq,test1218,1,1,Arkansas Razorbacks [5],Arkansas [10],arkansas razorbacks,arkansas,True
+nq,test122,0,1,Tom's Restaurant [4],Monk's Café [3],tom s restaurant,monk s café,True
+nq,test1220,0,0,"The term ""Jack Mormon"" originated in Missouri during the Kirtland period of Latter Day Saint history, circa 1834, when sympathetic Democrats in Clay County were pejoratively labeled ""Jack"" Mormons by antagonistic citizens of Jackson County [1].","The term Jack Mormon comes from Missouri during the Kirtland period of Latter Day Saint history, circa 1834, where local citizens, mostly Democrats, were sympathetic and friendly toward the Mormons and were pejoratively labeled ""Jack"" Mormons by the antagonistic citizens of Jackson County [1].",term jack mormon originated in missouri during kirtland period of latter day saint history circa 1834 when sympathetic democrats in clay county were pejoratively labeled jack mormons by antagonistic citizens of jackson county,term jack mormon comes from missouri during kirtland period of latter day saint history circa 1834 where local citizens mostly democrats were sympathetic and friendly toward mormons and were pejoratively labeled jack mormons by antagonistic citizens of jackson county,True
+nq,test1221,1,0,Jean Fernel [10],Hippocrates[8],jean fernel,hippocrates,True
+nq,test1222,0,0,Danny [2],Danny [8],danny,danny,True
+nq,test1223,0,1,Walsh [2],Hook [4],walsh,hook,True
+nq,test1224,0,0,"Amitabh Bachchan, Akshay Kumar, Bobby Deol, Divya Khosla Kumar, Sandali Sinha and Nagma[1]","Amitabh Bachchan, Akshay Kumar, Bobby Deol, Divya Khosla Kumar, Sandali Sinha and Nagma [1]",amitabh bachchan akshay kumar bobby deol divya khosla kumar sandali sinha and nagma,amitabh bachchan akshay kumar bobby deol divya khosla kumar sandali sinha and nagma,True
+nq,test1225,0,0,1950 [1],1940's [2],1950,1940 s,True
+nq,test1227,0,0,Aaron and Andrew Harrison [5],INSUFFICIENT.,aaron and andrew harrison,insufficient,True
+nq,test1229,1,0,Meri [1],Kody Brown [2],meri,kody brown,True
+nq,test1230,1,1,Buddhism [3],Buddhism [1],buddhism,buddhism,True
+nq,test1231,1,0,The Eagles [1],Daniel Powter [1],eagles,daniel powter,True
+nq,test1234,0,0,INSUFFICIENT,The United States uses the US Customary System alongside the SI system. [5],insufficient,united states uses us customary system alongside si system,True
+nq,test1235,0,0,INSUFFICIENT,INSUFFICIENT.,insufficient,insufficient,True
+nq,test1237,1,1,"Helena [1], [2], [6], [7], [8], [9]",Helena [8],helena,helena,True
+nq,test1238,1,0,Rich Mullins [2],INSUFFICIENT.,rich mullins,insufficient,True
+nq,test124,1,1,2015 [1],2015 [1],2015,2015,True
+nq,test1240,1,1,Mary Elizabeth [2],Mary Elizabeth [2],mary elizabeth,mary elizabeth,True
+nq,test1242,0,0,"Flag of the Soviet Union [1], Flag of China [5], Flag of Vietnam [10]",Vietnam flag [10],flag of soviet union flag of china flag of vietnam,vietnam flag,True
+nq,test1244,1,1,20 [3],20 [3],20,20,True
+nq,test1245,0,0,"support, movement, protection, production of blood cells, storage of minerals, and endocrine regulation [2]","support, movement, protection, production of blood cells, storage of minerals, and endocrine regulation [2]",support movement protection production of blood cells storage of minerals and endocrine regulation,support movement protection production of blood cells storage of minerals and endocrine regulation,True
+nq,test1246,0,0,1930s [2],INSUFFICIENT.,1930s,insufficient,True
+nq,test1247,0,0,A virtual reality simulator accessible by players using visors and haptic technology such as gloves [5].,"The Oasis is a virtual reality simulator accessible by players using visors and haptic technology such as gloves. It functions both as an MMORPG and as a virtual society, with its currency being the most stable in the real world. [5]",virtual reality simulator accessible by players using visors and haptic technology such as gloves,oasis is virtual reality simulator accessible by players using visors and haptic technology such as gloves it functions both as mmorpg and as virtual society with its currency being most stable in real world,True
+nq,test1248,1,0,Hercules [1],INSUFFICIENT.,hercules,insufficient,True
+nq,test1249,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+nq,test125,1,1,1854 [4],1854[4],1854,1854,True
+nq,test1251,1,0,Amitabh Bachchan [10],INSUFFICIENT.,amitabh bachchan,insufficient,True
+nq,test1252,0,0,29 November [2],"On 16 November 2003, Messi made his first team debut when he came on in the 75th minute during a friendly against José Mourinho's Porto [3].",29 november,on 16 november 2003 messi made his first team debut when he came on in 75th minute during friendly against josé mourinho s porto,True
+nq,test1256,0,1,energy dissipated [1],energy loss [9],energy dissipated,energy loss,True
+nq,test1257,1,1,"$205,700 [1]","$205,700 [1]",205 700,205 700,True
+nq,test1260,1,1,7 [5],7 [1],7,7,True
+nq,test1261,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+nq,test1263,1,1,Moctezuma II [2],Moctezuma II [8],moctezuma ii,moctezuma ii,True
+nq,test1264,0,0,Pat Walshe [2],Pat Walshe [1],pat walshe,pat walshe,True
+nq,test1268,1,1,Fermín Francisco de Lasuén [1],Fermín Francisco de Lasuén [1],fermín francisco de lasuén,fermín francisco de lasuén,True
+nq,test127,1,1,Sohrai [1],Sohrai [1],sohrai,sohrai,True
+nq,test1273,1,1,1981 [2],1981 [9],1981,1981,True
+nq,test1274,0,0,"The four major layers of the Earth in order are the crust, mantle, outer core, and inner core. However, the provided passages do not explicitly list the four major layers of the Earth in order. Therefore, the answer is: INSUFFICIENT.",INSUFFICIENT.,four major layers of earth in order are crust mantle outer core and inner core however provided passages do not explicitly list four major layers of earth in order therefore answer is insufficient,insufficient,True
+nq,test1276,1,0,Four [10],INSUFFICIENT.,four,insufficient,True
+nq,test1278,0,0,The word hosanna is a liturgical word in Judaism and Christianity. [2],"The word hosanna is from Hebrew הושיעה־נא, הושיעה נא hôšîʿâ-nā and related to Aramaic אושענא (ʾōshaʿnā) meaning ""save, rescue, savior""[4].",word hosanna is liturgical word in judaism and christianity,word hosanna is from hebrew הושיעה נא הושיעה נא hôšîʿâ nā and related to aramaic אושענא ʾōshaʿnā meaning save rescue savior,True
+nq,test1280,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+nq,test1282,0,0,Baltimore-Washington Metropolitan Area [3],"Prince George's County, Maryland is included in the Washington-Arlington-Alexandria, DC-VA-MD-WV Metropolitan Statistical Area. [7]",baltimore washington metropolitan area,prince george s county maryland is included in washington arlington alexandria dc va md wv metropolitan statistical area,True
+nq,test1283,1,0,2011 [4],2014 [10],2011,2014,True
+nq,test1286,1,1,247.3 million [3],247.3 million [3],247 3 million,247 3 million,True
+nq,test1287,1,0,Sylvester Stallone [3],Jon Favreau [5],sylvester stallone,jon favreau,True
+nq,test1288,0,1,"The speed of the NASCAR pace car is determined by the pit road speed, which drivers use as a reference. This speed is monitored and maintained to ensure safety and fairness. [1]",pit road speed [2],speed of nascar pace car is determined by pit road speed which drivers use as reference this speed is monitored and maintained to ensure safety and fairness,pit road speed,True
+nq,test1289,0,0,Palpatine [1],Palpatine [6],palpatine,palpatine,True
+nq,test129,0,0,The declaration of independence was written for the thirteen colonies to declare independence from Great Britain. [1],The Declaration of Independence was written for the American colonies to declare their independence from Great Britain. [10],declaration of independence was written for thirteen colonies to declare independence from great britain,declaration of independence was written for american colonies to declare their independence from great britain,True
+nq,test1290,1,1,Chris Rea [1],Chris Rea [1],chris rea,chris rea,True
+nq,test1291,0,0,Italy [2],"Hope Logan on The Bold and the Beautiful went to Big Bear, where she met Wyatt Spencer. [9]",italy,hope logan on bold and beautiful went to big bear where she met wyatt spencer,True
+nq,test1292,1,1,Wakanda [2],Wakanda [2],wakanda,wakanda,True
+nq,test1293,0,0,1986 [1],2011 [1],1986,2011,True
+nq,test1294,1,1,Florida [4],Florida [5],florida,florida,True
+nq,test1295,0,0,season 9 [7],"In ""Two Fathers"" [1]",season 9,in two fathers,True
+nq,test1296,0,0,17 [5],11 [7],17,11,True
+nq,test1298,0,0,Leo Dalton was killed in an explosion. [7],INSUFFICIENT.,leo dalton was killed in explosion,insufficient,True
+nq,test1299,0,0,private sector [4],private sector [1],private sector,private sector,True
+nq,test13,0,1,1971 [2],"January 2, 1971 [2]",1971,january 2 1971,True
+nq,test130,1,0,nucleus [3],INSUFFICIENT,nucleus,insufficient,True
+nq,test1300,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+nq,test1301,0,1,Abanindranath Tagore and Gaganendranath Tagore [2][4][7],Abanindranath Tagore [2],abanindranath tagore and gaganendranath tagore,abanindranath tagore,True
+nq,test1303,0,0,Matthias Schleiden[3],Matthias Schleiden and Theodor Schwann [10],matthias schleiden,matthias schleiden and theodor schwann,True
+nq,test1304,0,1,INSUFFICIENT.,2005 [7],insufficient,2005,True
+nq,test1305,0,0,The sun hits the U.S. first in the East. [4],INSUFFICIENT,sun hits u s first in east,insufficient,True
+nq,test1307,0,0,"Syria [1], Bulgaria [2], Mexico [4], India [5], Jordan [6], and Italy [8]",Flag of Kenya [9],syria bulgaria mexico india jordan and italy,flag of kenya,True
+nq,test1309,0,0,"The New Day won the tag team titles on September 5, 2016 [3].","The New Day became the longest reigning WWE Tag Team Champions in the title's history, breaking the old record of 331 days previously set by Paul London and Brian Kendrick[54] and, after the creation of the SmackDown Tag Team Championship for the SmackDown brand,[55] became the last people to have held their championship as the sole tag team title in WWE and the first to hold it under its new name of Raw Tag Team Championship.[56] The New Day would continue to successfully retain their championship against Gallows and Anderson in the following months, such as SummerSlam on August 21",new day won tag team titles on september 5 2016,new day became longest reigning wwe tag team champions in title s history breaking old record of 331 days previously set by paul london and brian kendrick and after creation of smackdown tag team championship for smackdown brand became last people to have held their championship as sole tag team title in wwe and first to hold it under its new name of raw tag team championship new day would continue to successfully retain their championship against gallows and anderson in following months such as summerslam on august 21,True
+nq,test131,0,0,1789 [1],1885 [2],1789,1885,True
+nq,test1310,1,1,Jules Shear [1],Jules Shear [1],jules shear,jules shear,True
+nq,test1312,0,0,Benj Pasek and Justin Paul wrote nine songs.[22],INSUFFICIENT.,benj pasek and justin paul wrote nine songs,insufficient,True
+nq,test1313,0,0,The answer is not present in the provided passages. INSUFFICIENT.,INSUFFICIENT.,answer is not present in provided passages insufficient,insufficient,True
+nq,test1314,0,0,"MCA Home Video, later known as MCA-Universal Home Video, is the authority or governing body of Jaws 2. [3]","The authority or governing body of MCA is the Department of Electronics, Government of India[10].",mca home video later known as mca universal home video is authority or governing body of jaws 2,authority or governing body of mca is department of electronics government of india,True
+nq,test1315,0,0,solid [1],Solid [3],solid,solid,True
+nq,test1317,1,0,"1,228 km/h [2]",1228 km/h [2],1 228 km h,1228 km h,True
+nq,test1319,1,1,Theodore Roosevelt [1],Theodore Roosevelt [3],theodore roosevelt,theodore roosevelt,True
+nq,test132,1,1,Michael Buffer [1],Michael Buffer [7],michael buffer,michael buffer,True
+nq,test1320,1,1,Justin Timberlake [4],Justin Timberlake [4],justin timberlake,justin timberlake,True
+nq,test1322,0,0,"The prime rib comes from the primal rib, one of the nine primal cuts of beef [5].","The prime rib comes from the primal rib, one of the nine primal cuts of beef [5].",prime rib comes from primal rib one of nine primal cuts of beef,prime rib comes from primal rib one of nine primal cuts of beef,True
+nq,test1324,1,1,courts [5],courts [5],courts,courts,True
+nq,test1325,0,0,Heath Ledger [2],Heath Ledger [8],heath ledger,heath ledger,True
+nq,test1328,1,1,President Lyndon Johnson [4],President Lyndon Johnson [4],president lyndon johnson,president lyndon johnson,True
+nq,test133,0,0,"The first NFL Thursday Night Football game was played on November 23, 2006. [8]",INSUFFICIENT.,first nfl thursday night football game was played on november 23 2006,insufficient,True
+nq,test1331,0,0,Gravitational force is commonly known as weight. [8],gravitational force [2],gravitational force is commonly known as weight,gravitational force,True
+nq,test1332,1,1,Dumont d'Urville Station [1],Dumont d'Urville Station [1],dumont d urville station,dumont d urville station,True
+nq,test1335,0,0,Judith Keppel [1],INSUFFICIENT.,judith keppel,insufficient,True
+nq,test1336,0,0,INSUFFICIENT,INSUFFICIENT.,insufficient,insufficient,True
+nq,test1337,0,1,"B. J. Thomas [4], Johnny Farnham [1], and others [1].",B. J. Thomas [2],b j thomas johnny farnham and others,b j thomas,True
+nq,test134,0,0,INSUFFICIENT,INSUFFICIENT.,insufficient,insufficient,True
+nq,test1340,0,0,3 [1][2][9],3 [8],3,3,True
+nq,test1341,0,1,Aristotle [10],Ptolemy [2],aristotle,ptolemy,True
+nq,test1343,0,0,INSUFFICIENT,INSUFFICIENT,insufficient,insufficient,True
+hotpotqa,5a70eee85542994082a3e3f0,0,0,Yoruba people [3],The Yoruba people [3].,yoruba people,yoruba people,True
+hotpotqa,5a70f0a75542994082a3e403,0,0,Scanian [1],Scanian [1],scanian,scanian,True
+hotpotqa,5a70f0e75542994082a3e408,0,0,Johns Hopkins University [10],INSUFFICIENT.,johns hopkins university,insufficient,True
+hotpotqa,5a70f11a5542994082a3e40b,1,0,"Bull Terrier
+[6]",INSUFFICIENT.,bull terrier,insufficient,True
+hotpotqa,5a70f1685542994082a3e40f,0,0,Violin Sonata No. 5 [1],Violin Sonata No. 5 [1],violin sonata no 5,violin sonata no 5,True
+hotpotqa,5a70f39c5542994082a3e429,0,1,Paul LePage [1],Eliot Cutler [3],paul lepage,eliot cutler,True
+hotpotqa,5a70f4695542994082a3e435,1,1,Whitewater Canal [1],Whitewater Canal [1],whitewater canal,whitewater canal,True
+hotpotqa,5a70f4c45542994082a3e437,1,1,Gian Carlo Menotti [1],Gian Carlo Menotti [1],gian carlo menotti,gian carlo menotti,True
+hotpotqa,5a70f6425542994082a3e44c,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a70f9335542994082a3e46a,0,0,More [10],INSUFFICIENT.,more,insufficient,True
+hotpotqa,5a70ff335542994082a3e49c,0,0,Kareena Kapoor [9],Kareena Kapoor [9],kareena kapoor,kareena kapoor,True
+hotpotqa,5a7100435542994082a3e4a3,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a7103b35542994082a3e4c0,1,1,Khunyang Chhish [1],Khunyang Chhish [1],khunyang chhish,khunyang chhish,True
+hotpotqa,5a7108fa5542994082a3e4ef,1,1,Second Battle of Bull Run [1],Second Battle of Bull Run [1],second battle of bull run,second battle of bull run,True
+hotpotqa,5a71095e5542994082a3e4f3,1,1,David Dunn [2],David Dunn [1],david dunn,david dunn,True
+hotpotqa,5a7109e95542994082a3e4fa,0,0,Birmingham [1],Birmingham City [1],birmingham,birmingham city,True
+hotpotqa,5a710a1e5542994082a3e4fd,0,0,Yellow fever [1],Yellow fever [1],yellow fever,yellow fever,True
+hotpotqa,5a710a915542994082a3e504,0,1,Scott Treleaven is credited with working in both films and photography. [1],Scott Treleaven [1],scott treleaven is credited with working in both films and photography,scott treleaven,True
+hotpotqa,5a710bb15542994082a3e50d,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a710d155542994082a3e520,1,1,Erich Schmidt-Leichner [2],Erich Schmidt-Leichner [2],erich schmidt leichner,erich schmidt leichner,True
+hotpotqa,5a71148b5542994082a3e567,0,0,3070 [3],"The Penobscot Marine Museum is located in Searsport, Maine. The population of Searsport is not directly mentioned in the provided passages. However, passage [6] mentions Whitney, Maine, which is a different location. Therefore, the answer is INSUFFICIENT.",3070,penobscot marine museum is located in searsport maine population of searsport is not directly mentioned in provided passages however passage mentions whitney maine which is different location therefore answer is insufficient,True
+hotpotqa,5a7115475542994082a3e56d,0,0,"The answer is: ""The Perez Family"" [6].","Lupita Nyong'o [1] starred in ""Look What This World Did to Us"" [4], which was released in 2015.",answer is perez family,lupita nyong o starred in look what this world did to us which was released in 2015,True
+hotpotqa,5a71166d5542994082a3e576,0,0,Battle of Manila [1],"Battle of Manila [7]  
+Battle of Guam (1944) [4]",battle of manila,battle of manila battle of guam 1944,True
+hotpotqa,5a7119095542994082a3e589,1,1,Ben Stokes [1],Ben Stokes [1],ben stokes,ben stokes,True
+hotpotqa,5a7119f75542994082a3e58e,0,0,INSUFFICIENT.,"Terry Riley was born on 28 September 1931, but this information is not present in the provided passages. Therefore, the answer is: INSUFFICIENT.",insufficient,terry riley was born on 28 september 1931 but this information is not present in provided passages therefore answer is insufficient,True
+hotpotqa,5a711bb55542994082a3e597,1,1,The 7 Habits of Highly Effective People [2],The 7 Habits of Highly Effective People [1].,7 habits of highly effective people,7 habits of highly effective people,True
+hotpotqa,5a711c535542994082a3e59b,0,0,political party [2],Albanian political party [2],political party,albanian political party,True
+hotpotqa,5a711cb45542994082a3e59f,0,0,"Lisa Raymond [5], Liezel Huber [1]","Lisa Raymond [5], Liezel Huber [1]",lisa raymond liezel huber,lisa raymond liezel huber,True
+hotpotqa,5a711ef85542994082a3e5ac,1,1,Howard University Hospital [1],Howard University Hospital [1],howard university hospital,howard university hospital,True
+hotpotqa,5a71214d5542994082a3e5b9,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a71224f5542994082a3e5c1,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a71231a5542994082a3e5c4,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a7125165542994082a3e5d0,0,0,Hector Berlioz [2],Hector Berlioz [2],hector berlioz,hector berlioz,True
+hotpotqa,5a7125b95542994082a3e5d5,0,0,"Gardnerville, Nevada [1] has a population of 5,656, while Minden, Nevada [2] has a population of 3,001. Therefore, Gardnerville, Nevada has a greater population.","Minden, Nevada [2].",gardnerville nevada has population of 5 656 while minden nevada has population of 3 001 therefore gardnerville nevada has greater population,minden nevada,True
+hotpotqa,5a71278c5542994082a3e5e2,0,0,INSUFFICIENT.,M.I.A. [1],insufficient,m i,True
+hotpotqa,5a7128b05542994082a3e5f2,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a7129685542994082a3e5fa,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a71299e5542994082a3e5fe,0,0,blood pudding [1],blood pudding [1],blood pudding,blood pudding,True
+hotpotqa,5a712af15542994082a3e614,0,0,Jackson Galaxy [1],INSUFFICIENT.,jackson galaxy,insufficient,True
+hotpotqa,5a712beb5542994082a3e61c,0,0,INSUFFICIENT,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a712c4b5542994082a3e622,1,1,Captain Cook's Landing Place [1],Captain Cook's Landing Place [1],captain cook s landing place,captain cook s landing place,True
+hotpotqa,5a712e895542994082a3e636,0,0,Nandrolone [1],Nandrolone [1],nandrolone,nandrolone,True
+hotpotqa,5a712fca5542994082a3e641,0,0,Tennis [1][2],tennis [1][2],tennis,tennis,True
+hotpotqa,5a7130365542994082a3e645,1,1,Las Vegas [1],Las Vegas [2],las vegas,las vegas,True
+hotpotqa,5a7131565542994082a3e64f,1,1,"Jon Hamm [7], [8], [10]",Jon Hamm [7],jon hamm,jon hamm,True
+hotpotqa,5a7133565542994082a3e65c,1,1,Oldham County [1][2],Oldham County [1][2],oldham county,oldham county,True
+hotpotqa,5a7133fa5542994082a3e660,0,0,"Fabio Cannavaro is the current manager of Tianjin Quanjian, and Paolo Cannavaro is his older brother [2].","Fabio Cannavaro is the current manager of Tianjin Quanjian, and he is Paolo Cannavaro's older brother [2].",fabio cannavaro is current manager of tianjin quanjian and paolo cannavaro is his older brother,fabio cannavaro is current manager of tianjin quanjian and he is paolo cannavaro s older brother,True
+hotpotqa,5a7136e25542994082a3e67e,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a7137dc5542994082a3e68a,0,0,NBA Rookie of the Year Award [2],NBA Rookie of the Year Award [2],nba rookie of year award,nba rookie of year award,True
+hotpotqa,5a71380c5542994082a3e68b,1,1,USS Monitor [3],USS Monitor [3],uss monitor,uss monitor,True
+hotpotqa,5a713a5a5542994082a3e6a9,0,0,Manchester United F.C. [1][5][7][9][10],Old Trafford [1],manchester united f c,old trafford,True
+hotpotqa,5a713b325542994082a3e6b5,0,1,Delhi [2],Agra [10],delhi,agra,True
+hotpotqa,5a713dcb5542994082a3e6d9,0,0,"Gevork Minaskanian and George Stambolian both had a pursuit in the field of literature and writing. Gevork Minaskanian is a research professor in chemistry and a contributor to drug development, while George Stambolian was an educator, writer, and editor of Armenian descent known for his work in the gay literary movement. However, the passages do not explicitly state that they had a common pursuit. Therefore, the answer is: INSUFFICIENT.",research and writing [1][2],gevork minaskanian and george stambolian both had pursuit in field of literature and writing gevork minaskanian is research professor in chemistry and contributor to drug development while george stambolian was educator writer and editor of armenian descent known for his work in gay literary movement however passages do not explicitly state that they had common pursuit therefore answer is insufficient,research and writing,True
+hotpotqa,5a713ea95542994082a3e6e4,0,0,Ais [1],Ais [1],ais,ais,True
+hotpotqa,5a713f395542994082a3e6ea,0,0,Augusta [2],Augusta [2],augusta,augusta,True
+hotpotqa,5a713f3c5542994082a3e6eb,0,0,Miami-Dade County [1].,INSUFFICIENT.,miami dade county,insufficient,True
+hotpotqa,5a713fb15542994082a3e6f0,0,0,"San Marco [1], About Time [5]","San Marco [1], About Time [5]",san marco about time,san marco about time,True
+hotpotqa,5a7140585542994082a3e6fa,0,0,INSUFFICIENT.,"Cedartown, Georgia [2]",insufficient,cedartown georgia,True
+hotpotqa,5a71419f5542994082a3e70d,1,1,1981 World Rowing Championships [1],1981 World Rowing Championships [1],1981 world rowing championships,1981 world rowing championships,True
+hotpotqa,5a7143625542994082a3e71e,0,1,Kevin Smith and Scott Mosier [1],Kevin Smith [7],kevin smith and scott mosier,kevin smith,True
+hotpotqa,5a71443f5542994082a3e727,0,0,"Gasherbrum II is 8035 m, while the tallest mountain in the world is Mount Everest at 8848 m. The distance between them is not provided in the passages. However, based on the information given, the answer is: Gasherbrum II [2].",Nuptse [5],gasherbrum ii is 8035 m while tallest mountain in world is mount everest at 8848 m distance between them is not provided in passages however based on information given answer is gasherbrum ii,nuptse,True
+hotpotqa,5a71446b5542994082a3e72a,1,1,President Bill Clinton [3].,President Bill Clinton [2],president bill clinton,president bill clinton,True
+hotpotqa,5a7145d55542994082a3e73c,1,1,Christer Fuglesang [1],Christer Fuglesang [1],christer fuglesang,christer fuglesang,True
+hotpotqa,5a71474b5542994082a3e74f,0,1,A by-election [2],Sleaford and North Hykeham by-election [2],by election,sleaford and north hykeham by election,True
+hotpotqa,5a7147fd5542994082a3e758,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a7148005542994082a3e759,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a7148685542994082a3e761,1,1,Bart Conner [1],Bart Conner [1],bart conner,bart conner,True
+hotpotqa,5a7148d25542994082a3e766,0,0,INSUFFICIENT.,"Warrel Dane [1]  
+Roy Khan [8]  
+Warrel Dane was born in 1969, while Roy Khan was born in 1963. Therefore, Roy Khan is older.  
+Answer: Roy Khan [8]",insufficient,warrel dane roy khan warrel dane was born in 1969 while roy khan was born in 1963 therefore roy khan is older answer roy khan,True
+hotpotqa,5a7149595542994082a3e76f,0,0,Jake Gyllenhaal and Anne Hathaway [1],Jake Gyllenhaal and Anne Hathaway [1].,jake gyllenhaal and anne hathaway,jake gyllenhaal and anne hathaway,True
+hotpotqa,5a7149cf5542994082a3e773,0,1,An Education [1],Brooklyn [3],education,brooklyn,True
+hotpotqa,5a714b645542994082a3e78b,1,1,2010 [8],2010 [8],2010,2010,True
+hotpotqa,5a714bb35542994082a3e78f,0,0,INSUFFICIENT.,"William Walton [2] was born in 1902, while Gaetano Donizetti [1] was born in 1797. Therefore, William Walton was born later.",insufficient,william walton was born in 1902 while gaetano donizetti was born in 1797 therefore william walton was born later,True
+hotpotqa,5a714de95542994082a3e7a8,0,0,Stevie Young [2],Stevie Young [2],stevie young,stevie young,True
+hotpotqa,5a714dea5542994082a3e7a9,1,0,Summer Wars [3],The Secret of Kells [1],summer wars,secret of kells,True
+hotpotqa,5a714f6f5542994082a3e7b3,0,0,INSUFFICIENT.,INSUFFICIENT,insufficient,insufficient,True
+hotpotqa,5a7150c75542994082a3e7be,0,0,INSUFFICIENT.,Oklahoma Memorial Stadium [1],insufficient,oklahoma memorial stadium,True
+hotpotqa,5a7153d05542994082a3e7dc,1,1,Nusretiye Mosque [1],Nusretiye Mosque [1],nusretiye mosque,nusretiye mosque,True
+hotpotqa,5a71646e5542994082a3e80e,0,0,THG [1],THG [1],thg,thg,True
+hotpotqa,5a7166395542994082a3e814,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a71674f5542994082a3e819,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a716a9b5542994082a3e821,0,0,Kevin Spacey [2],Kevin Spacey [2],kevin spacey,kevin spacey,True
+hotpotqa,5a716c415542994082a3e827,0,0,INSUFFICIENT.,Delta Air Lines [1],insufficient,delta air lines,True
+hotpotqa,5a716dc15542994082a3e82b,0,0,"Kirk Humphreys was born in 1950, while Tom Coburn was born in 1948. Therefore, Tom Coburn is younger. [1][5]","Kirk Humphreys [1] was born in 1950, and Tom Coburn [5] was born in 1948. Therefore, Tom Coburn is older. The answer is Kirk Humphreys [1].",kirk humphreys was born in 1950 while tom coburn was born in 1948 therefore tom coburn is younger,kirk humphreys was born in 1950 and tom coburn was born in 1948 therefore tom coburn is older answer is kirk humphreys,True
+hotpotqa,5a716ec85542994082a3e82d,1,1,You're Next [6],You're Next [6],you re next,you re next,True
+hotpotqa,5a716eeb5542994082a3e82e,1,1,William Powell [8],William Powell [8],william powell,william powell,True
+hotpotqa,5a716f575542994082a3e82f,0,0,Joseph Campbell [1],Joseph Campbell [1].,joseph campbell,joseph campbell,True
+hotpotqa,5a71717d5542994082a3e834,0,0,Larry Drake [3],Larry Drake [3],larry drake,larry drake,True
+hotpotqa,5a7172105542994082a3e837,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a717d4c5542994082a3e854,0,0,Pavel Alexandrov [4],Pavel Alexandrov [4],pavel alexandrov,pavel alexandrov,True
+hotpotqa,5a7180205542994082a3e856,1,1,Creature Comforts [1],Creature Comforts [1],creature comforts,creature comforts,True
+hotpotqa,5a7182b65542994082a3e85b,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a7183575542994082a3e85e,0,0,INSUFFICIENT,Rijksmuseum [1],insufficient,rijksmuseum,True
+hotpotqa,5a7184675542994082a3e864,1,1,Mazda [1],Mazda [1],mazda,mazda,True
+hotpotqa,5a7195a05542994082a3e881,1,1,2000 [1],2000 [1],2000,2000,True
+hotpotqa,5a7199725542994082a3e88f,0,0,Human Events [4],Human Events [4],human events,human events,True
+hotpotqa,5a719bf25542994082a3e891,1,1,BFH [5],BFH [5],bfh,bfh,True
+hotpotqa,5a7211e655429971e9dc923c,1,0,Yule Goat [1][3],Joulupukki [1],yule goat,joulupukki,True
+hotpotqa,5a72120e55429971e9dc923f,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a72125055429971e9dc9241,1,1,Eucritta melanolimnetes [1],Eucritta melanolimnetes [1],eucritta melanolimnetes,eucritta melanolimnetes,True
+hotpotqa,5a72160e55429971e9dc9253,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a7217f255429971e9dc9260,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a721a7655429971e9dc9271,0,0,Bill McIntyre [6],INSUFFICIENT.,bill mcintyre,insufficient,True
+hotpotqa,5a721b9055429971e9dc9277,1,1,SAS Group [1],SAS Group [1],sas group,sas group,True
+hotpotqa,5a721bbc55429971e9dc9279,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a721d5a55429971e9dc9283,0,0,Ballarat Bitter [1],Ballarat Bitter [1],ballarat bitter,ballarat bitter,True
+hotpotqa,5a721dfd55429971e9dc928b,0,0,Thorgan Hazard [1],Thorgan Hazard [1],thorgan hazard,thorgan hazard,True
+hotpotqa,5a721e0e55429971e9dc928d,0,1,Tufts University [1],Duke University [8].,tufts university,duke university,True
+hotpotqa,5a7220f055429971e9dc92ac,0,0,The Volvo S70 was essentially modeled after the 850 and was the first all wheel drive Volvo. [1],The Volvo S70 was essentially modeled after the 850 saloon [2]. The first all-wheel drive Volvo was the Volvo 850 [1].,volvo s70 was essentially modeled after 850 and was first all wheel drive volvo,volvo s70 was essentially modeled after 850 saloon first all wheel drive volvo was volvo 850,True
+hotpotqa,5a72224755429971e9dc92be,0,0,"Dain Rauscher Wessels [1]  
+Berenberg Bank [5]","Dain Rauscher Wessels [1], Berenberg Bank [5]  
+Dain Rauscher Wessels was founded first.",dain rauscher wessels berenberg bank,dain rauscher wessels berenberg bank dain rauscher wessels was founded first,True
+hotpotqa,5a7222b155429971e9dc92c4,1,1,The Happiest Millionaire [2],The Happiest Millionaire [2],happiest millionaire,happiest millionaire,True
+hotpotqa,5a72239a55429971e9dc92cf,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a7224ab55429971e9dc92dd,0,0,Patsy Kensit [1],Patsy Kensit [1],patsy kensit,patsy kensit,True
+hotpotqa,5a7228f655429971e9dc9312,1,1,The Company [1],The Company [1],company,company,True
+hotpotqa,5a722a6855429971e9dc9320,0,0,Anna Leonidovna Kovalchuk [1],Tainy Sledstviya [1],anna leonidovna kovalchuk,tainy sledstviya,True
+hotpotqa,5a722b8655429971e9dc9329,0,0,"Lee Hazlewood [2], Erica Peck [10]",Lee Hazlewood [2],lee hazlewood erica peck,lee hazlewood,True
+hotpotqa,5a722c2255429971e9dc932c,0,0,Lifestyle City [2],Lifestyle City [2],lifestyle city,lifestyle city,True
+hotpotqa,5a722fae55429971e9dc9343,0,0,Chloë Agnew [1],Chloë Agnew [1],chloë agnew,chloë agnew,True
+hotpotqa,5a72334755429971e9dc934c,0,0,Ricky Skaggs [1],Ricky Skaggs [1],ricky skaggs,ricky skaggs,True
+hotpotqa,5a72339855429971e9dc934d,0,0,INSUFFICIENT.,INSUFFICIENT,insufficient,insufficient,True
+hotpotqa,5a72429355429971e9dc9375,1,1,Boltzmann machine [1],Boltzmann machine [1],boltzmann machine,boltzmann machine,True
+hotpotqa,5a7243915542990c210a4086,1,1,"Wilmington, North Carolina [1]","Wilmington, North Carolina [1]",wilmington north carolina,wilmington north carolina,True
+hotpotqa,5a7244955542990c210a408a,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a7248665542990c210a40b1,0,0,Fred [1],Atlético Mineiro [1],fred,atlético mineiro,True
+hotpotqa,5a7249b85542990c210a40b9,1,1,Seti I [3],Seti I [7],seti i,seti i,True
+hotpotqa,5a724a2b5542990c210a40bc,0,0,INSUFFICIENT.,INSUFFICIENT,insufficient,insufficient,True
+hotpotqa,5a724ba25542990c210a40c7,0,0,Marmakhel Tribe [1],Marmakhel Tribe [1],marmakhel tribe,marmakhel tribe,True
+hotpotqa,5a724dc25542990c210a40df,0,1,"Roving Mars [2] was released later than The Strongest Man in the World. The Strongest Man in the World, which is the World's Strongest Man competition, had its 40th edition in 2017 [4], while Roving Mars was released in 2007 [2]. Therefore, Roving Mars was released later.",Roving Mars [2],roving mars was released later than strongest man in world strongest man in world which is world s strongest man competition had its 40th edition in 2017 while roving mars was released in 2007 therefore roving mars was released later,roving mars,True
+hotpotqa,5a7252db5542990c210a4104,1,1,Donald Trump Jr. [1],Donald Trump Jr. [1],donald trump jr,donald trump jr,True
+hotpotqa,5a7261635542997f8278398a,0,0,Utena [1],Utena [1],utena,utena,True
+hotpotqa,5a72634d5542997f82783994,0,0,The answer is: Niamey [10].,Tunis [2],answer is niamey,tunis,True
+hotpotqa,5a7263e05542997f82783998,0,0,Buncle [1],Buncle [1],buncle,buncle,True
+hotpotqa,5a72644b5542997f8278399a,0,0,Joe Ralls [9],INSUFFICIENT.,joe ralls,insufficient,True
+hotpotqa,5a7264ed5542990c210a411a,0,0,Lebensraum [1],Lebensraum [1],lebensraum,lebensraum,True
+hotpotqa,5a7265815542990c210a411b,0,0,"Dao was ejected from United Express Flight 3411, which was operated by Republic Airline on behalf of United Express. The call sign for Republic Airline is not directly mentioned in the provided passages. However, the call sign for GoJet Airlines, which operates under United Express, is ""Lindbergh"" [7]. Since the question is about the call sign of the airline that operates the flight with the United Express Flight 3411 incident, and the incident involved Republic Airline, which is not explicitly associated with a call sign in the provided passages, the answer is INSUFFICIENT.","The call sign of the airline that operates the flight with United Express Flight 3411 incident is not mentioned in the provided passages. Therefore, the answer is: INSUFFICIENT.",dao was ejected from united express flight 3411 which was operated by republic airline on behalf of united express call sign for republic airline is not directly mentioned in provided passages however call sign for gojet airlines which operates under united express is lindbergh since question is about call sign of airline that operates flight with united express flight 3411 incident and incident involved republic airline which is not explicitly associated with call sign in provided passages answer is insufficient,call sign of airline that operates flight with united express flight 3411 incident is not mentioned in provided passages therefore answer is insufficient,True
+hotpotqa,5a7265825542997f827839a3,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a7265a95542992359bc307a,0,0,2013 [1],INSUFFICIENT,2013,insufficient,True
+hotpotqa,5a7268235542992359bc3081,0,0,Pease Air National Guard Base [1],Pease Air National Guard Base [1],pease air national guard base,pease air national guard base,True
+hotpotqa,5a72688c5542997f827839b2,1,1,Turkey [1][3],Turkey [1][3],turkey,turkey,True
+hotpotqa,5a7269fa5542992359bc308d,0,0,"Kimberly Po [3]  
+Leoš Friedl [2]","Kimberly Po [3]  
+Leoš Friedl [2]",kimberly po leoš friedl,kimberly po leoš friedl,True
+hotpotqa,5a726b0f5542997f827839be,0,0,Samantha Cristoforetti was born first. [1],"Samantha Cristoforetti was born on 26 April 1977, and Jean-Loup Chrétien was born on 20 August 1938. Therefore, Jean-Loup Chrétien was born first. [1][2]",samantha cristoforetti was born first,samantha cristoforetti was born on 26 april 1977 and jean loup chrétien was born on 20 august 1938 therefore jean loup chrétien was born first,True
+hotpotqa,5a726ba35542997f827839c0,0,0,INSUFFICIENT.,Mark Donohue [5],insufficient,mark donohue,True
+hotpotqa,5a7270395542992359bc30a8,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a7271525542997f827839d0,0,0,"Black, red, and gold [4]","The colors of the tricolour flag that was adopted in 1919 are green, white, and red. [1]",black red and gold,colors of tricolour flag that was adopted in 1919 are green white and red,True
+hotpotqa,5a727a635542994cef4bc2c9,0,0,Continuous breeder [2],INSUFFICIENT.,continuous breeder,insufficient,True
+hotpotqa,5a727ca45542994cef4bc2d8,1,1,Westfield Old Orchard [1],Westfield Old Orchard [1],westfield old orchard,westfield old orchard,True
+hotpotqa,5a727e1b5542991f9a20c497,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a7280105542994cef4bc2e4,0,0,INSUFFICIENT.,Somerville [4],insufficient,somerville,True
+hotpotqa,5a7280925542991f9a20c4a1,1,1,2009 [1][3],2009 [1][3],2009,2009,True
+hotpotqa,5a7281075542994cef4bc2e9,0,1,INSUFFICIENT.,Moscow Kremlin [1],insufficient,moscow kremlin,True
+hotpotqa,5a72814f5542994cef4bc2eb,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a72830e5542994cef4bc2f9,0,0,Empire Distribution [1],Empire Distribution [2],empire distribution,empire distribution,True
+hotpotqa,5a7283355542991f9a20c4b1,0,1,"Frederick III, Holy Roman Emperor [1]",Frederick I [5],frederick iii holy roman emperor,frederick i,True
+hotpotqa,5a7283365542991f9a20c4b2,1,1,Rule of three [2],Rule of three [2],rule of three,rule of three,True
+hotpotqa,5a7284c85542991f9a20c4c0,0,0,Nebraska Cornhuskers [1],Nebraska Cornhuskers [1],nebraska cornhuskers,nebraska cornhuskers,True
+hotpotqa,5a7286865542991f9a20c4cb,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a728b1c5542992359bc30e0,1,0,Jonghyun [6],Kim Jong-hyun [6],jonghyun,kim jong hyun,True
+hotpotqa,5a728dc65542992359bc30ef,1,1,Nihat Kahveci [1],Nihat Kahveci [1],nihat kahveci,nihat kahveci,True
+hotpotqa,5a728f015542991f9a20c4e4,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a728f3c5542992359bc30f4,0,0,Arsenal [1],Arsenal [1],arsenal,arsenal,True
+hotpotqa,5a728f505542992359bc30f5,0,0,"Charles Rocket [1] and [9]  
+Answer: Dumb and Dumber [9]",Charles Rocket [1][9],charles rocket and answer dumb and dumber,charles rocket,True
+hotpotqa,5a728f745542991f9a20c4e6,1,1,Elle [3],Elle [3],elle,elle,True
+hotpotqa,5a728fbd5542992359bc30f8,0,0,INSUFFICIENT.,Bryan Phillips [2],insufficient,bryan phillips,True
+hotpotqa,5a72908f5542994cef4bc33b,0,0,Brett Scallions [1],Brett Scallions [1],brett scallions,brett scallions,True
+hotpotqa,5a7291c35542991f9a20c4f4,0,1,"Caddyshack [1], Groundhog Day (film) [4], Club Paradise [7]",Groundhog Day [4],caddyshack groundhog day film club paradise,groundhog day,True
+hotpotqa,5a7292385542994cef4bc342,0,0,Howard Ashman [1],Howard Ashman [1],howard ashman,howard ashman,True
+hotpotqa,5a7293655542991f9a20c4ff,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a72944c5542994cef4bc351,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a7294b65542991f9a20c509,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a72953b5542994cef4bc357,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a7296815542991f9a20c515,1,1,Samantha Cristoforetti [1],Samantha Cristoforetti [1],samantha cristoforetti,samantha cristoforetti,True
+hotpotqa,5a7299465542992359bc3131,0,0,Fiat S.p.A. [1],Fiat S.p.A. [1],fiat s p,fiat s p,True
+hotpotqa,5a7299e75542991f9a20c524,1,1,Monsters vs. Aliens [10],Monsters vs. Aliens [10],monsters vs aliens,monsters vs aliens,True
+hotpotqa,5a729cc25542991f9a20c532,0,0,Susan Choi [1],Sara Jane Olson [5],susan choi,sara jane olson,True
+hotpotqa,5a729e7b5542992359bc313d,0,0,Holston River Valley [1],Holston River Valley [1],holston river valley,holston river valley,True
+hotpotqa,5a729fa15542994cef4bc397,1,0,Bambi [2],Underdog [2],bambi,underdog,True
+hotpotqa,5a729fe55542991f9a20c53b,1,0,Pieter van Musschenbroek [4],INSUFFICIENT.,pieter van musschenbroek,insufficient,True
+hotpotqa,5a72a0be5542992359bc3143,1,1,Oedipus Rex [1],Oedipus Rex [1],oedipus rex,oedipus rex,True
+hotpotqa,5a72a2935542991f9a20c546,1,1,Velvetpark [1],Velvetpark [1],velvetpark,velvetpark,True
+hotpotqa,5a72a3c45542994cef4bc3ac,0,0,Harriet Tubman [1],Harriet Tubman [1],harriet tubman,harriet tubman,True
+hotpotqa,5a72a4645542991f9a20c54c,0,0,Delilah [1],Delilah [1],delilah,delilah,True
+hotpotqa,5a72a47d55429901807daf1f,0,0,English Civil War [1],English Civil War [1],english civil war,english civil war,True
+hotpotqa,5a72a51355429901807daf21,0,0,INSUFFICIENT.,Boyd Gaming [1],insufficient,boyd gaming,True
+hotpotqa,5a72a5a75542992359bc314e,0,0,Ranulph Fiennes [2],Ranulph Fiennes [3],ranulph fiennes,ranulph fiennes,True
+hotpotqa,5a72a6d855429901807daf27,1,1,Fred M. Vinson [1][2],Fred M. Vinson [1][2],fred m vinson,fred m vinson,True
+hotpotqa,5a72a9145542994cef4bc3c1,0,1,Herbert Erhardt [5],Dante [2],herbert erhardt,dante,True
+hotpotqa,5a72a9ab5542992359bc315a,0,0,Pennacook [3],The Winnipesaukee sub-tribe of the Pennacook people [3].,pennacook,winnipesaukee sub tribe of pennacook people,True
+hotpotqa,5a72a9ac5542991f9a20c55f,0,0,The View [1],The View [1],view,view,True
+hotpotqa,5a72abb95542992359bc3162,1,0,Smith! [1],Cars 3 [4],smith,cars 3,True
+hotpotqa,5a72ac8a5542992359bc3164,0,0,INSUFFICIENT.,Lake Worth Lagoon [1],insufficient,lake worth lagoon,True
+hotpotqa,5a72aec45542994cef4bc3d7,0,1,Nelson Algren lived longer. [4][6],Nelson Algren [4],nelson algren lived longer,nelson algren,True
+hotpotqa,5a72af155542992359bc316c,1,1,Dead Poets Society [1],Dead Poets Society [1],dead poets society,dead poets society,True
+hotpotqa,5a72b2dc5542992359bc3173,1,1,Anthony Rapp [1][2],Anthony Rapp [1][2],anthony rapp,anthony rapp,True
+hotpotqa,5a72b3335542994cef4bc3dc,0,1,Irish Parliamentary Party [2],Home Rule League [1],irish parliamentary party,home rule league,True
+hotpotqa,5a72b8de5542994cef4bc3df,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a72b9155542992359bc3187,0,1,Northeast Regional [1],Acela Express [1],northeast regional,acela express,True
+hotpotqa,5a72ba165542992359bc318a,0,0,INSUFFICIENT.,Baidu [1],insufficient,baidu,True
+hotpotqa,5a72ba1a5542992359bc318b,0,0,Numb [1],Numb [1],numb,numb,True
+hotpotqa,5a72bb045542994cef4bc3e4,0,1,INSUFFICIENT.,The Conjuring [1],insufficient,conjuring,True
+hotpotqa,5a72bbfa5542992359bc318d,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a72bd0b5542992359bc318f,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a72c6565542992359bc31a7,0,0,Jenna Haze [1],INSUFFICIENT.,jenna haze,insufficient,True
+hotpotqa,5a72c6f65542994cef4bc402,0,1,INSUFFICIENT.,tomato [1],insufficient,tomato,True
+hotpotqa,5a72c9e85542991f9a20c595,0,0,writer [4][9],Writer [4][9],writer,writer,True
+hotpotqa,5a72d3525542991f9a20c5ab,0,0,1986 [1],1986 [1],1986,1986,True
+hotpotqa,5a72d7b35542991f9a20c5be,0,0,INSUFFICIENT,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a72dcb45542992359bc31af,0,0,Forever Living Products [2].,Forever Living Products [2],forever living products,forever living products,True
+hotpotqa,5a72df275542992359bc31b3,0,0,Colonel [1],Colonel [1],colonel,colonel,True
+hotpotqa,5a72df8d5542992359bc31b4,0,0,Judy Campbell [1],Judy Campbell [1],judy campbell,judy campbell,True
+hotpotqa,5a72e28f5542992359bc31ba,0,0,magic formula investing [2],magic formula investing [3],magic formula investing,magic formula investing,True
+hotpotqa,5a72e4375542992359bc31bf,0,0,INSUFFICIENT.,"Lucy Gichuhi was born in 1962, while Bob Day was born in 1949. Therefore, Bob Day is older. [1]",insufficient,lucy gichuhi was born in 1962 while bob day was born in 1949 therefore bob day is older,True
+hotpotqa,5a72f0e25542991f9a20c5cf,1,1,Anne [6],Anne [6],anne,anne,True
+hotpotqa,5a72f1cf5542994cef4bc414,0,1,Robert Duvall [1],Gary Oldman [1],robert duvall,gary oldman,True
+hotpotqa,5a72f3a85542992359bc31e5,0,0,ribosome [2],ribosome [2],ribosome,ribosome,True
+hotpotqa,5a72f45a5542992359bc31e6,1,1,MGM Grand Garden Arena [6],MGM Grand Garden Arena [6],mgm grand garden arena,mgm grand garden arena,True
+hotpotqa,5a72f74a55429901807daf59,0,1,Kathy Greenwood [1],Rosie O'Donnell [8],kathy greenwood,rosie o donnell,True
+hotpotqa,5a72f7df5542991f9a20c5d7,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a72fc865542991f9a20c5e9,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a7300b85542994cef4bc41a,0,0,Astrosat is India's first dedicated multi-wavelength space observatory [2].,Astrosat is India's first dedicated multi-wavelength space observatory [2].,astrosat is india s first dedicated multi wavelength space observatory,astrosat is india s first dedicated multi wavelength space observatory,True
+hotpotqa,5a73024f5542991f9a20c5fc,0,0,"Bob Eggleton was the cover artist for Multiverse: Exploring Poul Anderson's Worlds. However, the provided passages do not mention Bob Eggleton's birth year. Therefore, the answer is: INSUFFICIENT.","Bob Eggleton, the cover artist of *Multiverse: Exploring Poul Anderson's Worlds*, is mentioned in passage [1], but there is no information provided about his birth year. Therefore, the answer is: INSUFFICIENT.",bob eggleton was cover artist for multiverse exploring poul anderson s worlds however provided passages do not mention bob eggleton s birth year therefore answer is insufficient,bob eggleton cover artist of multiverse exploring poul anderson s worlds is mentioned in passage but there is no information provided about his birth year therefore answer is insufficient,True
+hotpotqa,5a7302b75542991f9a20c5fd,0,0,Don't Kill It [2],The Magnificent Seven [1],don t kill it,magnificent seven,True
+hotpotqa,5a7306a655429901807daf67,0,0,Mahamat Kamoun [1],INSUFFICIENT.,mahamat kamoun,insufficient,True
+hotpotqa,5a73073d55429901807daf69,0,0,Matlama FC [1],Lerotholi Polytechnic FC [7],matlama fc,lerotholi polytechnic fc,True
+hotpotqa,5a73090455429901807daf6e,1,1,Pizza [1][2],Pizza [1][2],pizza,pizza,True
+hotpotqa,5a7309a15542992359bc320c,0,1,Björn Ulvaeus [1],Benny Andersson [1],björn ulvaeus,benny andersson,True
+hotpotqa,5a730a6b5542992359bc3210,0,0,INSUFFICIENT.,"Craig Nicholls was born on August 31, 1977, while Norman Blake's birth year is not explicitly mentioned in the provided passages. However, based on the information given, Craig Nicholls is older than Norman Blake. [7]",insufficient,craig nicholls was born on august 31 1977 while norman blake s birth year is not explicitly mentioned in provided passages however based on information given craig nicholls is older than norman blake,True
+hotpotqa,5a730abe5542994cef4bc42f,1,1,Cricket fighting [1],Cricket fighting [1],cricket fighting,cricket fighting,True
+hotpotqa,5a7312675542994cef4bc43d,1,1,Adolfo Rodríguez Saá [3],Adolfo Rodríguez Saá [1],adolfo rodríguez saá,adolfo rodríguez saá,True
+hotpotqa,5a7313865542994cef4bc442,0,0,INSUFFICIENT.,Pondicherry Gramin Bank is a Regional Rural Bank [1].,insufficient,pondicherry gramin bank is regional rural bank,True
+hotpotqa,5a7319bc5542992359bc3235,0,0,Leonid Khachiyan lived longer. [1],Leonid Khachiyan lived longer. [1] [4],leonid khachiyan lived longer,leonid khachiyan lived longer,True
+hotpotqa,5a7319e755429901807daf86,0,0,NCAA record for winning percentage in that position [6].,INSUFFICIENT.,ncaa record for winning percentage in that position,insufficient,True
+hotpotqa,5a731a635542994cef4bc458,0,0,INSUFFICIENT.,INSUFFICIENT,insufficient,insufficient,True
+hotpotqa,5a731c205542994cef4bc45d,0,0,Chain [1][2][4],Franchise[n],chain,franchise n,True
+hotpotqa,5a7320565542991f9a20c61d,0,0,"Keith Bostic was born in 1961, while Jerry Glanville was born in 1941. Therefore, Jerry Glanville is older. [1][5]","Keith Bostic was born in 1961, while Jerry Glanville was born in 1941. Therefore, Keith Bostic is younger. [1][5]",keith bostic was born in 1961 while jerry glanville was born in 1941 therefore jerry glanville is older,keith bostic was born in 1961 while jerry glanville was born in 1941 therefore keith bostic is younger,True
+hotpotqa,5a7320ac5542991f9a20c620,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a7322165542994cef4bc470,1,1,Aly Raisman [1],Aly Raisman [1],aly raisman,aly raisman,True
+hotpotqa,5a7322a25542991f9a20c634,0,0,Metropolitan Life Insurance Company Tower [Met Life Tower] [1],Metropolitan Life Insurance Company Tower [Met Life Tower] [1],metropolitan life insurance company tower met life tower,metropolitan life insurance company tower met life tower,True
+hotpotqa,5a73235c5542994cef4bc475,0,0,"Craig Jones [3] was born in Queanbeyan, and Grover Jones [1] was born in Rosedale, Indiana. Therefore, only Grover Jones was born in Indiana. The answer is Grover Jones [1].","Craig Melville was born in Australia, and Grover Jones was born in Indiana. [1]",craig jones was born in queanbeyan and grover jones was born in rosedale indiana therefore only grover jones was born in indiana answer is grover jones,craig melville was born in australia and grover jones was born in indiana,True
+hotpotqa,5a7323ad5542994cef4bc476,0,0,"Chantal Claret was born in 1982, while Max Green was born in 1984. Therefore, Chantal Claret is older. [1][4]","Chantal Claret was born in 1982, while Max Green was born in 1984. Therefore, Chantal Claret is older. [1][4]",chantal claret was born in 1982 while max green was born in 1984 therefore chantal claret is older,chantal claret was born in 1982 while max green was born in 1984 therefore chantal claret is older,True
+hotpotqa,5a7323ef5542994cef4bc477,1,1,Battle of Tarawa [2],Battle of Tarawa [2],battle of tarawa,battle of tarawa,True
+hotpotqa,5a7324205542994cef4bc478,0,0,INSUFFICIENT.,Farouk El-Baz [1],insufficient,farouk el baz,True
+hotpotqa,5a7324e055429901807daf8f,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a73250a5542991f9a20c643,1,1,Mental Floss [2],Mental Floss [2],mental floss,mental floss,True
+hotpotqa,5a73266d5542994cef4bc47d,0,0,INSUFFICIENT.,INSUFFICIENT,insufficient,insufficient,True
+hotpotqa,5a7326cb5542994cef4bc47f,0,0,"Both songs were written for Coldplay's fifth studio album, ""Mylo Xyloto"" [1][2].","Both songs were written for Coldplay's fifth studio album ""Mylo Xyloto"" [1].",both songs were written for coldplay s fifth studio album mylo xyloto,both songs were written for coldplay s fifth studio album mylo xyloto,True
+hotpotqa,5a7326cd5542991f29ee2d11,1,1,Bruce Lee [2],Bruce Lee [2],bruce lee,bruce lee,True
+hotpotqa,5a7327265542994cef4bc480,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a7329a15542991f9a20c65f,0,0,INSUFFICIENT.,INSUFFICIENT.,insufficient,insufficient,True
+hotpotqa,5a732aa055429901807daf9f,0,0,2009 [1],2009 [1],2009,2009,True
+hotpotqa,5a732aaa5542992359bc325a,0,0,tenant management of public housing properties [1],"Bertha Gilkey pursued a career in tenant management of public housing properties in St. Louis, Missouri [1].",tenant management of public housing properties,bertha gilkey pursued career in tenant management of public housing properties in st louis missouri,True
+hotpotqa,5a732ab25542991f29ee2d25,0,0,Puyallup School District [1],Puyallup School District [1],puyallup school district,puyallup school district,True
+fever,100060,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+fever,100145,1,1,"REFUTES. The Silver Surfer appears in American comic books, not only Icelandic ones [1].","REFUTES [1] The Silver Surfer is a fictional superhero appearing in American comic books published by Marvel Comics, which directly contradicts the claim that he appears only in Icelandic comic books.",REFUTES,REFUTES,True
+fever,100243,0,0,REFUTES [8],NOT_ENOUGH_INFO [1],REFUTES,NOT_ENOUGH_INFO,True
+fever,100245,1,1,SUPPORTS [2],SUPPORTS [2],SUPPORTS,SUPPORTS,True
+fever,100261,1,1,"REFUTES [4] The Pyrenees mentioned in passage [4] is a wine producing region in Victoria, Australia, and is not related to Mount Hood, which is a mountain in Oregon.","REFUTES [1] Elmhurst, a town in the Pyrenees region of western Victoria, Australia, is mentioned, but Mount Hood is not located in the Pyrenees. Mount Hood is in Oregon, USA, as indicated in other passages.",REFUTES,REFUTES,True
+fever,100271,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+fever,100318,1,1,"REFUTES [1]
+
+The passage states that ""Southern Hospitality"" reached the Top 40 at #38 on February 10, 2001, not February 10, 2007. Therefore, the claim is refuted.","REFUTES [1]
+
+The passage states that ""Southern Hospitality"" reached the Top 40 at #38 on February 10, 2001, not #22 on February 10, 2007.",REFUTES,REFUTES,True
+fever,100320,1,0,SUPPORTS [6],"REFUTES [3] Frederick Stone graduated from St. John's College of Annapolis, Maryland, but there is no mention of John S. McCain Jr. in any of the passages. Therefore, the claim that John S. McCain Jr. studied in Annapolis, Maryland, is refuted by the lack of evidence supporting it.",SUPPORTS,REFUTES,True
+fever,100446,1,1,"REFUTES  
+Shomu Mukherjee died of a heart attack on 10 April 2008, as stated in passage [1], which contradicts the claim that he died in November.","REFUTES [1]  
+The passage states that Shomu Mukherjee died of a heart attack on 10 April 2008, not in November.",REFUTES,REFUTES,True
+fever,100467,1,1,REFUTES [2],REFUTES [2],REFUTES,REFUTES,True
+fever,100487,1,0,REFUTES [1] and [2] both state that Estonia is bordered by the Baltic Sea to the west.,"Verdict: REFUTES [8]  
+The passage states that Estonia is bordered to the west by the Baltic Sea. This directly refutes the claim that Estonia does not border the Baltic Sea.",REFUTES,UNPARSEABLE,True
+fever,10051,1,1,SUPPORTS [3],SUPPORTS [3],SUPPORTS,SUPPORTS,True
+fever,10052,1,1,"REFUTES [3] Stomp the Yard is a 2007 dance drama film, not a clothing brand.","REFUTES [3] Stomp the Yard is a 2007 dance drama film, not a clothing brand.",REFUTES,REFUTES,True
+fever,100615,1,1,SUPPORTS [2],SUPPORTS [2],SUPPORTS,SUPPORTS,True
+fever,100617,1,1,"REFUTES [1]
+
+The passage states that Floyd Mayweather Jr. ""won fifteen world titles"" [1], which directly contradicts the claim of having 27 world title wins without a loss.","REFUTES [1]
+
+The passage states that Floyd Mayweather won fifteen world titles, which directly contradicts the claim of 27 world title wins without a loss.",REFUTES,REFUTES,True
+fever,100659,0,1,"NOT_ENOUGH_INFO  
+The provided passages do not give enough information to determine if ""Tangled"" is an audio book. [10] mentions audio book awards but does not specifically refer to a work titled ""Tangled"" as an audio book.","REFUTES [5] Tangled: The Video Game is an action-adventure game based on the 2010 film Tangled, while Tangled (the film) is a 2010 animated feature film. There is no passage indicating that Tangled is an audio book.",NOT_ENOUGH_INFO,REFUTES,True
+fever,100781,1,1,REFUTES [3],"REFUTES [3]  
+Zac Efron was born on October 18, 1987, according to passage [3], which directly refutes the claim that he was born in 1950.",REFUTES,REFUTES,True
+fever,100785,1,1,"REFUTES. The Book of Mormon has won multiple awards, including a Tony Award and a Grammy Award, as mentioned in passages [1] and [10].",REFUTES [5] The Book of Mormon (musical) is mentioned as being a Tony Award-winning musical.,REFUTES,REFUTES,True
+fever,100788,1,1,"REFUTES. Sky UK serves the United Kingdom and provides services to consumers and businesses in the UK, not only eastern Europe [1].","REFUTES. Sky UK serves the United Kingdom, not only eastern Europe [1].",REFUTES,REFUTES,True
+fever,100795,1,0,"REFUTES [1] The Eurotas is described as one of the major rivers of the Peloponnese, which directly refutes the claim that it is a minor river.","SUPPORTS [1]
+
+The passage states that the Eurotas is ""one of the major rivers of the Peloponnese,"" which directly supports the claim that it is one of the minor rivers of Peloponnese. However, this seems contradictory. Upon closer inspection, the claim is actually refuted by the passage, as it describes the Eurotas as a ""major river."" Therefore, the correct verdict is:
+
+REFUTES [1]",REFUTES,SUPPORTS,True
+fever,100852,1,1,"REFUTES. The passage states that Macron ""became an investment banker at Rothschild & Cie Banque"" [1], which directly contradicts the claim that he refused to work as an investment banker.",REFUTES. Emmanuel Macron worked as an investment banker at Rothschild & Cie Banque [1].,REFUTES,REFUTES,True
+fever,100893,1,0,"REFUTES. The claim that ""uranium is a country"" is false because uranium is a chemical element and a commodity, not a country. This is supported by the fact that uranium is mined in various countries and is used as fuel for nuclear power plants [1], [2], [4], [5], [6], [9].",Verdict: REFUTES [1],REFUTES,UNPARSEABLE,True
+fever,101008,1,1,REFUTES [2],"REFUTES [1]  
+The passage states that Camp Flog Gnaw has been held every year since 2012, which directly refutes the claim that it was created in 2013.",REFUTES,REFUTES,True
+fever,101014,1,1,SUPPORTS [1][5],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+fever,101017,0,0,"SUPPORTS [1], [3], [7], [8], [9]","SUPPORTS [6] Jaime Ray Newman, an American actress, will appear as a series regular on the upcoming Netflix series Marvel's The Punisher.",SUPPORTS,SUPPORTS,True
+fever,101027,1,0,SUPPORTS [1],REFUTES [2],SUPPORTS,REFUTES,True
+fever,101062,1,1,"REFUTES [1] The film ""Temple Grandin"" features Claire Danes as Temple Grandin, an autistic woman, not as a stormtrooper. The role of a stormtrooper is associated with the Star Wars franchise, not with the film ""Temple Grandin.""",REFUTES [4],REFUTES,REFUTES,True
+fever,101111,1,1,SUPPORTS [3],SUPPORTS [3],SUPPORTS,SUPPORTS,True
+fever,101118,1,1,"SUPPORTS. Sabbir Khan directed the film Heropanti which features Kriti Sanon, an Indian actress [3].",SUPPORTS [3],SUPPORTS,SUPPORTS,True
+fever,101125,1,1,"SUPPORTS. A near-Earth object is defined as an asteroid or comet that has an orbit bringing it close to Earth, and it is part of the Solar System, which is in the universe [1].",SUPPORTS [2],SUPPORTS,SUPPORTS,True
+fever,101142,1,1,"REFUTES [1] The film follows journalist Roger East who travels to East Timor in 1975 to investigate the deaths of the Balibo Five, directly contradicting the claim that the film is incapable of being about an investigation of deaths.","REFUTES [1]
+
+The film ""Balibo"" is about the investigation of the deaths of the Balibo Five, as it follows journalist Roger East as he travels to East Timor in 1975 to investigate the deaths during the buildup to the Indonesian invasion.",REFUTES,REFUTES,True
+fever,10117,1,1,SUPPORTS [2],SUPPORTS [2],SUPPORTS,SUPPORTS,True
+fever,101176,1,1,"REFUTES [4] The claim that ""I Want to Know What Love Is has always been kept off Rolling Stone's lists"" is refuted by passage [4], which states that the song is featured in the album ""Let's Do It Again"" and specifically mentions that it is included in the list of songs covered, indicating it has been recognized and included in such contexts. Additionally, passage [1] notes that the song is listed as one of Rolling Stone Magazine's greatest songs of all time at #479, directly contradicting the claim.",REFUTES [1],REFUTES,REFUTES,True
+fever,10118,1,1,SUPPORTS [2],SUPPORTS [2],SUPPORTS,SUPPORTS,True
+fever,101224,0,0,"REFUTES [2] The first film, The Maze Runner, was released on September 19, 2014 and became a commercial success grossing over $348 million worldwide. This indicates that the gross revenue was over $348 million, not the budget.",REFUTES [8],REFUTES,REFUTES,True
+fever,101300,1,1,"REFUTES [2] The San Francisco Bay Area consists of 101 municipalities, indicating it contains towns.","REFUTES [1] The San Francisco Bay Area contains many cities, towns, airports, and associated regional, state, and national parks.",REFUTES,REFUTES,True
+fever,101462,1,1,SUPPORTS [3],SUPPORTS [3],SUPPORTS,SUPPORTS,True
+fever,101473,1,1,"REFUTES [2], [3]",REFUTES [1],REFUTES,REFUTES,True
+fever,10151,1,0,SUPPORTS [3],REFUTES [10],SUPPORTS,REFUTES,True
+fever,101528,0,0,"REFUTES [1]
+
+The Guthrie Theater's first building included a 1,441-seat thrust stage, not a 1,441-window thrust stage. The passage specifically mentions the stage's seating capacity, not the number of windows.",REFUTES [1],REFUTES,REFUTES,True
+fever,101552,1,1,SUPPORTS [1],SUPPORTS [2],SUPPORTS,SUPPORTS,True
+fever,101553,1,1,"SUPPORTS. Aldous Huxley published writings as evidenced by his novels, essays, and other works mentioned in the passages [1], [3], [5], [6], [7], [8], [9], and [10].",SUPPORTS [1],SUPPORTS,SUPPORTS,True
+fever,101565,1,0,SUPPORTS. Pakistan is described as a country on the crossroads of Central Asia and Western Asia [6].,"NOT_ENOUGH_INFO  
+The provided passages discuss various crossroads in different locations such as Milford Crossroads, Carolina Crossroads, Little Brampton, and others, but none of them mention Pakistan or its geographical position relative to crossroads. Therefore, there is not enough information to evaluate the claim about Pakistan being on a crossroads.",SUPPORTS,NOT_ENOUGH_INFO,True
+fever,101619,0,0,"REFUTES [2] Ronaldinho has played 97 matches and scored 33 goals for the Brazil national team, not the national basketball team.",REFUTES [2],REFUTES,REFUTES,True
+fever,101638,1,1,"REFUTES [1] The passage states that ""The first season will consist of 10 episodes"" and ""The first season will be released on Netflix on June 23, 2017,"" which directly refutes the claim that GLOW does not have a first season.","REFUTES [1] The passage states that the first season of GLOW will consist of 10 episodes and will be released on Netflix on June 23, 2017, which directly refutes the claim that GLOW does not have a first season.",REFUTES,REFUTES,True
+fever,101656,1,1,"REFUTES [1] Jordan Roth produced the Pulitzer Prize and Tony Award-winning Best Play Clybourne Park, and Jujamcyn Theaters presents some of the most influential and successful musicals and plays on Broadway today, currently including the Tony Award-winning Best Musicals The Book of Mormon, A Gentleman's Guide to Love and Murder, Kinky Boots and Jersey Boys.","REFUTES [4] The Book of Mormon was nominated for the Tony Award for Best Musical and won it, as Casey Nicholaw was nominated for directing and choreographing the musical and won for his co-direction of the latter with Trey Parker.",REFUTES,REFUTES,True
+fever,101668,1,1,"REFUTES [2]  
+Brent Mydland was a member of the Grateful Dead from 1979 to 1990, and he passed away in 1990, which means he is not still a member of the band.","REFUTES [2]  
+Brent Mydland was a keyboard player for the Grateful Dead during a brief hiatus, but there is no indication that he remained a member of the Grateful Dead after that period.",REFUTES,REFUTES,True
+fever,101680,1,1,REFUTES [4],"REFUTES. The claim that ""Grease did not come out in 1978"" is refuted by passage [4], which states that ""Grease is a 1978 American musical romantic comedy film."" [4]",REFUTES,REFUTES,True
+fever,101702,1,1,REFUTES [1],REFUTES [1],REFUTES,REFUTES,True
+fever,101795,1,0,"REFUTES [1]  
+Donald Duck typically wears a sailor shirt and cap with a bow tie, not only a bracelet.",NOT_ENOUGH_INFO. The passages do not provide information about what Donald Duck typically wears beyond a sailor shirt and cap with a bow tie [2]. There is no mention of him wearing only a bracelet.,REFUTES,NOT_ENOUGH_INFO,True
+fever,101808,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+fever,101821,1,1,"REFUTES [1]
+
+Daenerys Targaryen was introduced in 1996's A Game of Thrones, not in A Feast for Crows. The passage states that she was one of a few prominent characters not included in 2005's A Feast for Crows, but returned in the next novel A Dance with Dragons (2011) [1].",REFUTES [1],REFUTES,REFUTES,True
+fever,101845,1,1,"REFUTES. Richard Kuklinski was a convicted murderer and contract killer, as stated in passage [1], which clearly indicates he was involved in multiple crimes and was sentenced to life imprisonment.",REFUTES [1],REFUTES,REFUTES,True
+fever,101883,0,0,NOT_ENOUGH_INFO [1]-[10],NOT_ENOUGH_INFO [1]-[10],NOT_ENOUGH_INFO,NOT_ENOUGH_INFO,True
+fever,101906,0,0,"SUPPORTS [1] Bank Street was the second home ground of Manchester United Football Club, after North Road, and they moved to Old Trafford in 1910. Old Trafford is also mentioned as the home ground of Manchester United in [6]. This indicates Manchester United has had multiple home stadiums.","SUPPORTS [1]  
+Manchester United played their home games at Maine Road while Old Trafford was under reconstruction after being damaged in a German air raid in 1941. This indicates that Manchester United had multiple home stadiums.",SUPPORTS,SUPPORTS,True
+fever,101932,1,1,"REFUTES. Firefox is not a piece of hardware; it is a web browser and the core component of Firefox OS, which is an operating system [1].","REFUTES. Firefox is a web browser, not hardware [1].",REFUTES,REFUTES,True
+fever,101985,1,1,"REFUTES [1] The Cordilleran Ice Sheet was a major ice sheet that periodically covered large parts of North America during glacial periods, covering up to 2.5 million square kilometres at the Last Glacial Maximum.","REFUTES [1] The Cordilleran ice sheet was a major ice sheet that covered large parts of North America during glacial periods, indicating it was not minor.",REFUTES,REFUTES,True
+fever,102003,1,1,"REFUTES [1]
+
+The passage about The Last Song (film) states that the film was set in a quiet Southern United States beach town and that filming took place on the island's beach and pier. However, there is no mention of any fighting or conflict occurring on a beach. Therefore, the claim that part of The Last Song (film) was fought on a beach is refuted by the information provided.","REFUTES [1]
+
+The passage states that ""The Last Song"" was filmed and set in Tybee Island, Georgia, with much of the filming occurring on the island's beach and pier. However, there is no mention of any fighting taking place on a beach during the film. Therefore, the claim that part of ""The Last Song"" (film) was fought on a beach is refuted by the information provided.",REFUTES,REFUTES,True
+fever,102019,1,1,SUPPORTS [2],SUPPORTS [2],SUPPORTS,SUPPORTS,True
+fever,102020,1,1,"REFUTES. The passages describe Mount Hood as a mountain in Oregon, not in the Andes [3].","REFUTES [2]  
+The claim that Mount Hood is in the Andes is refuted by passage [2], which lists Mount Darwin as a possible reference to a mountain in the Andes Mountains in Chile, but does not mention Mount Hood being located there. Additionally, other passages describe Mount Hood as being in Oregon, USA, not the Andes.",REFUTES,REFUTES,True
+fever,102038,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+fever,102079,1,1,REFUTES [1] Zoey Deutch is known for portraying Rosemarie `` Rose '' Hathaway in Vampire Academy ( 2014 ) .,REFUTES [1],REFUTES,REFUTES,True
+fever,102120,1,1,"REFUTES [3] The claim that ""Night of the Living Dead was originally directed by Krzysztof Kieslowski"" is refuted by passage [3], which states that the original ""Night of the Living Dead"" was written and directed by George A. Romero and Cameron Romero.","REFUTES [5] The claim that ""Night of the Living Dead was originally directed by Krzysztof Kieslowski"" is refuted by passage [5], which states that ""Land of the Dead (also known as George A. Romero's Land of the Dead) is a 2005 post-apocalyptic horror film written and directed by George A. Romero; the fourth of Romero's six Living Dead movies, it is preceded by Night of the Living Dead, Dawn of the Dead and Day of the Dead..."" This indicates that George A. Romero directed ""Night of the Living Dead,"" not Krzysz",REFUTES,REFUTES,True
+fever,102161,1,1,"REFUTES  
+Shannon Lee is an American actress, martial artist, and businesswoman [1].","REFUTES  
+The claim that Shannon Lee is not American is refuted by passage [1], which states that Shannon Emery Lee is an American actress, martial artist, and businesswoman.",REFUTES,REFUTES,True
+fever,102173,0,0,NOT_ENOUGH_INFO [2],NOT_ENOUGH_INFO [1]-[10],NOT_ENOUGH_INFO,NOT_ENOUGH_INFO,True
+fever,102297,1,1,"REFUTES [1] The passage states that Exotic Birds appeared as an opening band for Culture Club, which directly refutes the claim that they refused to ever open for Culture Club.","REFUTES [1]
+
+The passage states that ""They achieved mainly local success, but appeared as an opening band for Culture Club, Eurythmics, and Information Society."" This directly contradicts the claim that ""Exotic Birds refused to ever open for Culture Club.""",REFUTES,REFUTES,True
+fever,102303,0,0,SUPPORTS [4],SUPPORTS [4],SUPPORTS,SUPPORTS,True
+fever,102417,0,0,SUPPORTS [3],SUPPORTS [6],SUPPORTS,SUPPORTS,True
+fever,102418,1,1,REFUTES [3] The Hunger Games are based on a trilogy of young adult dystopian novels written by Suzanne Collins.,REFUTES [6] The Hunger Games film series is based on The Hunger Games trilogy of novels by Suzanne Collins.,REFUTES,REFUTES,True
+fever,102523,1,1,REFUTES [4] The film Grease had a soundtrack album that was the second-best selling album of the year in the United States.,"REFUTES [8] The claim that ""Grease did not have a soundtrack"" is refuted by passage [8], which states that ""Summer Nights"" is a popular song from the musical Grease and was recorded by John Travolta and Olivia Newton-John for the big-screen adaptation, and was released as a single. This indicates that Grease did have a soundtrack.",REFUTES,REFUTES,True
+fever,102528,1,1,"REFUTES [9] Personality is a set of individual differences that are affected by the development of an individual: values, attitudes, personal memories, social relationships, habits, and skills.","REFUTES [9] Personality is a set of individual differences that are affected by the development of an individual: values, attitudes, personal memories, social relationships, habits, and skills.",REFUTES,REFUTES,True
+fever,102540,1,0,"SUPPORTS [1] Annabelle is mentioned as a United States Navy patrol boat in commission from 1917 to 1918, indicating its presence in the United States.","NOT_ENOUGH_INFO  
+None of the passages provide information about Annabelle's location in the United States. [1]-[10]",SUPPORTS,NOT_ENOUGH_INFO,True
+fever,102583,1,1,"REFUTES [2] The 2013 Africa Cup of Nations was held in an odd-numbered year (2013), which contradicts the claim that it has only been held in even-numbered years.","REFUTES [1] The Africa Cup of Nations has not only been held in even-numbered years. The passage states that it was first held in 1957, which is an odd-numbered year, and that since 1968 it has been held every two years. This implies that it has been held in both even and odd-numbered years.",REFUTES,REFUTES,True
+fever,102594,1,1,SUPPORTS [3],SUPPORTS [3],SUPPORTS,SUPPORTS,True
+fever,102600,1,1,"REFUTES [1] The film 'Sausage Party' was theatrically released in the United States and Canada on August 12, 2016, not in May of 2016.","REFUTES. The film was theatrically released in the United States and Canada on August 12, 2016 [1].",REFUTES,REFUTES,True
+fever,10261,1,1,SUPPORTS. The English Wikipedia is described as the English-language edition of the free online encyclopedia Wikipedia [5].,SUPPORTS. The English Wikipedia is described as the English-language edition of the free online encyclopedia Wikipedia [5].,SUPPORTS,SUPPORTS,True
+fever,10262,1,1,"REFUTES. The English Wikipedia is a free online encyclopedia, not a chat room [3].","REFUTES [3] The English Wikipedia is described as the English-language edition of the free online encyclopedia Wikipedia, not a free online chat room.",REFUTES,REFUTES,True
+fever,102636,1,1,REFUTES [2],"REFUTES [5] The passage mentions that Salisbury Woodland Gardens were renovated in 1967 and that the Council's Ranger Service took over in 2006, but there is no information about a windstorm in Stanley Park in 2016.",REFUTES,REFUTES,True
+fever,102741,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+fever,102745,1,0,REFUTES [1] The Uganda Protectorate was a protectorate of the British Empire from 1894 to 1962.,Verdict: REFUTES [8] The Young Baganda Association is a political party created in the Uganda protectorate in 1919 by Z.K. Sentongo. This directly states that Uganda was a protectorate.,REFUTES,UNPARSEABLE,True
+fever,102784,0,1,"REFUTES [2]  
+The passage states that Zoey Deutch portrayed Stephanie Fleming in Why Him? (2016).",SUPPORTS [1],REFUTES,SUPPORTS,True
+fever,102789,0,1,NOT_ENOUGH_INFO [1][3],"REFUTES [1] The passage does not mention the number of escalators in the Burj Khalifa. It only discusses the building's height, construction, and purpose.",NOT_ENOUGH_INFO,REFUTES,True
+fever,102797,1,1,"REFUTES [2]  
+Simon Pegg is described as an English actor, comedian, screenwriter, and producer in passage [2], which directly refutes the claim that he is Scottish.","REFUTES [2] Simon Pegg is an English actor, comedian, screenwriter, and producer, indicating he is not Scottish.",REFUTES,REFUTES,True
+fever,102872,1,1,SUPPORTS [6],SUPPORTS [6],SUPPORTS,SUPPORTS,True
+fever,102876,0,1,NOT_ENOUGH_INFO [4],REFUTES [4],NOT_ENOUGH_INFO,REFUTES,True
+fever,102884,1,1,REFUTES [1],"REFUTES [1]  
+The album ""See You on the Other Side"" by Korn was first certified gold in the United States on January 12, 2006, not January 2016.",REFUTES,REFUTES,True
+fever,102911,1,1,"REFUTES [2], [3], [4], [5], [6], [9]",REFUTES [2] Reanimation is the first remix album by American rock band Linkin Park.,REFUTES,REFUTES,True
+fever,102986,1,1,"REFUTES [1]  
+The film ""Hannah and Her Sisters"" is described as a comedy-drama, not a tragedy.","REFUTES [1]  
+The film ""Hannah and Her Sisters"" is described as a comedy-drama, not a tragedy.",REFUTES,REFUTES,True
+fever,102990,0,0,"REFUTES [1] The Morning Show moved to its new studios at Corus Quay on November 21 , 2016 , which indicates that the first public showing of Quay (referring to Corus Quay) was in 2016, not 2015.","REFUTES [10] The claim that ""Quay had its first public showing in 2015"" is refuted because Elizabeth Quay, a mixed-use development project in Perth, was officially opened on 29 January 2016, not in 2015.",REFUTES,REFUTES,True
+fever,10300,0,0,"NOT_ENOUGH_INFO. The passages provided discuss Jimi Hendrix's music career, albums, and documentaries, but none mention any training or involvement with air assault operations [7].",NOT_ENOUGH_INFO [1]-[10],NOT_ENOUGH_INFO,NOT_ENOUGH_INFO,True
+fever,103003,1,1,"SUPPORTS. Kate Walsh was a presenter on Live from Studio Five and OK! TV [1], which are television shows.",SUPPORTS [6],SUPPORTS,SUPPORTS,True
+fever,103040,1,1,"REFUTES [1] The passage states that ""Designated Survivor is an American political drama television series,"" directly contradicting the claim that it is incapable of being an American political drama.","REFUTES [1] The passage states that ""Designated Survivor is an American political drama television series,"" directly contradicting the claim that it is incapable of being an American political drama.",REFUTES,REFUTES,True
+fever,103050,0,0,SUPPORTS [2],"SUPPORTS [2]  
+The passage states that ""In addition to brands selling assembled vehicles, GM has also had various automotive-component and non-automotive brands, many of which it divested in the 1980s through 2000s."" This indicates that General Motors had non-automotive factories or operations.",SUPPORTS,SUPPORTS,True
+fever,103051,1,1,"REFUTES [4]  
+The passage states that Floyd Mayweather Jr. is a former professional boxer who competed from 1996 to 2015 and is widely considered one of the greatest boxers of all time. This directly refutes the claim that he is incapable of being a professional boxer.","REFUTES [1]  
+The passage states that Floyd Mayweather Jr. is a five-division world champion and that he successfully returned to boxing after a two-year layoff, winning a unanimous decision against Juan Manuel Márquez. This directly refutes the claim that he is incapable of being a professional boxer.",REFUTES,REFUTES,True
+fever,103063,1,1,"SUPPORTS. Hermit crabs are animals because they are decapod crustaceans, as stated in passage [10] which defines crabs, including hermit crabs, as decapod crustaceans.","SUPPORTS [1]  
+Hermit crabs are animals because the passages describe various species of hermit crabs, which are classified as crustaceans, a subgroup of arthropods, which are animals.",SUPPORTS,SUPPORTS,True
+fever,103084,1,1,"REFUTES. The passage states that Zoe Saldana was born on June 19, 1978 [1], which directly refutes the claim that she died in 1958.","REFUTES. The passage states that Zoe Saldana made her screen debut in 1999 and had a breakthrough in 2009, indicating she was alive and active in the film industry during those years. [1]",REFUTES,REFUTES,True
+fever,103116,1,1,SUPPORTS. Jack Dylan Grazer is an American child actor as stated in passage [1].,SUPPORTS. Jack Dylan Grazer is described as an American child actor in passage [1].,SUPPORTS,SUPPORTS,True
+fever,103154,1,1,"SUPPORTS. The passage states that Sky UK Limited serves the United Kingdom by providing television and broadband internet services, fixed line and mobile telephone services to consumers and businesses in the United Kingdom [1].",SUPPORTS [1],SUPPORTS,SUPPORTS,True
+fever,103167,1,1,"REFUTES [2] The Love Club EP is the debut extended play by New Zealand singer Lorde, not by Banks.",REFUTES [2],REFUTES,REFUTES,True
+fever,1032,1,1,"REFUTES [1] The passage states that yin and yang are complementary forces that interact to form a dynamic system, implying that each contains elements of the opposite force.","REFUTES [1]  
+The passage states that yin and yang are complementary forces that interact to form a dynamic system, implying that each contains elements of the opposite force.",REFUTES,REFUTES,True
+fever,103221,1,1,REFUTES [3],REFUTES [3],REFUTES,REFUTES,True
+fever,103234,1,1,"SUPPORTS. Sherilyn Fenn starred in multiple films as indicated in passages [1], [2], [3], [4], [5], [6], [7], [8], [9], and [10].",SUPPORTS [2],SUPPORTS,SUPPORTS,True
+fever,10324,0,0,REFUTES [10],REFUTES [7],REFUTES,REFUTES,True
+fever,103298,1,0,"REFUTES [8] The passage states that ""Phoenix, the capital and largest city in Arizona"" is ranked as the sixth most populous city in the United States. This directly contradicts the claim that Phoenix, Arizona is not the capital of Arizona.","SUPPORTS [3]  
+The passage states that Kingman is the county seat of Mohave County, Arizona, and mentions that Phoenix is about 165 miles northwest of the state capital. This implies that Phoenix is not the capital of Arizona.",REFUTES,SUPPORTS,True
+fever,103307,1,1,"REFUTES  
+Shannon Lee is an American actress, martial artist, and businesswoman, as stated in passage [1]. There is no mention of her being German in any of the provided passages.","REFUTES. The passage states that Shannon Lee is an American actress, martial artist, and businesswoman [1]. This directly refutes the claim that she is German.",REFUTES,REFUTES,True
+fever,103325,1,1,SUPPORTS [6],SUPPORTS [6],SUPPORTS,SUPPORTS,True
+fever,103375,0,0,"NOT_ENOUGH_INFO. The passages discuss various earthquakes in Java and the geological features like the Sunda megathrust and Sunda Trench, but none directly state that Java was formed by earthquakes. [1][2][3][4][5][6][7][8][9][10]",NOT_ENOUGH_INFO [1],NOT_ENOUGH_INFO,NOT_ENOUGH_INFO,True
+fever,103398,0,1,"Verdict: REFUTES [4]  
+The claim that the Danish language is spoken only outside of Norway is refuted by passage [4], which states that Danish is spoken ""principally in Denmark and in the region of Southern Schleswig in northern Germany"" and also mentions that there are ""minor Danish-speaking communities in Norway."" This directly contradicts the claim that Danish is spoken only outside of Norway.","REFUTES [4] The Danish language is spoken by around six million people, principally in Denmark and in the region of Southern Schleswig in northern Germany, where it has minority language status. This directly contradicts the claim that it is spoken only outside of Norway.",UNPARSEABLE,REFUTES,True
+fever,103456,1,1,"REFUTES [1] The claim that ""Heaven Can Wait"" is a film adaptation of Harry Segall's play ""Hamlet"" is refuted because the passages indicate that ""Heaven Can Wait"" is based on Harry Segall's play of the same name, not ""Hamlet.""","REFUTES [1] and [5] indicate that ""Heaven Can Wait"" is a film adaptation of Harry Segall's play of the same name, not ""Hamlet"". The claim incorrectly attributes the source play of ""Heaven Can Wait"" to ""Hamlet"".",REFUTES,REFUTES,True
+fever,103503,1,1,REFUTES. The Eurotas is described as the main river of Laconia and one of the major rivers of the Peloponnese [1].,"REFUTES. The Eurotas is the main river of Laconia, not a minor river [1].",REFUTES,REFUTES,True
+fever,103509,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+fever,103535,1,1,"REFUTES [2]  
+The passage states that ""Hood Billionaire"" was released in 2014, not 2010.",REFUTES [1],REFUTES,REFUTES,True
+fever,103545,0,0,NOT_ENOUGH_INFO [1],NOT_ENOUGH_INFO [1]-[10],NOT_ENOUGH_INFO,NOT_ENOUGH_INFO,True
+fever,103583,1,1,SUPPORTS [10],"SUPPORTS [1] Woodrow Wilson is mentioned as the 28th President of the United States and the namesake of various places and buildings, indicating he lived.",SUPPORTS,SUPPORTS,True
+fever,103665,1,1,REFUTES. Oscar Isaac appeared in Star Wars: The Force Awakens as Poe Dameron [4].,REFUTES [4],REFUTES,REFUTES,True
+fever,103709,0,0,"Verdict: REFUTES [1]
+
+The claim that ""Uranium was unable to meet the qualifications to be considered a chemical element"" is refuted by passage [1], which discusses uranium as a chemical element and its isotopes, including its use in nuclear fuel and weapons. This indicates that uranium is recognized as a chemical element.",NOT_ENOUGH_INFO [1][2][3][4][6][9],UNPARSEABLE,NOT_ENOUGH_INFO,True
+fever,103742,1,1,SUPPORTS [1],SUPPORTS. The passage confirms that Buffy the Vampire Slayer is a television series [8].,SUPPORTS,SUPPORTS,True
+fever,103757,1,1,"SUPPORTS [2], [4], [7]",SUPPORTS [4],SUPPORTS,SUPPORTS,True
+fever,103758,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+fever,103767,1,1,"REFUTES. Linkin Park has released multiple albums, including Hybrid Theory, Meteora, A Thousand Suns, and Living Things, as stated in passages [1], [2], [6], and [10].",REFUTES [1][2][3][4][5][8][10],REFUTES,REFUTES,True
+fever,103816,1,1,REFUTES [1],"REFUTES [1] Fidaa is a Telugu film, not an Iranian language.",REFUTES,REFUTES,True
+fever,103840,0,1,NOT_ENOUGH_INFO [8],SUPPORTS [8],NOT_ENOUGH_INFO,SUPPORTS,True
+fever,103934,1,1,"REFUTES [1] The passage states that ""Maximum Overdrive is a 1986 American science fiction action horror comedy film written and directed by Stephen King,"" which directly contradicts the claim that it was written by the United States' government.","REFUTES. The film Maximum Overdrive was written and directed by Stephen King, not by the United States' government [1].",REFUTES,REFUTES,True
+fever,103941,0,1,SUPPORTS [1],REFUTES [6],SUPPORTS,REFUTES,True
+fever,103964,1,1,"REFUTES [1] The passage states that the Vandals established kingdoms in the 5th century, not the 6th century. Specifically, it mentions that the Vandal Kingdom was established in North Africa and the Mediterranean from 435 AD to 534 AD, which is in the 5th and early 6th centuries.","REFUTES [3] The Vandals established kingdoms in Spain and North Africa in the 5th century, not the 6th century.",REFUTES,REFUTES,True
+fever,104017,1,1,SUPPORTS [2],SUPPORTS [2],SUPPORTS,SUPPORTS,True
+fever,104031,1,1,"REFUTES. The Gettysburg Address was acknowledged and read, as evidenced by President Abraham Lincoln delivering it at the dedication of the National Cemetery, which was established with David Wills' efforts [5]. Additionally, the address is referenced in various contexts, including films and other historical accounts [4][6][8].","REFUTES [1], [4], [7], [8]",REFUTES,REFUTES,True
+fever,104036,1,1,SUPPORTS [1],"SUPPORTS The claim is supported by passage [1], which explicitly states that the English Wikipedia is the English-language edition of the free online encyclopedia Wikipedia.",SUPPORTS,SUPPORTS,True
+fever,104135,1,1,"REFUTES [2] Anneliese van der Pol is described as a Dutch and American actress, singer, model, and dancer, not as a mayor.","REFUTES. Anneliese van der Pol is not a mayor; she is an actress, singer, model, and dancer, best known for her role as Chelsea Daniels on ""That's So Raven"" [2]. There is no mention of her holding a mayoral position in the provided passages.",REFUTES,REFUTES,True
+fever,104178,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+fever,104205,1,1,REFUTES [1] Talulah Riley appeared in films such as Pride & Prejudice.,REFUTES [1] Talulah Riley appeared in Pride & Prejudice.,REFUTES,REFUTES,True
+fever,104206,1,1,"REFUTES [1] The passage does not mention anything about a boat named Emily belonging to Lorelai Gilmore. The information provided focuses on her relationships, her role as a single mother, and her interactions with her parents, but there is no reference to a boat or its name.","REFUTES [1]  
+The passage states that Lorelai Gilmore is a character from the TV series Gilmore Girls and mentions her relationships and family, but there is no mention of a boat named Emily associated with her.",REFUTES,REFUTES,True
+fever,104221,1,1,SUPPORTS [1],SUPPORTS [2],SUPPORTS,SUPPORTS,True
+fever,104249,1,1,"REFUTES. The third season of Fargo premiered on the basic cable network FX, not a Chinese basic cable network [1].","REFUTES [1]  
+The third season of Fargo premiered on FX, a basic cable network in the United States, not a Chinese basic cable network.",REFUTES,REFUTES,True
+fever,104298,1,1,SUPPORTS [1],SUPPORTS [4],SUPPORTS,SUPPORTS,True
+fever,104332,0,1,REFUTES [1],SUPPORTS [1],REFUTES,SUPPORTS,True
+fever,104365,1,1,"REFUTES [1][3][5]  
+The passages describe Jason Bourne as a former CIA assassin suffering from memory loss, not as a famous army general.","REFUTES [2] Jason Winston George, known as Jason Bourne, is an actor and model, not an army general.",REFUTES,REFUTES,True
+fever,104380,1,1,"SUPPORTS [1] Calvin Wiggett, a Canadian country music singer, recorded an album for Royalty Records, and one of his singles, ``Love Music Loves to Dance,'' peaked at No. 13 on the Canadian country music charts. This supports the claim that a Canadian made a dance-related work.","SUPPORTS [1] The passage mentions that the sher (also called sherele) is one of the most popular and widespread East European Jewish figure dances, and it is similar to the American square dance, the Russian kadril (quadrille), and other urban and rural figure dances originating in northern and eastern Europe. This indicates that the dance has a Canadian connection through its similarity to the American square dance, which is a form of dance that has roots in Canada.",SUPPORTS,SUPPORTS,True
+fever,104423,1,1,SUPPORTS. The film DodgeBall: A True Underdog Story is mentioned as a 2004 American sports comedy film in passage [1].,SUPPORTS [1],SUPPORTS,SUPPORTS,True
+fever,104426,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+fever,104427,1,1,"REFUTES [2] Joan Hilty has worked with Gene Luen Yang as an editor, but Barbarella is based on a comic by Jean-Claude Forest, not Gene Luen Yang.","REFUTES [9] The claim that Barbarella is based on a comic by Gene Luen Yang is refuted because Barbarella is a fictional heroine in a French science fiction comic book created by Jean-Claude Forest, as stated in passage [9]. There is no mention of Gene Luen Yang being involved with the creation of Barbarella.",REFUTES,REFUTES,True
+fever,10450,0,0,"REFUTES [1]
+
+The passage states that David Attenborough ""is a former senior manager at the BBC, having served as controller of BBC Two and director of programming for BBC Television in the 1960s and 1970s."" However, it does not claim he ""served as the program director for BBC Television,"" which is a more specific and broader role than what is mentioned. Therefore, the claim is refuted based on the information provided.","REFUTES [2]  
+The passage states that David Attenborough was ""instrumental in its creation"" of the BBC 2 Floodlit Trophy, but there is no mention of him serving as the program director for BBC Television. Instead, it notes his role as the ""then director of BBC2,"" which is a specific position, not the broader title of program director for the entire BBC Television.",REFUTES,REFUTES,True
+fever,10451,1,1,"SUPPORTS [1]  
+The passage states that David Attenborough ""is a former senior manager at the BBC, having served as controller of BBC Two and director of programming for BBC Television in the 1960s and 1970s."" This directly supports the claim that he directed programs for BBC Television.",SUPPORTS [1],SUPPORTS,SUPPORTS,True
+fever,104530,1,1,"REFUTES [2] Chris Benoit died on June 24, 2007, as a result of a murder-suicide where he killed his wife and son before committing suicide himself.","REFUTES [7] Chris Benoit was a Canadian professional wrestler who died on June 24, 2007, which directly contradicts the claim that he is immortal.",REFUTES,REFUTES,True
+fever,104547,1,1,"REFUTES. The Nice Guys was directed by Shane Black, not Stephen Spielberg [7].","REFUTES [7] The Nice Guys was directed by Shane Black, not Stephen Spielberg.",REFUTES,REFUTES,True
+fever,10455,1,1,"REFUTES. The Cyclades are an island group in the Aegean Sea, not the Dead Sea [6].","REFUTES. The Cyclades are an island group in the Aegean Sea, southeast of mainland Greece [6], while the Dead Sea is a salt lake located in the Middle East, bordering Jordan and Israel [3]. Therefore, the Cyclades are not in the Dead Sea.",REFUTES,REFUTES,True
+fever,104677,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+fever,104697,1,1,"SUPPORTS [1], [3]",SUPPORTS [1],SUPPORTS,SUPPORTS,True
+fever,104703,1,1,SUPPORTS [3],"SUPPORTS [2], [8]",SUPPORTS,SUPPORTS,True
+fever,104747,1,1,SUPPORTS [1],SUPPORTS. Dulquer Salmaan received his first Filmfare Award for Best Actor nomination for his performance in Ustad Hotel (2012) [1].,SUPPORTS,SUPPORTS,True
+scifact,1,1,1,NOT_ENOUGH_INFO. The provided passages do not mention anything about 0-dimensional biomaterials or their inductive properties.,NOT_ENOUGH_INFO. The provided passages do not mention anything about 0-dimensional biomaterials or their inductive properties.,NOT_ENOUGH_INFO,NOT_ENOUGH_INFO,True
+scifact,100,0,0,REFUTES [1],"REFUTES [1]
+
+The claim that all hematopoietic stem cells (HSCs) segregate their chromosomes randomly is refuted by passage [1], which states that ""Haematopoietic stem cells do not asymmetrically segregate chromosomes or retain BrdU."" This directly contradicts the claim by indicating that HSCs do not exhibit random chromosome segregation, as the hypothesis of asymmetric segregation was tested and found not to be supported.",REFUTES,REFUTES,True
+scifact,1012,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1014,0,0,REFUTES [1],REFUTES [1],REFUTES,REFUTES,True
+scifact,1019,0,0,REFUTES [2],REFUTES [2],REFUTES,REFUTES,True
+scifact,1020,1,0,"SUPPORTS [3]
+
+The passage [3] discusses how granule cell neurons have unique innate immune programs that confer differential susceptibility to viral infection. It specifically mentions that three interferon-stimulated genes (ISGs) mediated antiviral effects against neurotropic viruses, suggesting that interferon-induced genes play a role in protecting these neurons from infection. This supports the claim that rapid up-regulation and higher basal expression of interferon-induced genes increase survival of granule cell neurons infected by West Nile virus.",NOT_ENOUGH_INFO [3],SUPPORTS,NOT_ENOUGH_INFO,True
+scifact,1021,1,0,"REFUTES [1] and [3] 
+
+The claim suggests that rapid up-regulation and higher basal expression of interferon-induced genes reduce survival of granule cell neurons infected by West Nile virus. However, passage [1] indicates that IFN-β helps restrict WNV replication, and passage [3] shows that granule cell neurons have unique innate immune programs that confer antiviral effects, including the expression of interferon-stimulated genes (ISGs) that mediate antiviral effects. These findings contradict the claim that interferon-induced genes reduce survival of granule cell neurons.",NOT_ENOUGH_INFO [3],REFUTES,NOT_ENOUGH_INFO,True
+scifact,1024,0,0,REFUTES [1][2][3][4][7],"REFUTES [1]
+
+The passage states that CTCF anchor regions are conserved across species, influence gene expression, and are a frequent site of mutations in cancer cells. However, it does not specifically mention that recurrent mutations occur frequently within CTCF anchor sites adjacent to oncogenes. Therefore, the claim is refuted based on the information provided.",REFUTES,REFUTES,True
+scifact,1029,1,1,"REFUTES [2], [3]
+
+The claim that reduced responsiveness to interleukin-2 in regulatory T cells is associated with greater resistance to autoimmune diseases such as Type 1 Diabetes is refuted by the provided passages. Passage [2] states that IL2RA variation lowers IL-2 signaling and contributes to diminished CD4+CD25+ regulatory T cell function, which is linked to autoimmune diseases. Passage [3] further supports this by showing that reduced IL-2 production correlates with reduced function of CD4+ CD25+ regulatory T cells, which are critical for maintaining immune homeostasis. Thus, reduced IL","REFUTES [2], [3]
+
+The claim that reduced responsiveness to interleukin-2 in regulatory T cells is associated with greater resistance to autoimmune diseases such as Type 1 Diabetes is refuted by the provided passages. Passage [2] states that Type 1 diabetes-associated IL2RA variation lowers IL-2 signaling and contributes to diminished CD4+CD25+ regulatory T cell function, which suggests that reduced IL-2 signaling impairs regulatory T cell function and may contribute to autoimmunity. Passage [3] further supports this by showing that reduced IL-2 production correlates with reduced function of CD4+ CD2",REFUTES,REFUTES,True
+scifact,1041,1,1,"REFUTES [1] The passage states that SWR1 catalyzes H2A.Z replacement in vitro in a stepwise manner, producing homotypic H2A.Z nucleosomes as end products. It also suggests that H2A.Z-containing nucleosomes are incorporated at most eukaryotic promoters, which is associated with transcriptional regulation. There is no evidence in the passage that H2A.Z replacement slows gene activation; rather, it implies a role in promoting transcriptional activity.","REFUTES [9]
+
+The claim that replacement of histone H2A with H2A.Z slows gene activation in yeasts by stabilizing +1 nucleosomes is refuted by passage [9]. This passage discusses the reconstitution of promoter nucleosome organization and identifies specific contributions of chromatin remodelers. It states that INO80 and ISW2 each align downstream nucleosomal arrays, and ISW1a tightens the spacing to canonical repeat lengths. However, it does not support the idea that H2A.Z stabilizes +1 nucleosomes to slow gene activation. In fact, passage [3] discusses the stability",REFUTES,REFUTES,True
+scifact,1049,1,0,REFUTES [3],NOT_ENOUGH_INFO. The provided passages do not mention ribosomopathies or their pathology. [1-10],REFUTES,NOT_ENOUGH_INFO,True
+scifact,1062,1,1,"SUPPORTS [1]
+
+The passage states, ""Here, we show that SNO-GAPDH physiologically transnitrosylates nuclear proteins,"" and since histone deacetylases (HDACs) are nuclear proteins, this supports the claim that S-nitrosylated GAPDH physiologically transnitrosylates histone deacetylases.",SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1086,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1088,1,0,REFUTES [10],NOT_ENOUGH_INFO [9],REFUTES,NOT_ENOUGH_INFO,True
+scifact,1089,1,1,"SUPPORTS [1] The passage states that the activity of the SUMO ligase (Mms21) depends on its docking to an intact and active Smc5/6 complex, and that Mms21-dependent sumoylation requires binding of ATP to Smc5, a step that is part of the ligase mechanism. This supports the claim that Smc5/6 engagement drives the activation of the SUMO E3 ligase Mms21 through ATP-dependent remolding.",SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1099,0,0,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1100,0,0,REFUTES [1],REFUTES [1],REFUTES,REFUTES,True
+scifact,1104,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1107,0,0,"REFUTES [1]
+
+The claim that subcutaneous fat depots undergo extensive browning processes after cold exposure is refuted by passage [1], which states that during cold-induced 'browning' of subcutaneous fat, most 'beige' adipocytes stem from de novo–differentiated adipocytes. This suggests that while some browning occurs, it is not extensive and primarily involves new adipocyte differentiation rather than a widespread transformation of existing subcutaneous fat.","REFUTES [1]
+
+The passage states that during cold-induced 'browning' of subcutaneous fat, most 'beige' adipocytes stem from de novo–differentiated adipocytes. However, it does not claim that subcutaneous fat depots undergo extensive browning processes after cold exposure. Instead, it highlights that during cold exposure, subcutaneous fat undergoes browning, but the claim that it ""undergoes extensive browning processes"" is not directly supported and is not the main focus of the passage. The passage emphasizes differences in adipogenic potential among fat depots rather than the extent of browning in sub",REFUTES,REFUTES,True
+scifact,1110,1,1,"REFUTES [1] and [4] show that diet-related adaptive gene polymorphisms and nutritional habits are associated with chronic disorders, indicating that suboptimal nutrition can be predictive of chronic disease.",REFUTES [6],REFUTES,REFUTES,True
+scifact,1121,1,1,"SUPPORTS [2]  
+The passage states that during structural long-term potentiation (sLTP), there is fast and sustained activation of TrkB in the stimulated spine, which depends on NMDAR and CaMKII signaling and on postsynaptic synthesized BDNF. This indicates that synaptic activity (sLTP) leads to the release of BDNF from postsynaptic dendrites.",SUPPORTS [2],SUPPORTS,SUPPORTS,True
+scifact,113,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1130,1,1,"REFUTES [1]
+
+The passage states that Treg cells lacking expression of integrin αvβ8 were unable to suppress pathogenic T cell responses during active inflammation, directly contradicting the claim that they are more adept at suppression.","REFUTES [1]
+
+The passage states that Treg cells lacking expression of integrin αvβ8 were unable to suppress pathogenic T cell responses during active inflammation, directly contradicting the claim that they are more adept at suppression.",REFUTES,REFUTES,True
+scifact,1132,1,1,SUPPORTS [1],SUPPORTS [6],SUPPORTS,SUPPORTS,True
+scifact,1137,0,0,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1140,1,1,REFUTES [1],REFUTES [1],REFUTES,REFUTES,True
+scifact,1144,1,1,"REFUTES [1] The study in passage [1] estimates the potential health effects of a 20% SSB excise tax in India, suggesting that such a tax could reduce obesity and type 2 diabetes incidence. This directly refutes the claim that taxation had no effect on the incidence rate of type II diabetes in India.",REFUTES [1],REFUTES,REFUTES,True
+scifact,1146,0,1,"REFUTES [1] The systematic review found that the summary relative risk for mortality in teaching versus nonteaching hospitals was 0.96 (95% CI, 0.93–1.00), suggesting no significant difference in mortality outcomes, but this does not support the claim that teaching hospitals do not provide better care. Additionally, [3] shows that a ""closed"" organisational format in a teaching hospital improved patient outcomes in an ICU, indicating that teaching hospitals can provide better care in certain contexts.",SUPPORTS [1],REFUTES,SUPPORTS,True
+scifact,115,1,1,REFUTES [1],REFUTES [1],REFUTES,REFUTES,True
+scifact,1150,1,1,"SUPPORTS [1]
+
+The passage states that Tspan3 knockout mice showed impaired leukemia stem cell self-renewal and disease propagation, and Tspan3 inhibition blocked growth of AML patient samples. These findings suggest that Tetraspanin-3 plays a causative role in the development of acute myelogenous leukemia.",SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1163,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1175,0,1,"REFUTES [1] The passage states that RIG-I, not PPR MDA5, has two N-terminal CARD domains. It specifically mentions that RIG-I has two N-terminal caspase activation and recruitment domains (CARDs). There is no mention of PPR MDA5 having CARD domains.",NOT_ENOUGH_INFO. The claim about the PPR MDA5 having two N-terminal CARD domains is not addressed in any of the provided passages.,REFUTES,NOT_ENOUGH_INFO,True
+scifact,1179,0,1,"SUPPORTS [1]  
+The passage states that MDA5 is a key intracellular receptor that recognizes virus infection to produce type I IFN, and it is mentioned alongside RIG-I, both of which are DExD/H box RNA helicases. This supports the claim that MDA5 has a central DExD/H RNA helices domain.",NOT_ENOUGH_INFO [1],SUPPORTS,NOT_ENOUGH_INFO,True
+scifact,118,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1180,1,1,"SUPPORTS [1], [2], [3], [4], [5], [8]",SUPPORTS [5],SUPPORTS,SUPPORTS,True
+scifact,1185,0,0,"NOT_ENOUGH_INFO. The provided passages discuss the potential benefits and challenges of kidney paired donation (KPD) programs, including increased transplant numbers, improved matching, and financial considerations. However, none of the passages provide specific financial data or estimates regarding the potential savings of $750 million if 7% of patients participate in an optimized national KPD program. [1][2][3][4][5]","NOT_ENOUGH_INFO. The provided passages discuss kidney paired donation (KPD) and its potential impact on the number and quality of transplants, but none provide specific financial data or estimates about cost savings in the US health care system. [1]",NOT_ENOUGH_INFO,NOT_ENOUGH_INFO,True
+scifact,1187,1,1,SUPPORTS [6],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1191,1,1,NOT_ENOUGH_INFO. The provided passages do not mention anything about the rate at which DNA data is being generated or the doubling of publicly available DNA data over time. [1]-[10],NOT_ENOUGH_INFO. The provided passages do not mention anything about the rate at which publicly available DNA data increases over time.,NOT_ENOUGH_INFO,NOT_ENOUGH_INFO,True
+scifact,1194,0,0,REFUTES [1],REFUTES [2],REFUTES,REFUTES,True
+scifact,1196,1,1,NOT_ENOUGH_INFO. The provided passages do not discuss the availability of safe places to study or its impact on homelessness.,NOT_ENOUGH_INFO [5],NOT_ENOUGH_INFO,NOT_ENOUGH_INFO,True
+scifact,1197,1,1,"NOT_ENOUGH_INFO. The provided passages discuss the effects of homelessness on mental health, children, and health outcomes, but none directly address the effectiveness of safe places to study in decreasing homelessness. [1][3][5][8][9]",NOT_ENOUGH_INFO. The provided passages do not discuss the availability of safe places to study or its effectiveness in decreasing homelessness. [5],NOT_ENOUGH_INFO,NOT_ENOUGH_INFO,True
+scifact,1199,0,1,REFUTES [1],NOT_ENOUGH_INFO. The provided passages do not mention colchicine or its benefits in relation to secondary prevention strategies like high-dose statins. [1-10],REFUTES,NOT_ENOUGH_INFO,True
+scifact,1200,1,1,NOT_ENOUGH_INFO [1]-[10],NOT_ENOUGH_INFO. The provided passages do not mention anything about the binding orientation of the ML-SA1 activator at hTRPML1 or hTRPML2. [1-10],NOT_ENOUGH_INFO,NOT_ENOUGH_INFO,True
+scifact,1202,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1204,1,0,NOT_ENOUGH_INFO [1],REFUTES [1],NOT_ENOUGH_INFO,REFUTES,True
+scifact,1207,0,0,"REFUTES [1]
+
+The passage states that MIIB is strongly polarized in hematopoietic stem cells and progenitors (HSC/Ps) and is downregulated in differentiated cells via asymmetric division. It also mentions that MIIA is constitutive and activated during differentiation on stiff matrices, but not soft ones. However, it does not support the claim that the composition switches from MIIB to MIIA during differentiation. Instead, it suggests that MIIB is downregulated in differentiated cells, while MIIA is constitutively active in certain conditions. Therefore, the claim is refuted.","REFUTES [1]
+
+The passage states that MIIB is strongly polarized in hematopoietic stem cells and progenitors (HSC/Ps) and is downregulated in differentiated cells via asymmetric division. In contrast, MIIA is constitutive and activated by dephosphorylation during cytokine-triggered differentiation of cells grown on stiff, endosteum-like matrix, but not soft, marrow-like matrix. This suggests that MIIB is more prominent in stem/progenitor cells, while MIIA becomes more active during differentiation, indicating a switch from MIIB to MIIA, not the opposite. Therefore, the",REFUTES,REFUTES,True
+scifact,1213,0,0,"SUPPORTS [1] Prolonged release of interleukin-1β from activated microglia has a deleterious effect on hippocampal neurons and is implicated in the impaired neurogenesis and cognitive dysfunction associated with aging, Alzheimer's disease and depression. This suggests that prolonged activation of monocytes (or related inflammatory cells) can have harmful effects in inflammatory diseases.","SUPPORTS [1], [3], [10]",SUPPORTS,SUPPORTS,True
+scifact,1216,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1221,0,0,"NOT_ENOUGH_INFO. The provided passages discuss genomic aberrations in various contexts such as bladder cancer, mouse pluripotent stem cells, human embryonic stem cells, medulloblastoma, DNA methylation in mice, BRCA1 mutation carriers, glioblastoma multiforme, honey bees, and epigenetic instability in cloned mice. However, none of the passages specifically mention genomic aberrations in metastases or compare them to those in primary tumors. Therefore, there is not enough information to evaluate the claim.","NOT_ENOUGH_INFO. The provided passages discuss various genomic and molecular mechanisms in cancer, such as the role of Gr-1+CD11b+ cells in metastasis [1], p16 inactivation in head and neck squamous cell carcinoma [5], and copy number changes in bladder tumors [9]. However, none of the passages directly compare genomic aberrations in metastases to those in the primary tumor. Therefore, there is not enough information to evaluate the claim.",NOT_ENOUGH_INFO,NOT_ENOUGH_INFO,True
+scifact,1225,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1226,0,1,"SUPPORTS [1] and [2]  
+The claim that the loss of TET protein functions may have dire biological consequences, such as myeloid cancers, is supported by the passages. Passage [1] states that TET2 inactivation through loss-of-function mutation is a common event in myeloid and lymphoid malignancies. Passage [2] further explains that TET2 is involved in resolving inflammation and that its loss leads to increased inflammatory mediators, which can contribute to disease states. These findings support the claim that TET protein dysfunction can lead to serious biological consequences, including myeloid cancers.",NOT_ENOUGH_INFO [1]-[10],SUPPORTS,NOT_ENOUGH_INFO,True
+scifact,1232,1,1,"REFUTES [1]
+
+The passage states that the minor (G) allele of FOXO3 is associated with a milder course of Crohn's disease, not more severe symptoms. This directly contradicts the claim.",REFUTES [1],REFUTES,REFUTES,True
+scifact,124,1,1,"SUPPORTS [1], [2], [3], [4], [6], [7], [8]",SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1241,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1245,1,1,NOT_ENOUGH_INFO. The provided passages do not mention the one-child policy or its impact on population growth.,NOT_ENOUGH_INFO. The provided passages do not mention the one-child policy or its impact on population growth.,NOT_ENOUGH_INFO,NOT_ENOUGH_INFO,True
+scifact,1259,1,1,"SUPPORTS [1] and [2]. The passages indicate that variations in the CYP2D6 gene, which affects tamoxifen metabolism, are associated with clinical outcomes and serum levels of tamoxifen metabolites, suggesting a genetic influence on treatment efficacy.",SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1262,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1266,0,0,"REFUTES [1] The passage states that associations between indirect markers of hormonal exposures, such as placental weight and other pregnancy characteristics, and maternal risk of developing breast cancer have been inconsistently associated. It does not support the claim that the risk of breast cancer among parous women increases with placental weight, nor does it specify that this association is strongest for premenopausal breast cancer.",REFUTES [1],REFUTES,REFUTES,True
+scifact,127,0,0,REFUTES [2],REFUTES [2],REFUTES,REFUTES,True
+scifact,1270,0,1,NOT_ENOUGH_INFO. The provided passages do not contain specific data comparing the self-harm rates between male and female prisoners [1][2][4][6].,REFUTES [1],NOT_ENOUGH_INFO,REFUTES,True
+scifact,1271,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1272,0,1,REFUTES [1],NOT_ENOUGH_INFO. The provided passages do not mention anything about the single flash-evoked ERG b-wave or ON-bipolar cells. [1-10],REFUTES,NOT_ENOUGH_INFO,True
+scifact,1273,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1274,1,0,"SUPPORTS [2]  
+The claim is supported by passage [2], which discusses the T6SS spike and mentions that PAAR-repeat proteins form a sharp conical extension on the VgrG spike, which is involved in attaching effector domains to the spike. This implies that the tip of the T6SS spike, which is part of the inner tube, carries effector proteins. While the passage does not explicitly mention E. coli, it does describe the general mechanism of the T6SS, which is relevant to E. coli as it is a Gram-negative bacterium that utilizes the T6SS.",REFUTES [3],SUPPORTS,REFUTES,True
+scifact,1278,0,1,"REFUTES [1] and [9] indicate that immune checkpoint inhibitors, such as anti-PD-1 antibodies, can lead to immune-related adverse events, including autoimmune phenomena, by disrupting the normal regulatory mechanisms of the immune system.",NOT_ENOUGH_INFO. The provided passages do not mention anything about co-IR blockade or its association with adverse autoimmune events in cancer patients. [1-10],REFUTES,NOT_ENOUGH_INFO,True
+scifact,1279,0,1,"REFUTES [1] The passage discusses the mechanism of PD-1 blockade in cancer immunotherapy and mentions that nivolumab, a PD-1 inhibitor, effectively inhibits the interaction between PD-1 and its ligands. It does not mention any adverse autoimmune events associated with co-IR blockade.",NOT_ENOUGH_INFO. The provided passages do not mention anything about co-IR blockade or adverse autoimmune events in cancer patients. [1]-[10],REFUTES,NOT_ENOUGH_INFO,True
+scifact,128,1,1,NOT_ENOUGH_INFO. The passages do not provide direct information about the relative lumen diameters of arterioles and venules [1][9].,NOT_ENOUGH_INFO. The provided passages do not mention anything about the lumen diameter of arterioles or venules.,NOT_ENOUGH_INFO,NOT_ENOUGH_INFO,True
+scifact,1280,0,1,"REFUTES [1] The passage states that the ureD, ureE, ureF, and ureG genes are involved in nickel metallocenter biosynthesis, not that they encode urease maturation proteins. The claim incorrectly attributes the function of these genes to urease maturation proteins rather than nickel metallocenter biosynthesis.",NOT_ENOUGH_INFO. The provided passages do not mention the ureABIEFGH gene cluster or its encoded proteins.,REFUTES,NOT_ENOUGH_INFO,True
+scifact,1281,0,1,REFUTES [1],NOT_ENOUGH_INFO. The provided passages do not mention the ureABIEFGH gene cluster or its induction by nickel (II) ion.,REFUTES,NOT_ENOUGH_INFO,True
+scifact,1282,0,0,REFUTES [1],REFUTES [1],REFUTES,REFUTES,True
+scifact,129,1,1,REFUTES [1],REFUTES [1],REFUTES,REFUTES,True
+scifact,1290,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1292,0,0,REFUTES [1],"REFUTES [1] The passage states that HNF4A mutations are associated with macrosomia and hyperinsulinaemic hypoglycaemia, and that these mutations are part of the MODY genes, which are related to diabetes. This directly contradicts the claim that there is no association between HNF4A mutations and diabetes risks.",REFUTES,REFUTES,True
+scifact,1298,0,0,"REFUTES [1] The CLOTS trial 1 found that thigh-length GCS reduced the risk of DVT in patients with stroke, as the study was designed to assess this effectiveness.",REFUTES [1],REFUTES,REFUTES,True
+scifact,13,0,1,"REFUTES [10] The passage states that the primary outcome was birth length, and while there were differences in mean birth weight and other z-scores, it does not mention the percentage of perinatal mortality due to low birth weight. Therefore, the claim is refuted as there is no evidence supporting the 5% figure.",NOT_ENOUGH_INFO [5],REFUTES,NOT_ENOUGH_INFO,True
+scifact,130,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1303,1,0,REFUTES [2],NOT_ENOUGH_INFO. The provided passages do not mention Tirasemtiv or its effects on fast-twitch muscle. [1-10],REFUTES,NOT_ENOUGH_INFO,True
+scifact,1316,0,1,SUPPORTS [1],NOT_ENOUGH_INFO [1][2][3][4][5][6][7][8][9][10],SUPPORTS,NOT_ENOUGH_INFO,True
+scifact,1319,1,1,SUPPORTS [2],SUPPORTS [2],SUPPORTS,SUPPORTS,True
+scifact,132,0,1,"SUPPORTS [6], [7], [8], [9], [10]",NOT_ENOUGH_INFO [7],SUPPORTS,NOT_ENOUGH_INFO,True
+scifact,1320,1,1,"REFUTES [2]  
+The passage states that human glial progenitor cells engrafted into neonatal immunodeficient mice enhanced synaptic plasticity and learning, indicating they integrate with host neurons and form functional connections.",REFUTES [2],REFUTES,REFUTES,True
+scifact,133,1,1,"SUPPORTS [1] and [10]  
+The claim that assembly of invadopodia is triggered by focal generation of phosphatidylinositol-3,4-biphosphate (PtdIns(3,4)P2) and the activation of the nonreceptor tyrosine kinase Src is supported by the findings in passage [1], which shows that Src expression stimulates podosome formation at focal adhesions after PtdIns(3,4)P2 accumulation. Passage [10] further supports this by discussing the role of PI(3,4)P2 in cellular processes, including",SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1332,0,0,"REFUTES [1], [5], [6], [8]
+
+The claim that TNF-α and IL-1 inhibit IL-6 and IL-10 is refuted by the passages. Passage [1] states that TNF-α and IL-6 are pro-inflammatory cytokines that are elevated during exercise, indicating they are not inhibitors of IL-6. Passage [5] shows that statin treatment reduces IL-6 levels, suggesting TNF-α and IL-6 are not inhibiting each other. Passage [6] indicates that IL-1 increases glucose metabolism and does not mention inhibiting IL-6","REFUTES [4] and [9] show that TNF-α and IL-1 are pro-inflammatory cytokines, but they do not indicate that these cytokines inhibit IL-6 and IL-10. In fact, some studies suggest that TNF-α and IL-1 can influence IL-6 and IL-10 production in different contexts.",REFUTES,REFUTES,True
+scifact,1335,1,1,SUPPORTS [1],"SUPPORTS [1]
+
+The passage states that ""After 6 months, cord blood-graft recipients approximated the TCR diversity of healthy individuals,"" which supports the claim that UCB (cord blood) T cells maintain high TCR diversity after transplantation.",SUPPORTS,SUPPORTS,True
+scifact,1336,0,0,"SUPPORTS [1]
+
+The passage states that ""recipients of T cell-depleted peripheral-blood stem cell grafts had 28-fold and 14-fold lower CD4(+) and CD8(+) T cell diversities, respectively"" compared to cord blood-graft recipients who ""approximated the TCR diversity of healthy individuals."" This implies that UCB T cells do not reduce TCR diversity, but rather allow for recovery toward normal levels, suggesting that T cell-depleted grafts (not UCB) are associated with reduced TCR diversity. However, the claim is about UCB T cells reducing TCR",SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1337,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1339,1,1,REFUTES [1],REFUTES [1],REFUTES,REFUTES,True
+scifact,1344,0,0,"REFUTES [1][3] 
+
+The claim suggests that up-regulation of the p53 pathway causes cancer resistance but results in shortened lifespan due to senescent cells and accelerated aging. However, passage [1] states that p53 contributes to tumor growth suppression and that senescence, regulated by p53, is a robust antitumor response. Passage [3] explains that while senescence can promote early-life survival by curtailing cancer, it may also limit longevity as dysfunctional senescent cells accumulate. These passages do not support the claim that p53 up-regulation causes shortened lifespan; rather,","REFUTES [1] and [3] indicate that p53 pathway activation can lead to cancer suppression and that senescent cells can contribute to aging. However, the claim that up-regulation of the p53 pathway causes cancer resistance and results in shortened lifespan is contradicted by the fact that p53 is a tumor suppressor, and its activation typically leads to cell cycle arrest or apoptosis, not resistance. Additionally, while senescent cells are associated with aging, the claim that they ""marked by accelerated organismal aging"" is not directly supported by the passages.",REFUTES,REFUTES,True
+scifact,1352,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1359,1,1,REFUTES [1],REFUTES [1],REFUTES,REFUTES,True
+scifact,1362,1,1,NOT_ENOUGH_INFO. The provided passages do not mention venules or compare their lumen diameter to that of arterioles.,NOT_ENOUGH_INFO. The provided passages do not mention venules or arterioles or their lumen diameters.,NOT_ENOUGH_INFO,NOT_ENOUGH_INFO,True
+scifact,1363,1,1,"NOT_ENOUGH_INFO. The provided passages do not mention anything about the structural characteristics of venules or arterioles, specifically regarding the thickness or presence of a smooth layer. [1-10]","NOT_ENOUGH_INFO. The provided passages do not mention anything about the structure of venules or arterioles, specifically regarding the thickness or presence of their smooth layers. [1-10]",NOT_ENOUGH_INFO,NOT_ENOUGH_INFO,True
+scifact,1368,0,0,"REFUTES [10] The claim that vitamin D deficiency affects the term of delivery is not directly supported by the passage. While the passage discusses the association between maternal serum 25-hydroxyvitamin D levels and pregnancy outcomes, it does not specifically mention the term of delivery. The outcomes discussed include pre-eclampsia, gestational diabetes, bacterial vaginosis, caesarean section, small for gestational age infants, birth weight, birth length, and head circumference. The term of delivery is not explicitly addressed in the passage.","NOT_ENOUGH_INFO. The provided passages do not directly address the relationship between vitamin D deficiency and the term of delivery. [10] discusses maternal serum 25-hydroxyvitamin D levels and pregnancy outcomes, but it does not specifically mention the term of delivery. Other passages discuss vitamin D in relation to other outcomes, but not the timing of delivery.",REFUTES,NOT_ENOUGH_INFO,True
+scifact,137,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1370,1,1,"REFUTES [1] and [7] show that vitamin D deficiency is related to birth weight. Passage [1] discusses the association between maternal serum 25-hydroxyvitamin D levels and pregnancy outcomes, including birth weight. Passage [7] presents a meta-analysis linking perinatal factors, such as birth weight, to breast cancer risk, implying a connection between vitamin D status and birth weight.","REFUTES [1] and [10] show that vitamin D levels are associated with pregnancy outcomes, including birth weight. Specifically, [1] discusses the association between maternal serum 25-hydroxyvitamin D levels and birth weight, and [10] suggests that adequate vitamin D levels may reduce cancer risk, implying a broader role in health outcomes, including birth weight.",REFUTES,REFUTES,True
+scifact,1379,1,1,"SUPPORTS [3], [5], [10]","SUPPORTS [5], [10]",SUPPORTS,SUPPORTS,True
+scifact,1382,1,0,"REFUTES [9] The passage states that PKCζ deficiency promotes metabolic plasticity for cancer cells to utilize glutamine, and that PKCζ represses key enzymes in the serine biosynthetic pathway. It also mentions that PKCζ is a critical metabolic tumor suppressor, implying that its loss (not presence) enhances tumorigenesis. Therefore, aPKCz (assuming this refers to PKCζ) does not cause tumour enhancement by affecting glutamine metabolism; rather, its deficiency does.",SUPPORTS [9],REFUTES,SUPPORTS,True
+scifact,1385,0,1,REFUTES [1],SUPPORTS [1],REFUTES,SUPPORTS,True
+scifact,1389,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,1395,1,1,NOT_ENOUGH_INFO. The claim about p16INK4A accumulation being linked to an abnormal wound response caused by the microinvasive step of advanced Oral Potentially Malignant Lesions (OPMLs) is not addressed in any of the provided passages [1-10].,NOT_ENOUGH_INFO. The provided passages do not mention p16INK4A accumulation or its link to an abnormal wound response caused by the microinvasive step of advanced Oral Potentially Malignant Lesions (OPMLs). [1-10],NOT_ENOUGH_INFO,NOT_ENOUGH_INFO,True
+scifact,141,1,1,"SUPPORTS [1] and [2]  
+The claim that auditory entrainment is strengthened when people see congruent visual and auditory information is supported by the passages. Passage [1] discusses how congruent audiovisual speech enhances cortical entrainment to continuous auditory speech, and passage [2] explains that lip movements entrain observers' low-frequency brain oscillations, facilitating speech intelligibility. Both indicate that congruent visual and auditory information enhances neural entrainment.",SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,142,1,1,"REFUTES [1] The passage states that antibody-based induction therapy plus calcineurin inhibitors (CNIs) reduce acute rejection rates, but opportunistic infections and toxic CNI effects remain challenging. It does not compare the rate of opportunistic infections between autologous MSCs and anti-IL-2 receptor antibody induction therapy directly. Therefore, there is no evidence in the passage to support the claim that autologous MSCs cause a higher rate of opportunistic infections than anti-IL-2 receptor antibody induction therapy.","REFUTES [1]
+
+The passage states that antibody-based induction therapy plus calcineurin inhibitors (CNIs) reduces acute rejection rates, but opportunistic infections and toxic CNI effects remain challenging. It also mentions that mesenchymal stem cells (MSCs) have successfully treated graft-vs-host disease. However, the study in passage [1] does not compare the rate of opportunistic infections between autologous MSCs and anti-IL-2 receptor antibody induction therapy directly. Therefore, there is no evidence in the passage to support the claim that autologous MSCs cause a higher rate of opportunistic infections than anti-",REFUTES,REFUTES,True
+scifact,143,0,0,"REFUTES [1]
+
+The passage states that antibody-based induction therapy plus calcineurin inhibitors (CNIs) reduce acute rejection rates in kidney recipients, but opportunistic infections and toxic CNI effects remain challenging. The study compared autologous MSCs with anti-IL-2 receptor antibody plus standard-dose CNIs. The claim that autologous MSCs cause fewer opportunistic infections than anti-IL-2 receptor antibodies is refuted because the passage does not provide evidence that autologous MSCs reduce opportunistic infections compared to anti-IL-2 receptor antibodies. In fact, the passage suggests that CNIs, which",REFUTES [1],REFUTES,REFUTES,True
+scifact,146,1,1,"SUPPORTS [1]
+
+The claim that autologous transplantation of mesenchymal stem cells has lower rates of rejection than induction therapy with anti-interleukin-2 receptor antibodies is supported by passage [1]. This passage discusses a randomized controlled trial comparing autologous mesenchymal stem cells (MSCs) with anti-IL-2 receptor antibody induction therapy. The study aimed to assess whether autologous MSCs could replace antibody induction therapy in kidney transplant patients. While the passage does not explicitly state the rejection rates, it implies that MSCs may offer an alternative to traditional induction therapies, which are known to have","SUPPORTS [1]
+
+The claim that autologous transplantation of mesenchymal stem cells has lower rates of rejection than induction therapy with anti-interleukin-2 receptor antibodies is supported by passage [1]. This passage discusses a randomized controlled trial comparing autologous mesenchymal stem cells (MSCs) with anti-IL-2 receptor antibody induction therapy. The study aimed to assess MSCs as a replacement for antibody induction in kidney transplants, suggesting that MSCs could potentially reduce rejection rates. While the passage does not explicitly state the rejection rates, it implies that MSCs may offer an alternative to traditional induction",SUPPORTS,SUPPORTS,True
+scifact,148,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,163,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,171,1,1,"REFUTES [1] The passage states that basophils and IgE autoantibodies amplify autoantibody production that leads to lupus nephritis, and in individuals with SLE, IgE autoantibodies and activated basophils are factors associated with disease activity. This directly contradicts the claim that basophils counteract disease development in SLE.",REFUTES [1],REFUTES,REFUTES,True
+scifact,179,1,1,"SUPPORTS [1], [3], [4]","SUPPORTS [1], [3]",SUPPORTS,SUPPORTS,True
+scifact,180,0,1,"SUPPORTS [1]
+
+The passage states that TDP-43 binds to mitochondria-transcribed messenger RNAs encoding respiratory complex I subunits ND3 and ND6, impairing their expression and causing complex I disassembly. It also mentions that suppressing TDP-43 mitochondrial localization abolishes TDP-43-induced mitochondrial dysfunction and neuronal loss. Therefore, blocking the interaction between TDP-43 and ND3/ND6 would likely lead to increased TDP-43-induced neuronal loss, as it would prevent the suppression of TDP-43 toxicity.","REFUTES [1]
+
+The passage states that TDP-43 binds to mitochondria-transcribed messenger RNAs encoding respiratory complex I subunits ND3 and ND6, impairing their expression and causing complex I disassembly. However, it also mentions that the suppression of TDP-43 mitochondrial localization abolishes TDP-43-induced mitochondrial dysfunction and neuronal loss. This implies that blocking the interaction between TDP-43 and ND3/ND6 would not lead to increased neuronal loss, but rather its prevention. Therefore, the claim is refuted.",SUPPORTS,REFUTES,True
+scifact,183,0,1,SUPPORTS [1],REFUTES [2],SUPPORTS,REFUTES,True
+scifact,185,0,1,"Verdict: REFUTES [1], [5], [10]
+
+The claim that breast cancer development is determined exclusively by genetic factors is refuted by the provided passages. Passage [1] discusses how BRCA mutations are associated with breast cancer but also notes that tumor characteristics can differ between BRCA-positive and BRCA-negative patients, indicating that other factors are involved. Passage [5] links pre-eclampsia, an environmental factor, to an increased risk of breast cancer, suggesting that environmental factors also play a role. Passage [10] examines common genetic variations in the CHEK2 gene but finds no convincing association with breast","REFUTES [1] and [2] show that breast cancer development is not exclusively determined by genetic factors. Passage [1] discusses the role of CD133+ cells in brain tumors, while passage [2] highlights the influence of mammographic density and other environmental factors on breast cancer risk.",UNPARSEABLE,REFUTES,True
+scifact,198,0,0,REFUTES [5],REFUTES [2],REFUTES,REFUTES,True
+scifact,208,0,0,REFUTES [1],Verdict: REFUTES [1],REFUTES,UNPARSEABLE,True
+scifact,212,1,0,REFUTES [8],NOT_ENOUGH_INFO. The claim that CR (which is not explicitly defined in the provided passages) is associated with higher methylation age is not addressed in any of the given passages. [1]-[10],REFUTES,NOT_ENOUGH_INFO,True
+scifact,213,0,0,REFUTES [1] and [5] show that preoperative C-reactive protein (CRP) levels are associated with increased long-term and mid-term mortality after CABG surgery.,REFUTES [7],REFUTES,REFUTES,True
+scifact,216,0,1,"SUPPORTS [1]
+
+The passage states that CX3CR1 signaling promotes T(H)2 survival in the inflamed lungs, and that CX3CR1-blocking reagents prevented airway inflammation in CX3CR1-deficient recipients injected with WT T(H)2 cells. This directly supports the claim that CX3CR1 on Th2 cells impairs T cell survival by showing that blocking CX3CR1 reduces inflammation, implying that CX3CR1 is necessary for Th2 cell survival.","REFUTES [1]
+
+The claim that ""CX3CR1 on the Th2 cells impairs T cell survival"" is refuted by passage [1], which states that ""CX3CR1 signaling promoted T(H)2 survival in the inflamed lungs."" This directly contradicts the claim by indicating that CX3CR1 supports, rather than impairs, T cell survival.",SUPPORTS,REFUTES,True
+scifact,217,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,218,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,219,1,1,"REFUTES [1]
+
+The passage states that CX3CR1 is required for airway inflammation by promoting T helper cell (Th2) survival and maintenance in inflamed lungs. This directly contradicts the claim that CX3CR1 on Th2 cells suppresses airway inflammation, indicating that CX3CR1 actually contributes to, rather than suppresses, airway inflammation.","REFUTES [1]
+
+The passage states that CX3CR1 is required for airway inflammation by promoting T helper cell survival and maintenance in inflamed lung. It specifically mentions that untreated CX3CR1-deficient mice or wild-type mice treated with CX3CR1-blocking reagents show reduced lung disease upon allergen sensitization and challenge. This indicates that CX3CR1 actually promotes, rather than suppresses, airway inflammation, directly refuting the claim.",REFUTES,REFUTES,True
+scifact,230,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,232,0,1,REFUTES [1][2],NOT_ENOUGH_INFO [3],REFUTES,NOT_ENOUGH_INFO,True
+scifact,233,0,1,"Verdict: REFUTES [1]
+
+The claim that ""cell autonomous sex determination in somatic cells does not occur in Galliformes"" is refuted by passage [1], which discusses gynandromorph chickens and demonstrates that male and female avian somatic cells may have an inherent sex identity. This suggests that cell autonomous sex determination does occur in Galliformes, such as chickens.","REFUTES [1]
+
+The passage states that in gynandromorph chickens, male and female avian somatic cells may have an inherent sex identity, suggesting that somatic sex identity is cell-autonomous in chickens, which are Galliformes. This directly refutes the claim that cell autonomous sex determination in somatic cells does not occur in Galliformes.",UNPARSEABLE,REFUTES,True
+scifact,236,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,237,0,0,SUPPORTS [2],REFUTES [1],SUPPORTS,REFUTES,True
+scifact,238,0,1,"SUPPORTS [1] and [2] indicate that methionine restriction affects metabolic processes and lifespan in rats, and while they do not directly mention miRNAs, the broader context of methionine's role in cellular regulation and the involvement of miRNAs in gene expression and cellular processes (as seen in other passages) supports the claim that methionine restriction may activate miRNAs.",NOT_ENOUGH_INFO [3],SUPPORTS,NOT_ENOUGH_INFO,True
+scifact,239,0,0,"NOT_ENOUGH_INFO. The provided passages discuss various aspects of aging, including its relationship with cardiovascular disease, autoimmune regulation, DNA damage response, neurodegenerative disorders, cancer survivorship, and cellular aging models. However, none of the passages directly address the link between cellular aging and an older appearance. [1][2][3][5][6][7][8][9][10]","NOT_ENOUGH_INFO. The provided passages discuss cellular senescence, aerobic capacity, microRNA expression, hospital care access, IGF2 and H19 expression, pelvic organ prolapse, APOE genotype and Alzheimer's disease, β-lactamases, unmet need among older persons, and heart failure with preserved systolic function. None of these passages directly address the relationship between cellular aging and an older appearance.",NOT_ENOUGH_INFO,NOT_ENOUGH_INFO,True
+scifact,248,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,249,1,0,REFUTES [2],SUPPORTS [2],REFUTES,SUPPORTS,True
+scifact,261,1,1,"SUPPORTS [1], [2], [3], [4], [5], [8]","SUPPORTS [3], [8]",SUPPORTS,SUPPORTS,True
+scifact,268,0,0,SUPPORTS [1],SUPPORTS [6],SUPPORTS,SUPPORTS,True
+scifact,269,0,0,"REFUTES [1] and [3] indicate that cold exposure can increase BAT activity and recruitment. Passage [1] mentions that cold exposure stimulates BAT to express Ucp1, and passage [3] states that prolonged cold exposure leads to the differentiation of Pdgfrβ+ cells into beige adipocytes, suggesting increased BAT recruitment.",REFUTES [2],REFUTES,REFUTES,True
+scifact,274,0,0,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,275,1,0,SUPPORTS [1] and [3],"REFUTES [1] and [6] indicate that PI3K inhibitors, including dual PI3K/mTOR inhibitors like NVP-BEZ235, have shown efficacy in certain models, but the claim about combining PI3K and MEK inhibitors specifically for KRAS mutant tumors is not directly supported. In fact, [1] notes that mouse lung cancers driven by mutant Kras did not substantially respond to the PI3K inhibitor, suggesting limited efficacy in KRAS mutant tumors. [6] also highlights challenges in the clinical development of PI3K inhibitors, including limited single-agent activity. There is no direct evidence in the",SUPPORTS,REFUTES,True
+scifact,279,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,294,1,1,NOT_ENOUGH_INFO [1],NOT_ENOUGH_INFO [1],NOT_ENOUGH_INFO,NOT_ENOUGH_INFO,True
+scifact,295,1,1,"SUPPORTS [1]  
+The passage states that TNF-α produced by CD103(-)CD11b(+) dendritic cells synergized with IL-23 to drive IL-17A production by ILCs, demonstrating a previously unrecognized layer of cellular crosstalk between dendritic cells and ILCs. This directly supports the claim that crosstalk between dendritic cells and ILCs is important in the regulation of intestinal homeostasis.",SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,298,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,3,1,0,SUPPORTS [1],NOT_ENOUGH_INFO [5],SUPPORTS,NOT_ENOUGH_INFO,True
+scifact,300,0,0,SUPPORTS [1],REFUTES [1],SUPPORTS,REFUTES,True
+scifact,303,0,1,"SUPPORTS [1]
+
+The passage states that the MHM region is transcribed only in the female and that this transcription occurs adjacent to the DMRT1 locus. Additionally, it mentions that the methylation state of the MHM region is established after fertilization and that treatment with 5-azacytidine (which reduces methylation) leads to active transcription of the MHM region. This suggests an epigenetic regulation of the MHM region, which is adjacent to DMRT1, supporting the claim that DMRT1 is epigenetically regulated by the MHM region.",NOT_ENOUGH_INFO [1]-[10],SUPPORTS,NOT_ENOUGH_INFO,True
+scifact,312,1,0,NOT_ENOUGH_INFO [1][4][6],SUPPORTS [6],NOT_ENOUGH_INFO,SUPPORTS,True
+scifact,314,1,1,"SUPPORTS [1], [2], [3]",SUPPORTS [3],SUPPORTS,SUPPORTS,True
+scifact,324,0,1,"REFUTES [2] The passage states that T cell-specific deletion of raptor impairs Th17 differentiation, but it does not mention any effect of Raptor deletion on G-CSF levels. In fact, the passage discusses the role of the PI3K-Akt-mTORC1-S6K1/2 axis in Th17 differentiation, not a direct link between Raptor and G-CSF levels.",NOT_ENOUGH_INFO. The provided passages do not mention anything about Raptor or its relationship with G-CSF levels.,REFUTES,NOT_ENOUGH_INFO,True
+scifact,327,1,1,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,338,1,1,"REFUTES [1], [3], [10]",REFUTES [1],REFUTES,REFUTES,True
+scifact,343,1,0,SUPPORTS [1][2][4][6],REFUTES [6],SUPPORTS,REFUTES,True
+scifact,350,0,0,SUPPORTS [1],SUPPORTS [1],SUPPORTS,SUPPORTS,True
+scifact,354,0,0,"REFUTES [1]
+
+The passage states that ""spontaneous mammary tumors in mice and humans possess both downregulated and mislocalized Scribble"" and that ""loss of Scribble cooperates with oncogenes such as c-myc to transform epithelial cells and induce tumors in vivo by blocking activation of an apoptosis pathway."" This directly contradicts the claim that downregulation and mislocalization of Scribble prevents cell transformation and mammary tumorigenesis.","REFUTES [1]
+
+The passage states that ""spontaneous mammary tumors in mice and humans possess both downregulated and mislocalized Scribble"" and that ""loss of Scribble cooperates with oncogenes such as c-myc to transform epithelial cells and induce tumors in vivo by blocking activation of an apoptosis pathway."" This directly contradicts the claim that downregulation and mislocalization of Scribble prevents cell transformation and mammary tumorigenesis.",REFUTES,REFUTES,True
+scifact,36,0,1,"SUPPORTS [1], [2], [4], [6], [7], [9]",NOT_ENOUGH_INFO [7],SUPPORTS,NOT_ENOUGH_INFO,True
+scifact,362,0,0,"REFUTES [1] and [4] indicate that EBI2 (GPR183) guides B cells to specific niches, with downregulation of EBI2 enabling B cells to access the center of follicles and promote GC formation. However, there is no mention of oxysterol accumulation by stromal cells or B cells migrating toward inner-and outer paracortical areas during the primary early antibody response.","REFUTES [1][10]
+
+The claim suggests that during the primary early antibody response, activated B cells migrate toward the inner- and outer paracortical areas where oxysterol accumulation is generated by stromal cells. However, passage [1] states that B cells are guided to follicles by CXCL13 and to the T zone by T-zone chemokines, and that EBI2 (GPR183) guides activated B cells to inter and outer follicular niches. Passage [10] discusses oxysterol binding to EBI2 (GPR183), but it does",REFUTES,REFUTES,True

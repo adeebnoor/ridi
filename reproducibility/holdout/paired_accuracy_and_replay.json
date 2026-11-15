@@ -1,0 +1,70 @@
+{
+  "W_flag_projection_rows": 1500,
+  "old_W_score_rows": 21216,
+  "added_D_score_rows": 5304,
+  "W_score_sha256": "61f7144366b83f405b9c02d5ccb5c61280bfb33579e6e1ad0fee1e56274cda3e",
+  "W_report_sha256": "600ef9034ed4e3c2205c7a73b10612b1ce0bc6f775d9d9025919dfffd13b185f",
+  "combined_report_sha256": "d3244baaa9d8c0b94edf54855eedf75c0cd91d44827c5273033cbb9302aec028",
+  "seed": 20261109,
+  "draws": 100000,
+  "interval": "unadjusted paired 90% percentile, benchmark-stratified",
+  "status": "post hoc; margin selected after observing outcomes",
+  "paired_net_accuracy": [
+    {
+      "contrast": "W",
+      "model": "qwen3",
+      "eligible": 1264,
+      "n": 1115,
+      "regressions": 18,
+      "gains": 19,
+      "delta_pp": 0.2030273624221113,
+      "ci90_pp": [
+        -0.791817366547767,
+        1.1984338003819066
+      ],
+      "within_posthoc_margin_2pp": true
+    },
+    {
+      "contrast": "W",
+      "model": "mistral",
+      "eligible": 1264,
+      "n": 1115,
+      "regressions": 49,
+      "gains": 28,
+      "delta_pp": -1.9752648817602576,
+      "ci90_pp": [
+        -3.3753508260027543,
+        -0.5709965575263333
+      ],
+      "within_posthoc_margin_2pp": false
+    },
+    {
+      "contrast": "D",
+      "model": "qwen3",
+      "eligible": 590,
+      "n": 540,
+      "regressions": 19,
+      "gains": 22,
+      "delta_pp": -0.39367320920718973,
+      "ci90_pp": [
+        -2.6240210706230127,
+        1.8191624987741493
+      ],
+      "within_posthoc_margin_2pp": false
+    },
+    {
+      "contrast": "D",
+      "model": "mistral",
+      "eligible": 590,
+      "n": 540,
+      "regressions": 33,
+      "gains": 34,
+      "delta_pp": -1.1284831673181186,
+      "ci90_pp": [
+        -4.006080219672453,
+        1.7666260384706984
+      ],
+      "within_posthoc_margin_2pp": false
+    }
+  ]
+}

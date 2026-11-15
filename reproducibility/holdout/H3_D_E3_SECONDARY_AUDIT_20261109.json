@@ -1,0 +1,84 @@
+{
+  "status": "EXPLORATORY_SECONDARY_E3_DESCRIPTIVE",
+  "utc": "2026-11-09T08:44:18.137110+00:00",
+  "not_part_of_registered_primary_H3_test": true,
+  "not_human_adjudicated": true,
+  "flags_sha256": "9b8c8d9f7eae36712a98e7ba919610ed5ca68e00c8ce9e0906eeb7ea5cbd33f0",
+  "scores_sha256": "5905baddaefa974916f116c4f4f99e7ef5892ada6df805c2323138fb0337070d",
+  "E3": {
+    "qwen3": {
+      "by_dataset": {
+        "nq": {
+          "e3_eligible": 46,
+          "n_observed": 29,
+          "missing_reference_or_arms": 17,
+          "changes": 0,
+          "control_changes": 0,
+          "change_rate": 0.0,
+          "control_rate": 0.0
+        },
+        "hotpotqa": {
+          "e3_eligible": 166,
+          "n_observed": 166,
+          "missing_reference_or_arms": 0,
+          "changes": 8,
+          "control_changes": 2,
+          "change_rate": 0.04819277108433735,
+          "control_rate": 0.012048192771084338
+        },
+        "fever": {
+          "e3_eligible": 214,
+          "n_observed": 214,
+          "missing_reference_or_arms": 0,
+          "changes": 13,
+          "control_changes": 1,
+          "change_rate": 0.06074766355140187,
+          "control_rate": 0.004672897196261682
+        }
+      },
+      "total": {
+        "e3_eligible": 426,
+        "n_observed": 409,
+        "changes": 21,
+        "controls": 3
+      }
+    },
+    "mistral": {
+      "by_dataset": {
+        "nq": {
+          "e3_eligible": 46,
+          "n_observed": 29,
+          "missing_reference_or_arms": 17,
+          "changes": 12,
+          "control_changes": 0,
+          "change_rate": 0.41379310344827586,
+          "control_rate": 0.0
+        },
+        "hotpotqa": {
+          "e3_eligible": 166,
+          "n_observed": 166,
+          "missing_reference_or_arms": 0,
+          "changes": 23,
+          "control_changes": 2,
+          "change_rate": 0.13855421686746988,
+          "control_rate": 0.012048192771084338
+        },
+        "fever": {
+          "e3_eligible": 214,
+          "n_observed": 214,
+          "missing_reference_or_arms": 0,
+          "changes": 19,
+          "control_changes": 0,
+          "change_rate": 0.08878504672897196,
+          "control_rate": 0.0
+        }
+      },
+      "total": {
+        "e3_eligible": 426,
+        "n_observed": 409,
+        "changes": 54,
+        "controls": 2
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+panel,condition,percent,study
+b,Exchange,17.2666666667,primary
+b,Batching replay,1.2333333333,separate registered scale replay
+c,25%,6.9666666667,primary dose
+c,50%,11.0666666667,primary dose
+c,all,17.2666666667,primary dose
+d,Qwen3-8B,17.2666666667,registered model transfer
+d,Qwen3-32B,12.3666666667,registered model transfer
+d,Mistral-7B,13.6333333333,registered model transfer
+d,OLMo-2-7B,13.6333333333,registered model transfer

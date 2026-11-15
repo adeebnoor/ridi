@@ -1,0 +1,2 @@
+# Keep exact bytes; SHA-256 receipts in this folder depend on them.
+* -text

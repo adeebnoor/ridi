@@ -1,0 +1,76 @@
+Traceback (most recent call last):
+  File "/workspace/COMMERCIAL_v45/code/run_commercial.py", line 244, in <module>
+    main()
+    ~~~~^^
+  File "/workspace/COMMERCIAL_v45/code/run_commercial.py", line 216, in main
+    ok, t, mm = led.reserve(wc)
+                ~~~~~~~~~~~^^^^
+  File "/workspace/COMMERCIAL_v45/code/run_commercial.py", line 153, in reserve
+    fcntl.flock(f, fcntl.LOCK_EX); d = json.load(f)
+                                       ~~~~~~~~~^^^
+  File "/usr/lib/python3.13/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+        cls=cls, object_hook=object_hook,
+        parse_float=parse_float, parse_int=parse_int,
+        parse_constant=parse_constant, object_pairs_hook=object_pairs_hook, **kw)
+  File "/usr/lib/python3.13/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/usr/lib/python3.13/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/json/decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Expecting ',' delimiter: line 6388 column 24 (char 114925)
+2026-11-12T19:59:53+03:00 exit 1
+Traceback (most recent call last):
+  File "/workspace/COMMERCIAL_v45/code/run_commercial.py", line 244, in <module>
+    main()
+    ~~~~^^
+  File "/workspace/COMMERCIAL_v45/code/run_commercial.py", line 232, in main
+    total = led.add(c, f'{ds}/{q}/{arm}')
+  File "/workspace/COMMERCIAL_v45/code/run_commercial.py", line 160, in add
+    fcntl.flock(f, fcntl.LOCK_EX); d = json.load(f)
+                                       ~~~~~~~~~^^^
+  File "/usr/lib/python3.13/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+        cls=cls, object_hook=object_hook,
+        parse_float=parse_float, parse_int=parse_int,
+        parse_constant=parse_constant, object_pairs_hook=object_pairs_hook, **kw)
+  File "/usr/lib/python3.13/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/usr/lib/python3.13/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/json/decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Expecting ',' delimiter: line 7340 column 15 (char 131334)
+2026-11-12T20:06:41+03:00 exit 1
+Traceback (most recent call last):
+  File "/workspace/COMMERCIAL_v45/code/run_commercial.py", line 244, in <module>
+    main()
+    ~~~~^^
+  File "/workspace/COMMERCIAL_v45/code/run_commercial.py", line 232, in main
+    total = led.add(c, f'{ds}/{q}/{arm}')
+  File "/workspace/COMMERCIAL_v45/code/run_commercial.py", line 160, in add
+    fcntl.flock(f, fcntl.LOCK_EX); d = json.load(f)
+                                       ~~~~~~~~~^^^
+  File "/usr/lib/python3.13/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+        cls=cls, object_hook=object_hook,
+        parse_float=parse_float, parse_int=parse_int,
+        parse_constant=parse_constant, object_pairs_hook=object_pairs_hook, **kw)
+  File "/usr/lib/python3.13/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/usr/lib/python3.13/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/json/decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Expecting ',' delimiter: line 11170 column 47 (char 196982)
+{"model": "claude-sonnet-5.5", "jobs": 7500, "ledger_total_usd": 53.3373}

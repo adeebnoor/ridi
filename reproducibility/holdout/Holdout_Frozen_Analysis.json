@@ -1,0 +1,614 @@
+{
+ "version": "1.0",
+ "seed": 20261102,
+ "draws": 20000,
+ "margin": 0.02,
+ "frozen": {
+  "H1": {
+   "qwen3": {
+    "n": 1115,
+    "excluded_missing_arm": 149,
+    "changes": 37,
+    "control_changes": 4,
+    "change_rate_eqw": 0.03656231607835259,
+    "control_rate_eqw": 0.0032651617846407733,
+    "change_rate_pooled": 0.033183856502242155,
+    "change_exact95": [
+     0.0235,
+     0.0455
+    ],
+    "control_exact95": [
+     0.001,
+     0.0092
+    ],
+    "excess_eqw": 0.03329715429371182,
+    "excess_95ci": [
+     0.021679919401677544,
+     0.045701639553831504
+    ],
+    "p_one_sided_excess_le_margin": 0.0106,
+    "H1_supported_holm": true
+   },
+   "mistral": {
+    "n": 1115,
+    "excluded_missing_arm": 149,
+    "changes": 77,
+    "control_changes": 6,
+    "change_rate_eqw": 0.07339743456712851,
+    "control_rate_eqw": 0.005398438449008031,
+    "change_rate_pooled": 0.06905829596412556,
+    "change_exact95": [
+     0.0549,
+     0.0856
+    ],
+    "control_exact95": [
+     0.002,
+     0.0117
+    ],
+    "excess_eqw": 0.06799899611812048,
+    "excess_95ci": [
+     0.05212644207715004,
+     0.08462259381716124
+    ],
+    "p_one_sided_excess_le_margin": 0.0,
+    "H1_supported_holm": true
+   }
+  },
+  "H2": {
+   "qwen3": {
+    "n": 177,
+    "excluded_missing_arm": 20,
+    "changes": 3,
+    "control_changes": 0,
+    "change_rate_eqw": 0.01783538274066689,
+    "control_rate_eqw": 0.0,
+    "change_rate_pooled": 0.01694915254237288,
+    "change_exact95": [
+     0.0035,
+     0.0487
+    ],
+    "control_exact95": [
+     0.0,
+     0.0206
+    ],
+    "excess_eqw": 0.01783538274066689,
+    "excess_95ci": [
+     0.0,
+     0.04132048299545807
+    ],
+    "p_one_sided_excess_le_margin": 0.64165,
+    "descriptive_only": false
+   },
+   "mistral": {
+    "n": 177,
+    "excluded_missing_arm": 20,
+    "changes": 17,
+    "control_changes": 1,
+    "change_rate_eqw": 0.09529124070574346,
+    "control_rate_eqw": 0.006535947712418301,
+    "change_rate_pooled": 0.096045197740113,
+    "change_exact95": [
+     0.057,
+     0.1493
+    ],
+    "control_exact95": [
+     0.0001,
+     0.0311
+    ],
+    "excess_eqw": 0.08875529299332516,
+    "excess_95ci": [
+     0.04545071253899991,
+     0.13636040468974503
+    ],
+    "p_one_sided_excess_le_margin": 0.00055,
+    "descriptive_only": false
+   }
+  },
+  "H3": {
+   "qwen3": {
+    "all": {
+     "n": 540,
+     "excluded_missing_arm": 50,
+     "changes": 41,
+     "control_changes": 3,
+     "change_rate_eqw": 0.08134045027248911,
+     "control_rate_eqw": 0.004679247397693999,
+     "change_rate_pooled": 0.07592592592592592,
+     "change_exact95": [
+      0.055,
+      0.1016
+     ],
+     "control_exact95": [
+      0.0011,
+      0.0161
+     ],
+     "excess_eqw": 0.07666120287479511,
+     "excess_95ci": [
+      0.05129659984028916,
+      0.10364392888664735
+     ],
+     "p_one_sided_excess_le_margin": 0.0
+    },
+    "fever": {
+     "n": 231,
+     "excluded_missing_arm": 0,
+     "changes": 16,
+     "control_changes": 1,
+     "change_rate_eqw": 0.06926406926406926,
+     "control_rate_eqw": 0.004329004329004329,
+     "change_rate_pooled": 0.06926406926406926,
+     "change_exact95": [
+      0.0401,
+      0.11
+     ],
+     "control_exact95": [
+      0.0001,
+      0.0239
+     ],
+     "excess_eqw": 0.06493506493506493,
+     "excess_95ci": [
+      0.03463203463203463,
+      0.09956709956709957
+     ],
+     "p_one_sided_excess_le_margin": 0.002
+    },
+    "hotpotqa": {
+     "n": 206,
+     "excluded_missing_arm": 0,
+     "changes": 14,
+     "control_changes": 2,
+     "change_rate_eqw": 0.06796116504854369,
+     "control_rate_eqw": 0.009708737864077669,
+     "change_rate_pooled": 0.06796116504854369,
+     "change_exact95": [
+      0.0377,
+      0.1114
+     ],
+     "control_exact95": [
+      0.0012,
+      0.0346
+     ],
+     "excess_eqw": 0.05825242718446602,
+     "excess_95ci": [
+      0.024271844660194174,
+      0.0970873786407767
+     ],
+     "p_one_sided_excess_le_margin": 0.02345
+    },
+    "nq": {
+     "n": 103,
+     "excluded_missing_arm": 0,
+     "changes": 11,
+     "control_changes": 0,
+     "change_rate_eqw": 0.10679611650485436,
+     "control_rate_eqw": 0.0,
+     "change_rate_pooled": 0.10679611650485436,
+     "change_exact95": [
+      0.0545,
+      0.1831
+     ],
+     "control_exact95": [
+      0.0,
+      0.0352
+     ],
+     "excess_eqw": 0.10679611650485436,
+     "excess_95ci": [
+      0.04854368932038835,
+      0.1650485436893204
+     ],
+     "p_one_sided_excess_le_margin": 0.00045
+    }
+   },
+   "mistral": {
+    "all": {
+     "n": 540,
+     "excluded_missing_arm": 50,
+     "changes": 67,
+     "control_changes": 2,
+     "change_rate_eqw": 0.1354810238305384,
+     "control_rate_eqw": 0.0032362459546925564,
+     "change_rate_pooled": 0.12407407407407407,
+     "change_exact95": [
+      0.0975,
+      0.1549
+     ],
+     "control_exact95": [
+      0.0004,
+      0.0133
+     ],
+     "excess_eqw": 0.13224477787584585,
+     "excess_95ci": [
+      0.10058280446629962,
+      0.16574202496532592
+     ],
+     "p_one_sided_excess_le_margin": 0.0
+    },
+    "fever": {
+     "n": 231,
+     "excluded_missing_arm": 0,
+     "changes": 21,
+     "control_changes": 0,
+     "change_rate_eqw": 0.09090909090909091,
+     "control_rate_eqw": 0.0,
+     "change_rate_pooled": 0.09090909090909091,
+     "change_exact95": [
+      0.0572,
+      0.1356
+     ],
+     "control_exact95": [
+      0.0,
+      0.0158
+     ],
+     "excess_eqw": 0.09090909090909091,
+     "excess_95ci": [
+      0.05627705627705628,
+      0.12987012987012986
+     ],
+     "p_one_sided_excess_le_margin": 0.0
+    },
+    "hotpotqa": {
+     "n": 206,
+     "excluded_missing_arm": 0,
+     "changes": 27,
+     "control_changes": 2,
+     "change_rate_eqw": 0.13106796116504854,
+     "control_rate_eqw": 0.009708737864077669,
+     "change_rate_pooled": 0.13106796116504854,
+     "change_exact95": [
+      0.0882,
+      0.1849
+     ],
+     "control_exact95": [
+      0.0012,
+      0.0346
+     ],
+     "excess_eqw": 0.12135922330097088,
+     "excess_95ci": [
+      0.07281553398058252,
+      0.16990291262135923
+     ],
+     "p_one_sided_excess_le_margin": 0.0
+    },
+    "nq": {
+     "n": 103,
+     "excluded_missing_arm": 0,
+     "changes": 19,
+     "control_changes": 0,
+     "change_rate_eqw": 0.18446601941747573,
+     "control_rate_eqw": 0.0,
+     "change_rate_pooled": 0.18446601941747573,
+     "change_exact95": [
+      0.1149,
+      0.273
+     ],
+     "control_exact95": [
+      0.0,
+      0.0352
+     ],
+     "excess_eqw": 0.18446601941747573,
+     "excess_95ci": [
+      0.11650485436893204,
+      0.2621359223300971
+     ],
+     "p_one_sided_excess_le_margin": 0.0
+    }
+   }
+  },
+  "H4": {
+   "n_E1": 1264,
+   "either": 108,
+   "either_exact95": [
+    0.0706,
+    0.1022
+   ],
+   "both": 6,
+   "only": {
+    "qwen3": 31,
+    "mistral": 71
+   }
+  }
+ },
+ "format": {
+  "H1": {
+   "qwen3": {
+    "n": 1115,
+    "excluded_missing_arm": 149,
+    "changes": 37,
+    "control_changes": 4,
+    "change_rate_eqw": 0.03656231607835259,
+    "control_rate_eqw": 0.0032651617846407733,
+    "change_rate_pooled": 0.033183856502242155,
+    "change_exact95": [
+     0.0235,
+     0.0455
+    ],
+    "control_exact95": [
+     0.001,
+     0.0092
+    ],
+    "excess_eqw": 0.03329715429371182,
+    "excess_95ci": [
+     0.021679919401677544,
+     0.045701639553831504
+    ],
+    "p_one_sided_excess_le_margin": 0.0106
+   },
+   "mistral": {
+    "n": 1115,
+    "excluded_missing_arm": 149,
+    "changes": 71,
+    "control_changes": 5,
+    "change_rate_eqw": 0.06728415917006528,
+    "control_rate_eqw": 0.0051537076528837674,
+    "change_rate_pooled": 0.06367713004484304,
+    "change_exact95": [
+     0.0501,
+     0.0796
+    ],
+    "control_exact95": [
+     0.0015,
+     0.0104
+    ],
+    "excess_eqw": 0.06213045151718151,
+    "excess_95ci": [
+     0.047164407240677914,
+     0.07784192236185623
+    ],
+    "p_one_sided_excess_le_margin": 0.0
+   }
+  },
+  "H2": {
+   "qwen3": {
+    "n": 177,
+    "excluded_missing_arm": 20,
+    "changes": 3,
+    "control_changes": 0,
+    "change_rate_eqw": 0.01783538274066689,
+    "control_rate_eqw": 0.0,
+    "change_rate_pooled": 0.01694915254237288,
+    "change_exact95": [
+     0.0035,
+     0.0487
+    ],
+    "control_exact95": [
+     0.0,
+     0.0206
+    ],
+    "excess_eqw": 0.01783538274066689,
+    "excess_95ci": [
+     0.0,
+     0.04132048299545807
+    ],
+    "p_one_sided_excess_le_margin": 0.64165,
+    "descriptive_only": false
+   },
+   "mistral": {
+    "n": 177,
+    "excluded_missing_arm": 20,
+    "changes": 16,
+    "control_changes": 1,
+    "change_rate_eqw": 0.09031611632763402,
+    "control_rate_eqw": 0.006535947712418301,
+    "change_rate_pooled": 0.0903954802259887,
+    "change_exact95": [
+     0.0526,
+     0.1426
+    ],
+    "control_exact95": [
+     0.0001,
+     0.0311
+    ],
+    "excess_eqw": 0.08378016861521571,
+    "excess_95ci": [
+     0.04115018129690531,
+     0.12990547429023047
+    ],
+    "p_one_sided_excess_le_margin": 0.00105,
+    "descriptive_only": false
+   }
+  },
+  "H3": {
+   "qwen3": {
+    "all": {
+     "n": 540,
+     "excluded_missing_arm": 50,
+     "changes": 41,
+     "control_changes": 3,
+     "change_rate_eqw": 0.08134045027248911,
+     "control_rate_eqw": 0.004679247397693999,
+     "change_rate_pooled": 0.07592592592592592,
+     "change_exact95": [
+      0.055,
+      0.1016
+     ],
+     "control_exact95": [
+      0.0011,
+      0.0161
+     ],
+     "excess_eqw": 0.07666120287479511,
+     "excess_95ci": [
+      0.05129659984028916,
+      0.10364392888664735
+     ],
+     "p_one_sided_excess_le_margin": 0.0
+    },
+    "fever": {
+     "n": 231,
+     "excluded_missing_arm": 0,
+     "changes": 16,
+     "control_changes": 1,
+     "change_rate_eqw": 0.06926406926406926,
+     "control_rate_eqw": 0.004329004329004329,
+     "change_rate_pooled": 0.06926406926406926,
+     "change_exact95": [
+      0.0401,
+      0.11
+     ],
+     "control_exact95": [
+      0.0001,
+      0.0239
+     ],
+     "excess_eqw": 0.06493506493506493,
+     "excess_95ci": [
+      0.03463203463203463,
+      0.09956709956709957
+     ],
+     "p_one_sided_excess_le_margin": 0.002
+    },
+    "hotpotqa": {
+     "n": 206,
+     "excluded_missing_arm": 0,
+     "changes": 14,
+     "control_changes": 2,
+     "change_rate_eqw": 0.06796116504854369,
+     "control_rate_eqw": 0.009708737864077669,
+     "change_rate_pooled": 0.06796116504854369,
+     "change_exact95": [
+      0.0377,
+      0.1114
+     ],
+     "control_exact95": [
+      0.0012,
+      0.0346
+     ],
+     "excess_eqw": 0.05825242718446602,
+     "excess_95ci": [
+      0.024271844660194174,
+      0.0970873786407767
+     ],
+     "p_one_sided_excess_le_margin": 0.02345
+    },
+    "nq": {
+     "n": 103,
+     "excluded_missing_arm": 0,
+     "changes": 11,
+     "control_changes": 0,
+     "change_rate_eqw": 0.10679611650485436,
+     "control_rate_eqw": 0.0,
+     "change_rate_pooled": 0.10679611650485436,
+     "change_exact95": [
+      0.0545,
+      0.1831
+     ],
+     "control_exact95": [
+      0.0,
+      0.0352
+     ],
+     "excess_eqw": 0.10679611650485436,
+     "excess_95ci": [
+      0.04854368932038835,
+      0.1650485436893204
+     ],
+     "p_one_sided_excess_le_margin": 0.00045
+    }
+   },
+   "mistral": {
+    "all": {
+     "n": 540,
+     "excluded_missing_arm": 50,
+     "changes": 62,
+     "control_changes": 1,
+     "change_rate_eqw": 0.1209179170344219,
+     "control_rate_eqw": 0.0016181229773462782,
+     "change_rate_pooled": 0.11481481481481481,
+     "change_exact95": [
+      0.0892,
+      0.1448
+     ],
+     "control_exact95": [
+      0.0,
+      0.0103
+     ],
+     "excess_eqw": 0.11929979405707562,
+     "excess_95ci": [
+      0.08978130822791018,
+      0.1505694952296894
+     ],
+     "p_one_sided_excess_le_margin": 0.0
+    },
+    "fever": {
+     "n": 231,
+     "excluded_missing_arm": 0,
+     "changes": 21,
+     "control_changes": 0,
+     "change_rate_eqw": 0.09090909090909091,
+     "control_rate_eqw": 0.0,
+     "change_rate_pooled": 0.09090909090909091,
+     "change_exact95": [
+      0.0572,
+      0.1356
+     ],
+     "control_exact95": [
+      0.0,
+      0.0158
+     ],
+     "excess_eqw": 0.09090909090909091,
+     "excess_95ci": [
+      0.05627705627705628,
+      0.12987012987012986
+     ],
+     "p_one_sided_excess_le_margin": 0.0
+    },
+    "hotpotqa": {
+     "n": 206,
+     "excluded_missing_arm": 0,
+     "changes": 26,
+     "control_changes": 1,
+     "change_rate_eqw": 0.1262135922330097,
+     "control_rate_eqw": 0.0048543689320388345,
+     "change_rate_pooled": 0.1262135922330097,
+     "change_exact95": [
+      0.0841,
+      0.1794
+     ],
+     "control_exact95": [
+      0.0001,
+      0.0267
+     ],
+     "excess_eqw": 0.12135922330097088,
+     "excess_95ci": [
+      0.07766990291262135,
+      0.16990291262135923
+     ],
+     "p_one_sided_excess_le_margin": 0.0
+    },
+    "nq": {
+     "n": 103,
+     "excluded_missing_arm": 0,
+     "changes": 15,
+     "control_changes": 0,
+     "change_rate_eqw": 0.14563106796116504,
+     "control_rate_eqw": 0.0,
+     "change_rate_pooled": 0.14563106796116504,
+     "change_exact95": [
+      0.0839,
+      0.2288
+     ],
+     "control_exact95": [
+      0.0,
+      0.0352
+     ],
+     "excess_eqw": 0.14563106796116504,
+     "excess_95ci": [
+      0.07766990291262135,
+      0.21359223300970873
+     ],
+     "p_one_sided_excess_le_margin": 5e-05
+    }
+   }
+  },
+  "H4": {
+   "n_E1": 1264,
+   "either": 102,
+   "either_exact95": [
+    0.0663,
+    0.0971
+   ],
+   "both": 6,
+   "only": {
+    "qwen3": 31,
+    "mistral": 65
+   }
+  }
+ }
+}

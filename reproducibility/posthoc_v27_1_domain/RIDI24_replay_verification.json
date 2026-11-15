@@ -1,0 +1,67 @@
+{
+  "status": "COMPUTATIONAL_REPLAY",
+  "scored_rows": 126000,
+  "raw_record_files": 27,
+  "score_table_identical": true,
+  "analysis_identical_except_runtime": true,
+  "bootstrap_resamples": 20000,
+  "primary": {
+    "ci95": {
+      "COMBINED": [
+        0.6622860749512683,
+        0.7630165041726139
+      ],
+      "COMB_minus_DIFF": [
+        -0.0015581077285091755,
+        0.02394341241984804
+      ],
+      "COMB_minus_NAIVE": [
+        0.10874228171204531,
+        0.18166768046734125
+      ],
+      "COMB_over_RANDOM": [
+        3.3114303747563416,
+        3.81508252086307
+      ],
+      "DIFF": [
+        0.6503031617125247,
+        0.7528968586779548
+      ],
+      "FRAG_CORR": [
+        0.5951117047869475,
+        0.6906430560318441
+      ],
+      "FRAG_minus_NAIVE": [
+        0.04910597785509212,
+        0.09753232412264094
+      ],
+      "NAIVE": [
+        0.523838533724412,
+        0.6183863823264854
+      ],
+      "RANDOM": [
+        0.2,
+        0.2
+      ]
+    },
+    "decision": {
+      "H1": true,
+      "H2": true,
+      "H3": true,
+      "SUCCESS_H1_H2_H3": true
+    },
+    "point": {
+      "COMBINED": 0.7110842506496065,
+      "COMB_minus_DIFF": 0.011514237098778524,
+      "COMB_minus_NAIVE": 0.14377557008306874,
+      "COMB_over_RANDOM": 3.5554212532480323,
+      "DIFF": 0.6995700135508279,
+      "FRAG_CORR": 0.640931241362092,
+      "FRAG_minus_NAIVE": 0.07362256079555429,
+      "NAIVE": 0.5673086805665377,
+      "RANDOM": 0.2
+    }
+  },
+  "scope": "Frozen scoring and statistical analysis replay; no GPU generation and no independent human audit.",
+  "resampling": "Pair draws independently within each domain; one shared question draw per domain across all update pairs, as implemented by the frozen code."
+}

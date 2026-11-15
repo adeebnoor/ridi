@@ -1,0 +1,27 @@
+{
+ "started_utc": "2026-11-12T23:06:45.745361+00:00",
+ "model_key": "claude-sonnet-5.5",
+ "pinned": {
+  "vendor": "anthropic",
+  "model_id": "claude-sonnet-5-5",
+  "temperature": null,
+  "max_output_tokens": 128,
+  "worst_case_output_tokens": 128,
+  "model_cap_usd": 75.0,
+  "price_per_mtok": {
+   "input": 2.0,
+   "cached_input": 0.1,
+   "output": 10.0
+  },
+  "price_source": "https://platform.claude.com/docs/en/about-claude/pricing (read 2026-11-10)",
+  "thinking": {
+   "type": "between_tools"
+  }
+ },
+ "n_jobs": 7500,
+ "smoke": false,
+ "status": "CONFIRMATORY_RUN",
+ "seed": 20261110,
+ "finished_utc": "2026-11-13T00:49:46.792058+00:00",
+ "raw_outputs_sha256": "207a301a861b892a9281fc986e67238fa56938960f404006f459373b6b282058"
+}

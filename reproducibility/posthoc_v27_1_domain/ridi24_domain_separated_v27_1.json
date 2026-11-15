@@ -1,0 +1,182 @@
+{
+ "registered_equal_domain_reproduced": {
+  "D": 69.957,
+  "DF": 71.108,
+  "F": 64.093,
+  "naive": 56.731
+ },
+ "medical": {
+  "point": {
+   "D": 49.469,
+   "DF": 51.487,
+   "F": 40.223,
+   "naive": 27.16
+  },
+  "DF_minus_D": {
+   "point": 2.018,
+   "ci95": [
+    -0.254,
+    4.228
+   ]
+  },
+  "D_ci95": [
+   42.229,
+   56.568
+  ],
+  "DF_ci95": [
+   44.843,
+   58.313
+  ],
+  "DF_minus_naive": {
+   "point": 24.328,
+   "ci95": [
+    18.132,
+    31.229
+   ]
+  },
+  "D_minus_naive": {
+   "point": 22.309,
+   "ci95": [
+    15.485,
+    29.694
+   ]
+  }
+ },
+ "finance": {
+  "point": {
+   "D": 90.445,
+   "DF": 90.729,
+   "F": 87.963,
+   "naive": 86.302
+  },
+  "DF_minus_D": {
+   "point": 0.284,
+   "ci95": [
+    -0.985,
+    1.502
+   ]
+  },
+  "D_ci95": [
+   83.568,
+   98.178
+  ],
+  "DF_ci95": [
+   83.58,
+   98.627
+  ],
+  "DF_minus_naive": {
+   "point": 4.427,
+   "ci95": [
+    1.424,
+    7.762
+   ]
+  },
+  "D_minus_naive": {
+   "point": 4.143,
+   "ci95": [
+    1.194,
+    7.549
+   ]
+  }
+ },
+ "finance_degeneracy": [
+  {
+   "pair": "falcon3_7b_to_falconh1_7b",
+   "n_eligible": 283,
+   "regressions": 70,
+   "budget_covers_all": true,
+   "coverage_pct": 100,
+   "incumbent_accuracy_pct": 18.9
+  },
+  {
+   "pair": "glm4_9b_chat_to_glm4_9b_0414",
+   "n_eligible": 318,
+   "regressions": 118,
+   "budget_covers_all": false,
+   "coverage_pct": 94.3,
+   "incumbent_accuracy_pct": 21.2
+  },
+  {
+   "pair": "granite30_8b_to_granite32_8b",
+   "n_eligible": 305,
+   "regressions": 95,
+   "budget_covers_all": false,
+   "coverage_pct": 98.4,
+   "incumbent_accuracy_pct": 20.3
+  },
+  {
+   "pair": "granite31_8b_to_granite33_8b",
+   "n_eligible": 451,
+   "regressions": 163,
+   "budget_covers_all": false,
+   "coverage_pct": 66.5,
+   "incumbent_accuracy_pct": 30.1
+  },
+  {
+   "pair": "internlm25_7b_to_internlm3_8b",
+   "n_eligible": 414,
+   "regressions": 305,
+   "budget_covers_all": false,
+   "coverage_pct": 72.5,
+   "incumbent_accuracy_pct": 27.6
+  },
+  {
+   "pair": "mistral_v01_to_v02",
+   "n_eligible": 195,
+   "regressions": 109,
+   "budget_covers_all": true,
+   "coverage_pct": 100,
+   "incumbent_accuracy_pct": 13.0
+  },
+  {
+   "pair": "nemo12b_to_mistral_small_2501",
+   "n_eligible": 396,
+   "regressions": 153,
+   "budget_covers_all": false,
+   "coverage_pct": 75.8,
+   "incumbent_accuracy_pct": 26.4
+  },
+  {
+   "pair": "olmo2_32b_to_olmo31_32b",
+   "n_eligible": 359,
+   "regressions": 128,
+   "budget_covers_all": false,
+   "coverage_pct": 83.6,
+   "incumbent_accuracy_pct": 23.9
+  },
+  {
+   "pair": "olmo2_7b_to_olmo3_7b",
+   "n_eligible": 277,
+   "regressions": 127,
+   "budget_covers_all": true,
+   "coverage_pct": 100,
+   "incumbent_accuracy_pct": 18.5
+  },
+  {
+   "pair": "phi3_mini128k_to_phi35_mini",
+   "n_eligible": 240,
+   "regressions": 86,
+   "budget_covers_all": true,
+   "coverage_pct": 100,
+   "incumbent_accuracy_pct": 16.0
+  },
+  {
+   "pair": "smollm2_to_smollm3",
+   "n_eligible": 69,
+   "regressions": 35,
+   "budget_covers_all": true,
+   "coverage_pct": 100,
+   "incumbent_accuracy_pct": 4.6
+  },
+  {
+   "pair": "zephyr_alpha_to_beta",
+   "n_eligible": 190,
+   "regressions": 107,
+   "budget_covers_all": true,
+   "coverage_pct": 100,
+   "incumbent_accuracy_pct": 12.7
+  }
+ ],
+ "n_finance_pairs_budget_covers_all_eligible": 6,
+ "_note": "Post hoc domain-separated re-analysis of registered RIDI-24 outcomes; two-stage bootstrap (12 pairs with replacement, then one shared 1,500-question draw), 20,000 draws, seed 2026102901; fixed 300-case budget as registered. Not a replacement for the registered equal-domain primary."
+}

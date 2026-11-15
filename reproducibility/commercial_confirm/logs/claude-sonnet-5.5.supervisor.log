@@ -1,0 +1,10 @@
+2026-11-12T20:07:07.477219+03:00 started runner pid 180957 (restart #0)
+2026-11-12T20:13:07.599485+03:00 runner exit 1
+2026-11-13T00:03:59.181286+03:00 started runner pid 183407 (restart #1)
+2026-11-13T00:51:42.783638+03:00 STALL: no output for 2697 s
+2026-11-13T00:51:47.785889+03:00 started runner pid 185484 (restart #2)
+2026-11-13T01:50:56.535582+03:00 STALL: no output for 3111 s
+2026-11-13T01:51:01.538651+03:00 started runner pid 189280 (restart #3)
+2026-11-13T02:06:45.331297+03:00 started runner pid 186 (restart #0)
+2026-11-13T03:49:51.662993+03:00 runner exit 0
+2026-11-13T03:49:51.663302+03:00 DONE rc=0 reason=None restarts=0

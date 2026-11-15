@@ -1,0 +1,39 @@
+{
+ "scifact": {
+  "url": "https://huggingface.co/datasets/BeIR/scifact-qrels/resolve/main/test.tsv",
+  "sha256": "0864bb985e0ca2367ba217977e72004d549054b2b06666ed9d4825ac7c21284c",
+  "rows": 339,
+  "grades": {
+   "1": 339
+  },
+  "retrieved": "2026-11-10"
+ },
+ "nq": {
+  "url": "https://huggingface.co/datasets/BeIR/nq-qrels/resolve/main/test.tsv",
+  "sha256": "6df0cd2cbbe88504b64c68f21e946a759b62c4d864225720cec256f0196e2210",
+  "rows": 4201,
+  "grades": {
+   "1": 4201
+  },
+  "retrieved": "2026-11-10"
+ },
+ "hotpotqa": {
+  "url": "https://huggingface.co/datasets/BeIR/hotpotqa-qrels/resolve/main/test.tsv",
+  "sha256": "20d35d40a234e9bd0a561344b76077cea07a2f74d9cb80b8ce1e75408b596247",
+  "rows": 14810,
+  "grades": {
+   "1": 14810
+  },
+  "retrieved": "2026-11-10"
+ },
+ "fever": {
+  "url": "https://huggingface.co/datasets/BeIR/fever-qrels/resolve/main/test.tsv",
+  "sha256": "6599dab4e2189ca5eb5216546021710c06dc8bdd1a0c59cc1fa52129c6e038b3",
+  "rows": 7937,
+  "grades": {
+   "1": 7937
+  },
+  "retrieved": "2026-11-10"
+ },
+ "note": "All released BEIR test judgements for the four benchmarks have grade 1; no judged-nonrelevant entries exist, so unjudged and judged-zero passages are indistinguishable."
+}

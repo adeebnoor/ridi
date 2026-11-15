@@ -1,0 +1,5 @@
+contrast,hypothesis,model,eligible_questions,scorable_questions,changed_context,changed_repeat,equal_benchmark_excess_pp,ci95_nominal_low_pp,ci95_nominal_high_pp,bootstrap_draws_at_or_below_2pp,bootstrap_draws,inference
+W,H1,qwen3,1264,1115,37,4,3.329715,2.167992,4.570164,212,20000,Holm test across two models
+W,H1,mistral,1264,1115,77,6,6.7999,5.212644,8.462259,0,20000,Holm test across two models
+D,H3,qwen3,590,540,41,3,7.66612,5.12966,10.364393,0,20000,nominal registered test
+D,H3,mistral,590,540,67,2,13.224478,10.05828,16.574202,0,20000,nominal registered test
