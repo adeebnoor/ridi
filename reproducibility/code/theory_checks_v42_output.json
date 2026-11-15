@@ -1,0 +1,139 @@
+{
+ "b_feasible_range_exhaustive_n1_14": true,
+ "b_identities": true,
+ "c_triangle_exhaustive_n1_6": true,
+ "a_five_measures_identical_under_exchange_20000_random": true,
+ "witness_primary_qwen3_8b": {
+  "n": 800,
+  "grades_identical_all": true,
+  "k0": 369,
+  "k1": 383,
+  "a0_pct": 46.125,
+  "a1_pct": 47.875,
+  "regressions": 60,
+  "improvements": 74,
+  "changed": 134,
+  "d_pooled_pct": 16.75,
+  "delta_pp": 1.75,
+  "feasible_min_pct": 1.75,
+  "feasible_max_pct": 94.0,
+  "changes_cancelled_in_mean": 120,
+  "changes_visible_in_mean": 14,
+  "scale_8b_matches_primary": true,
+  "floor_changed": 9,
+  "floor_reg": 4,
+  "floor_imp": 5,
+  "d_equal_weight_pct": 17.26666666666667,
+  "f_equal_weight_pct": 1.2333333333333334,
+  "gap_equal_weight_pp": 16.033333333333335,
+  "observed_in_feasible_range": true
+ },
+ "scale_sizes": {
+  "qwen3-0.6b": {
+   "k0": 165,
+   "k1": 161,
+   "changed": 32,
+   "floor": 0,
+   "feasible": [
+    0.5,
+    40.75
+   ],
+   "inside": true
+  },
+  "qwen3-1.7b": {
+   "k0": 195,
+   "k1": 199,
+   "changed": 64,
+   "floor": 8,
+   "feasible": [
+    0.5,
+    49.25
+   ],
+   "inside": true
+  },
+  "qwen3-14b": {
+   "k0": 410,
+   "k1": 395,
+   "changed": 111,
+   "floor": 3,
+   "feasible": [
+    1.875,
+    99.375
+   ],
+   "inside": true
+  },
+  "qwen3-32b": {
+   "k0": 381,
+   "k1": 380,
+   "changed": 99,
+   "floor": 4,
+   "feasible": [
+    0.125,
+    95.125
+   ],
+   "inside": true
+  },
+  "qwen3-4b": {
+   "k0": 329,
+   "k1": 332,
+   "changed": 105,
+   "floor": 6,
+   "feasible": [
+    0.375,
+    82.625
+   ],
+   "inside": true
+  },
+  "qwen3-8b": {
+   "k0": 369,
+   "k1": 383,
+   "changed": 134,
+   "floor": 9,
+   "feasible": [
+    1.75,
+    94.0
+   ],
+   "inside": true
+  }
+ },
+ "beir_qrels_census": {
+  "scifact": {
+   "url": "https://huggingface.co/datasets/BeIR/scifact-qrels/resolve/main/test.tsv",
+   "sha256": "0864bb985e0ca2367ba217977e72004d549054b2b06666ed9d4825ac7c21284c",
+   "rows": 339,
+   "grades": {
+    "1": 339
+   },
+   "retrieved": "2026-11-10"
+  },
+  "nq": {
+   "url": "https://huggingface.co/datasets/BeIR/nq-qrels/resolve/main/test.tsv",
+   "sha256": "6df0cd2cbbe88504b64c68f21e946a759b62c4d864225720cec256f0196e2210",
+   "rows": 4201,
+   "grades": {
+    "1": 4201
+   },
+   "retrieved": "2026-11-10"
+  },
+  "hotpotqa": {
+   "url": "https://huggingface.co/datasets/BeIR/hotpotqa-qrels/resolve/main/test.tsv",
+   "sha256": "20d35d40a234e9bd0a561344b76077cea07a2f74d9cb80b8ce1e75408b596247",
+   "rows": 14810,
+   "grades": {
+    "1": 14810
+   },
+   "retrieved": "2026-11-10"
+  },
+  "fever": {
+   "url": "https://huggingface.co/datasets/BeIR/fever-qrels/resolve/main/test.tsv",
+   "sha256": "6599dab4e2189ca5eb5216546021710c06dc8bdd1a0c59cc1fa52129c6e038b3",
+   "rows": 7937,
+   "grades": {
+    "1": 7937
+   },
+   "retrieved": "2026-11-10"
+  },
+  "note": "All released BEIR test judgements for the four benchmarks have grade 1; no judged-nonrelevant entries exist, so unjudged and judged-zero passages are indistinguishable."
+ },
+ "ALL_CHECKS_PASS": true
+}
