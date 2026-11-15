@@ -1,6 +1,8 @@
 > **Paper code and data (manuscript "Identical relevance grades cannot certify retrieval-augmented AI answers", November 2026; not yet peer reviewed).**
-> The data, frozen analysis scripts and checks for this manuscript are in the Source Data that accompany the submission;
-> [`reproducibility/README.md`](reproducibility/README.md) says what is there and how to run it.
+> The data, frozen analysis scripts and checks for this manuscript are in [`reproducibility/`](reproducibility/),
+> which is the Source Data folder submitted with the paper. From inside that folder, `python code/check_holdout.py` replays the
+> held-out analysis, `python code/theory_checks_v42.py` checks Proposition 1, and the figure scripts rebuild the figures;
+> [`reproducibility/README.md`](reproducibility/README.md) lists every command and file.
 > Registrations: OSF https://osf.io/794p5/ (RIDI-CONFIRM) and https://osf.io/anbjd/ (RIDI-CONFIRM-C, DOI 10.17605/OSF.IO/ANBJD).
 > The open-source tool RIDI Check is a separate repository: https://github.com/adeebnoor/ridi-check
 > (archived snapshot: https://doi.org/10.5281/zenodo.24193755).
