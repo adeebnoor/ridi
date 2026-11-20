@@ -1,5 +1,5 @@
 # Source data and reproducibility
-This folder is the `03_Source_Data` directory from the Nature submission package (v57, 16 November 2026). Paths below are relative to this folder. Figure and Extended Data numbering follows the manuscript. Archived input names can carry an older figure or version number.
+This folder is the Source Data accompanying the manuscript (data release of 16 November 2026). Paths below are relative to this folder. Figure numbering follows the manuscript; tables and figures cited as Extended Data here appear as Online Appendix Tables A1–A6 and Figures A1–A4 in the current version. Archived input names can carry an older figure or version number.
 
 ## Replay the held-out study
 Use Python 3 with NumPy and pandas. Figure generation also requires SciPy, Matplotlib and scikit-learn. From this directory:
