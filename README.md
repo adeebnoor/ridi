@@ -1,4 +1,4 @@
-> **Paper code and data (manuscript "Identical relevance grades cannot certify retrieval-augmented AI answers", November 2026; not yet peer reviewed).**
+> **Paper code and data (manuscript "Identical Relevance Grades Cannot Certify Retrieval-Augmented Answers: Measuring the Certification Gap in RAG System Updates", November 2026; not yet peer reviewed).**
 > The data, frozen analysis scripts and checks for this manuscript are in [`reproducibility/`](reproducibility/),
 > which is the Source Data folder submitted with the paper. From inside that folder, `python code/check_holdout.py` replays the
 > held-out analysis, `python code/theory_checks_v42.py` checks Proposition 1, and the figure scripts rebuild the figures;
@@ -13,7 +13,7 @@
 > GPT-5.4 mini 1.02, −0.41 to 2.44; Claude Sonnet 5.5 0.86, −0.23 to 1.99). The manuscript reports both analyses.
 > Everything below this line describes earlier work in this repository and is kept for the record.
 
-# RIDI — Equal evaluation scores do not certify equivalent AI behaviour
+# RIDI — Identical Relevance Grades Cannot Certify Retrieval-Augmented Answers: Measuring the Certification Gap in RAG System Updates
 
 > **Research project + open-source audit toolkit.** RIDI studies when aggregate evaluation fails to identify what an AI system actually acts on, measures selection and downstream decision divergence, and computes the **exact minimum turnover compatible with a declared rank-utility budget**.
 
@@ -177,7 +177,7 @@ Exploratory drug-interaction and medication-context analyses are retained as bou
 
 ## Current manuscript
 
-**Current title:** *Equal evaluation scores do not certify equivalent AI behaviour*
+**Current title:** *Identical Relevance Grades Cannot Certify Retrieval-Augmented Answers: Measuring the Certification Gap in RAG System Updates*
 
 The submission-ready manuscript is organised around a single distinction: **evaluation equivalence does not certify action or behavioural equivalence**. The preregistered RAG experiment is the controlled anchor; the GPT-5.6 Sol transfer and semantic audit test major alternative explanations; P5 remains a transparent negative inferential-equivalence result; P5b estimates downstream semantic disagreement under a separately locked practitioner-facing tie rule; EPSS supplies the production update; and the identity–utility frontier separates necessary from discretionary selection change. CMS is retained as a rule-version boundary case.
 
